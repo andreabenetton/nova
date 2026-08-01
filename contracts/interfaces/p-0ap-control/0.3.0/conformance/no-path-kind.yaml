@@ -1,0 +1,10 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: P0C03-NO-KIND-001
+  interface: NOVA-IF-P-0AP-CONTROL
+  version: 0.3.0
+  role: provider
+  steps:
+  - action: inspect create-path input and trace
+  - action: assert no PathKind, P-LAP, P-RAP, Adapter, or Binding selection exists

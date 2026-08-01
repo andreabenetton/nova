@@ -1,0 +1,1 @@
+{"$schema":"../../../../schemas/nidl/0.1/conformance.schema.json","nidl":"0.1","scenario":{"id":"P0C03-IDENTITY-001","interface":"NOVA-IF-P-0AP-CONTROL","role":"provider","steps":[{"action":"create two simulated Nodes with distinct Node identities"},{"action":"assert duplicate identity is rejected"},{"action":"create a Provider Path between them"}],"version":"0.3.0"}}

@@ -188,6 +188,34 @@ impl ObfuscatedDegree {
     }
 }
 
+
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+pub struct ExpansionProfileId(pub u32);
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct ExpansionProfileDescriptor {
+    pub id: ExpansionProfileId,
+    pub maximum_value: u32,
+    pub description: String,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ExpansionCardinality {
+    pub value: u32,
+    pub profile_id: ExpansionProfileId,
+    pub age_micros: u64,
+    pub valid_for_micros: u64,
+}
+
+impl ExpansionCardinality {
+    #[must_use]
+    pub fn is_fresh_after(&self, elapsed_since_snapshot_micros: u64) -> bool {
+        self.age_micros
+            .saturating_add(elapsed_since_snapshot_micros)
+            < self.valid_for_micros
+    }
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct InterfaceLimits {
     pub maximum_edge_count: u32,

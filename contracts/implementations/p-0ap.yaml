@@ -6,9 +6,9 @@ implementation:
   status: stub
 implements:
 - interface: NOVA-IF-P-PATH-PROVIDER
-  version: 0.3.0
+  version: 0.4.0
 - interface: NOVA-IF-P-0AP-CONTROL
-  version: 0.2.0
+  version: 0.3.0
 technology:
   component: P-0AP
   underlay: none
@@ -18,5 +18,5 @@ capabilities:
   VIRTUAL_FABRIC_MODE: partial
   RECORD_REPLAY: false
   ADVERSARIAL_PROVIDER_MODE: false
-  OBFUSCATED_DEGREE_CONTROL: true
+  EXPANSION_CARDINALITY_CONTROL: true
   IDENTITY_UPDATE_CONTROL: true

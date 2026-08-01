@@ -14,7 +14,7 @@ The original architecture distinguishes P-Stratum Paths from R-Stratum Edges. Mu
 
 `NOVA-IF-P-R 0.2.0` exposes one Edge per authenticated Peer identity. P-Stratum common consumes Provider Paths, groups them by Node identity, constructs Edge service profiles, selects underlying Paths, and owns multipath policy.
 
-P-0AP, P-LAP, and P-RAP implement the internal Path Provider Interface. Provider Paths, provider type, Adapter, Binding, locator, Ethernet, QUIC, and simulation metadata do not cross P-R.
+Path Provider instances conforming to P-0AP, P-LAP, or P-RAP implement the internal Path Provider Interface. Provider Paths, provider type, Adapter, Binding, locator, Ethernet, QUIC, and simulation metadata do not cross P-R.
 
 ## Consequences
 
@@ -31,7 +31,7 @@ P-0AP, P-LAP, and P-RAP implement the internal Path Provider Interface. Provider
 
 ## Contract and migration impact
 
-Introduce `NOVA-IF-P-R 0.2.0` and `NOVA-IF-P-PATH-PROVIDER 0.3.0`. Preserve earlier `0.x` versions without claiming compatibility.
+Introduce `NOVA-IF-P-R 0.2.0` and `NOVA-IF-P-PATH-PROVIDER 0.4.0`. Preserve earlier `0.x` versions without claiming compatibility.
 
 ## Validation plan
 

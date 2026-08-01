@@ -9,10 +9,12 @@ Generated from NIDL sources. Do not edit manually.
 | NOVA-IF-O-A | 0.1.0 | stratum-interface | O-Stratum | Application or Compatibility Service | contracts/interfaces/o-a/0.1.0/interface.yaml |
 | NOVA-IF-P-0AP-CONTROL | 0.1.0 | provider-interface | P-0AP | Simulation controller | contracts/interfaces/p-0ap-control/0.1.0/interface.yaml |
 | NOVA-IF-P-0AP-CONTROL | 0.2.0 | provider-interface | P-0AP | Simulation controller | contracts/interfaces/p-0ap-control/0.2.0/interface.yaml |
+| NOVA-IF-P-0AP-CONTROL | 0.3.0 | provider-interface | P-0AP | Simulation controller | contracts/interfaces/p-0ap-control/0.3.0/interface.yaml |
 | NOVA-IF-P-LAP-ADAPTER | 0.1.0 | adapter-interface | P-LAP Adapter | P-LAP | contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml |
 | NOVA-IF-P-PATH-PROVIDER | 0.1.0 | provider-interface | P-LAP or P-RAP | P-Stratum common | contracts/interfaces/p-path-provider/0.1.0/interface.yaml |
 | NOVA-IF-P-PATH-PROVIDER | 0.2.0 | provider-interface | P-0AP, P-LAP, or P-RAP | P-Stratum common | contracts/interfaces/p-path-provider/0.2.0/interface.yaml |
 | NOVA-IF-P-PATH-PROVIDER | 0.3.0 | provider-interface | P-0AP, P-LAP, or P-RAP | P-Stratum common | contracts/interfaces/p-path-provider/0.3.0/interface.yaml |
+| NOVA-IF-P-PATH-PROVIDER | 0.4.0 | provider-interface | Path Provider instance | P-Stratum common | contracts/interfaces/p-path-provider/0.4.0/interface.yaml |
 | NOVA-IF-P-R | 0.1.0 | stratum-interface | P-Stratum | R-Stratum | contracts/interfaces/p-r/0.1.0/interface.yaml |
 | NOVA-IF-P-R | 0.2.0 | stratum-interface | P-Stratum common service | R-Stratum | contracts/interfaces/p-r/0.2.0/interface.yaml |
 | NOVA-IF-P-RAP-BINDING | 0.1.0 | binding-interface | P-RAP Binding | P-RAP | contracts/interfaces/p-rap-binding/0.1.0/interface.yaml |

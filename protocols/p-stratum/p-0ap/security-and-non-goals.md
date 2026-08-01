@@ -9,7 +9,7 @@ P-0AP is useful for deterministic validation of:
 - backpressure and limits;
 - failure ordering;
 - Path generation handling;
-- R-Stratum behavior under loss, delay, reordering, and partition;
+- upper-consumer behavior under loss, delay, reordering, and partition;
 - defensive behavior against an explicitly faulty Path Provider.
 
 P-0AP does not provide evidence for:

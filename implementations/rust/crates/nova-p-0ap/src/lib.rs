@@ -17,7 +17,7 @@ use nova_interface_p_path_provider::{
 use nova_interface_virtual_fabric::VirtualFabric;
 use nova_types::{
     DeliveryProperties, DirectionalMetrics, InterSduOrdering, Metric, MetricSource, MetricUnit,
-    NodeIdentity, ObfuscatedDegree, ObfuscationProfileId, QueueLimits, Sdu,
+    NodeIdentity, ExpansionCardinality, ObfuscationProfileId, QueueLimits, Sdu,
 };
 
 #[derive(Clone, Debug)]
@@ -36,7 +36,7 @@ pub struct P0ap<F: VirtualFabric> {
     next_event: u64,
     mode: ProviderComplianceMode,
     nodes: BTreeMap<SimulationNodeId, NodeIdentity>,
-    degrees: BTreeMap<SimulationNodeId, ObfuscatedDegree>,
+    degrees: BTreeMap<SimulationNodeId, ExpansionCardinality>,
     paths: BTreeMap<SimulationPathId, PathRecord>,
     events: VecDeque<ProviderEvent>,
 }
@@ -140,8 +140,8 @@ impl<F: VirtualFabric> P0ap<F> {
         }
     }
 
-    fn default_degree() -> ObfuscatedDegree {
-        ObfuscatedDegree {
+    fn default_degree() -> ExpansionCardinality {
+        ExpansionCardinality {
             value: 0,
             profile_id: ObfuscationProfileId(0),
             age_micros: 0,
@@ -177,7 +177,7 @@ impl<F: VirtualFabric> P0ap<F> {
                     record.snapshot.revision.0.saturating_add(1),
                 );
                 record.snapshot.peer_identity = identity.clone();
-                record.snapshot.obfuscated_degree = degree;
+                record.snapshot.expansion_cardinality = degree;
                 record.snapshot.clone()
             };
             let context = self.event_context()?;
@@ -388,7 +388,7 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
             revision: ProviderPathRevision(1),
             peer_identity,
             properties: Self::properties(characteristics),
-            obfuscated_degree: degree,
+            expansion_cardinality: degree,
         };
         self.paths.insert(
             simulated,
@@ -426,10 +426,10 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
         Ok(())
     }
 
-    fn set_obfuscated_degree(
+    fn set_expansion_cardinality(
         &mut self,
         node: SimulationNodeId,
-        degree: ObfuscatedDegree,
+        degree: ExpansionCardinality,
     ) -> Result<(), P0apControlError> {
         if !self.nodes.contains_key(&node) {
             return Err(P0apControlError::UnknownNode);
@@ -438,7 +438,7 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
             || degree.profile_id != ObfuscationProfileId(0)
             || degree.value > 65_535
         {
-            return Err(P0apControlError::InvalidObfuscatedDegree);
+            return Err(P0apControlError::InvalidExpansionCardinality);
         }
         self.degrees.insert(node, degree);
         self.update_paths_for_node(node)

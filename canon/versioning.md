@@ -50,4 +50,4 @@ Within a stable major Interface version, implementations select the highest mutu
 
 ## Immutability
 
-A published version directory is immutable. Any normative correction that changes implementation behavior creates a new version. Published experimental versions remain preserved. The current development baselines are `NOVA-IF-P-R 0.2.0`, `NOVA-IF-P-PATH-PROVIDER 0.3.0`, and `NOVA-IF-P-0AP-CONTROL 0.2.0`; earlier directories remain immutable historical contracts.
+A published version directory is immutable. Any normative correction that changes implementation behavior creates a new version. Published experimental versions remain preserved. The current development baselines are `NOVA-IF-P-R 0.2.0`, `NOVA-IF-P-PATH-PROVIDER 0.4.0`, and `NOVA-IF-P-0AP-CONTROL 0.3.0`; earlier directories remain immutable historical contracts.

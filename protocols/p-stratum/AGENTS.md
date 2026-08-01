@@ -2,7 +2,9 @@
 
 # P-Stratum agent rules
 
-1. Read `protocols/p-stratum/glossary.md` and `canon/glossary/common.md`.
+1. Read `protocols/p-stratum/objectives.md`, `protocols/p-stratum/glossary.md`, and `canon/glossary/common.md`.
 2. Do not use R-Stratum or O-Stratum owned terms except while editing an explicit Interface document outside this tree.
 3. Describe outward behavior by referencing `NOVA-IF-P-R`; do not restate its foreign-stratum semantics here.
 4. Keep Adapter and Binding details below their declared interfaces.
+
+5. Treat P-0AP, P-LAP, and P-RAP as Path Provider protocols. A running component is a Path Provider instance.

@@ -16,4 +16,4 @@ Normative Interfaces and protocol specifications
 
 Executable simulation behavior does not define Nova semantics. The same Virtual Fabric may support P-0AP, a Simulated P-LAP Adapter, and a Simulated P-RAP Binding through distinct front ends.
 
-Scenario `0.2` assigns each simulated Node a distinct Nova identity and an Obfuscated-degree hint. Provider Paths have characteristics but no P-LAP/P-RAP Path-kind label.
+Scenario `0.2` assigns each simulated Node a distinct Nova identity and an Expansion-cardinality hint. Provider Paths have characteristics but no P-LAP/P-RAP Path-kind label.

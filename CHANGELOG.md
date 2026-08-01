@@ -4,6 +4,9 @@
 
 ## Unreleased
 
+- Classified P-0AP, P-LAP, and P-RAP as Path Provider protocols; distinguished protocol, implementation, and runtime instance.
+- Added the normative P-Stratum objectives document and wired it into scoped agent and context manifests.
+- Published `NOVA-IF-P-PATH-PROVIDER 0.4.0` with the provider role expressed as a Path Provider instance.
 - Split the unified glossary into common, P-Stratum, R-Stratum, O-Stratum, and Interface-owned glossaries.
 - Added term-ownership metadata, scoped agent instructions, context boundaries, and CI terminology enforcement.
 - Moved Path-to-Edge and Obfuscated-Degree mappings exclusively into the P–R Interface documentation.
@@ -17,7 +20,7 @@
 - Redesigned the P-Stratum/R-Stratum boundary around aggregated Edges in `NOVA-IF-P-R 0.2.0`.
 - Added mandatory Obfuscated degree as a privacy-preserving neighbor-expansion cardinality.
 - Specified service profiles, authenticated identity, directional metric provenance, atomic reliable SDUs, finite backpressure, lifecycle, reset, sequencing, and race semantics.
-- Added `NOVA-IF-P-PATH-PROVIDER 0.3.0` and `NOVA-IF-P-0AP-CONTROL 0.2.0`.
+- Added `NOVA-IF-P-PATH-PROVIDER 0.4.0` and `NOVA-IF-P-0AP-CONTROL 0.3.0`.
 - Added proposed ADRs 0015–0017 and revised the implementation roadmap.
 - Refined P-R `0.2.0` with stable Peer handles, address rotation, typed limits, closed metric units, age-based freshness, declared Obfuscated-degree profiles, service-profile removal, orderly close, finite event backlog, and terminal reset ordering.
 - Refined Path Provider `0.3.0` with event context, scheduling and expiry options, declared degree profiles, typed metrics, finite event limits, and reset completion semantics.

@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: P0C03-QUEUE-001
+  interface: NOVA-IF-P-0AP-CONTROL
+  version: 0.3.0
+  role: provider
+  steps:
+  - action: create a Path with finite queue limits
+  - action: submit until the limit is reached
+  - action: observe deterministic WOULD_BLOCK
+  - action: advance time to drain and observe capacity recovery

@@ -34,7 +34,7 @@ P-0AP shall support paired-node mode as the minimum useful profile. A self-Path 
 
 ## Contract and migration impact
 
-Use `NOVA-IF-P-0AP-CONTROL 0.2.0`, `NOVA-IF-P-PATH-PROVIDER 0.3.0`, and `NOVA-IF-VIRTUAL-FABRIC 0.1.0`. P-0AP supplies authenticated identity, finite Path properties, and Obfuscated degree to P-Stratum common. Add implementation declarations for P-0AP, the Virtual Fabric, Simulated Adapter, and Simulated Binding.
+Use `NOVA-IF-P-0AP-CONTROL 0.3.0`, `NOVA-IF-P-PATH-PROVIDER 0.4.0`, and `NOVA-IF-VIRTUAL-FABRIC 0.1.0`. P-0AP supplies authenticated identity, finite Path properties, and Obfuscated degree to P-Stratum common. Add implementation declarations for P-0AP, the Virtual Fabric, Simulated Adapter, and Simulated Binding.
 
 ## Security impact
 

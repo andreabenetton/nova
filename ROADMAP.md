@@ -2,7 +2,7 @@
 
 # Roadmap
 
-The roadmap is organized around executable, versioned boundaries. P-0AP is the first deterministic Path Provider, P-RAP/QUIC is the first real external-underlay integration, and R-Stratum development proceeds in parallel against the P-R Interface.
+The roadmap is organized around executable, versioned boundaries. P-0AP is the first deterministic Path Provider protocol, P-RAP/QUIC is the first real external-underlay integration, and R-Stratum development proceeds in parallel against the P-R Interface.
 
 ## M0 — Repository and contract foundation
 
@@ -14,10 +14,10 @@ The roadmap is organized around executable, versioned boundaries. P-0AP is the f
 ## M1 — P-R semantic redesign before implementation
 
 - Use `NOVA-IF-P-R 0.2.0` as the development baseline.
-- Use `NOVA-IF-P-PATH-PROVIDER 0.3.0`.
-- Use `NOVA-IF-P-0AP-CONTROL 0.2.0` and `NOVA-IF-VIRTUAL-FABRIC 0.1.0`.
+- Use `NOVA-IF-P-PATH-PROVIDER 0.4.0`.
+- Use `NOVA-IF-P-0AP-CONTROL 0.3.0` and `NOVA-IF-VIRTUAL-FABRIC 0.1.0`.
 - Freeze the distinction between private Paths and R-Stratum-visible Edges.
-- Define Node identity and address rotation, Edge aggregation, service-profile lifecycle, profile-bounded Obfuscated degree, atomic reliable SDUs, ownership, finite Submission and event queues, orderly close, reset ordering, sequencing, and race linearization.
+- Define Node identity and address rotation, Edge aggregation, service-profile lifecycle, profile-bounded Expansion cardinality, atomic reliable SDUs, ownership, finite Submission and event queues, orderly close, reset ordering, sequencing, and race linearization.
 - Complete provider and consumer conformance scenarios before implementing P-0AP behavior.
 
 M1 is the synchronization point for the parallel workstreams below.
@@ -25,9 +25,9 @@ M1 is the synchronization point for the parallel workstreams below.
 ## M2A — Deterministic Virtual Fabric and P-0AP
 
 - Implement virtual time, seeded pseudo-random behavior, deterministic scheduling, stable tie-breaking, finite resources, and record/replay.
-- Implement P-0AP as a `NOVA-IF-P-PATH-PROVIDER 0.3.0` provider.
+- Implement a P-0AP Path Provider instance as a `NOVA-IF-P-PATH-PROVIDER 0.4.0` provider.
 - Support paired-node mode as the first useful topology. Reject self-Paths as Provider Paths; any future loopback diagnostic remains private and invisible to R-Stratum.
-- Configure distinct authenticated Node identities, address rotation or replacement, and registered Obfuscated-degree profiles and values.
+- Configure distinct authenticated Node identities, address rotation or replacement, and registered Expansion-cardinality profiles and values.
 - Model latency, jitter, bandwidth, finite queues, backpressure, loss, duplication, reordering, partition, recovery, and reset.
 - Separate contract-conforming simulation from explicitly adversarial provider behavior.
 
@@ -47,7 +47,7 @@ This work proceeds in parallel with M2A and M2B.
 - Consume only `NOVA-IF-P-R 0.2.0`.
 - Implement the Gram model and control-plane registry.
 - React to Edge addition, update, removal, reset, and capacity changes.
-- Use Obfuscated degree only as a neighbor-expansion cardinality.
+- Use Obfuscated Degree only as a neighbor-expansion cardinality.
 - Implement basic forwarding over deterministic or manually supplied Routes.
 - Run consumer conformance first against a reference mock, then P-0AP.
 - Defer Beacons, Authorities, payments, monetary issuance, and proof of bandwidth.
@@ -71,7 +71,7 @@ Node A -- P-0AP -- Node B -- P-0AP -- Node C
 
 - Incorporate ambiguities discovered by P-0AP, P-Stratum common, R-Stratum, and P-RAP/QUIC implementations.
 - Publish a new immutable `0.3.0` contract rather than modifying `0.2.0`.
-- Expand race, failure, restart, metric, and Obfuscated-degree profile tests.
+- Expand race, failure, restart, metric, and P–R expansion-cardinality/Obfuscated-Degree mapping tests.
 
 ## M5 — P-LAP Ethernet vertical slice
 
@@ -86,11 +86,11 @@ Node A -- P-0AP -- Node B -- P-0AP -- Node C
 Node A -- P-LAP/Ethernet -- Node B -- P-RAP/QUIC -- Node C
 ```
 
-Acceptance requires P-LAP and P-RAP to remain different peer protocols while P-Stratum common exposes only Edges, service profiles, metrics, and Obfuscated degree.
+Acceptance requires P-LAP and P-RAP to remain different peer protocols while P-Stratum common exposes only Edges, service profiles, metrics, and Expansion cardinality.
 
 ## M7 — R-Stratum topology-discovery subset
 
-- Implement bounded neighbor expansion using Obfuscated degree.
+- Implement bounded neighbor expansion using Expansion cardinality.
 - Specify dummy-slot behavior, common-Peer detection, profile algorithms, and privacy analysis.
 - Implement Route-label lifecycle, cycle handling, stale-state handling, and deterministic topology fixtures.
 
@@ -101,7 +101,7 @@ Freeze `1.0` only after:
 - P-0AP passes provider conformance;
 - R-Stratum passes consumer conformance against mock and P-0AP;
 - P-RAP/QUIC provides independent implementation evidence;
-- Edge aggregation, identity continuity, lifecycle, close/reset behavior, metrics, event backlog, and Obfuscated degree profiles are complete;
+- Edge aggregation, identity continuity, lifecycle, close/reset behavior, metrics, event backlog, and Expansion cardinality profiles are complete;
 - no placeholder structures or implementation leakage remain;
 - the relevant ADRs are accepted.
 

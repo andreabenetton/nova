@@ -13,7 +13,7 @@ normative: true
 2. R-Stratum must not depend on P-0AP, P-LAP, P-RAP, any Path Provider, Adapter, Binding, or the Virtual Fabric.
 3. P-LAP must not depend on a concrete Adapter implementation.
 4. P-RAP must not depend on a concrete Binding implementation.
-5. P-Stratum common consumes P-0AP, P-LAP, and P-RAP only through the Path Provider Interface.
+5. P-Stratum common consumes Path Provider instances only through the Path Provider Interface. P-0AP, P-LAP, and P-RAP are Path Provider protocols.
 6. An Adapter binds P-LAP to a Nexus Fundamenta. A Binding binds P-RAP to an integrated routed underlay. P-0AP uses neither.
 7. A P-RAP Association remains distinct from a Binding instance.
 8. A Node address identifies a Node cryptographically; a locator identifies a current means of reachability.

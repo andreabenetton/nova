@@ -1,0 +1,11 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PPP04-CONSUMER-001
+  interface: NOVA-IF-P-PATH-PROVIDER
+  version: 0.4.0
+  role: consumer
+  steps:
+  - action: receive two Provider Paths with the same authenticated Node identity
+  - action: group them into one Peer aggregate
+  - action: retain one Peer aggregate

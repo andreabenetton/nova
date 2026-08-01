@@ -5,8 +5,8 @@ Current contracts are experimental and require exact-version matching. Published
 ## Current development baselines
 
 - `NOVA-IF-P-R 0.2.0` is the Edge-oriented redesign for P-Stratum/R-Stratum work. It replaces the Path-oriented `0.1.0` model for new implementations.
-- `NOVA-IF-P-PATH-PROVIDER 0.3.0` supplies authenticated Provider Paths, declared Obfuscated-degree profiles, scheduling and expiry options, finite Submission/event queues, and terminal reset ordering to P-Stratum common.
-- `NOVA-IF-P-0AP-CONTROL 0.2.0` removes Path-kind selection and adds explicit identity creation/update, Path update, Obfuscated-degree, and finite-resource controls.
+- `NOVA-IF-P-PATH-PROVIDER 0.4.0` supplies authenticated Provider Paths, declared Obfuscated-degree profiles, scheduling and expiry options, finite Submission/event queues, and terminal reset ordering to P-Stratum common.
+- `NOVA-IF-P-0AP-CONTROL 0.3.0` removes Path-kind selection and adds explicit identity creation/update, Path update, Obfuscated-degree, and finite-resource controls.
 - `NOVA-IF-VIRTUAL-FABRIC 0.1.0` remains the deterministic simulation-engine boundary.
 
 ## Preserved historical versions

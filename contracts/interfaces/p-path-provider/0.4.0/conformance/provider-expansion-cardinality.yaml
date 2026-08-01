@@ -1,0 +1,11 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PPP04-DEGREE-001
+  interface: NOVA-IF-P-PATH-PROVIDER
+  version: 0.4.0
+  role: provider
+  steps:
+  - action: emit provider-path-added
+  - action: assert mandatory ProviderExpansionCardinality fields are present and within
+      limits

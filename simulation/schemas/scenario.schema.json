@@ -64,7 +64,7 @@
             ],
             "type": "object"
           },
-          "obfuscated_degree": {
+          "expansion_cardinality": {
             "additionalProperties": false,
             "properties": {
               "profile_id": {
@@ -91,7 +91,7 @@
         "required": [
           "id",
           "identity",
-          "obfuscated_degree"
+          "expansion_cardinality"
         ],
         "type": "object"
       },

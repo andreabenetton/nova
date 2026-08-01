@@ -4,11 +4,12 @@ module: p-stratum-common-design
 required_context:
 - canon/glossary/common.md
 - protocols/p-stratum/glossary.md
+- protocols/p-stratum/objectives.md
 - contracts/interfaces/p-r/glossary.md
 - canon/architecture.md
 - canon/invariants.md
 - contracts/interfaces/p-r/0.2.0/interface.yaml
-- contracts/interfaces/p-path-provider/0.3.0/interface.yaml
+- contracts/interfaces/p-path-provider/0.4.0/interface.yaml
 optional_context:
 - protocols/p-stratum/p-0ap/README.md
 - protocols/p-stratum/p-lap/README.md
@@ -20,7 +21,7 @@ forbidden_context:
 interfaces:
   consumes:
   - id: NOVA-IF-P-PATH-PROVIDER
-    version: 0.3.0
+    version: 0.4.0
   provides:
   - id: NOVA-IF-P-R
     version: 0.2.0

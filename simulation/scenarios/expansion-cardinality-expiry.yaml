@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0 OR CC-BY-4.0
 schema_version: '0.2'
-name: obfuscated-degree-expiry
+name: expansion-cardinality-expiry
 seed: 12
 clock: virtual
 provider_compliance: conforming
@@ -11,7 +11,7 @@ nodes:
     identity_digest_hex: '1201120112011201120112011201120112011201120112011201120112011201'
     cryptographic_suite_id: 1
     address_digest_hex: '1201120112011201120112011201120112011201120112011201120112011201'
-  obfuscated_degree:
+  expansion_cardinality:
     value: 2
     profile_id: 0
     valid_for_ms: 1000
@@ -21,7 +21,7 @@ nodes:
     identity_digest_hex: '1202120212021202120212021202120212021202120212021202120212021202'
     cryptographic_suite_id: 1
     address_digest_hex: '1202120212021202120212021202120212021202120212021202120212021202'
-  obfuscated_degree:
+  expansion_cardinality:
     value: 2
     profile_id: 0
     valid_for_ms: 1000

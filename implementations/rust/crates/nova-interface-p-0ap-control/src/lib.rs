@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #![forbid(unsafe_code)]
 
-use nova_types::{NodeIdentity, ObfuscatedDegree};
+use nova_types::{NodeIdentity, ExpansionCardinality};
 
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct SimulationNodeId(pub u64);
@@ -54,7 +54,7 @@ pub enum P0apControlError {
     UnknownPath,
     SelfLoopNotAllowed,
     InvalidCharacteristics,
-    InvalidObfuscatedDegree,
+    InvalidExpansionCardinality,
     InvalidTime,
     EventLimit,
     NoRecording,
@@ -87,10 +87,10 @@ pub trait P0apControl {
         characteristics: SimulationPathCharacteristics,
     ) -> Result<(), P0apControlError>;
 
-    fn set_obfuscated_degree(
+    fn set_expansion_cardinality(
         &mut self,
         node: SimulationNodeId,
-        degree: ObfuscatedDegree,
+        degree: ExpansionCardinality,
     ) -> Result<(), P0apControlError>;
 
     fn remove_path(&mut self, path: SimulationPathId) -> Result<(), P0apControlError>;

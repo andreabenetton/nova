@@ -1,0 +1,513 @@
+$schema: ../../../schemas/nidl/0.1/interface.schema.json
+nidl: '0.1'
+interface:
+  id: NOVA-IF-P-PATH-PROVIDER
+  name: P-Stratum Path Provider Interface
+  kind: provider-interface
+  version: 0.4.0
+  status: experimental
+roles:
+  provider: Path Provider instance
+  consumer: P-Stratum common
+compatibility:
+  policy: exact-version-during-0.x
+  type_references: strict
+states:
+- INACTIVE
+- ACTIVE
+- RESET
+types:
+  ProviderInstanceId:
+    kind: opaque
+  ProviderGeneration:
+    kind: unsigned-integer
+    bits: 64
+  ProviderEventSequence:
+    kind: unsigned-integer
+    bits: 64
+  ProviderPathId:
+    kind: opaque
+    scope: one provider generation
+  ProviderPathRevision:
+    kind: unsigned-integer
+    bits: 64
+  ProviderSubmissionId:
+    kind: unsigned-integer
+    bits: 64
+  CryptographicSuiteId:
+    kind: unsigned-integer
+    bits: 32
+  NodeAddress:
+    kind: structure
+    fields:
+    - name: cryptographic_suite_id
+      type: CryptographicSuiteId
+      required: true
+    - name: address_digest
+      type: bytes
+      required: true
+  AuthenticatedNodeIdentity:
+    kind: structure
+    fields:
+    - name: identity_id
+      type: AuthenticatedNodeIdentityId
+      required: true
+    - name: addresses
+      type: non-empty-list<NodeAddress>
+      required: true
+    rule: addresses are canonical, sorted by cryptographic suite, unique, and cryptographically bound
+      to identity_id
+  ProviderMetricUnit:
+    kind: enumeration
+    values:
+    - MICROSECONDS
+    - BITS_PER_SECOND
+  ProviderMetric:
+    kind: structure
+    fields:
+    - name: value
+      type: unsigned-integer
+      required: true
+    - name: unit
+      type: ProviderMetricUnit
+      required: true
+    - name: source
+      type: enumeration
+      values:
+      - MEASURED
+      - CONFIGURED
+      - DECLARED
+      - DERIVED
+      required: true
+    - name: age_micros
+      type: unsigned-integer
+      required: true
+    - name: sample_window_micros
+      type: unsigned-integer
+      required: true
+    - name: valid_for_micros
+      type: unsigned-integer
+      required: true
+    - name: confidence_ppm
+      type: unsigned-integer
+      required: false
+      rule: integer from 0 through 1000000 inclusive
+    rule: age is measured when the containing Provider Path snapshot is emitted or returned
+  ProviderQueueLimits:
+    kind: structure
+    fields:
+    - name: maximum_queued_sdus
+      type: unsigned-integer
+      required: true
+    - name: maximum_queued_bytes
+      type: unsigned-integer
+      required: true
+  ProviderPathProperties:
+    kind: structure
+    fields:
+    - name: maximum_sdu_size
+      type: unsigned-integer
+      required: true
+    - name: reliable
+      type: boolean
+      required: true
+    - name: atomic_sdu
+      type: boolean
+      required: true
+    - name: boundary_preserving
+      type: boolean
+      required: true
+    - name: inter_sdu_ordering
+      type: enumeration
+      values:
+      - NONE
+      - ORDERED
+      required: true
+    - name: duplicate_suppression
+      type: boolean
+      required: true
+    - name: priority_prefix_supported
+      type: boolean
+      required: true
+    - name: queue_limits
+      type: ProviderQueueLimits
+      required: true
+    - name: round_trip_latency
+      type: ProviderMetric
+      required: false
+    - name: outbound
+      type: ProviderDirectionalMetrics
+      required: true
+    - name: inbound
+      type: ProviderDirectionalMetrics
+      required: true
+  ProviderExpansionCardinality:
+    kind: structure
+    fields:
+    - name: value
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: profile_id
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: age_micros
+      type: unsigned-integer
+      required: true
+    - name: valid_for_micros
+      type: unsigned-integer
+      required: true
+    rule: profile_id shall be declared at activation and value shall not exceed the declared maximum;
+      age is measured when the Path snapshot is emitted or returned
+  ProviderPathSnapshot:
+    kind: structure
+    fields:
+    - name: provider_instance_id
+      type: ProviderInstanceId
+      required: true
+    - name: provider_generation
+      type: ProviderGeneration
+      required: true
+    - name: provider_path_id
+      type: ProviderPathId
+      required: true
+    - name: provider_path_revision
+      type: ProviderPathRevision
+      required: true
+    - name: peer_identity
+      type: AuthenticatedNodeIdentity
+      required: true
+    - name: properties
+      type: ProviderPathProperties
+      required: true
+    - name: expansion_cardinality
+      type: ProviderExpansionCardinality
+      required: true
+  ProviderUrgency:
+    kind: enumeration
+    values:
+    - BACKGROUND
+    - NORMAL
+    - URGENT
+    - CRITICAL
+  ProviderSubmissionOptions:
+    kind: structure
+    fields:
+    - name: urgency
+      type: ProviderUrgency
+      required: true
+    - name: priority_prefix_length
+      type: unsigned-integer
+      required: false
+    - name: expires_after_micros
+      type: unsigned-integer
+      required: false
+  ProviderSdu:
+    kind: bytes
+  ActivateProviderRequest:
+    kind: structure
+  ProviderExpansionProfileDescriptor:
+    kind: structure
+    fields:
+    - name: profile_id
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: maximum_value
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: description
+      type: string
+      required: true
+  ProviderLimits:
+    kind: structure
+    fields:
+    - name: maximum_active_paths
+      type: unsigned-integer
+      required: true
+    - name: maximum_event_backlog
+      type: unsigned-integer
+      required: true
+  ProviderActivated:
+    kind: structure
+    fields:
+    - name: provider_instance_id
+      type: ProviderInstanceId
+      required: true
+    - name: provider_generation
+      type: ProviderGeneration
+      required: true
+    - name: limits
+      type: ProviderLimits
+      required: true
+    - name: expansion_profiles
+      type: non-empty-list<ProviderExpansionProfileDescriptor>
+      required: true
+    - name: initial_paths
+      type: list<ProviderPathSnapshot>
+      required: true
+    - name: next_event_sequence
+      type: ProviderEventSequence
+      required: true
+  SendProviderSduRequest:
+    kind: structure
+    fields:
+    - name: provider_instance_id
+      type: ProviderInstanceId
+      required: true
+    - name: provider_path_id
+      type: ProviderPathId
+      required: true
+    - name: provider_submission_id
+      type: ProviderSubmissionId
+      required: true
+    - name: options
+      type: ProviderSubmissionOptions
+      required: true
+    - name: sdu
+      type: ProviderSdu
+      required: true
+  ProviderSubmissionAccepted:
+    kind: structure
+    fields:
+    - name: provider_submission_id
+      type: ProviderSubmissionId
+      required: true
+  DeactivateProviderRequest:
+    kind: structure
+    fields:
+    - name: provider_instance_id
+      type: ProviderInstanceId
+      required: true
+  ProviderDeactivated:
+    kind: structure
+    fields:
+    - name: provider_instance_id
+      type: ProviderInstanceId
+      required: true
+  ProviderEventContext:
+    kind: structure
+    fields:
+    - name: provider_instance_id
+      type: ProviderInstanceId
+      required: true
+    - name: provider_generation
+      type: ProviderGeneration
+      required: true
+    - name: event_sequence
+      type: ProviderEventSequence
+      required: true
+  ProviderPathAdded:
+    kind: structure
+    fields:
+    - name: context
+      type: ProviderEventContext
+      required: true
+    - name: path
+      type: ProviderPathSnapshot
+      required: true
+  ProviderPathUpdated:
+    kind: structure
+    fields:
+    - name: context
+      type: ProviderEventContext
+      required: true
+    - name: path
+      type: ProviderPathSnapshot
+      required: true
+  ProviderPathRemoved:
+    kind: structure
+    fields:
+    - name: context
+      type: ProviderEventContext
+      required: true
+    - name: provider_path_id
+      type: ProviderPathId
+      required: true
+    - name: last_revision
+      type: ProviderPathRevision
+      required: true
+  ProviderSduReceived:
+    kind: structure
+    fields:
+    - name: context
+      type: ProviderEventContext
+      required: true
+    - name: provider_path_id
+      type: ProviderPathId
+      required: true
+    - name: sdu
+      type: ProviderSdu
+      required: true
+  ProviderSubmissionCompleted:
+    kind: structure
+    fields:
+    - name: context
+      type: ProviderEventContext
+      required: true
+    - name: provider_submission_id
+      type: ProviderSubmissionId
+      required: true
+    - name: status
+      type: enumeration
+      values:
+      - DELIVERED_TO_PEER_PROVIDER
+      - PATH_REMOVED
+      - EXPIRED
+      - PROVIDER_FAILURE
+      - PROVIDER_RESET
+      required: true
+  ProviderCapacityAvailable:
+    kind: structure
+    fields:
+    - name: context
+      type: ProviderEventContext
+      required: true
+    - name: provider_path_id
+      type: ProviderPathId
+      required: true
+  ProviderReset:
+    kind: structure
+    fields:
+    - name: context
+      type: ProviderEventContext
+      required: true
+    - name: reason
+      type: string
+      required: true
+  ProviderDirectionalMetrics:
+    kind: structure
+    fields:
+    - name: estimated_one_way_latency
+      type: ProviderMetric
+      required: false
+    - name: jitter
+      type: ProviderMetric
+      required: false
+    - name: nominal_capacity
+      type: ProviderMetric
+      required: false
+    - name: available_capacity
+      type: ProviderMetric
+      required: false
+  AuthenticatedNodeIdentityId:
+    kind: structure
+    fields:
+    - name: profile_id
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: digest
+      type: bytes
+      required: true
+    rule: canonical stable identity key used for Peer aggregation
+operations:
+- id: 1
+  name: activate-provider
+  caller: consumer
+  input: ActivateProviderRequest
+  success: ProviderActivated
+  errors:
+  - UNSUPPORTED_CONFIGURATION
+  - PROVIDER_UNAVAILABLE
+- id: 2
+  name: send-provider-sdu
+  caller: consumer
+  input: SendProviderSduRequest
+  success: ProviderSubmissionAccepted
+  errors:
+  - UNKNOWN_PROVIDER_INSTANCE
+  - UNKNOWN_PROVIDER_PATH
+  - PATH_UNAVAILABLE
+  - SDU_TOO_LARGE
+  - WOULD_BLOCK
+  - DUPLICATE_SUBMISSION
+  - INVALID_OPTIONS
+- id: 3
+  name: deactivate-provider
+  caller: consumer
+  input: DeactivateProviderRequest
+  success: ProviderDeactivated
+  errors:
+  - UNKNOWN_PROVIDER_INSTANCE
+events:
+- id: 4097
+  name: provider-path-added
+  emitted_by: provider
+  data: ProviderPathAdded
+- id: 4098
+  name: provider-path-updated
+  emitted_by: provider
+  data: ProviderPathUpdated
+- id: 4099
+  name: provider-path-removed
+  emitted_by: provider
+  data: ProviderPathRemoved
+- id: 4100
+  name: provider-sdu-received
+  emitted_by: provider
+  data: ProviderSduReceived
+- id: 4101
+  name: provider-submission-completed
+  emitted_by: provider
+  data: ProviderSubmissionCompleted
+- id: 4102
+  name: provider-capacity-available
+  emitted_by: provider
+  data: ProviderCapacityAvailable
+- id: 4103
+  name: provider-reset
+  emitted_by: provider
+  data: ProviderReset
+errors:
+- id: 8193
+  name: UNSUPPORTED_CONFIGURATION
+- id: 8194
+  name: PROVIDER_UNAVAILABLE
+- id: 8195
+  name: UNKNOWN_PROVIDER_INSTANCE
+- id: 8196
+  name: UNKNOWN_PROVIDER_PATH
+- id: 8197
+  name: PATH_UNAVAILABLE
+- id: 8198
+  name: SDU_TOO_LARGE
+- id: 8199
+  name: WOULD_BLOCK
+- id: 8200
+  name: DUPLICATE_SUBMISSION
+- id: 8201
+  name: INVALID_OPTIONS
+invariants:
+- id: PPP-INV-001
+  statement: P-Stratum common consumes only Path Provider instances through this Interface; P-0AP, P-LAP, and P-RAP are Path Provider protocols, not provider instances.
+- id: PPP-INV-002
+  statement: Every announced Provider Path carries an authenticated Peer Node identity and mandatory Obfuscated
+    degree.
+- id: PPP-INV-003
+  statement: Provider-specific protocol, locator, Adapter, Binding, and simulation details never cross
+    this Interface.
+- id: PPP-INV-004
+  statement: Every accepted Provider Submission has exactly one terminal result, including before provider-reset
+    terminates the generation.
+- id: PPP-INV-005
+  statement: Provider queues are finite and capacity recovery is observable.
+- id: PPP-INV-006
+  statement: Provider Path identifiers and event sequences are scoped to one provider generation.
+- id: PPP-INV-007
+  statement: Provider event context identifies one provider instance and generation; sequence values are
+    total and gap-detectable within that generation.
+- id: PPP-INV-008
+  statement: Provider Submission options preserve urgency, optional priority-prefix, and expiry semantics
+    supplied by P-Stratum common.
+- id: PPP-INV-009
+  statement: Every Provider Expansion cardinality uses a profile declared at activation and remains within
+    its declared maximum.
+- id: PPP-INV-010
+  statement: The Provider reserves capacity for the terminal reset event and never silently drops events
+    when its finite backlog is exhausted.
+- id: PPP-INV-011
+  statement: Provider Path snapshots carried by events match the provider instance and generation in the
+    event context.

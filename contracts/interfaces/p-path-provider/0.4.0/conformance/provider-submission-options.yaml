@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PPP04-SUBMISSION-002
+  interface: NOVA-IF-P-PATH-PROVIDER
+  version: 0.4.0
+  role: provider
+  description: Submission scheduling and expiry options cross the internal boundary
+  steps:
+  - action: send a Provider Submission with urgency, priority prefix, and expiry options
+  - action: preserve urgency and supported prefix behavior in provider scheduling
+  - action: complete with EXPIRED if peer Provider acceptance misses the deadline

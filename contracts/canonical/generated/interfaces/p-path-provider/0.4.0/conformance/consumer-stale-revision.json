@@ -1,0 +1,1 @@
+{"$schema":"../../../../schemas/nidl/0.1/conformance.schema.json","nidl":"0.1","scenario":{"id":"PPP04-CONSUMER-002","interface":"NOVA-IF-P-PATH-PROVIDER","role":"consumer","steps":[{"action":"install Provider Path revision 3"},{"action":"receive revision 2"},{"action":"ignore the stale update"}],"version":"0.4.0"}}

@@ -28,7 +28,7 @@
     {
       "id": "NOVA-IF-P-0AP-CONTROL",
       "version": "0.2.0",
-      "path": "contracts/interfaces/p-0ap-control/0.2.0/interface.yaml",
+      "path": "contracts/interfaces/p-0ap-control/0.3.0/interface.yaml",
       "fingerprint": "sha256:1d5c0bd47fc7f0d209a6d0e00177244a99abcca758477ac38517b04b3bca7f3d"
     },
     {
@@ -52,7 +52,7 @@
     {
       "id": "NOVA-IF-P-PATH-PROVIDER",
       "version": "0.3.0",
-      "path": "contracts/interfaces/p-path-provider/0.3.0/interface.yaml",
+      "path": "contracts/interfaces/p-path-provider/0.4.0/interface.yaml",
       "fingerprint": "sha256:86ab2de847030ea899d9df981e7cd3f8a4b76740d8a034d5f8f59a0c32456651"
     },
     {

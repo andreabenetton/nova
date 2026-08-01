@@ -3,12 +3,12 @@
 
 use nova_types::{
     DeliveryProperties, DirectionalMetrics, InterfaceVersion, Metric, NodeIdentity,
-    ObfuscatedDegree, QueueLimits, Sdu, Urgency,
+    ExpansionCardinality, QueueLimits, Sdu, Urgency,
 };
 
 pub const VERSION: InterfaceVersion = InterfaceVersion {
     major: 0,
-    minor: 3,
+    minor: 4,
     patch: 0,
 };
 
@@ -56,11 +56,11 @@ pub struct ProviderPathSnapshot {
     pub revision: ProviderPathRevision,
     pub peer_identity: NodeIdentity,
     pub properties: ProviderPathProperties,
-    pub obfuscated_degree: ObfuscatedDegree,
+    pub expansion_cardinality: ExpansionCardinality,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub struct ProviderObfuscationProfileDescriptor {
+pub struct ProviderExpansionProfileDescriptor {
     pub profile_id: u32,
     pub maximum_value: u32,
     pub description: String,
@@ -77,7 +77,7 @@ pub struct ProviderActivated {
     pub instance: ProviderInstanceId,
     pub generation: ProviderGeneration,
     pub limits: ProviderLimits,
-    pub obfuscation_profiles: Vec<ProviderObfuscationProfileDescriptor>,
+    pub expansion_profiles: Vec<ProviderExpansionProfileDescriptor>,
     pub initial_paths: Vec<ProviderPathSnapshot>,
     pub next_event_sequence: ProviderEventSequence,
 }

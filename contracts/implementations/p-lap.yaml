@@ -6,7 +6,7 @@ implementation:
   status: stub
 implements:
 - interface: NOVA-IF-P-PATH-PROVIDER
-  version: 0.3.0
+  version: 0.4.0
 technology:
   component: P-LAP
 capabilities:

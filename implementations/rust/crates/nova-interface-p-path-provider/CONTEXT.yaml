@@ -4,7 +4,7 @@ module: nova-interface-p-path-provider
 required_context:
 - canon/glossary/common.md
 - protocols/p-stratum/glossary.md
-- contracts/interfaces/p-path-provider/0.3.0/
+- contracts/interfaces/p-path-provider/0.4.0/
 optional_context: []
 forbidden_context:
 - integrations/

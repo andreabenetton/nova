@@ -46,7 +46,7 @@ Applications and compatibility services
 - A P-RAP Binding identifies the integrated network/transport combination, such as **IPv4-QUIC** or **IPv6-QUIC**, because contemporary routing and transport implementations are tightly integrated.
 - **IP-over-Nova** is a Compatibility Service above O-Stratum. Its operating-system integration is provided by **Platform Attachments**, such as Windows NDIS or Linux TUN.
 
-P-0AP, P-LAP, and P-RAP provide private Paths to P-Stratum common through `NOVA-IF-P-PATH-PROVIDER 0.3.0`. P-Stratum common groups Paths by authenticated Node identity and exposes one Edge per Peer through `NOVA-IF-P-R 0.2.0`. Every Edge includes service profiles and a mandatory, profile-bounded Obfuscated degree. Peer identity continuity, finite Submission and event queues, exactly-one terminal completion, and reset ordering are explicit contract semantics. R-Stratum never learns which Path Provider, Adapter, Binding, locator, or simulation component produced it.
+Path Provider instances conforming to P-0AP, P-LAP, or P-RAP provide private Paths to P-Stratum common through `NOVA-IF-P-PATH-PROVIDER 0.4.0`. P-Stratum common groups Paths by authenticated Node identity and exposes one Edge per Peer through `NOVA-IF-P-R 0.2.0`. Every Edge includes service profiles and a mandatory, profile-bounded Obfuscated degree. Peer identity continuity, finite Submission and event queues, exactly-one terminal completion, and reset ordering are explicit contract semantics. R-Stratum never learns which Path Provider, Adapter, Binding, locator, or simulation component produced it.
 
 ## Authority order
 

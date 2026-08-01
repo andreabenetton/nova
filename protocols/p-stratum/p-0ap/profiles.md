@@ -9,7 +9,7 @@ Returns submitted SDUs to the same local P-Stratum instance. Intended for serial
 
 ## Paired node
 
-Connects two distinct Node instances with independent state. This is the minimum useful P-0AP profile and the first R-Stratum integration target.
+Connects two distinct Node instances with independent state. This is the minimum useful P-0AP profile and the first upper-Interface integration target.
 
 ## Virtual fabric
 

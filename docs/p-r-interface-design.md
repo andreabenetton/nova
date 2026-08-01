@@ -9,7 +9,7 @@ This guide indexes the current P-R design. It is explanatory; the authoritative 
 ```text
 P-0AP / P-LAP / P-RAP
           |
-NOVA-IF-P-PATH-PROVIDER 0.3.0
+NOVA-IF-P-PATH-PROVIDER 0.4.0
           |
 P-Stratum common
   identity grouping
@@ -82,8 +82,8 @@ The implementation sequence is:
 
 - glossary and global rules: `canon/`;
 - P-R contract: `contracts/interfaces/p-r/0.2.0/`;
-- Path Provider contract: `contracts/interfaces/p-path-provider/0.3.0/`;
-- P-0AP Control contract: `contracts/interfaces/p-0ap-control/0.2.0/`;
+- Path Provider contract: `contracts/interfaces/p-path-provider/0.4.0/`;
+- P-0AP Control contract: `contracts/interfaces/p-0ap-control/0.3.0/`;
 - P-Stratum common design: `protocols/p-stratum/common/`;
 - P-0AP design: `protocols/p-stratum/p-0ap/`;
 - proposed decisions: ADR-0015, ADR-0016, ADR-0017;

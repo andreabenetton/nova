@@ -25,8 +25,17 @@ An established P-Stratum association through which P-Stratum Packets may be exch
 **Provider Path**  
 A Path supplied to P-Stratum common through the internal Path Provider Interface.
 
-**Path Provider**  
-A component implementing the internal P-Stratum Path Provider Interface. P-0AP, P-LAP, and P-RAP are Path Providers.
+**Path Provider protocol**
+
+A P-Stratum peer protocol that specifies how a class of Path Provider instances establishes, maintains, and removes Paths. P-0AP, P-LAP, and P-RAP are Path Provider protocols.
+
+**Path Provider implementation**
+
+Software implementing one Path Provider protocol and the internal P-Stratum Path Provider Interface.
+
+**Path Provider instance**
+
+A running realization of a Path Provider implementation within a Node. It creates and maintains Provider Paths and reports them to P-Stratum common through the Path Provider Interface.
 
 **Packet**  
 The P-Stratum SDU exchanged between P-Stratum peer entities.
@@ -38,10 +47,10 @@ A P-Stratum grouping used to preserve the boundary of one submitted unit when it
 The provider-independent P-Stratum component that groups Paths by authenticated Peer identity, applies selection policy, and implements the P–R Interface.
 
 **P-Stratum Zero-Underlay Association Protocol (P-0AP)**  
-A deterministic P-Stratum Path Provider that establishes local or simulated associations without an external Nexus Fundamenta Adapter or routed-underlay Binding.
+A deterministic P-Stratum Path Provider protocol that specifies local or simulated association behavior without an external Nexus Fundamenta Adapter or routed-underlay Binding.
 
 **P-Stratum Link Adjacency Protocol (P-LAP)**  
-The P-Stratum peer protocol used to discover and establish Paths with Nodes adjacent through a Nexus Fundamenta.
+The P-Stratum Path Provider protocol used to discover and establish Paths with Nodes adjacent through a Nexus Fundamenta.
 
 **Adapter**  
 A P-LAP component that binds P-LAP to one Nexus Fundamenta technology or instance.
@@ -50,7 +59,7 @@ A P-LAP component that binds P-LAP to one Nexus Fundamenta technology or instanc
 A P-LAP Adapter representing an internal Nexus Fundamenta-like attachment inside one device. It is distinct from P-0AP.
 
 **P-Stratum Remote Association Protocol (P-RAP)**  
-The P-Stratum peer protocol used to establish Paths with remote Nodes through an already routed underlay.
+The P-Stratum Path Provider protocol used to establish Paths with remote Nodes through an already routed underlay.
 
 **Binding**  
 A P-RAP component that binds P-RAP to a specific integrated routed network and transport combination, such as IPv4-QUIC or IPv6-QUIC.

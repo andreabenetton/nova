@@ -4,8 +4,9 @@ module: p-rap-design
 required_context:
 - canon/glossary/common.md
 - protocols/p-stratum/glossary.md
+- protocols/p-stratum/objectives.md
 - canon/invariants.md
-- contracts/interfaces/p-path-provider/0.3.0/interface.yaml
+- contracts/interfaces/p-path-provider/0.4.0/interface.yaml
 - contracts/interfaces/p-rap-binding/0.1.0/interface.yaml
 - protocols/p-stratum/p-rap/
 optional_context:
@@ -19,4 +20,4 @@ interfaces:
     version: 0.1.0
   provides:
   - id: NOVA-IF-P-PATH-PROVIDER
-    version: 0.3.0
+    version: 0.4.0

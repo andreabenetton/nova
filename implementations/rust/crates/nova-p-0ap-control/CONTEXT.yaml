@@ -4,7 +4,7 @@ module: nova-p-0ap-control
 required_context:
 - canon/glossary/common.md
 - protocols/p-stratum/glossary.md
-- contracts/interfaces/p-0ap-control/0.2.0/
+- contracts/interfaces/p-0ap-control/0.3.0/
 optional_context:
 - simulation/scenarios/
 forbidden_context:
@@ -12,5 +12,5 @@ forbidden_context:
 interfaces:
   consumes:
   - id: NOVA-IF-P-0AP-CONTROL
-    version: 0.2.0
+    version: 0.3.0
   provides: []

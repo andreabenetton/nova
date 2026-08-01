@@ -11,7 +11,7 @@ nodes:
     identity_digest_hex: '0101010101010101010101010101010101010101010101010101010101010101'
     cryptographic_suite_id: 1
     address_digest_hex: '0101010101010101010101010101010101010101010101010101010101010101'
-  obfuscated_degree:
+  expansion_cardinality:
     value: 1
     profile_id: 0
     valid_for_ms: 60000
@@ -21,7 +21,7 @@ nodes:
     identity_digest_hex: '0102010201020102010201020102010201020102010201020102010201020102'
     cryptographic_suite_id: 1
     address_digest_hex: '0102010201020102010201020102010201020102010201020102010201020102'
-  obfuscated_degree:
+  expansion_cardinality:
     value: 1
     profile_id: 0
     valid_for_ms: 60000

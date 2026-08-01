@@ -28,7 +28,9 @@ owners:
       - Peer handle
       - Path
       - Provider Path
-      - Path Provider
+      - Path Provider protocol
+      - Path Provider implementation
+      - Path Provider instance
       - Packet
       - Sequence
       - P-Stratum common

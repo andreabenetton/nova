@@ -2,7 +2,9 @@
 
 # P-Stratum common architecture
 
-P-Stratum common consumes Provider Paths through `NOVA-IF-P-PATH-PROVIDER 0.3.0` and does not depend on P-0AP, P-LAP, P-RAP, Adapter, Binding, locator, or Virtual Fabric implementation details.
+The normative P-Stratum objectives are defined in `../objectives.md`.
+
+P-Stratum common consumes Provider Paths through `NOVA-IF-P-PATH-PROVIDER 0.4.0` and does not depend on P-0AP, P-LAP, P-RAP, Adapter, Binding, locator, or Virtual Fabric implementation details.
 
 Its P-Stratum responsibilities are:
 
@@ -14,4 +16,4 @@ Its P-Stratum responsibilities are:
 - own finite queues, backpressure, transfer lifecycle, and provider restart handling;
 - implement `NOVA-IF-P-R 0.2.0` without exporting private P-Stratum mechanics.
 
-The semantic mapping from P-Stratum concepts to R-Stratum concepts is defined only in `contracts/interfaces/p-r/`.
+Cross-stratum semantic mappings are defined only in `contracts/interfaces/p-r/`.

@@ -15,7 +15,7 @@ Nova is organized into P-Stratum, R-Stratum, and O-Stratum. Communication across
 
 ## P-Stratum decomposition
 
-P-Stratum contains a common service and three Path Providers: P-0AP, P-LAP, and P-RAP. All provide internal Paths through the same Path Provider Interface and remain invisible to R-Stratum.
+P-Stratum contains a common service and three Path Provider protocols: P-0AP, P-LAP, and P-RAP. Running Path Provider instances conforming to those protocols provide internal Paths through the same Path Provider Interface and remain invisible across the P–R Interface.
 
 ```text
 P-0AP          P-LAP          P-RAP
