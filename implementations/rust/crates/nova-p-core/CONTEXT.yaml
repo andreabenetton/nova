@@ -3,7 +3,7 @@ module: "nova-p-core"
 required_context:
   - "canon/glossary.md"
   - "contracts/interfaces/p-r/0.1.0/"
-  - "contracts/interfaces/p-path-provider/0.1.0/"
+  - "contracts/interfaces/p-path-provider/0.2.0/"
   - "protocols/p-stratum/common/"
 optional_context:
   []

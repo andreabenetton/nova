@@ -1,0 +1,70 @@
+
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-P-PATH-PROVIDER"
+  name: "P-Stratum Path Provider Interface"
+  kind: "provider-interface"
+  version: "0.2.0"
+  status: "experimental"
+roles:
+  provider: "P-0AP, P-LAP, or P-RAP"
+  consumer: "P-Stratum common"
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  ProviderPathId:
+    kind: "opaque"
+  PathCandidate:
+    kind: "structure"
+  ProviderSdu:
+    kind: "bytes"
+operations:
+  - id: 1
+    name: "activate-provider"
+    caller: "consumer"
+    input: "ActivateProviderRequest"
+    success: "ProviderActivated"
+    errors: ["UNSUPPORTED_CONFIGURATION"]
+  - id: 2
+    name: "send-provider-sdu"
+    caller: "consumer"
+    input: "SendProviderSduRequest"
+    success: "ProviderSubmissionAccepted"
+    errors: ["UNKNOWN_PROVIDER_PATH", "BACKPRESSURE"]
+  - id: 3
+    name: "deactivate-provider"
+    caller: "consumer"
+    input: "DeactivateProviderRequest"
+    success: "ProviderDeactivated"
+events:
+  - id: 4097
+    name: "provider-path-added"
+    emitted_by: "provider"
+    data: "ProviderPathAdded"
+  - id: 4098
+    name: "provider-path-updated"
+    emitted_by: "provider"
+    data: "ProviderPathUpdated"
+  - id: 4099
+    name: "provider-path-removed"
+    emitted_by: "provider"
+    data: "ProviderPathRemoved"
+  - id: 4100
+    name: "provider-sdu-received"
+    emitted_by: "provider"
+    data: "ProviderSduReceived"
+errors:
+  - id: 8193
+    name: "UNSUPPORTED_CONFIGURATION"
+  - id: 8194
+    name: "UNKNOWN_PROVIDER_PATH"
+  - id: 8195
+    name: "BACKPRESSURE"
+invariants:
+  - id: "PPP-INV-001"
+    statement: "P-Stratum common treats P-0AP, P-LAP, and P-RAP as Path Providers and does not depend on their private behavior."
+  - id: "PPP-INV-002"
+    statement: "A provider does not expose provider-specific technology, locator, simulation, or control details through this Interface."
+  - id: "PPP-INV-003"
+    statement: "A provider-sdu-received event refers to exactly one active provider Path generation."

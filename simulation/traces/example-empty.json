@@ -1,0 +1,12 @@
+{
+  "engine": {
+    "id": "NOVA-VIRTUAL-FABRIC",
+    "prng": "stub-v0",
+    "scheduler": "reference-v0",
+    "version": "0.1.0"
+  },
+  "events": [],
+  "scenario_digest": "sha256:stub-three-node-chain",
+  "schema_version": "0.1",
+  "seed": 42
+}

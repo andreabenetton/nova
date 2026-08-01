@@ -1,0 +1,17 @@
+$schema: "../schemas/nidl/0.1/implementation.schema.json"
+nidl: "0.1"
+implementation:
+  id: "NOVA-ADAPTER-SIMULATED"
+  version: "0.1.0"
+  status: "stub"
+implements:
+  - interface: "NOVA-IF-P-LAP-ADAPTER"
+    version: "0.1.0"
+technology:
+  kind: "Simulated Nexus Fundamenta"
+  engine: "NOVA-VIRTUAL-FABRIC"
+capabilities:
+  BROADCAST: true
+  MULTICAST: true
+  POINT_TO_POINT: true
+  CONGESTION_SIGNAL: true

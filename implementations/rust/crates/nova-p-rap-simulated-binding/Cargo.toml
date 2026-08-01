@@ -1,0 +1,12 @@
+[package]
+name = "nova-p-rap-simulated-binding"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-interface-p-rap-binding = { path = "../nova-interface-p-rap-binding" }
+nova-interface-virtual-fabric = { path = "../nova-interface-virtual-fabric" }
+
+[lints]
+workspace = true

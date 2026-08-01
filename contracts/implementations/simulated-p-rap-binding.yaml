@@ -1,0 +1,19 @@
+$schema: "../schemas/nidl/0.1/implementation.schema.json"
+nidl: "0.1"
+implementation:
+  id: "NOVA-BINDING-SIMULATED"
+  version: "0.1.0"
+  status: "stub"
+implements:
+  - interface: "NOVA-IF-P-RAP-BINDING"
+    version: "0.1.0"
+technology:
+  network: "Simulated routed underlay"
+  transport: "Configurable Virtual Fabric profile"
+capabilities:
+  MESSAGE_BOUNDARIES: true
+  RELIABLE_DELIVERY: "profile-dependent"
+  ORDERED_DELIVERY: "profile-dependent"
+  CONGESTION_CONTROL: "profile-dependent"
+  LOCATOR_MIGRATION: true
+  UNRELIABLE_DATAGRAM: true

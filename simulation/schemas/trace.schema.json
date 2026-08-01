@@ -1,0 +1,75 @@
+{
+  "$id": "https://nova.invalid/simulation/trace/0.1/schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "engine": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "prng": {
+          "type": "string"
+        },
+        "scheduler": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "scheduler",
+        "prng"
+      ],
+      "type": "object"
+    },
+    "events": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "at_ms": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "sequence": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "at_ms",
+          "sequence",
+          "kind"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "scenario_digest": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "0.1"
+    },
+    "seed": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "scenario_digest",
+    "engine",
+    "seed",
+    "events"
+  ],
+  "title": "Nova portable simulation trace",
+  "type": "object"
+}

@@ -1,0 +1,18 @@
+$schema: "../schemas/nidl/0.1/implementation.schema.json"
+nidl: "0.1"
+implementation:
+  id: "NOVA-VIRTUAL-FABRIC"
+  version: "0.1.0"
+  status: "stub"
+implements:
+  - interface: "NOVA-IF-VIRTUAL-FABRIC"
+    version: "0.1.0"
+technology:
+  component: "Deterministic in-process simulation engine"
+capabilities:
+  VIRTUAL_CLOCK: true
+  SEEDED_RANDOM: true
+  RECORD_REPLAY: true
+  FAULT_INJECTION: true
+  BIDIRECTIONAL_LINKS: true
+  DIRECTIONAL_LINKS: true

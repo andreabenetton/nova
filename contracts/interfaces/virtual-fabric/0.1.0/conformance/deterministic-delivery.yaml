@@ -1,0 +1,16 @@
+
+$schema: "../../../../schemas/nidl/0.1/conformance.schema.json"
+nidl: "0.1"
+scenario:
+  id: "VF-CONF-DETERMINISTIC-DELIVERY-001"
+  interface: "NOVA-IF-VIRTUAL-FABRIC"
+  version: "0.1.0"
+  role: "provider"
+  description: "Repeated execution with identical configuration and seed produces identical delivery events."
+  steps:
+    - action: "initialize a fabric with a fixed seed and scheduler policy"
+    - action: "register two endpoints and one modeled link"
+    - action: "submit a deterministic sequence of units"
+    - action: "run until idle and record delivery events"
+    - action: "repeat from a clean state"
+    - action: "assert identical externally observable events"

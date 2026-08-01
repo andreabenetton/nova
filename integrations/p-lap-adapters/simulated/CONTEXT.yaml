@@ -1,0 +1,20 @@
+
+$schema: "../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "p-lap-simulated-adapter"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/p-lap-adapter/0.1.0/"
+  - "contracts/interfaces/virtual-fabric/0.1.0/"
+  - "integrations/p-lap-adapters/simulated/"
+  - "simulation/virtual-fabric/"
+optional_context: []
+forbidden_context:
+  - "protocols/r-stratum/"
+  - "protocols/p-stratum/p-rap/"
+interfaces:
+  consumes:
+    - id: "NOVA-IF-VIRTUAL-FABRIC"
+      version: "0.1.0"
+  provides:
+    - id: "NOVA-IF-P-LAP-ADAPTER"
+      version: "0.1.0"

@@ -1,0 +1,105 @@
+{
+  "$id": "https://nova.invalid/simulation/scenario/0.1/schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "clock": {
+      "const": "virtual"
+    },
+    "events": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "at_ms": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "at_ms",
+          "action"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "nodes": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "paths": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "path_kind": {
+            "enum": [
+              "LINK_ADJACENT",
+              "REMOTE_ASSOCIATION"
+            ]
+          },
+          "profile": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "from",
+          "to",
+          "path_kind",
+          "profile"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "provider_compliance": {
+      "enum": [
+        "conforming",
+        "intentionally-violating"
+      ]
+    },
+    "schema_version": {
+      "const": "0.1"
+    },
+    "seed": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "seed",
+    "clock",
+    "nodes",
+    "paths",
+    "events"
+  ],
+  "title": "Nova deterministic simulation scenario",
+  "type": "object"
+}

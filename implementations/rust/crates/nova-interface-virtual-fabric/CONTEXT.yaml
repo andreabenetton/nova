@@ -1,0 +1,11 @@
+$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-interface-virtual-fabric"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/virtual-fabric/0.1.0/"
+optional_context: []
+forbidden_context:
+  - "protocols/r-stratum/"
+interfaces:
+  consumes: []
+  provides: []

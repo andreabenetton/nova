@@ -20,6 +20,12 @@
       "version": "0.1.0"
     },
     {
+      "fingerprint": "sha256:54669a4b9499512ba64958e5ab2f15aabbf8381872a71ae18a0c3fc636737233",
+      "id": "NOVA-IF-P-0AP-CONTROL",
+      "path": "contracts/interfaces/p-0ap-control/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
       "fingerprint": "sha256:c371d99f8b3fae961ba978062e09a6dd54e13795973543c50a9772c94ec85f66",
       "id": "NOVA-IF-P-LAP-ADAPTER",
       "path": "contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml",
@@ -30,6 +36,12 @@
       "id": "NOVA-IF-P-PATH-PROVIDER",
       "path": "contracts/interfaces/p-path-provider/0.1.0/interface.yaml",
       "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:1ec3d48a83195a14b42084b56787f812b2d8cb2e9c0ce8f4475187b9076ad950",
+      "id": "NOVA-IF-P-PATH-PROVIDER",
+      "path": "contracts/interfaces/p-path-provider/0.2.0/interface.yaml",
+      "version": "0.2.0"
     },
     {
       "fingerprint": "sha256:93f3408129ee0e2078102d38f25299ca2d81922d1e8741f2cfd391c3a163aa8f",
@@ -53,6 +65,12 @@
       "fingerprint": "sha256:dcb1efeef5bbb2c73b378fde67cf63d9181a719a80d8a17ededce3c9542b2edf",
       "id": "NOVA-IF-R-O",
       "path": "contracts/interfaces/r-o/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:77987d39c981e51572c3db72499f346004bef64c1b98dd009e039981368d7527",
+      "id": "NOVA-IF-VIRTUAL-FABRIC",
+      "path": "contracts/interfaces/virtual-fabric/0.1.0/interface.yaml",
       "version": "0.1.0"
     }
   ],

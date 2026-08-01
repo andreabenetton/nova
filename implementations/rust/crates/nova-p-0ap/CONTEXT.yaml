@@ -1,0 +1,25 @@
+$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-p-0ap"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/p-path-provider/0.2.0/"
+  - "contracts/interfaces/p-0ap-control/0.1.0/"
+  - "contracts/interfaces/virtual-fabric/0.1.0/"
+  - "protocols/p-stratum/p-0ap/"
+  - "simulation/virtual-fabric/"
+optional_context:
+  - "simulation/profiles/"
+  - "simulation/scenarios/"
+forbidden_context:
+  - "protocols/r-stratum/"
+  - "integrations/p-lap-adapters/ethernet/"
+  - "integrations/p-rap-bindings/quic-common/"
+interfaces:
+  consumes:
+    - id: "NOVA-IF-VIRTUAL-FABRIC"
+      version: "0.1.0"
+  provides:
+    - id: "NOVA-IF-P-PATH-PROVIDER"
+      version: "0.2.0"
+    - id: "NOVA-IF-P-0AP-CONTROL"
+      version: "0.1.0"

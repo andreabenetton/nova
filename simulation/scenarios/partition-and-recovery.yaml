@@ -1,0 +1,28 @@
+
+schema_version: "0.1"
+name: "partition-and-recovery"
+seed: 9
+clock: "virtual"
+provider_compliance: "conforming"
+nodes:
+  - id: "node-a"
+  - id: "node-b"
+  - id: "node-c"
+paths:
+  - id: "a-b"
+    from: "node-a"
+    to: "node-b"
+    path_kind: "LINK_ADJACENT"
+    profile: "adjacent-lan-like"
+  - id: "b-c"
+    from: "node-b"
+    to: "node-c"
+    path_kind: "REMOTE_ASSOCIATION"
+    profile: "remote-wan-like"
+events:
+  - at_ms: 3000
+    action: "partition"
+    members: ["node-c"]
+  - at_ms: 9000
+    action: "heal"
+    members: ["node-c"]

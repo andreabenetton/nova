@@ -7,12 +7,43 @@ crates:
       - nova-interface-r-o
     forbid:
       - nova-p-core
+      - nova-p-0ap
+      - nova-virtual-fabric
       - nova-p-lap
       - nova-p-rap
+      - nova-p-lap-simulated-adapter
+      - nova-p-rap-simulated-binding
       - nova-p-lap-ethernet
       - nova-p-rap-quic-common
       - nova-p-rap-ipv4-quic
       - nova-p-rap-ipv6-quic
+  nova-p-0ap:
+    allow:
+      - nova-types
+      - nova-interface-p-path-provider
+      - nova-interface-p-0ap-control
+      - nova-interface-virtual-fabric
+    forbid:
+      - nova-r-stratum
+      - nova-p-lap
+      - nova-p-rap
+      - nova-p-lap-ethernet
+      - nova-p-rap-quic-common
+  nova-p-0ap-control:
+    allow:
+      - nova-interface-p-0ap-control
+    forbid:
+      - nova-r-stratum
+      - nova-p-lap
+      - nova-p-rap
+  nova-virtual-fabric:
+    allow:
+      - nova-interface-virtual-fabric
+    forbid:
+      - nova-r-stratum
+      - nova-p-core
+      - nova-p-lap
+      - nova-p-rap
   nova-p-lap:
     allow:
       - nova-types
@@ -20,6 +51,7 @@ crates:
       - nova-interface-p-path-provider
     forbid:
       - nova-p-lap-ethernet
+      - nova-p-lap-simulated-adapter
       - nova-p-rap
   nova-p-rap:
     allow:
@@ -27,10 +59,27 @@ crates:
       - nova-interface-p-rap-binding
       - nova-interface-p-path-provider
     forbid:
+      - nova-p-rap-simulated-binding
       - nova-p-rap-quic-common
       - nova-p-rap-ipv4-quic
       - nova-p-rap-ipv6-quic
       - nova-p-lap
+  nova-p-lap-simulated-adapter:
+    allow:
+      - nova-interface-p-lap-adapter
+      - nova-interface-virtual-fabric
+    forbid:
+      - nova-r-stratum
+      - nova-p-lap
+      - nova-p-rap
+  nova-p-rap-simulated-binding:
+    allow:
+      - nova-interface-p-rap-binding
+      - nova-interface-virtual-fabric
+    forbid:
+      - nova-r-stratum
+      - nova-p-lap
+      - nova-p-rap
   nova-ip-over-nova:
     allow:
       - nova-types
@@ -38,6 +87,8 @@ crates:
       - nova-interface-ip-platform-attachment
     forbid:
       - nova-p-core
+      - nova-p-0ap
+      - nova-virtual-fabric
       - nova-p-lap
       - nova-p-rap
       - nova-r-stratum

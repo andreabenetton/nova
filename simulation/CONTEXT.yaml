@@ -1,0 +1,19 @@
+
+$schema: "../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-simulation"
+required_context:
+  - "canon/glossary.md"
+  - "canon/invariants.md"
+  - "contracts/interfaces/virtual-fabric/0.1.0/"
+  - "simulation/virtual-fabric/"
+optional_context:
+  - "protocols/p-stratum/p-0ap/"
+  - "integrations/p-lap-adapters/simulated/"
+  - "integrations/p-rap-bindings/simulated/"
+forbidden_context:
+  - "protocols/r-stratum/"
+interfaces:
+  consumes: []
+  provides:
+    - id: "NOVA-IF-VIRTUAL-FABRIC"
+      version: "0.1.0"

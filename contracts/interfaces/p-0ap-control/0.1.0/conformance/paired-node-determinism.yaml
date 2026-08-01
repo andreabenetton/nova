@@ -1,0 +1,15 @@
+
+$schema: "../../../../schemas/nidl/0.1/conformance.schema.json"
+nidl: "0.1"
+scenario:
+  id: "P0C-CONF-PAIRED-DETERMINISM-001"
+  interface: "NOVA-IF-P-0AP-CONTROL"
+  version: "0.1.0"
+  role: "provider"
+  description: "The same paired-node scenario and seed produce the same portable trace."
+  steps:
+    - action: "load a valid paired-node scenario with a fixed seed"
+    - action: "run until idle and export a portable trace"
+    - action: "reset and load the identical scenario"
+    - action: "run until idle and export a second portable trace"
+    - action: "assert the externally observable traces are identical"

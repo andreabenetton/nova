@@ -2,7 +2,7 @@ $schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
 module: "nova-p-lap"
 required_context:
   - "canon/glossary.md"
-  - "contracts/interfaces/p-path-provider/0.1.0/"
+  - "contracts/interfaces/p-path-provider/0.2.0/"
   - "contracts/interfaces/p-lap-adapter/0.1.0/"
   - "protocols/p-stratum/p-lap/"
 optional_context:

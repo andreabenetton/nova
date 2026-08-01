@@ -1,0 +1,16 @@
+
+schema_version: "0.1"
+name: "two-nodes"
+seed: 1
+clock: "virtual"
+provider_compliance: "conforming"
+nodes:
+  - id: "node-a"
+  - id: "node-b"
+paths:
+  - id: "a-b"
+    from: "node-a"
+    to: "node-b"
+    path_kind: "REMOTE_ASSOCIATION"
+    profile: "remote-wan-like"
+events: []

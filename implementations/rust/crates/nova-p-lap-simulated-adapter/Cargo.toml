@@ -1,0 +1,12 @@
+[package]
+name = "nova-p-lap-simulated-adapter"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-interface-p-lap-adapter = { path = "../nova-interface-p-lap-adapter" }
+nova-interface-virtual-fabric = { path = "../nova-interface-virtual-fabric" }
+
+[lints]
+workspace = true

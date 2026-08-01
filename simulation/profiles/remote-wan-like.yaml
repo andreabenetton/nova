@@ -1,0 +1,12 @@
+
+profile_version: "0.1"
+name: "remote-wan-like"
+characteristics:
+  latency_ms: 60
+  jitter_ms: 8
+  bandwidth_bps: 20000000
+  loss_probability: 0.001
+  maximum_sdu_size: 65535
+  queue_units: 2048
+notes:
+  - "Path-level preset only; not evidence of QUIC, IP, or P-RAP conformance."

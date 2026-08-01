@@ -1,6 +1,7 @@
+
 PYTHON ?= python3
 
-.PHONY: setup contracts normalize lint matrix context boundaries contract-tests agent-instructions rust test check tree
+.PHONY: setup contracts normalize lint matrix context boundaries contract-tests agent-instructions simulation-fixtures rust test check tree
 
 setup:
 	$(PYTHON) -m pip install --no-build-isolation -e tools/nova-contract
@@ -29,6 +30,9 @@ contract-tests:
 agent-instructions:
 	$(PYTHON) tools/check_agent_instructions.py
 
+simulation-fixtures:
+	$(PYTHON) tools/check_simulation_fixtures.py
+
 rust:
 	cargo fmt --all -- --check
 	cargo check --workspace
@@ -37,7 +41,7 @@ rust:
 test:
 	cargo test --workspace
 
-check: contracts normalize lint matrix context boundaries contract-tests agent-instructions rust test
+check: contracts normalize lint matrix context boundaries contract-tests agent-instructions simulation-fixtures rust test
 
 tree:
 	find . -path './.git' -prune -o -print | sort

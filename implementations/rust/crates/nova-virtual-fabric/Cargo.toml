@@ -1,0 +1,11 @@
+[package]
+name = "nova-virtual-fabric"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-interface-virtual-fabric = { path = "../nova-interface-virtual-fabric" }
+
+[lints]
+workspace = true

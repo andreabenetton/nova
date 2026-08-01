@@ -1,0 +1,1 @@
+{"$schema":"../../../../schemas/nidl/0.1/conformance.schema.json","nidl":"0.1","scenario":{"id":"PPP-CONF-ACTIVATE-002","interface":"NOVA-IF-P-PATH-PROVIDER","role":"provider","steps":[{"action":"activate provider then emit no Path event before activation succeeds"}],"version":"0.2.0"}}

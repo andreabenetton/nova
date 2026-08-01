@@ -1,0 +1,145 @@
+
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-VIRTUAL-FABRIC"
+  name: "Deterministic Virtual Fabric Interface"
+  kind: "provider-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "Virtual Fabric engine"
+  consumer: "Simulation front end"
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  FabricEndpointId:
+    kind: "opaque"
+  FabricLinkId:
+    kind: "opaque"
+  FabricUnit:
+    kind: "bytes"
+  FabricLinkProperties:
+    kind: "structure"
+  VirtualTime:
+    kind: "unsigned-integer"
+states:
+  - "STOPPED"
+  - "READY"
+  - "RUNNING"
+  - "FAILED"
+operations:
+  - id: 1
+    name: "initialize-fabric"
+    caller: "consumer"
+    input: "InitializeFabricRequest"
+    success: "FabricInitialized"
+    errors: ["INVALID_CONFIGURATION", "UNSUPPORTED_VERSION", "RESOURCE_LIMIT"]
+  - id: 2
+    name: "register-endpoint"
+    caller: "consumer"
+    input: "RegisterEndpointRequest"
+    success: "EndpointRegistered"
+    errors: ["DUPLICATE_ENDPOINT", "RESOURCE_LIMIT", "INVALID_STATE"]
+  - id: 3
+    name: "remove-endpoint"
+    caller: "consumer"
+    input: "RemoveEndpointRequest"
+    success: "EndpointRemoved"
+    errors: ["UNKNOWN_ENDPOINT", "INVALID_STATE"]
+  - id: 4
+    name: "configure-link"
+    caller: "consumer"
+    input: "ConfigureLinkRequest"
+    success: "LinkConfigured"
+    errors: ["UNKNOWN_ENDPOINT", "INVALID_LINK", "RESOURCE_LIMIT", "INVALID_STATE"]
+  - id: 5
+    name: "remove-link"
+    caller: "consumer"
+    input: "RemoveLinkRequest"
+    success: "LinkRemoved"
+    errors: ["UNKNOWN_LINK", "INVALID_STATE"]
+  - id: 6
+    name: "submit-unit"
+    caller: "consumer"
+    input: "SubmitFabricUnitRequest"
+    success: "FabricUnitAccepted"
+    errors: ["UNKNOWN_ENDPOINT", "UNKNOWN_LINK", "UNIT_TOO_LARGE", "BACKPRESSURE", "INVALID_STATE"]
+  - id: 7
+    name: "advance-time"
+    caller: "consumer"
+    input: "AdvanceFabricTimeRequest"
+    success: "FabricTimeAdvanced"
+    errors: ["INVALID_TIME", "EVENT_LIMIT", "INVALID_STATE"]
+  - id: 8
+    name: "run-until-idle"
+    caller: "consumer"
+    input: "RunFabricUntilIdleRequest"
+    success: "FabricIdle"
+    errors: ["EVENT_LIMIT", "INVALID_STATE"]
+  - id: 9
+    name: "export-trace"
+    caller: "consumer"
+    input: "ExportFabricTraceRequest"
+    success: "FabricTraceExported"
+    errors: ["TRACE_DISABLED", "RESOURCE_LIMIT"]
+events:
+  - id: 4097
+    name: "unit-delivered"
+    emitted_by: "provider"
+    data: "FabricUnitDelivered"
+  - id: 4098
+    name: "link-state-changed"
+    emitted_by: "provider"
+    data: "FabricLinkStateChanged"
+  - id: 4099
+    name: "fabric-failed"
+    emitted_by: "provider"
+    data: "FabricFailure"
+errors:
+  - id: 8193
+    name: "INVALID_CONFIGURATION"
+  - id: 8194
+    name: "UNSUPPORTED_VERSION"
+  - id: 8195
+    name: "RESOURCE_LIMIT"
+  - id: 8196
+    name: "DUPLICATE_ENDPOINT"
+  - id: 8197
+    name: "UNKNOWN_ENDPOINT"
+  - id: 8198
+    name: "INVALID_STATE"
+  - id: 8199
+    name: "INVALID_LINK"
+  - id: 8200
+    name: "UNKNOWN_LINK"
+  - id: 8201
+    name: "UNIT_TOO_LARGE"
+  - id: 8202
+    name: "BACKPRESSURE"
+  - id: 8203
+    name: "INVALID_TIME"
+  - id: 8204
+    name: "EVENT_LIMIT"
+  - id: 8205
+    name: "TRACE_DISABLED"
+capabilities:
+  - id: 1
+    name: "VIRTUAL_CLOCK"
+  - id: 2
+    name: "SEEDED_RANDOM"
+  - id: 3
+    name: "RECORD_REPLAY"
+  - id: 4
+    name: "FAULT_INJECTION"
+  - id: 5
+    name: "BIDIRECTIONAL_LINKS"
+  - id: 6
+    name: "DIRECTIONAL_LINKS"
+invariants:
+  - id: "VF-INV-001"
+    statement: "A fixed scenario, seed, scheduler policy, pseudo-random algorithm, and implementation version produce the same externally observable trace."
+  - id: "VF-INV-002"
+    statement: "The engine does not interpret R-Stratum, P-Stratum, P-LAP, or P-RAP protocol semantics."
+  - id: "VF-INV-003"
+    statement: "Every accepted unit is delivered, dropped, duplicated, or retained only according to explicit modeled state and deterministic scheduling."

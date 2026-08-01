@@ -1,0 +1,22 @@
+
+schema_version: "0.1"
+name: "path-failure"
+seed: 7
+clock: "virtual"
+provider_compliance: "conforming"
+nodes:
+  - id: "node-a"
+  - id: "node-b"
+paths:
+  - id: "a-b"
+    from: "node-a"
+    to: "node-b"
+    path_kind: "REMOTE_ASSOCIATION"
+    profile: "remote-wan-like"
+events:
+  - at_ms: 5000
+    action: "remove-path"
+    path: "a-b"
+  - at_ms: 8000
+    action: "restore-path"
+    path: "a-b"

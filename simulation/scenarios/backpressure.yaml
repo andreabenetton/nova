@@ -1,0 +1,20 @@
+
+schema_version: "0.1"
+name: "backpressure"
+seed: 13
+clock: "virtual"
+provider_compliance: "conforming"
+nodes:
+  - id: "node-a"
+  - id: "node-b"
+paths:
+  - id: "a-b"
+    from: "node-a"
+    to: "node-b"
+    path_kind: "REMOTE_ASSOCIATION"
+    profile: "impaired-path"
+events:
+  - at_ms: 0
+    action: "submit-burst"
+    path: "a-b"
+    units: 256

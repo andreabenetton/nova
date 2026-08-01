@@ -1,0 +1,12 @@
+
+profile_version: "0.1"
+name: "impaired-path"
+characteristics:
+  latency_ms: 120
+  jitter_ms: 40
+  bandwidth_bps: 1000000
+  loss_probability: 0.05
+  duplicate_probability: 0.01
+  reorder_probability: 0.02
+  maximum_sdu_size: 4096
+  queue_units: 64

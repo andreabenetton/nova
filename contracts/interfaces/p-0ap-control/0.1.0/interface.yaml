@@ -1,0 +1,175 @@
+
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-P-0AP-CONTROL"
+  name: "P-0AP Control Interface"
+  kind: "provider-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "P-0AP"
+  consumer: "Simulation controller"
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  SimulationNodeId:
+    kind: "opaque"
+  SimulationPathId:
+    kind: "opaque"
+  ScenarioDocument:
+    kind: "structure"
+  TraceDocument:
+    kind: "structure"
+  PathCharacteristics:
+    kind: "structure"
+states:
+  - "INACTIVE"
+  - "READY"
+  - "RUNNING"
+  - "FAILED"
+operations:
+  - id: 1
+    name: "load-scenario"
+    caller: "consumer"
+    input: "LoadScenarioRequest"
+    success: "ScenarioLoaded"
+    errors: ["INVALID_SCENARIO", "UNSUPPORTED_SCENARIO_VERSION", "RESOURCE_LIMIT"]
+  - id: 2
+    name: "create-node"
+    caller: "consumer"
+    input: "CreateNodeRequest"
+    success: "NodeCreated"
+    errors: ["DUPLICATE_NODE", "RESOURCE_LIMIT", "INVALID_STATE"]
+  - id: 3
+    name: "remove-node"
+    caller: "consumer"
+    input: "RemoveNodeRequest"
+    success: "NodeRemoved"
+    errors: ["UNKNOWN_NODE", "INVALID_STATE"]
+  - id: 4
+    name: "create-path"
+    caller: "consumer"
+    input: "CreatePathRequest"
+    success: "PathCreated"
+    errors: ["UNKNOWN_NODE", "DUPLICATE_PATH", "INVALID_PATH_KIND", "RESOURCE_LIMIT", "INVALID_STATE"]
+  - id: 5
+    name: "update-path"
+    caller: "consumer"
+    input: "UpdatePathRequest"
+    success: "PathUpdated"
+    errors: ["UNKNOWN_PATH", "INVALID_CHARACTERISTICS", "INVALID_STATE"]
+  - id: 6
+    name: "remove-path"
+    caller: "consumer"
+    input: "RemovePathRequest"
+    success: "PathRemoved"
+    errors: ["UNKNOWN_PATH", "INVALID_STATE"]
+  - id: 7
+    name: "set-partition"
+    caller: "consumer"
+    input: "SetPartitionRequest"
+    success: "PartitionApplied"
+    errors: ["UNKNOWN_NODE", "INVALID_STATE"]
+  - id: 8
+    name: "advance-time"
+    caller: "consumer"
+    input: "AdvanceTimeRequest"
+    success: "TimeAdvanced"
+    errors: ["INVALID_TIME", "INVALID_STATE"]
+  - id: 9
+    name: "run-until-idle"
+    caller: "consumer"
+    input: "RunUntilIdleRequest"
+    success: "SimulationIdle"
+    errors: ["EVENT_LIMIT", "INVALID_STATE"]
+  - id: 10
+    name: "start-recording"
+    caller: "consumer"
+    input: "StartRecordingRequest"
+    success: "RecordingStarted"
+    errors: ["INVALID_STATE", "RESOURCE_LIMIT"]
+  - id: 11
+    name: "export-trace"
+    caller: "consumer"
+    input: "ExportTraceRequest"
+    success: "TraceExported"
+    errors: ["NO_RECORDING", "RESOURCE_LIMIT"]
+  - id: 12
+    name: "replay-trace"
+    caller: "consumer"
+    input: "ReplayTraceRequest"
+    success: "TraceReplayed"
+    errors: ["INVALID_TRACE", "UNSUPPORTED_TRACE_VERSION", "REPLAY_INCOMPATIBLE", "RESOURCE_LIMIT"]
+  - id: 13
+    name: "set-provider-compliance-mode"
+    caller: "consumer"
+    input: "SetProviderComplianceModeRequest"
+    success: "ProviderComplianceModeSet"
+    errors: ["INVALID_MODE", "INVALID_STATE"]
+events:
+  - id: 4097
+    name: "control-action-applied"
+    emitted_by: "provider"
+    data: "ControlActionApplied"
+  - id: 4098
+    name: "simulation-failed"
+    emitted_by: "provider"
+    data: "SimulationFailure"
+  - id: 4099
+    name: "trace-available"
+    emitted_by: "provider"
+    data: "TraceAvailable"
+errors:
+  - id: 8193
+    name: "INVALID_SCENARIO"
+  - id: 8194
+    name: "UNSUPPORTED_SCENARIO_VERSION"
+  - id: 8195
+    name: "RESOURCE_LIMIT"
+  - id: 8196
+    name: "DUPLICATE_NODE"
+  - id: 8197
+    name: "UNKNOWN_NODE"
+  - id: 8198
+    name: "INVALID_STATE"
+  - id: 8199
+    name: "DUPLICATE_PATH"
+  - id: 8200
+    name: "UNKNOWN_PATH"
+  - id: 8201
+    name: "INVALID_PATH_KIND"
+  - id: 8202
+    name: "INVALID_CHARACTERISTICS"
+  - id: 8203
+    name: "INVALID_TIME"
+  - id: 8204
+    name: "EVENT_LIMIT"
+  - id: 8205
+    name: "NO_RECORDING"
+  - id: 8206
+    name: "INVALID_TRACE"
+  - id: 8207
+    name: "UNSUPPORTED_TRACE_VERSION"
+  - id: 8208
+    name: "REPLAY_INCOMPATIBLE"
+  - id: 8209
+    name: "INVALID_MODE"
+capabilities:
+  - id: 1
+    name: "LOOPBACK_MODE"
+  - id: 2
+    name: "PAIRED_NODE_MODE"
+  - id: 3
+    name: "VIRTUAL_FABRIC_MODE"
+  - id: 4
+    name: "RECORD_REPLAY"
+  - id: 5
+    name: "ADVERSARIAL_PROVIDER_MODE"
+invariants:
+  - id: "P0C-INV-001"
+    statement: "Control operations and identifiers are not exposed through NOVA-IF-P-R or NOVA-IF-P-PATH-PROVIDER."
+  - id: "P0C-INV-002"
+    statement: "Paired-node and Virtual Fabric modes use distinct Nova Node identities for distinct simulated Nodes."
+  - id: "P0C-INV-003"
+    statement: "Adversarial provider mode is explicitly selected and clearly labeled as non-conforming provider behavior."

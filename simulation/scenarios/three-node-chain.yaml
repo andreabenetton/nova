@@ -1,0 +1,22 @@
+
+schema_version: "0.1"
+name: "three-node-chain"
+seed: 42
+clock: "virtual"
+provider_compliance: "conforming"
+nodes:
+  - id: "node-a"
+  - id: "node-b"
+  - id: "node-c"
+paths:
+  - id: "a-b"
+    from: "node-a"
+    to: "node-b"
+    path_kind: "LINK_ADJACENT"
+    profile: "adjacent-lan-like"
+  - id: "b-c"
+    from: "node-b"
+    to: "node-c"
+    path_kind: "REMOTE_ASSOCIATION"
+    profile: "remote-wan-like"
+events: []
