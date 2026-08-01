@@ -210,16 +210,20 @@ Do not include "while here" cleanup. Record unrelated drift for later, or addres
 
 ## Multi-component prompts
 
-This repository does not use an `apps/` application layout. Apply the same separation rule to independently deployable or independently versioned Nova components, including:
+When a single prompt requires changes to more than one independently versioned or independently deployable Nova component, handle each component separately. Components covered by this rule include:
 
-- P-Stratum common;
-- P-0AP, P-LAP, and P-RAP implementations;
-- R-Stratum and O-Stratum implementations;
-- Adapter, Binding, and Platform Attachment implementations;
-- Interface crates and generated SDKs;
-- command-line tools, daemons, conformance harnesses, and simulation tooling.
+- a stratum implementation;
+- a Path Provider implementation;
+- an Adapter;
+- a Binding;
+- a Platform Attachment;
+- an Interface or generated Interface crate;
+- an SDK;
+- a daemon or executable;
+- a conformance tool;
+- simulation tooling.
 
-When one prompt spans more than one such component, do not bundle all implementations into one commit merely because they support one broad feature. For each independently reviewable component:
+For each independently reviewable component:
 
 1. implement only that component's portion;
 2. add or update only its directly related tests and conformance material;
