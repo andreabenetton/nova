@@ -21,6 +21,7 @@ jobs:
       - run: nova-contract boundaries canon/dependency-policy.yaml implementations/rust
       - run: python -m unittest discover -s tools/nova-contract/tests
       - run: python tools/check_repository_shape.py
+      - run: python tools/check_agent_instructions.py
       - if: github.event_name == 'pull_request'
         run: |
           git fetch origin "${{ github.base_ref }}" --depth=1

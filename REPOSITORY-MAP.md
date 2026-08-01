@@ -13,7 +13,8 @@
 | `generated/` | derived | Reproducible generated code, documentation, mocks, harnesses, and dissector material. |
 | `adr/` | decision process | Proposed, accepted, rejected, and superseded architecture decisions. |
 | `agents/` | process | LLM roles, bounded context, task templates, and review checklists. |
+| `docs/` | process documentation | Repository-wide contributor and coding-agent instruction architecture. |
 | `research/` | non-normative | Original papers, assessments, design notes, experiments, references, and unresolved questions. |
-| `tools/` | enforcement | NIDL validation, semantic lint, compatibility guard, context and dependency checks. |
+| `tools/` | enforcement | NIDL validation, semantic lint, compatibility guard, context, dependency, and agent-instruction checks. |
 | `examples/` | non-normative | Version-pinned examples and mock topologies. |
 | `fuzz/`, `benchmarks/` | evidence stubs | Security and performance work once wire formats exist. |

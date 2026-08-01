@@ -10,3 +10,10 @@
 8. New replaceable boundaries require a versioned NIDL contract, conformance scenarios, context rules, and an ADR when the architecture changes.
 9. Research documents are non-normative. Do not implement directly from an original paper when a normative contract exists.
 10. Run `make check` before proposing completion.
+
+## Instruction architecture
+
+- `AGENTS.md` is the canonical, vendor-neutral source of repository instructions.
+- Nested `AGENTS.md` files provide more specific instructions for their directory trees.
+- Agent-specific files are adapters or extensions only and must not copy shared rules.
+- Deterministic requirements belong in tooling and CI rather than prompt instructions alone.
