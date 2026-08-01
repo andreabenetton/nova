@@ -15,6 +15,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # --no-build-isolation needs the PEP 517 backend already present, and the
+      # Python 3.12 runner image no longer preinstalls setuptools.
+      - run: python -m pip install setuptools wheel
       - run: python -m pip install --no-build-isolation -e tools/nova-contract
       - run: nova-contract validate contracts
       - run: nova-contract normalize contracts --check
