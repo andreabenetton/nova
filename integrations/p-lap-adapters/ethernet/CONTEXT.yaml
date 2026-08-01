@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: Apache-2.0
-$schema: "../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "ethernet-adapter-design"
+$schema: ../../../contracts/schemas/nidl/0.1/context.schema.json
+module: ethernet-adapter-design
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml"
-  - "integrations/p-lap-adapters/ethernet/"
+- canon/glossary/common.md
+- protocols/p-stratum/glossary.md
+- contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml
+- integrations/p-lap-adapters/ethernet/
 optional_context:
-  - "protocols/p-stratum/p-lap/adapter-interface.md"
+- protocols/p-stratum/p-lap/adapter-interface.md
 forbidden_context:
-  - "protocols/r-stratum/"
-  - "integrations/p-rap-bindings/"
+- protocols/r-stratum/
+- integrations/p-rap-bindings/

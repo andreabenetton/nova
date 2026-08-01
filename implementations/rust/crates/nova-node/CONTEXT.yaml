@@ -1,13 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-node"
+$schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
+module: nova-node
 required_context:
-  - "canon/architecture.md"
-  - "implementations/rust/"
-optional_context:
-  []
+- canon/architecture.md
+- implementations/rust/
+optional_context: []
 forbidden_context:
-  - "research/original-papers/"
+- research/original-papers/
 interfaces:
   consumes: []
   provides: []

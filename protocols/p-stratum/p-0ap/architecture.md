@@ -18,6 +18,6 @@ NOVA-IF-P-R 0.2.0
 R-Stratum
 ```
 
-Control configures simulated Nodes, identities, Provider Paths, Obfuscated degree, finite resources, virtual time, faults, and replay. None of that metadata appears through the Path Provider Interface or P-R.
+Control configures simulated Nodes, identities, Provider Paths, expansion cardinality, finite resources, virtual time, faults, and replay. None of that metadata appears through the Path Provider Interface or P-R.
 
-P-Stratum common, not P-0AP, aggregates Paths and creates Edges.
+P-Stratum common, not P-0AP, aggregates Paths and implements the outward P–R Interface representation.

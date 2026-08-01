@@ -21,7 +21,7 @@ Rules:
 
 - activation returns an atomic initial Path snapshot and continuation sequence;
 - `provider-path-added` follows identity validation;
-- address rotation, identity replacement, characteristic change, and Obfuscated-degree change increment Provider Path revision;
+- address rotation, identity replacement, characteristic change, and expansion-cardinality change increment Provider Path revision;
 - restoration after removal uses a non-reused Path identifier within the generation;
 - every accepted Provider Submission has exactly one terminal result;
 - no conforming SDU reception occurs after final Path removal;

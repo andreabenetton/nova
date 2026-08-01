@@ -25,6 +25,7 @@ jobs:
       - run: python -m unittest discover -s tools/nova-contract/tests
       - run: python tools/check_repository_shape.py
       - run: python tools/check_agent_instructions.py
+      - run: python tools/check_terminology.py
       - run: python tools/check_licenses.py
       - run: python tools/check_simulation_fixtures.py
       - run: python tools/generate_repository_docs.py --check

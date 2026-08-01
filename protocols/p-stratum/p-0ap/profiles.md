@@ -5,7 +5,7 @@
 
 ## Loopback
 
-Returns submitted SDUs to the same local P-Stratum instance. Intended for serialization, queue, and smoke tests. It does not normally expose an Edge.
+Returns submitted SDUs to the same local P-Stratum instance. Intended for serialization, queue, and smoke tests. It does not normally expose an upper-stratum adjacency.
 
 ## Paired node
 

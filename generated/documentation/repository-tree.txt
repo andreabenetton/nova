@@ -69,6 +69,7 @@
 ./adr/proposed/0016-obfuscated-degree-in-base-p-r-interface.md
 ./adr/proposed/0017-p-r-atomic-reliable-sdu-lifecycle.md
 ./adr/proposed/0018-split-core-and-integration-licensing.md
+./adr/proposed/0019-stratum-scoped-glossaries.md
 ./adr/proposed/LICENSE.md
 ./adr/rejected
 ./adr/rejected/LICENSE.md
@@ -123,7 +124,10 @@
 ./canon/architecture.md
 ./canon/authority.md
 ./canon/dependency-policy.yaml
+./canon/glossary
 ./canon/glossary.md
+./canon/glossary/LICENSE.md
+./canon/glossary/common.md
 ./canon/invariants.md
 ./canon/registries
 ./canon/registries/LICENSE.md
@@ -136,6 +140,7 @@
 ./canon/registries/obfuscation-profile-identifiers.yaml
 ./canon/registries/path-kind-identifiers.yaml
 ./canon/registries/protocol-identifiers.yaml
+./canon/registries/term-ownership.yaml
 ./canon/security-model.md
 ./canon/versioning.md
 ./compatibility
@@ -440,6 +445,7 @@
 ./contracts/interfaces/o-a/0.1.0/interface.yaml
 ./contracts/interfaces/o-a/0.1.0/invariants.md
 ./contracts/interfaces/o-a/LICENSE.md
+./contracts/interfaces/o-a/glossary.md
 ./contracts/interfaces/p-0ap-control
 ./contracts/interfaces/p-0ap-control/0.1.0
 ./contracts/interfaces/p-0ap-control/0.1.0/LICENSE.md
@@ -587,7 +593,10 @@
 ./contracts/interfaces/p-r/0.2.0/neighbor-expansion.md
 ./contracts/interfaces/p-r/0.2.0/security.md
 ./contracts/interfaces/p-r/0.2.0/stability-gates.md
+./contracts/interfaces/p-r/AGENTS.md
+./contracts/interfaces/p-r/CLAUDE.md
 ./contracts/interfaces/p-r/LICENSE.md
+./contracts/interfaces/p-r/glossary.md
 ./contracts/interfaces/p-rap-binding
 ./contracts/interfaces/p-rap-binding/0.1.0
 ./contracts/interfaces/p-rap-binding/0.1.0/LICENSE.md
@@ -624,6 +633,7 @@
 ./contracts/interfaces/r-o/0.1.0/interface.yaml
 ./contracts/interfaces/r-o/0.1.0/invariants.md
 ./contracts/interfaces/r-o/LICENSE.md
+./contracts/interfaces/r-o/glossary.md
 ./contracts/interfaces/virtual-fabric
 ./contracts/interfaces/virtual-fabric/0.1.0
 ./contracts/interfaces/virtual-fabric/0.1.0/LICENSE.md
@@ -657,6 +667,7 @@
 ./docs/agent-instructions.md
 ./docs/licensing.md
 ./docs/p-r-interface-design.md
+./docs/terminology-architecture.md
 ./examples
 ./examples/LICENSE.md
 ./examples/README.md
@@ -1038,6 +1049,8 @@
 ./protocols/LICENSE.md
 ./protocols/README.md
 ./protocols/o-stratum
+./protocols/o-stratum/AGENTS.md
+./protocols/o-stratum/CLAUDE.md
 ./protocols/o-stratum/CONTEXT.yaml
 ./protocols/o-stratum/LICENSE.md
 ./protocols/o-stratum/README.md
@@ -1047,19 +1060,23 @@
 ./protocols/o-stratum/connectionless
 ./protocols/o-stratum/connectionless/LICENSE.md
 ./protocols/o-stratum/connectionless/README.md
+./protocols/o-stratum/glossary.md
 ./protocols/p-stratum
+./protocols/p-stratum/AGENTS.md
+./protocols/p-stratum/CLAUDE.md
 ./protocols/p-stratum/LICENSE.md
 ./protocols/p-stratum/README.md
 ./protocols/p-stratum/common
 ./protocols/p-stratum/common/CONTEXT.yaml
 ./protocols/p-stratum/common/LICENSE.md
 ./protocols/p-stratum/common/architecture.md
-./protocols/p-stratum/common/edge-aggregation.md
-./protocols/p-stratum/common/obfuscated-degree.md
+./protocols/p-stratum/common/expansion-cardinality.md
 ./protocols/p-stratum/common/path-model.md
 ./protocols/p-stratum/common/peer-model.md
+./protocols/p-stratum/common/peer-service-aggregation.md
 ./protocols/p-stratum/common/security-invariants.md
 ./protocols/p-stratum/common/submission-model.md
+./protocols/p-stratum/glossary.md
 ./protocols/p-stratum/p-0ap
 ./protocols/p-stratum/p-0ap/CONTEXT.yaml
 ./protocols/p-stratum/p-0ap/LICENSE.md
@@ -1096,6 +1113,8 @@
 ./protocols/p-stratum/p-rap/state-machine.md
 ./protocols/p-stratum/p-rap/unit-format.md
 ./protocols/r-stratum
+./protocols/r-stratum/AGENTS.md
+./protocols/r-stratum/CLAUDE.md
 ./protocols/r-stratum/CONTEXT.yaml
 ./protocols/r-stratum/LICENSE.md
 ./protocols/r-stratum/README.md
@@ -1114,6 +1133,7 @@
 ./protocols/r-stratum/flow-setup
 ./protocols/r-stratum/flow-setup/LICENSE.md
 ./protocols/r-stratum/flow-setup/README.md
+./protocols/r-stratum/glossary.md
 ./protocols/r-stratum/link-identify
 ./protocols/r-stratum/link-identify/LICENSE.md
 ./protocols/r-stratum/link-identify/README.md
@@ -1276,6 +1296,7 @@
 ./tools/check_licenses.py
 ./tools/check_repository_shape.py
 ./tools/check_simulation_fixtures.py
+./tools/check_terminology.py
 ./tools/ci
 ./tools/ci/LICENSE.md
 ./tools/ci/check_contract_versions.py

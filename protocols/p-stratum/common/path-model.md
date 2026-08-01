@@ -9,9 +9,9 @@ A Provider Path is private to P-Stratum and contains:
 - authenticated Peer Node identity;
 - complete-SDU delivery properties and finite queue limits;
 - abstract directional metrics;
-- Obfuscated degree with profile and freshness;
-- provider Submission lifecycle.
+- expansion-cardinality contribution with profile and freshness;
+- provider transfer lifecycle.
 
-P-Stratum common may maintain multiple Paths to one Peer. It must not export Path identifiers, Path kinds, provider type, Adapter, Binding, locator, Ethernet, QUIC, simulation profile, or seed.
+P-Stratum common may maintain multiple Paths to one Peer. It must not export Path identifiers, provider type, Adapter, Binding, locator, Ethernet, QUIC, simulation profile, or seed.
 
-Path selection is P-Stratum policy. R-Stratum selects an Edge service profile, not a concrete Path.
+Path selection is P-Stratum policy. The outward service contract is defined only by `NOVA-IF-P-R`.

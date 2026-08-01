@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: Apache-2.0
-$schema: "contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-repository"
+$schema: contracts/schemas/nidl/0.1/context.schema.json
+module: nova-repository
 required_context:
-  - "README.md"
-  - "canon/"
-  - "contracts/README.md"
+- README.md
+- canon/
+- contracts/README.md
 optional_context:
-  - "research/design-notes/"
+- research/design-notes/
 forbidden_context: []
 interfaces:
   consumes: []
   provides: []
 notes:
-  - "Use component-local manifests for implementation work."
+- Use component-local manifests for implementation work.

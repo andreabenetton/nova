@@ -14,6 +14,6 @@ P-RAP common behavior shall define:
 - complete SDU submission and terminal results;
 - finite queues and capacity recovery;
 - creation and removal of Provider Paths;
-- production and update of the Path Provider Obfuscated-degree hint.
+- production and update of the Path Provider expansion-cardinality hint.
 
 P-RAP must not assume UDP, TCP, QUIC, IPv4, or IPv6 behavior. It consumes declared Binding properties. The first QUIC implementation must not leak QUIC ordering, connection identity, or locator semantics into P-R or the common Path model.

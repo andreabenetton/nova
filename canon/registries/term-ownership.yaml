@@ -1,0 +1,91 @@
+# SPDX-License-Identifier: Apache-2.0 OR CC-BY-4.0
+registry: NOVA-TERM-OWNERSHIP
+version: "0.1.0"
+status: experimental
+owners:
+  common:
+    glossary: canon/glossary/common.md
+    terms:
+      - Node
+      - Node identity
+      - Node address
+      - Stratum
+      - Stratum Data Unit
+      - Process Logical Unit
+      - Interface
+      - Interface instance
+      - Operation
+      - Event
+      - Implementation
+      - Conformance
+      - NIDL
+      - Peer protocol
+  p-stratum:
+    glossary: protocols/p-stratum/glossary.md
+    terms:
+      - Nexus Fundamenta
+      - Peer
+      - Peer handle
+      - Path
+      - Provider Path
+      - Path Provider
+      - Packet
+      - Sequence
+      - P-Stratum common
+      - P-0AP
+      - P-LAP
+      - Adapter
+      - Internal virtual Adapter
+      - P-RAP
+      - Binding
+      - Binding instance
+      - Remote locator
+      - P-RAP Association
+      - Expansion cardinality contribution
+  r-stratum:
+    glossary: protocols/r-stratum/glossary.md
+    terms:
+      - Close
+      - Edge
+      - Distance
+      - Neighbor
+      - Degree
+      - Obfuscated Degree
+      - Route
+      - Link
+      - Trail
+      - Flow
+      - Gram
+      - Message
+      - Sender
+      - Receiver
+      - Router Node
+      - Gateway
+      - Beacon
+      - Authority
+      - Facility
+  o-stratum:
+    glossary: protocols/o-stratum/glossary.md
+    terms:
+      - Segment
+      - Connection-oriented service
+      - Connectionless service
+      - Application endpoint
+interfaces:
+  p-r:
+    glossary: contracts/interfaces/p-r/glossary.md
+    permits:
+      - common
+      - p-stratum
+      - r-stratum
+  r-o:
+    glossary: contracts/interfaces/r-o/glossary.md
+    permits:
+      - common
+      - r-stratum
+      - o-stratum
+  o-a:
+    glossary: contracts/interfaces/o-a/glossary.md
+    permits:
+      - common
+      - o-stratum

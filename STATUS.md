@@ -4,6 +4,7 @@
 
 - Architecture: draft, with private Provider Paths aggregated into R-Stratum-visible Edges
 - Normative canon: draft
+- Terminology: stratum-scoped glossaries enforced in CI; cross-stratum mappings are Interface-owned
 - NIDL language: experimental `0.1`; strict type-reference lint is opt-in and enabled on current P-Stratum development contracts
 - P-R development baseline: experimental `0.2.0`, with identity continuity, Edge profiles, profile-bounded Obfuscated degree, finite queues, close/reset ordering, and exactly-one Submission completion
 - Path Provider development baseline: experimental `0.3.0`, with authenticated Paths, declared Obfuscated-degree profiles, scheduling options, finite events, and reset ordering

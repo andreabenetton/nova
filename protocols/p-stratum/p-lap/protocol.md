@@ -12,7 +12,7 @@
 - fragment and reassemble according to Adapter-reported limits;
 - provide replay protection and bounded resource use;
 - report abstract Path characteristics and finite queue limits;
-- obtain and update the Obfuscated-degree hint required by the Path Provider Interface;
+- obtain and update the expansion-cardinality hint required by the Path Provider Interface;
 - emit terminal Provider Submission results.
 
 ## Explicitly deferred from the first profile
@@ -23,4 +23,4 @@
 - proof-of-work admission;
 - provider-internal multipath aggregation.
 
-Obfuscated degree is not deferred at the Interface boundary: a first implementation may use a configured or deterministic experimental profile, clearly identified as such, until the private derivation protocol is specified.
+expansion cardinality is not deferred at the Interface boundary: a first implementation may use a configured or deterministic experimental profile, clearly identified as such, until the private derivation protocol is specified.

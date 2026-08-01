@@ -1,17 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-ip-over-nova"
+$schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
+module: nova-ip-over-nova
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/o-a/0.1.0/"
-  - "contracts/interfaces/ip-platform-attachment/0.1.0/"
-  - "compatibility/ip-over-nova/"
-optional_context:
-  []
+- canon/glossary/common.md
+- contracts/interfaces/o-a/0.1.0/
+- contracts/interfaces/ip-platform-attachment/0.1.0/
+- compatibility/ip-over-nova/
+optional_context: []
 forbidden_context:
-  - "protocols/p-stratum/"
-  - "protocols/r-stratum/"
-  - "integrations/"
+- protocols/p-stratum/
+- protocols/r-stratum/
+- integrations/
 interfaces:
   consumes: []
   provides: []

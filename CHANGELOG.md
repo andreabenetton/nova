@@ -4,6 +4,9 @@
 
 ## Unreleased
 
+- Split the unified glossary into common, P-Stratum, R-Stratum, O-Stratum, and Interface-owned glossaries.
+- Added term-ownership metadata, scoped agent instructions, context boundaries, and CI terminology enforcement.
+- Moved Path-to-Edge and Obfuscated-Degree mappings exclusively into the P–R Interface documentation.
 - Created the Nova architecture scaffold.
 - Added strict strata, P-LAP/P-RAP decomposition, Adapters, Bindings, Platform Attachments, and IP-over-Nova separation.
 - Added experimental NIDL contracts, generated canonical artifacts, and CI tooling.

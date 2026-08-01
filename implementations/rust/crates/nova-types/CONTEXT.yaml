@@ -1,13 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
-$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-types"
+$schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
+module: nova-types
 required_context:
-  - "canon/glossary.md"
-  - "canon/versioning.md"
-optional_context:
-  []
-forbidden_context:
-  []
+- canon/glossary/common.md
+- canon/versioning.md
+optional_context: []
+forbidden_context: []
 interfaces:
   consumes: []
   provides: []

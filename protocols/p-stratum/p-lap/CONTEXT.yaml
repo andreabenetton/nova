@@ -2,7 +2,8 @@
 $schema: ../../../contracts/schemas/nidl/0.1/context.schema.json
 module: p-lap-design
 required_context:
-- canon/glossary.md
+- canon/glossary/common.md
+- protocols/p-stratum/glossary.md
 - canon/invariants.md
 - contracts/interfaces/p-path-provider/0.3.0/interface.yaml
 - contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml

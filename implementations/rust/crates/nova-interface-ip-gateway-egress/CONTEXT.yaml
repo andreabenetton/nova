@@ -1,13 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0
-$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-interface-ip-gateway-egress"
+$schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
+module: nova-interface-ip-gateway-egress
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/ip-gateway-egress/0.1.0/"
-optional_context:
-  []
+- canon/glossary/common.md
+- contracts/interfaces/ip-gateway-egress/0.1.0/
+optional_context: []
 forbidden_context:
-  - "protocols/p-stratum/"
+- protocols/p-stratum/
 interfaces:
   consumes: []
   provides: []

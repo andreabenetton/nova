@@ -5,13 +5,13 @@
 The first executable R-Stratum subset separates:
 
 - Edge consumption and Close lifecycle;
-- topology discovery and neighbor expansion;
+- topology discovery and Neighbor expansion;
 - Route-label lifecycle;
-- Trail identification and service-characteristic collection;
+- Link identification and service-characteristic collection;
 - Flow setup;
 - Gram processing and forwarding;
 - optional Facilities.
 
-An Edge produces one Close. R-Stratum selects an Edge service profile for local SDU submission but never selects a Provider Path. Metrics are consumed with their units, source, freshness, and confidence.
+Through the P–R Interface, each exposed Edge establishes one Close in the local R-Stratum view. R-Stratum consumes only the Interface's delivery capabilities and metrics; it does not depend on how the lower stratum realizes them.
 
 Traffic payments, monetary issuance, proof of bandwidth, and validating consensus remain outside the mandatory first subset.

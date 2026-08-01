@@ -1,17 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
-$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-virtual-fabric"
+$schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
+module: nova-virtual-fabric
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/virtual-fabric/0.1.0/"
-  - "simulation/virtual-fabric/"
+- canon/glossary/common.md
+- contracts/interfaces/virtual-fabric/0.1.0/
+- simulation/virtual-fabric/
 optional_context:
-  - "simulation/profiles/"
-  - "simulation/scenarios/"
+- simulation/profiles/
+- simulation/scenarios/
 forbidden_context:
-  - "protocols/r-stratum/"
+- protocols/r-stratum/
 interfaces:
   consumes: []
   provides:
-    - id: "NOVA-IF-VIRTUAL-FABRIC"
-      version: "0.1.0"
+  - id: NOVA-IF-VIRTUAL-FABRIC
+    version: 0.1.0

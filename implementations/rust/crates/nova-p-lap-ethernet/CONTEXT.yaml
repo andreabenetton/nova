@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: Apache-2.0
-$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-p-lap-ethernet"
+$schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
+module: nova-p-lap-ethernet
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/p-lap-adapter/0.1.0/"
-  - "integrations/p-lap-adapters/ethernet/"
-optional_context:
-  []
+- canon/glossary/common.md
+- protocols/p-stratum/glossary.md
+- contracts/interfaces/p-lap-adapter/0.1.0/
+- integrations/p-lap-adapters/ethernet/
+optional_context: []
 forbidden_context:
-  - "protocols/r-stratum/"
-  - "protocols/p-stratum/p-rap/"
+- protocols/r-stratum/
+- protocols/p-stratum/p-rap/
 interfaces:
   consumes: []
   provides: []

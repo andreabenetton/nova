@@ -1,15 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
-$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-interface-p-r"
+$schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
+module: nova-interface-p-r
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/p-r/0.2.0/"
-optional_context:
-  []
+- canon/glossary/common.md
+- protocols/p-stratum/glossary.md
+- protocols/r-stratum/glossary.md
+- contracts/interfaces/p-r/glossary.md
+- contracts/interfaces/p-r/0.2.0/
+optional_context: []
 forbidden_context:
-  - "protocols/p-stratum/p-lap/"
-  - "protocols/p-stratum/p-rap/"
-  - "integrations/"
+- protocols/p-stratum/p-lap/
+- protocols/p-stratum/p-rap/
+- integrations/
 interfaces:
   consumes: []
   provides: []

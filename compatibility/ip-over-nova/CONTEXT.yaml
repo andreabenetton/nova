@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: CC-BY-4.0
-$schema: "../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "ip-over-nova-design"
+$schema: ../../contracts/schemas/nidl/0.1/context.schema.json
+module: ip-over-nova-design
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/o-a/0.1.0/interface.yaml"
-  - "contracts/interfaces/ip-platform-attachment/0.1.0/interface.yaml"
-  - "compatibility/ip-over-nova/"
+- canon/glossary/common.md
+- contracts/interfaces/o-a/0.1.0/interface.yaml
+- contracts/interfaces/ip-platform-attachment/0.1.0/interface.yaml
+- compatibility/ip-over-nova/
 forbidden_context:
-  - "protocols/p-stratum/"
-  - "integrations/p-lap-adapters/"
-  - "integrations/p-rap-bindings/"
+- protocols/p-stratum/
+- integrations/p-lap-adapters/
+- integrations/p-rap-bindings/

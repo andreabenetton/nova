@@ -3,7 +3,7 @@
 # Agent rules
 
 1. Read the nearest `CONTEXT.yaml` before modifying a component.
-2. Treat `canon/glossary.md` as the only glossary source. Do not silently redefine Nova terms.
+2. Use `canon/glossary.md` as the glossary index. Read only the common glossary, the glossary owned by the component being modified, and any explicit Interface glossary. Do not mix stratum-owned terminology outside Interface documentation.
 3. A higher stratum may use only the versioned interface contract of the lower stratum.
 4. Do not import implementation-specific knowledge across a declared boundary.
 5. Change the lowest correct layer. A QUIC framing change belongs to a QUIC Binding document, not to the P-R Interface.

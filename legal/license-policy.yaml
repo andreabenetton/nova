@@ -131,6 +131,10 @@ rules:
     license: "CC-BY-4.0"
   - pattern: "docs/**"
     license: "CC-BY-4.0"
+  - pattern: "protocols/**/CLAUDE.md"
+    license: "CC-BY-4.0"
+    spdx_header: false
+    reason: "managed Claude adapter must contain only @AGENTS.md"
   - pattern: "protocols/**"
     license: "CC-BY-4.0"
   - pattern: "research/**"

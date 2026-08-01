@@ -1,31 +1,31 @@
 # SPDX-License-Identifier: CC-BY-4.0
-
-$schema: "../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "p-0ap-design"
+$schema: ../../../contracts/schemas/nidl/0.1/context.schema.json
+module: p-0ap-design
 required_context:
-  - "canon/glossary.md"
-  - "canon/architecture.md"
-  - "canon/invariants.md"
-  - "contracts/interfaces/p-path-provider/0.3.0/"
-  - "contracts/interfaces/p-0ap-control/0.2.0/"
-  - "contracts/interfaces/virtual-fabric/0.1.0/"
-  - "protocols/p-stratum/common/"
-  - "simulation/virtual-fabric/"
+- canon/glossary/common.md
+- protocols/p-stratum/glossary.md
+- canon/architecture.md
+- canon/invariants.md
+- contracts/interfaces/p-path-provider/0.3.0/
+- contracts/interfaces/p-0ap-control/0.2.0/
+- contracts/interfaces/virtual-fabric/0.1.0/
+- protocols/p-stratum/common/
+- simulation/virtual-fabric/
 optional_context:
-  - "simulation/profiles/"
-  - "simulation/scenarios/"
+- simulation/profiles/
+- simulation/scenarios/
 forbidden_context:
-  - "protocols/r-stratum/"
-  - "integrations/p-lap-adapters/ethernet/"
-  - "integrations/p-rap-bindings/quic-common/"
+- protocols/r-stratum/
+- integrations/p-lap-adapters/ethernet/
+- integrations/p-rap-bindings/quic-common/
 interfaces:
   consumes:
-    - id: "NOVA-IF-VIRTUAL-FABRIC"
-      version: "0.1.0"
+  - id: NOVA-IF-VIRTUAL-FABRIC
+    version: 0.1.0
   provides:
-    - id: "NOVA-IF-P-PATH-PROVIDER"
-      version: "0.3.0"
-    - id: "NOVA-IF-P-0AP-CONTROL"
-      version: "0.2.0"
+  - id: NOVA-IF-P-PATH-PROVIDER
+    version: 0.3.0
+  - id: NOVA-IF-P-0AP-CONTROL
+    version: 0.2.0
 notes:
-  - "P-0AP models Path behavior and must not acquire P-LAP or P-RAP technology semantics."
+- P-0AP models Path behavior and must not acquire P-LAP or P-RAP technology semantics.

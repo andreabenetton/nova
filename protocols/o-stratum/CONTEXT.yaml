@@ -1,12 +1,15 @@
 # SPDX-License-Identifier: CC-BY-4.0
-$schema: "../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "o-stratum-design"
+$schema: ../../contracts/schemas/nidl/0.1/context.schema.json
+module: o-stratum-design
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/r-o/0.1.0/interface.yaml"
-  - "contracts/interfaces/o-a/0.1.0/interface.yaml"
-  - "protocols/o-stratum/"
+- canon/glossary/common.md
+- protocols/o-stratum/glossary.md
+- contracts/interfaces/r-o/glossary.md
+- contracts/interfaces/o-a/glossary.md
+- contracts/interfaces/r-o/0.1.0/interface.yaml
+- contracts/interfaces/o-a/0.1.0/interface.yaml
+- protocols/o-stratum/
 forbidden_context:
-  - "protocols/p-stratum/"
-  - "integrations/p-lap-adapters/"
-  - "integrations/p-rap-bindings/"
+- protocols/p-stratum/
+- integrations/p-lap-adapters/
+- integrations/p-rap-bindings/
