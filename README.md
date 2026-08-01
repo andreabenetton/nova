@@ -40,7 +40,7 @@ Applications and compatibility services
              (Ethernet, Wi-Fi) (IPv4-QUIC, IPv6-QUIC, ...)
 ```
 
-- **P-0AP** is the deterministic zero-underlay Path Provider used for local, simulated, and replayable development. It creates authenticated Provider Paths, not Edges, has no Path-kind selector, and does not replace P-LAP or P-RAP conformance testing.
+- **P-0AP** is the deterministic zero-underlay Path Provider protocol used for local, simulated, and replayable development. It creates authenticated Provider Paths, not Edges, has no Path-kind selector, and does not replace P-LAP or P-RAP conformance testing.
 - **P-LAP** establishes Paths with link-adjacent Peers through **Adapters**.
 - **P-RAP** establishes Paths with remote Peers through **Bindings**.
 - A P-RAP Binding identifies the integrated network/transport combination, such as **IPv4-QUIC** or **IPv6-QUIC**, because contemporary routing and transport implementations are tightly integrated.

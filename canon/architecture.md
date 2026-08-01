@@ -46,7 +46,7 @@ R-Stratum selects an Edge service profile. P-Stratum common selects the concrete
 
 ## P-0AP and Virtual Fabric
 
-P-0AP establishes deterministic local or simulated Provider Paths. Its default useful mode connects distinct Nova Node instances. A self-Path is not announced by a conforming Path Provider. Any future loopback diagnostic remains private to its test-control surface and never creates an Edge.
+P-0AP establishes deterministic local or simulated Provider Paths. Its default useful mode connects distinct Nova Node instances. A self-Path is not announced by a conforming Path Provider instance. Any future loopback diagnostic remains private to its test-control surface and never creates an Edge.
 
 The Virtual Fabric can support P-0AP, a Simulated Adapter exercising real P-LAP, and a Simulated Binding exercising real P-RAP. These front ends are not interchangeable.
 

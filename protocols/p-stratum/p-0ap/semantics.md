@@ -13,4 +13,4 @@ P-0AP models behavior observable at the Path Provider boundary:
 
 It does not emulate or validate Ethernet framing, P-LAP discovery and cryptography, IP locator behavior, QUIC, P-RAP Association establishment, or operating-system scheduling. Preset names such as `adjacent-lan-like` and `remote-wan-like` are characteristic profiles only.
 
-A self-Path is not a valid Path Provider artifact because it would create an invalid upper-stratum self-adjacency. A future diagnostic loopback may exercise local serialization and queue behavior only if it remains private to the P-0AP control surface.
+A self-Path is not a valid Provider Path artifact because it would create an invalid upper-stratum self-adjacency. A future diagnostic loopback may exercise local serialization and queue behavior only if it remains private to the P-0AP control surface.

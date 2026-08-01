@@ -5,6 +5,7 @@
 ## Unreleased
 
 - Classified P-0AP, P-LAP, and P-RAP as Path Provider protocols; distinguished protocol, implementation, and runtime instance.
+- Corrected remaining mutable documentation so P-0AP, P-LAP, and P-RAP are never described as runtime Path Providers; implementations and instances are named explicitly.
 - Added the normative P-Stratum objectives document and wired it into scoped agent and context manifests.
 - Published `NOVA-IF-P-PATH-PROVIDER 0.4.0` with the provider role expressed as a Path Provider instance.
 - Split the unified glossary into common, P-Stratum, R-Stratum, O-Stratum, and Interface-owned glossaries.

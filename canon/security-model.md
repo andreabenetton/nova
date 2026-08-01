@@ -20,7 +20,7 @@ Every security claim must identify the attacker class it addresses.
 - Compromised Endpoint: controls keys and plaintext at one Endpoint.
 - Multi-link observer: correlates observations across multiple locations.
 - Resource-exhaustion attacker: consumes state, CPU, bandwidth, or queue capacity.
-- Faulty Path Provider: violates the internal Path Provider Interface through defects or deliberate adversarial testing.
+- Faulty Path Provider instance: violates the internal Path Provider Interface through defects or deliberate adversarial testing.
 - Faulty simulation controller: supplies malformed, contradictory, or resource-exhausting scenarios.
 
 ## Required analyses

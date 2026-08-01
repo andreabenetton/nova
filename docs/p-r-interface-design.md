@@ -65,7 +65,7 @@ The experimental profile registry is `canon/registries/obfuscation-profile-ident
 
 ## P-0AP role
 
-P-0AP is the first deterministic Path Provider. It creates Provider Paths, not Edges, and uses neither an Adapter nor a Binding. Its control Interface can model identity/address updates, Path changes, degree changes, finite resources, faults, virtual time, and replay.
+P-0AP is the first deterministic Path Provider protocol. A running P-0AP Path Provider instance creates Provider Paths, not Edges, and uses neither an Adapter nor a Binding. Its control Interface can model identity/address updates, Path changes, degree changes, finite resources, faults, virtual time, and replay.
 
 Self-Paths are rejected as Provider Paths. A future loopback diagnostic may exist only inside the P-0AP control surface and must never create an Edge.
 

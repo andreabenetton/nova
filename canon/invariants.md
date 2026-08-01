@@ -10,7 +10,7 @@ normative: true
 # Architectural invariants
 
 1. A stratum implementation depends only on declared adjacent Interface contracts.
-2. R-Stratum must not depend on P-0AP, P-LAP, P-RAP, any Path Provider, Adapter, Binding, or the Virtual Fabric.
+2. R-Stratum must not depend on P-0AP, P-LAP, P-RAP, any Path Provider implementation or instance, Adapter, Binding, or the Virtual Fabric.
 3. P-LAP must not depend on a concrete Adapter implementation.
 4. P-RAP must not depend on a concrete Binding implementation.
 5. P-Stratum common consumes Path Provider instances only through the Path Provider Interface. P-0AP, P-LAP, and P-RAP are Path Provider protocols.

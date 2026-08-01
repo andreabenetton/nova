@@ -10,7 +10,7 @@ P-0AP is useful for deterministic validation of:
 - failure ordering;
 - Path generation handling;
 - upper-consumer behavior under loss, delay, reordering, and partition;
-- defensive behavior against an explicitly faulty Path Provider.
+- defensive behavior against an explicitly faulty Path Provider instance.
 
 P-0AP does not provide evidence for:
 

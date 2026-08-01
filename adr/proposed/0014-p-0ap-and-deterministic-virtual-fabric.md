@@ -8,11 +8,11 @@
 
 ## Context
 
-R-Stratum and P-Stratum common need an executable, deterministic Path Provider before real Ethernet and QUIC integrations are complete. A simple self-loop is insufficient because topology, failure, forwarding, and multi-node behavior require distinct Node instances and programmable characteristics.
+R-Stratum and P-Stratum common need an executable, deterministic Path Provider instance before real Ethernet and QUIC integrations are complete. A simple self-loop is insufficient because topology, failure, forwarding, and multi-node behavior require distinct Node instances and programmable characteristics.
 
 ## Decision
 
-Introduce P-0AP, the P-Stratum Zero-Underlay Association Protocol, as a development and conformance Path Provider. P-0AP implements `NOVA-IF-P-PATH-PROVIDER`, provides a test-only `NOVA-IF-P-0AP-CONTROL`, and may consume a reusable deterministic Virtual Fabric through `NOVA-IF-VIRTUAL-FABRIC`.
+Introduce P-0AP, the P-Stratum Zero-Underlay Association Protocol, as a development and conformance Path Provider protocol. A P-0AP Path Provider implementation implements `NOVA-IF-P-PATH-PROVIDER`; a running Path Provider instance provides the service, exposes the test-only `NOVA-IF-P-0AP-CONTROL`, and may consume a reusable deterministic Virtual Fabric through `NOVA-IF-VIRTUAL-FABRIC`.
 
 The Virtual Fabric shall also support a Simulated P-LAP Adapter and Simulated P-RAP Binding so the real P-LAP and P-RAP protocols can be exercised deterministically at their proper boundaries.
 
@@ -28,7 +28,7 @@ P-0AP shall support paired-node mode as the minimum useful profile. A self-Path 
 ## Alternatives considered
 
 - Use only an in-process mock P-Stratum.
-- Implement P-RAP/QUIC before any deterministic Path Provider.
+- Implement P-RAP/QUIC before any deterministic Path Provider instance.
 - Treat the internal virtual Adapter as the simulator.
 - Build separate unrelated simulators for P-0AP, P-LAP, and P-RAP.
 

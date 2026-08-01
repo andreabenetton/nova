@@ -37,6 +37,8 @@ Software implementing one Path Provider protocol and the internal P-Stratum Path
 
 A running realization of a Path Provider implementation within a Node. It creates and maintains Provider Paths and reports them to P-Stratum common through the Path Provider Interface.
 
+The unqualified expression **Path Provider** is not a separate architectural kind. Normative text must use **Path Provider protocol**, **Path Provider implementation**, or **Path Provider instance**, according to the concept intended.
+
 **Packet**  
 The P-Stratum SDU exchanged between P-Stratum peer entities.
 
