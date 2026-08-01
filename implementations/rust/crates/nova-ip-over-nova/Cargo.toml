@@ -1,0 +1,13 @@
+[package]
+name = "nova-ip-over-nova"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+nova-interface-o-a = { path = "../nova-interface-o-a" }
+nova-interface-ip-platform-attachment = { path = "../nova-interface-ip-platform-attachment" }
+
+[lints]
+workspace = true

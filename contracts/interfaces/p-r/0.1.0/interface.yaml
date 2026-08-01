@@ -1,0 +1,105 @@
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-P-R"
+  name: "P-Stratum to R-Stratum Interface"
+  kind: "stratum-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "P-Stratum"
+  consumer: "R-Stratum"
+
+compatibility:
+  policy: "exact-version-during-0.x"
+  unknown_optional_fields: "ignore"
+types:
+  PeerId:
+    kind: "opaque-bytes"
+    length: 32
+  PathId:
+    kind: "unsigned-integer"
+    bits: 64
+  PathKind:
+    kind: "enumeration"
+    values: ["LINK_ADJACENT", "REMOTE_ASSOCIATION"]
+  Sdu:
+    kind: "bytes"
+  PathProperties:
+    kind: "structure"
+    description: "Abstract measurable and declared Path properties; no Adapter or Binding identifiers."
+operations:
+  - id: 1
+    name: "open-interface"
+    caller: "consumer"
+    input: "OpenInterfaceRequest"
+    success: "InterfaceOpened"
+    errors: ["UNSUPPORTED_VERSION"]
+  - id: 2
+    name: "submit-sdu"
+    caller: "consumer"
+    input: "SubmitSduRequest"
+    success: "SubmissionAccepted"
+    errors: ["UNKNOWN_PATH", "PATH_UNAVAILABLE", "SDU_TOO_LARGE", "BACKPRESSURE"]
+  - id: 3
+    name: "cancel-submission"
+    caller: "consumer"
+    input: "CancelSubmissionRequest"
+    success: "SubmissionCancelled"
+    errors: ["UNKNOWN_SUBMISSION", "TOO_LATE"]
+  - id: 4
+    name: "query-path"
+    caller: "consumer"
+    input: "QueryPathRequest"
+    success: "PathSnapshot"
+    errors: ["UNKNOWN_PATH"]
+events:
+  - id: 4097
+    name: "path-added"
+    emitted_by: "provider"
+    data: "PathAdded"
+  - id: 4098
+    name: "path-updated"
+    emitted_by: "provider"
+    data: "PathUpdated"
+  - id: 4099
+    name: "path-removed"
+    emitted_by: "provider"
+    data: "PathRemoved"
+  - id: 4100
+    name: "sdu-delivered"
+    emitted_by: "provider"
+    data: "SduDelivered"
+  - id: 4101
+    name: "submission-result"
+    emitted_by: "provider"
+    data: "SubmissionResult"
+capabilities:
+  - id: 1
+    name: "RELIABLE_SDU"
+  - id: 2
+    name: "UNRELIABLE_SDU"
+  - id: 3
+    name: "PATH_CHARACTERISTICS"
+errors:
+  - id: 8193
+    name: "UNSUPPORTED_VERSION"
+  - id: 8194
+    name: "UNKNOWN_PATH"
+  - id: 8195
+    name: "PATH_UNAVAILABLE"
+  - id: 8196
+    name: "SDU_TOO_LARGE"
+  - id: 8197
+    name: "BACKPRESSURE"
+  - id: 8198
+    name: "UNKNOWN_SUBMISSION"
+  - id: 8199
+    name: "TOO_LATE"
+invariants:
+  - id: "PR-INV-001"
+    statement: "R-Stratum shall not require knowledge of P-LAP, P-RAP, any Adapter, or any Binding."
+  - id: "PR-INV-002"
+    statement: "An SDU is delivered with its PeerId and PathId and preserves its logical boundary."
+  - id: "PR-INV-003"
+    statement: "No SDU is delivered on a Path after path-removed for that Path generation."

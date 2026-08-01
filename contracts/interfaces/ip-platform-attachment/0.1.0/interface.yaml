@@ -1,0 +1,77 @@
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-IP-PLATFORM-ATTACHMENT"
+  name: "IP Platform Attachment Interface"
+  kind: "platform-attachment-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "IP Platform Attachment"
+  consumer: "IP-over-Nova Compatibility Service"
+
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  PlatformInterfaceId:
+    kind: "opaque"
+  IpDatagram:
+    kind: "bytes"
+    maximum_length: 65535
+  IpVersion:
+    kind: "enumeration"
+    values: ["IPV4", "IPV6"]
+operations:
+  - id: 1
+    name: "create-interface"
+    caller: "consumer"
+    input: "CreateInterfaceRequest"
+    success: "InterfaceCreated"
+    errors: ["PERMISSION_DENIED", "UNSUPPORTED_PLATFORM"]
+  - id: 2
+    name: "set-mtu"
+    caller: "consumer"
+    input: "SetMtuRequest"
+    success: "MtuSet"
+    errors: ["UNKNOWN_INTERFACE", "INVALID_MTU"]
+  - id: 3
+    name: "inject-ip-datagram"
+    caller: "consumer"
+    input: "InjectIpDatagramRequest"
+    success: "IpDatagramAccepted"
+    errors: ["UNKNOWN_INTERFACE", "BACKPRESSURE"]
+  - id: 4
+    name: "add-route"
+    caller: "consumer"
+    input: "AddRouteRequest"
+    success: "RouteAdded"
+    errors: ["UNKNOWN_INTERFACE", "INVALID_ROUTE"]
+events:
+  - id: 4097
+    name: "ip-datagram-received"
+    emitted_by: "provider"
+    data: "IpDatagramReceived"
+  - id: 4098
+    name: "platform-interface-failed"
+    emitted_by: "provider"
+    data: "PlatformInterfaceFailure"
+  - id: 4099
+    name: "platform-mtu-changed"
+    emitted_by: "provider"
+    data: "PlatformMtuChanged"
+errors:
+  - id: 8193
+    name: "PERMISSION_DENIED"
+  - id: 8194
+    name: "UNSUPPORTED_PLATFORM"
+  - id: 8195
+    name: "UNKNOWN_INTERFACE"
+  - id: 8196
+    name: "INVALID_MTU"
+  - id: 8197
+    name: "BACKPRESSURE"
+  - id: 8198
+    name: "INVALID_ROUTE"
+invariants:
+  - id: "IPA-INV-001"
+    statement: "A Platform Attachment exchanges IP datagrams and host configuration only; it does not implement Nova routing."

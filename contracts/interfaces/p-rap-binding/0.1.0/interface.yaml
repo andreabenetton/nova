@@ -1,0 +1,96 @@
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-P-RAP-BINDING"
+  name: "P-RAP Binding Interface"
+  kind: "binding-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "P-RAP Binding"
+  consumer: "P-RAP"
+
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  BindingInstanceId:
+    kind: "unsigned-integer"
+    bits: 64
+  BindingId:
+    kind: "unsigned-integer"
+    bits: 16
+  RemoteLocator:
+    kind: "tagged-opaque"
+  PrapUnit:
+    kind: "bytes"
+  BindingProperties:
+    kind: "structure"
+    required_fields: ["message_boundaries_preserved", "reliable", "ordered", "congestion_controlled", "effective_maximum_unit_size"]
+operations:
+  - id: 1
+    name: "open-binding-instance"
+    caller: "consumer"
+    input: "OpenBindingRequest"
+    success: "BindingOpened"
+    errors: ["UNSUPPORTED_LOCATOR", "UNREACHABLE", "AUTHENTICATION_FAILED"]
+  - id: 2
+    name: "send-unit"
+    caller: "consumer"
+    input: "SendUnitRequest"
+    success: "UnitAccepted"
+    errors: ["UNKNOWN_BINDING_INSTANCE", "UNIT_TOO_LARGE", "BACKPRESSURE"]
+  - id: 3
+    name: "close-binding-instance"
+    caller: "consumer"
+    input: "CloseBindingRequest"
+    success: "BindingClosed"
+events:
+  - id: 4097
+    name: "unit-received"
+    emitted_by: "provider"
+    data: "ReceivedUnit"
+  - id: 4098
+    name: "binding-properties-changed"
+    emitted_by: "provider"
+    data: "BindingPropertiesChanged"
+  - id: 4099
+    name: "binding-instance-failed"
+    emitted_by: "provider"
+    data: "BindingFailure"
+  - id: 4100
+    name: "remote-locator-changed"
+    emitted_by: "provider"
+    data: "RemoteLocatorChanged"
+capabilities:
+  - id: 1
+    name: "MESSAGE_BOUNDARIES"
+  - id: 2
+    name: "RELIABLE_DELIVERY"
+  - id: 3
+    name: "ORDERED_DELIVERY"
+  - id: 4
+    name: "CONGESTION_CONTROL"
+  - id: 5
+    name: "LOCATOR_MIGRATION"
+  - id: 6
+    name: "UNRELIABLE_DATAGRAM"
+errors:
+  - id: 8193
+    name: "UNSUPPORTED_LOCATOR"
+  - id: 8194
+    name: "UNREACHABLE"
+  - id: 8195
+    name: "AUTHENTICATION_FAILED"
+  - id: 8196
+    name: "UNKNOWN_BINDING_INSTANCE"
+  - id: 8197
+    name: "UNIT_TOO_LARGE"
+  - id: 8198
+    name: "BACKPRESSURE"
+invariants:
+  - id: "PRB-INV-001"
+    statement: "A Binding carries P-RAP units and does not define the P-RAP Association identity."
+  - id: "PRB-INV-002"
+    statement: "A Binding name identifies the integrated network and transport combination."
+  - id: "PRB-INV-003"
+    statement: "A unit accepted for transmission belongs to exactly one active Binding instance."

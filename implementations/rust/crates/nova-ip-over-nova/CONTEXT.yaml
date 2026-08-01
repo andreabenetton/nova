@@ -1,0 +1,16 @@
+$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-ip-over-nova"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/o-a/0.1.0/"
+  - "contracts/interfaces/ip-platform-attachment/0.1.0/"
+  - "compatibility/ip-over-nova/"
+optional_context:
+  []
+forbidden_context:
+  - "protocols/p-stratum/"
+  - "protocols/r-stratum/"
+  - "integrations/"
+interfaces:
+  consumes: []
+  provides: []

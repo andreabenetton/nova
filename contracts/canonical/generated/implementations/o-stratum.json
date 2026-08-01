@@ -1,0 +1,1 @@
+{"$schema":"../schemas/nidl/0.1/implementation.schema.json","capabilities":{"declared":false},"implementation":{"id":"NOVA-O-STRATUM","status":"stub","version":"0.1.0"},"implements":[{"interface":"NOVA-IF-O-A","version":"0.1.0"}],"nidl":"0.1","technology":{"component":"O-Stratum"}}

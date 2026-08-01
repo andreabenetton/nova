@@ -1,0 +1,11 @@
+$schema: "../../../../schemas/nidl/0.1/conformance.schema.json"
+nidl: "0.1"
+scenario:
+  id: "PLA-CONF-FRAME-SIZE-001"
+  interface: "NOVA-IF-P-LAP-ADAPTER"
+  version: "0.1.0"
+  role: "provider"
+  steps:
+    - action: "activate Adapter reporting effective maximum frame size"
+    - action: "send frame one byte larger than the reported maximum"
+    - action: "expect FRAME_TOO_LARGE"

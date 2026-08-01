@@ -1,0 +1,9 @@
+$schema: "../../../../schemas/nidl/0.1/conformance.schema.json"
+nidl: "0.1"
+scenario:
+  id: "RF-CONF-ACTIVATE-001"
+  interface: "NOVA-IF-R-FACILITY"
+  version: "0.1.0"
+  role: "provider"
+  steps:
+    - action: "activate an unsupported Facility and expect UNSUPPORTED_FACILITY"

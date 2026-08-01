@@ -1,0 +1,13 @@
+$schema: "../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "p-lap-design"
+required_context:
+  - "canon/glossary.md"
+  - "canon/invariants.md"
+  - "contracts/interfaces/p-path-provider/0.1.0/interface.yaml"
+  - "contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml"
+  - "protocols/p-stratum/p-lap/"
+optional_context:
+  - "research/original-papers/P_Stratum_WP.pdf"
+forbidden_context:
+  - "protocols/r-stratum/"
+  - "integrations/p-rap-bindings/"

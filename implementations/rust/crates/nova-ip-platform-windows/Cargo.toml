@@ -1,0 +1,12 @@
+[package]
+name = "nova-ip-platform-windows"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+nova-interface-ip-platform-attachment = { path = "../nova-interface-ip-platform-attachment" }
+
+[lints]
+workspace = true

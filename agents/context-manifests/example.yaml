@@ -1,0 +1,13 @@
+$schema: "../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "example-module"
+required_context:
+  - "canon/glossary.md"
+optional_context:
+  - "research/references/"
+forbidden_context:
+  - "implementations/rust/crates/unrelated-component/"
+interfaces:
+  consumes: []
+  provides: []
+notes:
+  - "Replace with a component-specific manifest."

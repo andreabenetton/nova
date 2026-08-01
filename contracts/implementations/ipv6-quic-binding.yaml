@@ -1,0 +1,19 @@
+$schema: "../schemas/nidl/0.1/implementation.schema.json"
+nidl: "0.1"
+implementation:
+  id: "NOVA-BINDING-IPV6-QUIC"
+  version: "0.1.0"
+  status: "stub"
+implements:
+  - interface: "NOVA-IF-P-RAP-BINDING"
+    version: "0.1.0"
+technology:
+  network: "IPv6"
+  transport: "QUIC over UDP"
+capabilities:
+  MESSAGE_BOUNDARIES: true
+  RELIABLE_DELIVERY: true
+  ORDERED_DELIVERY: "per-stream"
+  CONGESTION_CONTROL: true
+  LOCATOR_MIGRATION: true
+  UNRELIABLE_DATAGRAM: true

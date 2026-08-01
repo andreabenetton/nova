@@ -1,0 +1,257 @@
+{
+  "$defs": {
+    "event": {
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "emitted_by": {
+          "enum": [
+            "provider",
+            "consumer"
+          ]
+        },
+        "id": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "emitted_by"
+      ],
+      "type": "object"
+    },
+    "namedId": {
+      "additionalProperties": true,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": [
+            "integer",
+            "string"
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "type": "object"
+    },
+    "operation": {
+      "additionalProperties": false,
+      "properties": {
+        "caller": {
+          "enum": [
+            "provider",
+            "consumer",
+            "either"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "errors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "id": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "input": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "success": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "caller"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://nova.invalid/schemas/nidl/0.1/interface.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "capabilities": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/namedId"
+      },
+      "type": "array"
+    },
+    "compatibility": {
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "errors": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/namedId"
+      },
+      "type": "array"
+    },
+    "events": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/event"
+      },
+      "type": "array"
+    },
+    "interface": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^NOVA-IF-[A-Z0-9-]+$",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "stratum-interface",
+            "provider-interface",
+            "adapter-interface",
+            "binding-interface",
+            "facility-interface",
+            "platform-attachment-interface",
+            "gateway-egress-interface"
+          ]
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "experimental",
+            "proposed",
+            "stable",
+            "obsolete"
+          ]
+        },
+        "version": {
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "version",
+        "status"
+      ],
+      "type": "object"
+    },
+    "invariants": {
+      "default": [],
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "statement"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "limits": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/namedId"
+      },
+      "type": "array"
+    },
+    "nidl": {
+      "const": "0.1"
+    },
+    "operations": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/operation"
+      },
+      "type": "array"
+    },
+    "roles": {
+      "additionalProperties": false,
+      "properties": {
+        "consumer": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "consumer"
+      ],
+      "type": "object"
+    },
+    "states": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "transitions": {
+      "default": [],
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "types": {
+      "additionalProperties": {
+        "type": "object"
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "nidl",
+    "interface",
+    "roles"
+  ],
+  "title": "NIDL Interface Contract",
+  "type": "object"
+}

@@ -1,0 +1,13 @@
+[package]
+name = "nova-o-stratum"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+nova-interface-r-o = { path = "../nova-interface-r-o" }
+nova-interface-o-a = { path = "../nova-interface-o-a" }
+
+[lints]
+workspace = true

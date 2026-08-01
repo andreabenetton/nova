@@ -1,0 +1,51 @@
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-R-O"
+  name: "R-Stratum to O-Stratum Interface"
+  kind: "stratum-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "R-Stratum"
+  consumer: "O-Stratum"
+
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  FlowId:
+    kind: "opaque"
+  OnerariiPayload:
+    kind: "bytes"
+operations:
+  - id: 1
+    name: "open-flow"
+    caller: "consumer"
+    input: "OpenFlowRequest"
+    success: "FlowOpened"
+    errors: ["DESTINATION_UNREACHABLE"]
+  - id: 2
+    name: "submit-flow-payload"
+    caller: "consumer"
+    input: "SubmitFlowPayloadRequest"
+    success: "FlowPayloadAccepted"
+    errors: ["UNKNOWN_FLOW", "BACKPRESSURE"]
+events:
+  - id: 4097
+    name: "flow-payload-delivered"
+    emitted_by: "provider"
+    data: "FlowPayloadDelivered"
+  - id: 4098
+    name: "flow-closed"
+    emitted_by: "provider"
+    data: "FlowClosed"
+errors:
+  - id: 8193
+    name: "DESTINATION_UNREACHABLE"
+  - id: 8194
+    name: "UNKNOWN_FLOW"
+  - id: 8195
+    name: "BACKPRESSURE"
+invariants:
+  - id: "RO-INV-001"
+    statement: "O-Stratum does not depend on P-Stratum interfaces or integrations."

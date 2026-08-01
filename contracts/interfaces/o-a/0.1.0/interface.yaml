@@ -1,0 +1,51 @@
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-O-A"
+  name: "O-Stratum to Application Interface"
+  kind: "stratum-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "O-Stratum"
+  consumer: "Application or Compatibility Service"
+
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  ApplicationEndpointId:
+    kind: "opaque"
+  Message:
+    kind: "bytes"
+operations:
+  - id: 1
+    name: "open-endpoint"
+    caller: "consumer"
+    input: "OpenEndpointRequest"
+    success: "EndpointOpened"
+    errors: ["UNSUPPORTED_PROFILE"]
+  - id: 2
+    name: "send-message"
+    caller: "consumer"
+    input: "SendMessageRequest"
+    success: "MessageAccepted"
+    errors: ["UNKNOWN_ENDPOINT", "BACKPRESSURE"]
+events:
+  - id: 4097
+    name: "message-received"
+    emitted_by: "provider"
+    data: "MessageReceived"
+  - id: 4098
+    name: "endpoint-closed"
+    emitted_by: "provider"
+    data: "EndpointClosed"
+errors:
+  - id: 8193
+    name: "UNSUPPORTED_PROFILE"
+  - id: 8194
+    name: "UNKNOWN_ENDPOINT"
+  - id: 8195
+    name: "BACKPRESSURE"
+invariants:
+  - id: "OA-INV-001"
+    statement: "Applications and Compatibility Services do not access P-Stratum or R-Stratum internals."

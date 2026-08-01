@@ -1,0 +1,27 @@
+name: contracts
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --no-build-isolation -e tools/nova-contract
+      - run: nova-contract validate contracts
+      - run: nova-contract normalize contracts --check
+      - run: nova-contract lint contracts
+      - run: nova-contract matrix contracts --check
+      - run: nova-contract context .
+      - run: nova-contract boundaries canon/dependency-policy.yaml implementations/rust
+      - run: python -m unittest discover -s tools/nova-contract/tests
+      - run: python tools/check_repository_shape.py
+      - if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          python tools/ci/check_contract_versions.py "origin/${{ github.base_ref }}"

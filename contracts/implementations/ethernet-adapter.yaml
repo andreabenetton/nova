@@ -1,0 +1,17 @@
+$schema: "../schemas/nidl/0.1/implementation.schema.json"
+nidl: "0.1"
+implementation:
+  id: "NOVA-ADAPTER-ETHERNET"
+  version: "0.1.0"
+  status: "stub"
+implements:
+  - interface: "NOVA-IF-P-LAP-ADAPTER"
+    version: "0.1.0"
+technology:
+  kind: "Ethernet"
+  nexus: "IEEE 802.3"
+capabilities:
+  BROADCAST: true
+  MULTICAST: true
+  POINT_TO_POINT: false
+  CONGESTION_SIGNAL: false

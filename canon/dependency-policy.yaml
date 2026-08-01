@@ -1,0 +1,66 @@
+policy_version: "0.1"
+crates:
+  nova-r-stratum:
+    allow:
+      - nova-types
+      - nova-interface-p-r
+      - nova-interface-r-o
+    forbid:
+      - nova-p-core
+      - nova-p-lap
+      - nova-p-rap
+      - nova-p-lap-ethernet
+      - nova-p-rap-quic-common
+      - nova-p-rap-ipv4-quic
+      - nova-p-rap-ipv6-quic
+  nova-p-lap:
+    allow:
+      - nova-types
+      - nova-interface-p-lap-adapter
+      - nova-interface-p-path-provider
+    forbid:
+      - nova-p-lap-ethernet
+      - nova-p-rap
+  nova-p-rap:
+    allow:
+      - nova-types
+      - nova-interface-p-rap-binding
+      - nova-interface-p-path-provider
+    forbid:
+      - nova-p-rap-quic-common
+      - nova-p-rap-ipv4-quic
+      - nova-p-rap-ipv6-quic
+      - nova-p-lap
+  nova-ip-over-nova:
+    allow:
+      - nova-types
+      - nova-interface-o-a
+      - nova-interface-ip-platform-attachment
+    forbid:
+      - nova-p-core
+      - nova-p-lap
+      - nova-p-rap
+      - nova-r-stratum
+  nova-p-lap-ethernet:
+    allow:
+      - nova-types
+      - nova-interface-p-lap-adapter
+    forbid:
+      - nova-r-stratum
+      - nova-p-rap
+  nova-p-rap-ipv4-quic:
+    allow:
+      - nova-types
+      - nova-interface-p-rap-binding
+      - nova-p-rap-quic-common
+    forbid:
+      - nova-r-stratum
+      - nova-p-lap
+  nova-p-rap-ipv6-quic:
+    allow:
+      - nova-types
+      - nova-interface-p-rap-binding
+      - nova-p-rap-quic-common
+    forbid:
+      - nova-r-stratum
+      - nova-p-lap

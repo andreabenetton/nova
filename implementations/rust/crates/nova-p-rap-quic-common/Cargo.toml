@@ -1,0 +1,12 @@
+[package]
+name = "nova-p-rap-quic-common"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+nova-interface-p-rap-binding = { path = "../nova-interface-p-rap-binding" }
+
+[lints]
+workspace = true

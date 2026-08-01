@@ -1,0 +1,60 @@
+{
+  "canonicalization": "deterministic-sorted-json-v0",
+  "contracts": [
+    {
+      "fingerprint": "sha256:21442cdad1d42f88941c23cf5c56a03ecde7ac7aef14840bf30db16b83b5b8fe",
+      "id": "NOVA-IF-IP-GATEWAY-EGRESS",
+      "path": "contracts/interfaces/ip-gateway-egress/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:91a4f8af88403f20645d25a7eef3768fe19ed611046bf6bb50295c08214a84bf",
+      "id": "NOVA-IF-IP-PLATFORM-ATTACHMENT",
+      "path": "contracts/interfaces/ip-platform-attachment/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:2bf9f6cd7a4b3ceead114d8e927902d62e2939081de76589bf5d59ef0246671d",
+      "id": "NOVA-IF-O-A",
+      "path": "contracts/interfaces/o-a/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:c371d99f8b3fae961ba978062e09a6dd54e13795973543c50a9772c94ec85f66",
+      "id": "NOVA-IF-P-LAP-ADAPTER",
+      "path": "contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:aa034b1dc628d7865861ec018195efd574c7484ee543d38535446881dde6d53b",
+      "id": "NOVA-IF-P-PATH-PROVIDER",
+      "path": "contracts/interfaces/p-path-provider/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:93f3408129ee0e2078102d38f25299ca2d81922d1e8741f2cfd391c3a163aa8f",
+      "id": "NOVA-IF-P-R",
+      "path": "contracts/interfaces/p-r/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:5510277b5ba421bc5edb6a42ebdbdeb440950f7e4b7e842cb075c2647e06845a",
+      "id": "NOVA-IF-P-RAP-BINDING",
+      "path": "contracts/interfaces/p-rap-binding/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:a370920b0fc45381c0607e887c37f1849600da27b67492b4264d737672169416",
+      "id": "NOVA-IF-R-FACILITY",
+      "path": "contracts/interfaces/r-facility/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    },
+    {
+      "fingerprint": "sha256:dcb1efeef5bbb2c73b378fde67cf63d9181a719a80d8a17ededce3c9542b2edf",
+      "id": "NOVA-IF-R-O",
+      "path": "contracts/interfaces/r-o/0.1.0/interface.yaml",
+      "version": "0.1.0"
+    }
+  ],
+  "format_version": "0.1"
+}

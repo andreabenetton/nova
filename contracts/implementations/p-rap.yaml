@@ -1,0 +1,13 @@
+$schema: "../schemas/nidl/0.1/implementation.schema.json"
+nidl: "0.1"
+implementation:
+  id: "NOVA-P-RAP"
+  version: "0.1.0"
+  status: "stub"
+implements:
+  - interface: "NOVA-IF-P-PATH-PROVIDER"
+    version: "0.1.0"
+technology:
+  component: "P-RAP"
+capabilities:
+  declared: false

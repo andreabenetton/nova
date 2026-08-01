@@ -1,0 +1,12 @@
+$schema: "../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "ipv4-quic-binding-design"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/p-rap-binding/0.1.0/interface.yaml"
+  - "integrations/p-rap-bindings/quic-common/"
+  - "integrations/p-rap-bindings/ipv4-quic/"
+optional_context:
+  - "protocols/p-stratum/p-rap/binding-interface.md"
+forbidden_context:
+  - "protocols/r-stratum/"
+  - "integrations/p-lap-adapters/"

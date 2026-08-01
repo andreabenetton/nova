@@ -1,0 +1,1 @@
+{"$schema":"../../../../schemas/nidl/0.1/conformance.schema.json","nidl":"0.1","scenario":{"id":"PR-CONF-UNKNOWN-PATH-001","interface":"NOVA-IF-P-R","role":"consumer","steps":[{"action":"submit SDU using unknown PathId"},{"action":"expect UNKNOWN_PATH"}],"version":"0.1.0"}}

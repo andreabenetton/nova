@@ -1,0 +1,13 @@
+$schema: "../../../../schemas/nidl/0.1/conformance.schema.json"
+nidl: "0.1"
+scenario:
+  id: "IPA-CONF-LIFECYCLE-001"
+  interface: "NOVA-IF-IP-PLATFORM-ATTACHMENT"
+  version: "0.1.0"
+  role: "provider"
+  steps:
+    - action: "create Platform Attachment instance"
+    - action: "set valid MTU"
+    - action: "emit IP datagram received"
+    - action: "destroy instance"
+    - action: "assert no later datagram event for destroyed instance"

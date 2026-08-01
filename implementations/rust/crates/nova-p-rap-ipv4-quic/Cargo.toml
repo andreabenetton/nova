@@ -1,0 +1,13 @@
+[package]
+name = "nova-p-rap-ipv4-quic"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+nova-interface-p-rap-binding = { path = "../nova-interface-p-rap-binding" }
+nova-p-rap-quic-common = { path = "../nova-p-rap-quic-common" }
+
+[lints]
+workspace = true

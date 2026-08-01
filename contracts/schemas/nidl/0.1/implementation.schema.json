@@ -1,0 +1,81 @@
+{
+  "$id": "https://nova.invalid/schemas/nidl/0.1/implementation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "capabilities": {
+      "additionalProperties": {
+        "type": [
+          "boolean",
+          "string",
+          "integer",
+          "number"
+        ]
+      },
+      "type": "object"
+    },
+    "context": {
+      "type": "string"
+    },
+    "implementation": {
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "status"
+      ],
+      "type": "object"
+    },
+    "implements": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "interface": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "interface",
+          "version"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "nidl": {
+      "const": "0.1"
+    },
+    "profiles": {
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "technology": {
+      "additionalProperties": true,
+      "type": "object"
+    }
+  },
+  "required": [
+    "implementation",
+    "implements"
+  ],
+  "title": "NIDL Implementation Manifest",
+  "type": "object"
+}

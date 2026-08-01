@@ -1,0 +1,13 @@
+[package]
+name = "nova-p-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+nova-interface-p-r = { path = "../nova-interface-p-r" }
+nova-interface-p-path-provider = { path = "../nova-interface-p-path-provider" }
+
+[lints]
+workspace = true

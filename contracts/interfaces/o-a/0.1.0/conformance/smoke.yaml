@@ -1,0 +1,9 @@
+$schema: "../../../../schemas/nidl/0.1/conformance.schema.json"
+nidl: "0.1"
+scenario:
+  id: "OA-CONF-UNSUPPORTED-PROFILE-001"
+  interface: "NOVA-IF-O-A"
+  version: "0.1.0"
+  role: "provider"
+  steps:
+    - action: "open an unsupported application profile and expect UNSUPPORTED_PROFILE"

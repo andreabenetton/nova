@@ -1,0 +1,47 @@
+{
+  "$id": "https://nova.invalid/schemas/nidl/0.1/context.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "forbidden_context": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "interfaces": {
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "module": {
+      "type": "string"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "optional_context": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "required_context": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "module",
+    "required_context"
+  ],
+  "title": "Nova component context manifest",
+  "type": "object"
+}

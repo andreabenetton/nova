@@ -1,0 +1,9 @@
+$schema: "../../../../schemas/nidl/0.1/conformance.schema.json"
+nidl: "0.1"
+scenario:
+  id: "RO-CONF-UNKNOWN-FLOW-001"
+  interface: "NOVA-IF-R-O"
+  version: "0.1.0"
+  role: "provider"
+  steps:
+    - action: "submit payload for an unknown Flow and expect UNKNOWN_FLOW"

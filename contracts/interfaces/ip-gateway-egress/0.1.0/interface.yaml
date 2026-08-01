@@ -1,0 +1,37 @@
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-IP-GATEWAY-EGRESS"
+  name: "IP Gateway Egress Interface"
+  kind: "gateway-egress-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "IP Gateway Egress"
+  consumer: "IP-over-Nova Gateway"
+
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  IpDatagram:
+    kind: "bytes"
+operations:
+  - id: 1
+    name: "forward-ip-datagram"
+    caller: "consumer"
+    input: "ForwardIpDatagramRequest"
+    success: "IpDatagramForwarded"
+    errors: ["EGRESS_UNAVAILABLE", "POLICY_DENIED"]
+events:
+  - id: 4097
+    name: "return-ip-datagram"
+    emitted_by: "provider"
+    data: "ReturnIpDatagram"
+errors:
+  - id: 8193
+    name: "EGRESS_UNAVAILABLE"
+  - id: 8194
+    name: "POLICY_DENIED"
+invariants:
+  - id: "IGE-INV-001"
+    statement: "Gateway egress behavior is separate from end-host Platform Attachment behavior."

@@ -1,0 +1,14 @@
+$schema: "../schemas/nidl/0.1/implementation.schema.json"
+nidl: "0.1"
+implementation:
+  id: "NOVA-IP-PLATFORM-LINUX-TUN"
+  version: "0.1.0"
+  status: "stub"
+implements:
+  - interface: "NOVA-IF-IP-PLATFORM-ATTACHMENT"
+    version: "0.1.0"
+technology:
+  os: "Linux"
+  technology: "TUN"
+capabilities:
+  declared: false

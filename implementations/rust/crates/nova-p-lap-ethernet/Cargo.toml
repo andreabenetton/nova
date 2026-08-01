@@ -1,0 +1,12 @@
+[package]
+name = "nova-p-lap-ethernet"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+nova-interface-p-lap-adapter = { path = "../nova-interface-p-lap-adapter" }
+
+[lints]
+workspace = true

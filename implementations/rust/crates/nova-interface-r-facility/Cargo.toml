@@ -1,0 +1,11 @@
+[package]
+name = "nova-interface-r-facility"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+
+[lints]
+workspace = true

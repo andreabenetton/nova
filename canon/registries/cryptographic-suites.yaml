@@ -1,0 +1,6 @@
+$schema: "../../contracts/schemas/nidl/0.1/registry.schema.json"
+registry: NOVA-CRYPTOGRAPHIC-SUITES
+status: unassigned
+entries: []
+notes:
+  - "No suite is normative until security review and test vectors exist."

@@ -1,0 +1,11 @@
+$schema: "../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "o-stratum-design"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/r-o/0.1.0/interface.yaml"
+  - "contracts/interfaces/o-a/0.1.0/interface.yaml"
+  - "protocols/o-stratum/"
+forbidden_context:
+  - "protocols/p-stratum/"
+  - "integrations/p-lap-adapters/"
+  - "integrations/p-rap-bindings/"

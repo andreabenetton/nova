@@ -1,0 +1,14 @@
+$schema: "../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "p-stratum-common-design"
+required_context:
+  - "canon/glossary.md"
+  - "canon/architecture.md"
+  - "canon/invariants.md"
+  - "contracts/interfaces/p-r/0.1.0/interface.yaml"
+  - "contracts/interfaces/p-path-provider/0.1.0/interface.yaml"
+optional_context:
+  - "protocols/p-stratum/p-lap/README.md"
+  - "protocols/p-stratum/p-rap/README.md"
+forbidden_context:
+  - "integrations/p-lap-adapters/"
+  - "integrations/p-rap-bindings/"

@@ -1,0 +1,13 @@
+[package]
+name = "nova-node"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-p-core = { path = "../nova-p-core" }
+nova-r-stratum = { path = "../nova-r-stratum" }
+nova-o-stratum = { path = "../nova-o-stratum" }
+
+[lints]
+workspace = true

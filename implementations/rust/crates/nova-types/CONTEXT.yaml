@@ -1,0 +1,12 @@
+$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-types"
+required_context:
+  - "canon/glossary.md"
+  - "canon/versioning.md"
+optional_context:
+  []
+forbidden_context:
+  []
+interfaces:
+  consumes: []
+  provides: []

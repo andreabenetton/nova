@@ -1,0 +1,14 @@
+$schema: "contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-repository"
+required_context:
+  - "README.md"
+  - "canon/"
+  - "contracts/README.md"
+optional_context:
+  - "research/design-notes/"
+forbidden_context: []
+interfaces:
+  consumes: []
+  provides: []
+notes:
+  - "Use component-local manifests for implementation work."

@@ -1,0 +1,67 @@
+{
+  "$id": "https://nova.invalid/schemas/nidl/0.1/conformance.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "nidl": {
+      "const": "0.1"
+    },
+    "scenario": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "provider",
+            "consumer",
+            "interoperability"
+          ]
+        },
+        "steps": {
+          "items": {
+            "additionalProperties": true,
+            "properties": {
+              "action": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "action"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "interface",
+        "version",
+        "role",
+        "steps"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "nidl",
+    "scenario"
+  ],
+  "title": "NIDL Conformance Scenario",
+  "type": "object"
+}

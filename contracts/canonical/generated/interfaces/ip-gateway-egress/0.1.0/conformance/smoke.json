@@ -1,0 +1,1 @@
+{"$schema":"../../../../schemas/nidl/0.1/conformance.schema.json","nidl":"0.1","scenario":{"id":"IGE-CONF-POLICY-DENIED-001","interface":"NOVA-IF-IP-GATEWAY-EGRESS","role":"provider","steps":[{"action":"forward a policy-denied datagram and expect POLICY_DENIED"}],"version":"0.1.0"}}

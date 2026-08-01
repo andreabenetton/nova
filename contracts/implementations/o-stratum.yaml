@@ -1,0 +1,13 @@
+$schema: "../schemas/nidl/0.1/implementation.schema.json"
+nidl: "0.1"
+implementation:
+  id: "NOVA-O-STRATUM"
+  version: "0.1.0"
+  status: "stub"
+implements:
+  - interface: "NOVA-IF-O-A"
+    version: "0.1.0"
+technology:
+  component: "O-Stratum"
+capabilities:
+  declared: false

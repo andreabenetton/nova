@@ -1,0 +1,14 @@
+$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-p-rap-ipv4-quic"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/p-rap-binding/0.1.0/"
+  - "integrations/p-rap-bindings/quic-common/"
+  - "integrations/p-rap-bindings/ipv4-quic/"
+optional_context:
+  []
+forbidden_context:
+  - "protocols/r-stratum/"
+interfaces:
+  consumes: []
+  provides: []

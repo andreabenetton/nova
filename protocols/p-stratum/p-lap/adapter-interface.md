@@ -1,0 +1,3 @@
+# P-LAP Adapter boundary
+
+The normative boundary is `contracts/interfaces/p-lap-adapter/0.1.0/`. P-LAP consumes frames, locator information, effective limits, and lower-layer events. An Adapter does not perform Nova routing or expose R-Stratum concepts.

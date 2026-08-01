@@ -1,0 +1,17 @@
+format: "IP-over-Nova-message"
+version: "0.1-draft"
+status: "stub"
+fields:
+  - name: "profile"
+    type: "u16"
+  - name: "ip_version"
+    type: "u8"
+    values: [4, 6]
+  - name: "flags"
+    type: "u8"
+  - name: "packet_length"
+    type: "u32"
+  - name: "ip_datagram"
+    type: "bytes"
+notes:
+  - "Not normative until a binary wire schema and vectors are approved."

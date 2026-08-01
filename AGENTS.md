@@ -1,0 +1,12 @@
+# Agent rules
+
+1. Read the nearest `CONTEXT.yaml` before modifying a component.
+2. Treat `canon/glossary.md` as the only glossary source. Do not silently redefine Nova terms.
+3. A higher stratum may use only the versioned interface contract of the lower stratum.
+4. Do not import implementation-specific knowledge across a declared boundary.
+5. Change the lowest correct layer. A QUIC framing change belongs to a QUIC Binding document, not to the P-R Interface.
+6. Update contracts before code when externally visible behavior changes.
+7. Never edit generated files manually.
+8. New replaceable boundaries require a versioned NIDL contract, conformance scenarios, context rules, and an ADR when the architecture changes.
+9. Research documents are non-normative. Do not implement directly from an original paper when a normative contract exists.
+10. Run `make check` before proposing completion.

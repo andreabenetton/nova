@@ -1,0 +1,11 @@
+$schema: "../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "ethernet-adapter-design"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml"
+  - "integrations/p-lap-adapters/ethernet/"
+optional_context:
+  - "protocols/p-stratum/p-lap/adapter-interface.md"
+forbidden_context:
+  - "protocols/r-stratum/"
+  - "integrations/p-rap-bindings/"

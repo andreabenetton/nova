@@ -1,0 +1,80 @@
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-P-LAP-ADAPTER"
+  name: "P-LAP Adapter Interface"
+  kind: "adapter-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "P-LAP Adapter"
+  consumer: "P-LAP"
+
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  AdapterId:
+    kind: "unsigned-integer"
+    bits: 64
+  NexusLocator:
+    kind: "opaque-bytes"
+  AdapterFrame:
+    kind: "bytes"
+  AdapterProperties:
+    kind: "structure"
+operations:
+  - id: 1
+    name: "activate-adapter"
+    caller: "consumer"
+    input: "ActivateAdapterRequest"
+    success: "AdapterActivated"
+    errors: ["UNSUPPORTED_NEXUS", "PERMISSION_DENIED"]
+  - id: 2
+    name: "send-frame"
+    caller: "consumer"
+    input: "SendFrameRequest"
+    success: "FrameAccepted"
+    errors: ["ADAPTER_INACTIVE", "FRAME_TOO_LARGE", "BACKPRESSURE"]
+  - id: 3
+    name: "deactivate-adapter"
+    caller: "consumer"
+    input: "DeactivateAdapterRequest"
+    success: "AdapterDeactivated"
+events:
+  - id: 4097
+    name: "frame-received"
+    emitted_by: "provider"
+    data: "FrameReceived"
+  - id: 4098
+    name: "adapter-properties-changed"
+    emitted_by: "provider"
+    data: "AdapterPropertiesChanged"
+  - id: 4099
+    name: "adapter-failed"
+    emitted_by: "provider"
+    data: "AdapterFailure"
+capabilities:
+  - id: 1
+    name: "BROADCAST"
+  - id: 2
+    name: "MULTICAST"
+  - id: 3
+    name: "POINT_TO_POINT"
+  - id: 4
+    name: "CONGESTION_SIGNAL"
+errors:
+  - id: 8193
+    name: "UNSUPPORTED_NEXUS"
+  - id: 8194
+    name: "PERMISSION_DENIED"
+  - id: 8195
+    name: "ADAPTER_INACTIVE"
+  - id: 8196
+    name: "FRAME_TOO_LARGE"
+  - id: 8197
+    name: "BACKPRESSURE"
+invariants:
+  - id: "PLA-INV-001"
+    statement: "An Adapter exposes Nexus Fundamenta behavior and does not implement R-Stratum routing."
+  - id: "PLA-INV-002"
+    statement: "P-LAP does not assume one concrete Nexus locator format."

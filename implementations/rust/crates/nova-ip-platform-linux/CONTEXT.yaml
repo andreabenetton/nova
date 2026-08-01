@@ -1,0 +1,14 @@
+$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-ip-platform-linux"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/ip-platform-attachment/0.1.0/"
+  - "compatibility/ip-over-nova/platform-attachments/linux-tun/"
+optional_context:
+  []
+forbidden_context:
+  - "protocols/p-stratum/"
+  - "protocols/r-stratum/"
+interfaces:
+  consumes: []
+  provides: []

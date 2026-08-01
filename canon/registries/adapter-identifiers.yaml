@@ -1,0 +1,12 @@
+$schema: "../../contracts/schemas/nidl/0.1/registry.schema.json"
+registry: NOVA-P-LAP-ADAPTERS
+status: experimental
+entries:
+  - id: 1
+    name: "Ethernet"
+  - id: 2
+    name: "Internal Virtual"
+    status: proposed
+  - id: 3
+    name: "Wi-Fi"
+    status: reserved

@@ -1,0 +1,11 @@
+$schema: "../../../../schemas/nidl/0.1/conformance.schema.json"
+nidl: "0.1"
+scenario:
+  id: "PRB-CONF-UNIT-SIZE-001"
+  interface: "NOVA-IF-P-RAP-BINDING"
+  version: "0.1.0"
+  role: "provider"
+  steps:
+    - action: "open Binding instance with effective maximum unit size 1200"
+    - action: "send P-RAP unit of 1201 bytes"
+    - action: "expect UNIT_TOO_LARGE"

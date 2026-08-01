@@ -1,0 +1,11 @@
+[package]
+name = "nova-interface-p-path-provider"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+
+[lints]
+workspace = true

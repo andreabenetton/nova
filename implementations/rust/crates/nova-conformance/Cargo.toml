@@ -1,0 +1,14 @@
+[package]
+name = "nova-conformance"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nova-types = { path = "../nova-types" }
+nova-interface-p-r = { path = "../nova-interface-p-r" }
+nova-interface-p-lap-adapter = { path = "../nova-interface-p-lap-adapter" }
+nova-interface-p-rap-binding = { path = "../nova-interface-p-rap-binding" }
+
+[lints]
+workspace = true

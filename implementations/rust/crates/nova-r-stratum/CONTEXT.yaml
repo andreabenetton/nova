@@ -1,0 +1,16 @@
+$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-r-stratum"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/p-r/0.1.0/"
+  - "contracts/interfaces/r-o/0.1.0/"
+  - "protocols/r-stratum/"
+optional_context:
+  - "research/original-papers/Nova__A_new_Internet_protocol_stack.pdf"
+forbidden_context:
+  - "protocols/p-stratum/p-lap/"
+  - "protocols/p-stratum/p-rap/"
+  - "integrations/"
+interfaces:
+  consumes: []
+  provides: []

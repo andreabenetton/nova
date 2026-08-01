@@ -1,0 +1,14 @@
+$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
+module: "nova-interface-p-r"
+required_context:
+  - "canon/glossary.md"
+  - "contracts/interfaces/p-r/0.1.0/"
+optional_context:
+  []
+forbidden_context:
+  - "protocols/p-stratum/p-lap/"
+  - "protocols/p-stratum/p-rap/"
+  - "integrations/"
+interfaces:
+  consumes: []
+  provides: []

@@ -1,0 +1,11 @@
+example: "minimal-node"
+status: "non-normative"
+contracts:
+  p_r: "0.1.0"
+path_providers:
+  - kind: "P-LAP"
+    adapter: "Ethernet"
+  - kind: "P-RAP"
+    bindings:
+      - "IPv6-QUIC"
+      - "IPv4-QUIC"

@@ -1,0 +1,35 @@
+$schema: "../../../schemas/nidl/0.1/interface.schema.json"
+nidl: "0.1"
+interface:
+  id: "NOVA-IF-R-FACILITY"
+  name: "R-Stratum Facility Interface"
+  kind: "facility-interface"
+  version: "0.1.0"
+  status: "experimental"
+roles:
+  provider: "R-Stratum Facility"
+  consumer: "R-Stratum core"
+
+compatibility:
+  policy: "exact-version-during-0.x"
+types:
+  FacilityId:
+    kind: "opaque"
+operations:
+  - id: 1
+    name: "activate-facility"
+    caller: "consumer"
+    input: "ActivateFacilityRequest"
+    success: "FacilityActivated"
+    errors: ["UNSUPPORTED_FACILITY"]
+events:
+  - id: 4097
+    name: "facility-result"
+    emitted_by: "provider"
+    data: "FacilityResult"
+errors:
+  - id: 8193
+    name: "UNSUPPORTED_FACILITY"
+invariants:
+  - id: "RF-INV-001"
+    statement: "A facility is replaceable and communicates with R-Stratum core only through this contract."
