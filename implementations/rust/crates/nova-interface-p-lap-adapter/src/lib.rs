@@ -20,7 +20,10 @@ pub struct AdapterProperties {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum AdapterEvent {
-    FrameReceived { source: NexusLocator, frame: AdapterFrame },
+    FrameReceived {
+        source: NexusLocator,
+        frame: AdapterFrame,
+    },
     PropertiesChanged(AdapterProperties),
     Failed,
 }
@@ -36,7 +39,11 @@ pub enum AdapterError {
 
 pub trait PLapAdapter {
     fn activate(&mut self) -> Result<AdapterProperties, AdapterError>;
-    fn send_frame(&mut self, destination: &NexusLocator, frame: AdapterFrame) -> Result<(), AdapterError>;
+    fn send_frame(
+        &mut self,
+        destination: &NexusLocator,
+        frame: AdapterFrame,
+    ) -> Result<(), AdapterError>;
     fn deactivate(&mut self);
     fn poll_event(&mut self) -> Option<AdapterEvent>;
 }

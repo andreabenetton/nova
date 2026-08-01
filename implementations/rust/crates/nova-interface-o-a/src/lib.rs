@@ -9,7 +9,11 @@ pub struct Message(pub Vec<u8>);
 
 pub trait OStratumService {
     fn open_endpoint(&mut self, profile: &str) -> Result<ApplicationEndpointId, OError>;
-    fn send_message(&mut self, endpoint: ApplicationEndpointId, message: Message) -> Result<(), OError>;
+    fn send_message(
+        &mut self,
+        endpoint: ApplicationEndpointId,
+        message: Message,
+    ) -> Result<(), OError>;
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]

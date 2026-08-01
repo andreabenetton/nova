@@ -2,8 +2,8 @@
 #![forbid(unsafe_code)]
 
 use nova_types::{
-    DeliveryProperties, DirectionalMetrics, InterfaceVersion, Metric, NodeIdentity,
-    ExpansionCardinality, QueueLimits, Sdu, Urgency,
+    DeliveryProperties, DirectionalMetrics, ExpansionCardinality, InterfaceVersion, Metric,
+    NodeIdentity, QueueLimits, Sdu, Urgency,
 };
 
 pub const VERSION: InterfaceVersion = InterfaceVersion {

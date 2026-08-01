@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #![forbid(unsafe_code)]
 
-use nova_interface_ip_platform_attachment::{IpDatagram, IpPlatformAttachment, PlatformError, PlatformEvent, PlatformInterfaceId};
+use nova_interface_ip_platform_attachment::{
+    IpDatagram, IpPlatformAttachment, PlatformError, PlatformEvent, PlatformInterfaceId,
+};
 
 #[derive(Default)]
 pub struct LinuxTunPlatformAttachment {
@@ -21,7 +23,11 @@ impl IpPlatformAttachment for LinuxTunPlatformAttachment {
         Ok(())
     }
 
-    fn inject_datagram(&mut self, _interface: PlatformInterfaceId, _datagram: IpDatagram) -> Result<(), PlatformError> {
+    fn inject_datagram(
+        &mut self,
+        _interface: PlatformInterfaceId,
+        _datagram: IpDatagram,
+    ) -> Result<(), PlatformError> {
         Ok(())
     }
 

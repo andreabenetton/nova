@@ -34,7 +34,10 @@ impl VirtualFabric for ReferenceVirtualFabric {
         if !self.initialized {
             return Err(FabricError::InvalidState);
         }
-        self.next_endpoint = self.next_endpoint.checked_add(1).ok_or(FabricError::ResourceLimit)?;
+        self.next_endpoint = self
+            .next_endpoint
+            .checked_add(1)
+            .ok_or(FabricError::ResourceLimit)?;
         Ok(FabricEndpointId(self.next_endpoint))
     }
 
@@ -47,14 +50,27 @@ impl VirtualFabric for ReferenceVirtualFabric {
         if !self.initialized {
             return Err(FabricError::InvalidState);
         }
-        self.next_link = self.next_link.checked_add(1).ok_or(FabricError::ResourceLimit)?;
+        self.next_link = self
+            .next_link
+            .checked_add(1)
+            .ok_or(FabricError::ResourceLimit)?;
         let id = FabricLinkId(self.next_link);
-        self.links.insert(id, Link { destination, properties });
+        self.links.insert(
+            id,
+            Link {
+                destination,
+                properties,
+            },
+        );
         Ok(id)
     }
 
     fn submit_unit(&mut self, link: FabricLinkId, unit: FabricUnit) -> Result<(), FabricError> {
-        let configured = self.links.get(&link).copied().ok_or(FabricError::UnknownLink)?;
+        let configured = self
+            .links
+            .get(&link)
+            .copied()
+            .ok_or(FabricError::UnknownLink)?;
         if unit.0.len() > configured.properties.maximum_unit_size as usize {
             return Err(FabricError::UnitTooLarge);
         }

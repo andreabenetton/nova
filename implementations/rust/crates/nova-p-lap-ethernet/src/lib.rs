@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 #![forbid(unsafe_code)]
 
-use nova_interface_p_lap_adapter::{AdapterError, AdapterEvent, AdapterFrame, AdapterProperties, NexusLocator, PLapAdapter};
+use nova_interface_p_lap_adapter::{
+    AdapterError, AdapterEvent, AdapterFrame, AdapterProperties, NexusLocator, PLapAdapter,
+};
 
 #[derive(Default)]
 pub struct EthernetAdapter {
@@ -19,7 +21,11 @@ impl PLapAdapter for EthernetAdapter {
         })
     }
 
-    fn send_frame(&mut self, _destination: &NexusLocator, frame: AdapterFrame) -> Result<(), AdapterError> {
+    fn send_frame(
+        &mut self,
+        _destination: &NexusLocator,
+        frame: AdapterFrame,
+    ) -> Result<(), AdapterError> {
         if !self.active {
             return Err(AdapterError::Inactive);
         }

@@ -16,8 +16,8 @@ use nova_interface_p_path_provider::{
 };
 use nova_interface_virtual_fabric::VirtualFabric;
 use nova_types::{
-    DeliveryProperties, DirectionalMetrics, InterSduOrdering, Metric, MetricSource, MetricUnit,
-    NodeIdentity, ExpansionCardinality, ObfuscationProfileId, QueueLimits, Sdu,
+    DeliveryProperties, DirectionalMetrics, ExpansionCardinality, InterSduOrdering, Metric,
+    MetricSource, MetricUnit, NodeIdentity, ObfuscationProfileId, QueueLimits, Sdu,
 };
 
 #[derive(Clone, Debug)]
@@ -90,14 +90,10 @@ impl<F: VirtualFabric> P0ap<F> {
     }
 
     fn properties(characteristics: SimulationPathCharacteristics) -> ProviderPathProperties {
-        let latency = Self::configured_metric(
-            characteristics.latency_micros,
-            MetricUnit::Microseconds,
-        );
-        let jitter = Self::configured_metric(
-            characteristics.jitter_micros,
-            MetricUnit::Microseconds,
-        );
+        let latency =
+            Self::configured_metric(characteristics.latency_micros, MetricUnit::Microseconds);
+        let jitter =
+            Self::configured_metric(characteristics.jitter_micros, MetricUnit::Microseconds);
         let capacity = Self::configured_metric(
             characteristics.bandwidth_bits_per_second,
             MetricUnit::BitsPerSecond,
@@ -149,10 +145,7 @@ impl<F: VirtualFabric> P0ap<F> {
         }
     }
 
-    fn update_paths_for_node(
-        &mut self,
-        node: SimulationNodeId,
-    ) -> Result<(), P0apControlError> {
+    fn update_paths_for_node(&mut self, node: SimulationNodeId) -> Result<(), P0apControlError> {
         let identity = self
             .nodes
             .get(&node)
@@ -172,17 +165,21 @@ impl<F: VirtualFabric> P0ap<F> {
 
         for id in affected {
             let updated = {
-                let record = self.paths.get_mut(&id).ok_or(P0apControlError::UnknownPath)?;
-                record.snapshot.revision = ProviderPathRevision(
-                    record.snapshot.revision.0.saturating_add(1),
-                );
+                let record = self
+                    .paths
+                    .get_mut(&id)
+                    .ok_or(P0apControlError::UnknownPath)?;
+                record.snapshot.revision =
+                    ProviderPathRevision(record.snapshot.revision.0.saturating_add(1));
                 record.snapshot.peer_identity = identity.clone();
                 record.snapshot.expansion_cardinality = degree;
                 record.snapshot.clone()
             };
             let context = self.event_context()?;
-            self.events
-                .push_back(ProviderEvent::PathUpdated { context, path: updated });
+            self.events.push_back(ProviderEvent::PathUpdated {
+                context,
+                path: updated,
+            });
         }
         Ok(())
     }
@@ -304,7 +301,10 @@ impl<F: VirtualFabric> PathProvider for P0ap<F> {
 }
 
 impl<F: VirtualFabric> P0apControl for P0ap<F> {
-    fn create_node(&mut self, identity: NodeIdentity) -> Result<SimulationNodeId, P0apControlError> {
+    fn create_node(
+        &mut self,
+        identity: NodeIdentity,
+    ) -> Result<SimulationNodeId, P0apControlError> {
         if !identity.is_valid() {
             return Err(P0apControlError::InvalidScenario);
         }
@@ -335,7 +335,10 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
         {
             return Err(P0apControlError::DuplicateIdentity);
         }
-        let current = self.nodes.get_mut(&node).ok_or(P0apControlError::UnknownNode)?;
+        let current = self
+            .nodes
+            .get_mut(&node)
+            .ok_or(P0apControlError::UnknownNode)?;
         *current = identity;
         self.update_paths_for_node(node)
     }
@@ -399,8 +402,10 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
             },
         );
         let context = self.event_context()?;
-        self.events
-            .push_back(ProviderEvent::PathAdded { context, path: snapshot });
+        self.events.push_back(ProviderEvent::PathAdded {
+            context,
+            path: snapshot,
+        });
         Ok(simulated)
     }
 
@@ -413,16 +418,20 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
             return Err(P0apControlError::InvalidCharacteristics);
         }
         let updated = {
-            let record = self.paths.get_mut(&path).ok_or(P0apControlError::UnknownPath)?;
-            record.snapshot.revision = ProviderPathRevision(
-                record.snapshot.revision.0.saturating_add(1),
-            );
+            let record = self
+                .paths
+                .get_mut(&path)
+                .ok_or(P0apControlError::UnknownPath)?;
+            record.snapshot.revision =
+                ProviderPathRevision(record.snapshot.revision.0.saturating_add(1));
             record.snapshot.properties = Self::properties(characteristics);
             record.snapshot.clone()
         };
         let context = self.event_context()?;
-        self.events
-            .push_back(ProviderEvent::PathUpdated { context, path: updated });
+        self.events.push_back(ProviderEvent::PathUpdated {
+            context,
+            path: updated,
+        });
         Ok(())
     }
 
