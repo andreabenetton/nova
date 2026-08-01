@@ -143,6 +143,111 @@ python3 tools/check_repository_shape.py
 
 Do not push until the merged tree has been tested and these checks have either passed or their environmental limitation has been stated precisely.
 
+
+## Tests follow implementations
+
+Every implementation change MUST land with tests for the behavior it adds or changes. If a change has no testable surface, state that explicitly in the completion report and explain why.
+
+Add or update tests when a change introduces:
+
+- new behavior or a new code path;
+- a new validation, rejection, or failure branch;
+- a new edge case or boundary condition;
+- a regression fix whose failing case can be reproduced;
+- a changed public contract, Interface behavior, wire representation, state transition, or observable result.
+
+Tests MUST pin observable behavior rather than private implementation structure. A refactor that preserves behavior SHOULD NOT require test changes merely because helpers, modules, or internal data structures were renamed or reorganized.
+
+### Cover the behavioral matrix
+
+A single success case is the minimum, not complete coverage. For each changed code path, cover the directly related matrix where applicable:
+
+- successful operation;
+- each distinct rejected-input shape and its exact error or status;
+- all values of closed enums, registries, mappings, and capability sets;
+- error and reset branches that the implementation can produce;
+- minimum and maximum values;
+- empty, single-element, and multi-element collections;
+- absent and present optional fields;
+- stale, duplicate, reordered, expired, and conflicting events or revisions;
+- authorization, scope, role, and capability variants distinguished by the Interface;
+- provider loss, Interface reset, queue exhaustion, backpressure, and recovery behavior.
+
+Use table-driven or parameterized tests for closed sets rather than selecting one representative value. If a defensive branch is genuinely unreachable because a framework or validated boundary prevents it, document that fact in a code comment rather than leaving the branch unexplained.
+
+"Only the tests directly related to the change" is a scope limiter, not permission to omit the changed behavior's rejection, edge, and boundary cases. Do not add unrelated test cleanup to the same commit.
+
+Integration behavior requires integration tests. Tests that replace the relevant socket, process boundary, generated contract, queue, clock, persistence layer, or other integration surface with mocks do not establish that the integration works. Mocks MAY be used for narrower unit behavior, but they do not substitute for the relevant conformance or integration test.
+
+For Nova specifically:
+
+- externally visible Interface changes require matching provider and consumer conformance scenarios;
+- Path Provider behavior changes require tests at the Path Provider Interface boundary;
+- P-0AP deterministic behavior requires scenario or trace fixtures where applicable;
+- parser, serializer, registry, and normalization changes require positive and negative vectors;
+- generated artifacts MUST be regenerated and verified rather than asserted through hand-written copies;
+- Rust public behavior requires crate tests or integration tests in addition to contract validation where executable code exists.
+
+If the only meaningful verification requires a real operating-system, packet, driver, hardware, or multi-process surface, perform that verification when the environment supports it. If the environment does not support it, state the exact unverified surface and do not treat type-checking, compilation, or mock-only tests as proof that the feature works.
+
+Legitimate examples of changes with no separate testable surface include documentation-only edits, instruction files, legal texts, and CI configuration whose behavior is exercised by the CI run itself. In such cases, still run the applicable repository validators.
+
+## Multi-fix prompts
+
+When one prompt requests multiple unrelated fixes, do not bundle them into one commit. Treat fixes as unrelated when they address different root causes, independent ADRs, separate Interface changes, or concerns that can be reviewed and reverted independently.
+
+For each fix, in order:
+
+1. implement only that fix;
+2. add or update only its directly related tests and conformance material;
+3. run the impacted tests and validators;
+4. create one commit scoped to that fix;
+5. fetch and push before moving to the next fix when a writable remote is available.
+
+A multi-fix request produces one commit per independent fix. Related sub-tasks of one fix, such as implementation, tests, generated output, a docstring, and a direct documentation cross-reference, belong in the same commit.
+
+Do not include "while here" cleanup. Record unrelated drift for later, or address it in a separate follow-up commit after the requested fix is committed.
+
+## Multi-component prompts
+
+This repository does not use an `apps/` application layout. Apply the same separation rule to independently deployable or independently versioned Nova components, including:
+
+- P-Stratum common;
+- P-0AP, P-LAP, and P-RAP implementations;
+- R-Stratum and O-Stratum implementations;
+- Adapter, Binding, and Platform Attachment implementations;
+- Interface crates and generated SDKs;
+- command-line tools, daemons, conformance harnesses, and simulation tooling.
+
+When one prompt spans more than one such component, do not bundle all implementations into one commit merely because they support one broad feature. For each independently reviewable component:
+
+1. implement only that component's portion;
+2. add or update only its directly related tests and conformance material;
+3. run that component's tests and validators;
+4. create one commit whose message names only that component change;
+5. fetch and push before moving to the next component when possible.
+
+Shared contract, registry, or normative documentation changes that enable multiple components belong in their own preceding commit. Order commits in the authority direction: normative contract and registry changes first, provider implementation next, then consumers and integrations.
+
+Do not split a single atomic cross-boundary contract revision into inconsistent commits. The contract revision, its schemas, canonical generated form, compatibility declaration, and conformance scenarios form one logical unit. Implementations that consume that completed revision follow in separate component commits.
+
+## Debugging hygiene
+
+When investigation reveals multiple independent root causes, commit each root cause separately. Do not squash the diagnostic chain into one broad fix; preserve bisectability and the reason each change exists.
+
+Before committing, remove temporary diagnostic material, including:
+
+- `println!`, `dbg!`, `print`, or equivalent ad hoc output;
+- payload or secret dumps;
+- temporary trace fixtures and shortcuts;
+- commented-out hypotheses;
+- hot-path debug logging added only for investigation;
+- temporary feature flags or relaxed validation.
+
+Keep intentional production diagnostics, such as a warning on a real fallback path, structured reporting of a previously silent failure, or a bounded startup diagnostic. Such logging MUST avoid secrets, cryptographic material, private identifiers, and unbounded packet or payload contents.
+
+Cleanup belongs in the fix commit, or in a separate follow-up commit completed before pushing. Never publish temporary diagnostic noise with a promise to remove it later.
+
 ## Licensing rules
 
 - Follow `legal/license-policy.yaml`; do not change a file's license by moving or copying it across a boundary without review.
