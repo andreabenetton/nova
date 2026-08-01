@@ -60,6 +60,8 @@ Path Provider instances conforming to P-0AP, P-LAP, or P-RAP provide private Pat
 
 The original papers are preserved as non-normative research inputs. Where a normative document conflicts with a research paper, the normative document wins.
 
+Uppercase requirement words in normative documents have the meanings defined by [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt), as specified in [`canon/normative-language.md`](canon/normative-language.md).
+
 ## First implementation target
 
 The proposed first executable slice is:

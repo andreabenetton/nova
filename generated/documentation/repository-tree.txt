@@ -130,6 +130,7 @@
 ./canon/glossary/LICENSE.md
 ./canon/glossary/common.md
 ./canon/invariants.md
+./canon/normative-language.md
 ./canon/registries
 ./canon/registries/LICENSE.md
 ./canon/registries/README.md

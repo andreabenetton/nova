@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+- Defined repository-wide RFC 2119 interpretation for uppercase normative requirement words.
+
 - Classified P-0AP, P-LAP, and P-RAP as Path Provider protocols; distinguished protocol, implementation, and runtime instance.
 - Corrected remaining mutable documentation so P-0AP, P-LAP, and P-RAP are never described as runtime Path Providers; implementations and instances are named explicitly.
 - Added the normative P-Stratum objectives document and wired it into scoped agent and context manifests.

@@ -11,7 +11,8 @@
 7. Never edit generated files manually.
 8. New replaceable boundaries require a versioned NIDL contract, conformance scenarios, context rules, and an ADR when the architecture changes.
 9. Research documents are non-normative. Do not implement directly from an original paper when a normative contract exists.
-10. Run `make check` before proposing completion.
+10. In normative prose, use the uppercase requirement words defined by `canon/normative-language.md` only with their RFC 2119 meanings.
+11. Run `make check` before proposing completion.
 
 ## Instruction architecture
 

@@ -4,6 +4,7 @@ module: nova-repository
 required_context:
 - README.md
 - canon/
+- canon/normative-language.md
 - contracts/README.md
 optional_context:
 - research/design-notes/
