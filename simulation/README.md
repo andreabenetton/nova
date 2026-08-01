@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 OR CC-BY-4.0 -->
+
 # Simulation
 
 This directory defines the deterministic Virtual Fabric, scenario and trace schemas, reusable characteristic profiles, and reproducible fixtures.

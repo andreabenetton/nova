@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-RAP protocol stub
 
 P-RAP common behavior shall define:

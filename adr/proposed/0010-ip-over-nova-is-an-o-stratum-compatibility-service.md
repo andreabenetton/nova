@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0010: IP-over-Nova is an O-Stratum Compatibility Service
 
 - Status: proposed

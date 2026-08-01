@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 OR CC-BY-4.0 -->
+
 # Simulation schemas
 
 `scenario.schema.json` is the current `0.2` scenario schema. It requires distinct Node identities, mandatory Obfuscated-degree hints, and Provider Paths without a Path-kind field. `scenario-0.1.schema.json` preserves the earlier experimental schema.

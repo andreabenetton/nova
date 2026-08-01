@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 $schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
 module: "nova-interface-p-path-provider"
 required_context:

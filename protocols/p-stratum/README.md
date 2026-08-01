@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-Stratum protocols
 
 P-Stratum consists of a common service plus three Path Providers:

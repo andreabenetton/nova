@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Task template: add a P-RAP Binding
 
 - Name the integrated network/transport combination.

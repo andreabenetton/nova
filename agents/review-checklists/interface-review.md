@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Interface review checklist
 
 - Provider and consumer roles are unambiguous.

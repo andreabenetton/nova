@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0011: P-RAP Association is independent from Binding instance
 
 - Status: proposed

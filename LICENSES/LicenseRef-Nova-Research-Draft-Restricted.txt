@@ -1,0 +1,13 @@
+Nova Research Draft Restricted Notice
+
+This designation applies only to files explicitly marked with
+SPDX-License-Identifier: LicenseRef-Nova-Research-Draft-Restricted.
+
+The marked file is retained as a historical, confidential, or research source.
+No permission is granted by this repository to copy, modify, distribute,
+publish, sublicense, or create derivative works from that file, except to the
+extent separately authorized in writing by the applicable rights holder or
+permitted by law.
+
+Third-party figures, quotations, tables, and other incorporated material remain
+subject to their own rights and are not relicensed by this notice.

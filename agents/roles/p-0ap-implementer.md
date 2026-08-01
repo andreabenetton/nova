@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # P-0AP implementer
 
 Implement P-0AP against `NOVA-IF-P-PATH-PROVIDER 0.3.0`, `NOVA-IF-P-0AP-CONTROL 0.2.0`, and the Virtual Fabric Interface. P-0AP creates authenticated Provider Paths, not R-Stratum Edges. It has no Path-kind selector.

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Peer and Edge model
 
 A Peer is an authenticated Nova Node reachable through one or more usable P-Stratum Paths. P-Stratum common groups Paths exclusively by `NodeIdentityId`, never by locator, address-set equality, or provider-local identifier.

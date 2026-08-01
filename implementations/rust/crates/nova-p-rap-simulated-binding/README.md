@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # nova-p-rap-simulated-binding
 
 Simulated P-RAP Binding skeleton backed by the Virtual Fabric.

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # LLM scope review checklist
 
 - `CONTEXT.yaml` exists and paths resolve.

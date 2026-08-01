@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0001: Strict strata and versioned boundaries
 
 - Status: proposed

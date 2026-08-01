@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-0AP control Interface
 
 `NOVA-IF-P-0AP-CONTROL 0.2.0` is a test-only Interface used to:

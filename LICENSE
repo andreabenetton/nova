@@ -1,0 +1,21 @@
+Nova is a multi-licensed project.
+
+No single license applies to every file in this repository. The authoritative
+path-to-license mapping is in LICENSE-NOTICE.md and legal/license-policy.yaml.
+Individual files may also carry SPDX-License-Identifier declarations.
+
+The principal licenses are:
+
+- AGPL-3.0-or-later for the Nova core implementation;
+- Apache-2.0 for replaceable integration implementations, interface SDKs,
+  conformance tooling, examples, tests, and build tooling;
+- CC-BY-4.0 for architecture, protocol, and explanatory documentation;
+- Apache-2.0 OR CC-BY-4.0 for machine-readable contracts, schemas, registries,
+  simulation fixtures, and generated contract documentation.
+
+Historical research drafts explicitly marked
+LicenseRef-Nova-Research-Draft-Restricted are not open-licensed by this
+repository.
+
+See LICENSES/ for license texts, PATENTS.md for the patent policy,
+TRADEMARKS.md for trademark terms, and THIRD_PARTY_NOTICES.md for exclusions.

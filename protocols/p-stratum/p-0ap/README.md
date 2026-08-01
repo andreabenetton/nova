@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-0AP
 
 P-0AP is the **P-Stratum Zero-Underlay Association Protocol**. It is the first deterministic Path Provider used to make P-Stratum common and R-Stratum executable without an external Nexus Fundamenta or routed underlay.

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # CI maintainer
 
 Maintain schema validation, semantic lint, compatibility checks, generation checks, context checks, dependency boundaries, conformance harnesses, and reproducibility.

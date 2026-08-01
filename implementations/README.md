@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Implementations
 
 Language- and platform-specific implementations. Normative behavior remains in canon, contracts, protocols, integrations, simulation, and compatibility profiles.

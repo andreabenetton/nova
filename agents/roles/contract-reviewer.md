@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Contract reviewer
 
 Review structural validity, semantic completeness, version compatibility, lifecycle, errors, capabilities, limits, and provider/consumer testability.

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # R-Stratum architecture
 
 The first executable R-Stratum subset separates:

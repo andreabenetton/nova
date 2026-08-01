@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 #![forbid(unsafe_code)]
 
 use nova_interface_ip_platform_attachment::{IpDatagram, IpPlatformAttachment, PlatformError, PlatformEvent, PlatformInterfaceId};

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # IP-over-Nova implementer
 
 Consume NOVA-IF-O-A and the IP Platform Attachment interface. Do not bypass O-Stratum or depend on P/R implementation crates.

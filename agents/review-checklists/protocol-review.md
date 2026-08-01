@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Peer-protocol review checklist
 
 - Version negotiation and downgrade behavior are specified.

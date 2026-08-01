@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Repository design rationale
 
 Status: non-normative explanation of the scaffold.

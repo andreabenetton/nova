@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-LAP security worklist
 
 - exact Noise suite and transcript;

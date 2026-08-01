@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0007: Version all replaceable boundaries
 
 - Status: proposed

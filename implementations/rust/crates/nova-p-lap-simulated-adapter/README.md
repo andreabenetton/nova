@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # nova-p-lap-simulated-adapter
 
 Simulated P-LAP Adapter skeleton backed by the Virtual Fabric.

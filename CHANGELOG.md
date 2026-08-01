@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Changelog
 
 ## Unreleased
@@ -19,3 +21,16 @@
 - Added P-0AP Node-identity update and Path-update control behavior and propagated identity or degree changes as Provider Path updates.
 - Added strict NIDL type-reference lint for current development contracts and expanded provider/consumer conformance scenarios.
 - Added the experimental Obfuscated-degree profile registry with a deterministic test profile and a proposed positive-noise production profile.
+
+## Unreleased — licensing architecture
+
+- adopted AGPL-3.0-or-later for the Nova core implementation;
+- adopted Apache-2.0 for Interfaces, Adapters, Bindings, Platform Attachments,
+  shared SDK types, conformance code, tooling, tests, and examples;
+- adopted CC-BY-4.0 for project-authored documentation and specification prose;
+- dual-licensed contracts, schemas, registries, and simulation fixtures under
+  Apache-2.0 OR CC-BY-4.0;
+- restricted historical research PDFs pending third-party rights review;
+- added SPDX metadata, per-directory license markers, DCO, patent, copyright,
+  trademark, and third-party notice files; and
+- added deterministic license-policy CI enforcement.

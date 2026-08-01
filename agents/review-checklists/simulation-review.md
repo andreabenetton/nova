@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Simulation review checklist
 
 - The simulator implements a versioned boundary rather than a private shortcut.

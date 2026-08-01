@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-RAP unit-format stub
 
 The P-RAP unit format must remain independent of one Binding. A possible protected structure contains:

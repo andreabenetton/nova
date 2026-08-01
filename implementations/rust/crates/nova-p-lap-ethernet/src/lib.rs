@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 #![forbid(unsafe_code)]
 
 use nova_interface_p_lap_adapter::{AdapterError, AdapterEvent, AdapterFrame, AdapterProperties, NexusLocator, PLapAdapter};

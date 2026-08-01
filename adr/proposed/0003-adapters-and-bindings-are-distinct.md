@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0003: Adapters and Bindings are distinct extension points
 
 - Status: proposed

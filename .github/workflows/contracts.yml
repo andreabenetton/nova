@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 name: contracts
 
 on:
@@ -9,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -22,9 +25,12 @@ jobs:
       - run: python -m unittest discover -s tools/nova-contract/tests
       - run: python tools/check_repository_shape.py
       - run: python tools/check_agent_instructions.py
+      - run: python tools/check_licenses.py
       - run: python tools/check_simulation_fixtures.py
       - run: python tools/generate_repository_docs.py --check
       - if: github.event_name == 'pull_request'
         run: |
-          git fetch origin "${{ github.base_ref }}" --depth=1
-          python tools/ci/check_contract_versions.py "origin/${{ github.base_ref }}"
+          python tools/ci/check_contract_versions.py "${{ github.event.pull_request.base.sha }}"
+          python tools/ci/check_dco.py \
+            "${{ github.event.pull_request.base.sha }}" \
+            "${{ github.event.pull_request.head.sha }}"

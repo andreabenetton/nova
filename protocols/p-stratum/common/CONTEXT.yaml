@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: CC-BY-4.0
 $schema: ../../../contracts/schemas/nidl/0.1/context.schema.json
 module: p-stratum-common-design
 required_context:

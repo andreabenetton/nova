@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # R-Stratum implementer
 
 Consume only `NOVA-IF-P-R 0.2.0` and `NOVA-IF-R-O`. Develop first against a reference mock, then run the same tests against P-0AP and later P-LAP/P-RAP-derived Edges.

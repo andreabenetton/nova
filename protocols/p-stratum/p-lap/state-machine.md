@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-LAP state-machine stub
 
 Proposed conceptual states:

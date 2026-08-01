@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-RAP Association
 
 A P-RAP Association is identified by Nova identities and P-RAP state. It is not the same as:

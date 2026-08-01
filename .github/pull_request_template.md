@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 ## Boundary changed
 
 - Interface or protocol ID:

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Edge aggregation
 
 P-Stratum common maintains a map from authenticated Node identity to one Peer aggregate. Each aggregate contains all usable Provider Paths and produces one Edge snapshot.

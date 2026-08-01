@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Obfuscated degree
 
 Each Provider Path supplies a current Obfuscated-degree hint for its Peer. P-Stratum common exposes one coherent value in every Edge snapshot.

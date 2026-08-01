@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Design note: P-Stratum and repository decomposition
 
 This note records the working design developed before the repository scaffold:

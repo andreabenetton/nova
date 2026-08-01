@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-Stratum common security invariants
 
 - An Edge is not exposed before Peer identity authentication and availability of a compliant service profile.

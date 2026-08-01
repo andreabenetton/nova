@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # O-Stratum
 
 O-Stratum consumes `NOVA-IF-R-O` and provides `NOVA-IF-O-A`. It should eventually provide at least:

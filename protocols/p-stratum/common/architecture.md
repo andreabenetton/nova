@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-Stratum common architecture
 
 P-Stratum common is the only component that provides `NOVA-IF-P-R`. It consumes Provider Paths through `NOVA-IF-P-PATH-PROVIDER 0.3.0` and never depends on P-0AP, P-LAP, P-RAP, Adapter, Binding, locator, or Virtual Fabric implementation details.

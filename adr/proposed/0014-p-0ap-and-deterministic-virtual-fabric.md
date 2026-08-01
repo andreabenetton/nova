@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0014: Add P-0AP and a deterministic Virtual Fabric
 
 - Status: proposed

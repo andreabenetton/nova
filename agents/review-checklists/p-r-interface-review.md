@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # P-R Interface review checklist
 
 - The contract exposes Edges, never Paths or provider provenance.

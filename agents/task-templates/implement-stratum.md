@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Task template: implement a stratum
 
 - Read only adjacent Interface contracts and the stratum's protocol documents.

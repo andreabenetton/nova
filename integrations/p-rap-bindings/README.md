@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # P-RAP Bindings
 
 Bindings bind P-RAP to integrated routed network and transport combinations and implement `NOVA-IF-P-RAP-BINDING`.

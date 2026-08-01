@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Nova
 
 Nova is an experimental replacement Internet protocol stack organized into three strict strata:
@@ -77,7 +79,22 @@ See `docs/p-r-interface-design.md`, `ROADMAP.md`, `adr/proposed/`, and `STATUS.m
 
 ```sh
 make setup
+make licenses
 make check
 ```
 
 The contract tool validates NIDL YAML against JSON Schema, normalizes contracts, performs Nova-specific linting, checks context manifests and dependency boundaries, and supports compatibility checks. Simulation profiles and scenarios are validated independently against their schemas.
+
+## Licensing
+
+Nova is multi-licensed by architectural role:
+
+- AGPL-3.0-or-later for the core implementation;
+- Apache-2.0 for public Interfaces, Adapters, Bindings, Platform Attachments,
+  conformance tooling, tests, and integration SDKs;
+- CC-BY-4.0 for architecture and specification prose; and
+- Apache-2.0 OR CC-BY-4.0 for machine-readable contracts and schemas.
+
+Historical papers are excluded pending a third-party rights review. See
+`LICENSE`, `LICENSE-NOTICE.md`, `docs/licensing.md`, `PATENTS.md`, and the
+nearest directory `LICENSE.md` before reuse.

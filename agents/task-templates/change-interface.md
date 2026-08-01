@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Task template: change an Interface contract
 
 1. Name the Interface ID and current version.

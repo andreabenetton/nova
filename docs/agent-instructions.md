@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Coding-agent instruction architecture
 
 Nova uses `AGENTS.md` as the canonical, vendor-neutral source of coding-agent instructions. Shared repository rules belong there once; vendor-specific files may only adapt or extend those rules when a tool requires it.

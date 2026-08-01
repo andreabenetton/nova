@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # nova-interface-virtual-fabric
 
 Language-level shape for `NOVA-IF-VIRTUAL-FABRIC 0.1.0`.

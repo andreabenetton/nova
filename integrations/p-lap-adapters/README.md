@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # P-LAP Adapters
 
 Adapters bind P-LAP to Nexus Fundamenta-specific behavior and implement `NOVA-IF-P-LAP-ADAPTER`.

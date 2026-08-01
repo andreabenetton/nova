@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 [package]
 name = "nova-node"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
+license = "AGPL-3.0-or-later"
 
 [dependencies]
 nova-p-core = { path = "../nova-p-core" }

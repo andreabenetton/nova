@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-LAP wire-format stub
 
 No wire format is frozen. The final format must separate pre-association framing from post-association protected framing. Stable Nova Node addresses and post-association message types should not be exposed unnecessarily in cleartext.

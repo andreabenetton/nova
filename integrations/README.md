@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Integrations
 
 Technology-specific integrations implement versioned Interfaces. They must not redefine the common protocol.

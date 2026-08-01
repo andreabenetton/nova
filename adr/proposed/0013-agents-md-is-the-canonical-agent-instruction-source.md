@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0013: AGENTS.md is the canonical agent instruction source
 
 - Status: proposed

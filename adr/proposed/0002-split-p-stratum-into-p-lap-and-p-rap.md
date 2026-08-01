@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0002: Split P-Stratum into P-LAP and P-RAP
 
 - Status: proposed

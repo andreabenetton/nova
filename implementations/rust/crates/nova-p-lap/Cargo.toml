@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 [package]
 name = "nova-p-lap"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
+license = "AGPL-3.0-or-later"
 
 [dependencies]
 nova-types = { path = "../nova-types" }

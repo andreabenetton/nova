@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # nova-virtual-fabric
 
 Reference deterministic Virtual Fabric skeleton. It is intentionally incomplete and not normative.

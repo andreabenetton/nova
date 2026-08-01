@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Architecture Decision Records
 
 Statuses: proposed, accepted, superseded, rejected.

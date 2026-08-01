@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-0AP semantics
 
 P-0AP models behavior observable at the Path Provider boundary:

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0017: Use an atomic reliable SDU baseline with explicit lifecycle
 
 - Status: proposed

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Topology discovery
 
 Topology discovery begins from R-Stratum Edges. For each Edge, R-Stratum creates one Close and uses the mandatory Obfuscated degree as the number of neighbor-expansion slots to prepare.

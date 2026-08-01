@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # QUIC common specification stub
 
 The proposed first profile uses:

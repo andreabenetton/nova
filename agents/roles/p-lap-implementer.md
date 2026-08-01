@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # P-LAP implementer
 
 Implement P-LAP against the Path Provider and Adapter interfaces. Do not depend on Ethernet directly or read R-Stratum internals.

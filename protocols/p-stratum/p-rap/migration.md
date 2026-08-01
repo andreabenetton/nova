@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-RAP migration stub
 
 Two migration levels are distinct:

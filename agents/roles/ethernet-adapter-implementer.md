@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Ethernet Adapter implementer
 
 Implement only the P-LAP Adapter interface and Ethernet integration profile. P-LAP protocol decisions remain outside this component.

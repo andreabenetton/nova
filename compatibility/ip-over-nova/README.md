@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # IP-over-Nova Compatibility Service
 
 IP-over-Nova carries IPv4 and IPv6 datagrams through the O-Stratum application interface. The interoperable profile is platform-independent. Operating-system integration is supplied by Platform Attachments.

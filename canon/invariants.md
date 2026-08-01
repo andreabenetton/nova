@@ -4,6 +4,9 @@ status: draft
 normative: true
 ---
 
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
+
 # Architectural invariants
 
 1. A stratum implementation depends only on declared adjacent Interface contracts.

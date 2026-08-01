@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0009: LLM context manifests and knowledge firewalls
 
 - Status: proposed

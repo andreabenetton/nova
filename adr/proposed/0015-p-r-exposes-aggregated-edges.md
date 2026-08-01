@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0015: Expose aggregated Edges rather than Paths through P-R
 
 - Status: proposed

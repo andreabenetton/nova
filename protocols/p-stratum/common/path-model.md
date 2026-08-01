@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Private Path model
 
 A Provider Path is private to P-Stratum and contains:

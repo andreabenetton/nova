@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Context manifests
 
 Every component should carry a `CONTEXT.yaml` validated by the NIDL context schema. A manifest lists:

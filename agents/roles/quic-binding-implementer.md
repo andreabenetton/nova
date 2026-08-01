@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # QUIC Binding implementer
 
 Implement IPv4-QUIC or IPv6-QUIC against the P-RAP Binding interface and QUIC-common profile. Do not define P-RAP Association identity.

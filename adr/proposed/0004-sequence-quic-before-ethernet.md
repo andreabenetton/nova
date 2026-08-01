@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0004: Sequence QUIC before Ethernet while developing R-Stratum in parallel
 
 - Status: proposed

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
@@ -6,6 +7,7 @@ build-backend = "setuptools.build_meta"
 name = "nova-contract"
 version = "0.1.0"
 description = "Experimental Nova NIDL contract tooling"
+license = { text = "Apache-2.0" }
 requires-python = ">=3.11"
 dependencies = [
   "PyYAML>=6.0,<7",

@@ -4,6 +4,9 @@ status: draft
 normative: true
 ---
 
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
+
 # Security model
 
 Every security claim must identify the attacker class it addresses.

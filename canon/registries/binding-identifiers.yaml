@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR CC-BY-4.0
 $schema: "../../contracts/schemas/nidl/0.1/registry.schema.json"
 registry: NOVA-P-RAP-BINDINGS
 status: experimental

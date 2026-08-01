@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
 [package]
 name = "nova-p-rap-ipv4-quic"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
+license = "Apache-2.0"
 
 [dependencies]
 nova-types = { path = "../nova-types" }

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # nova-contract
 
 Experimental CLI for the Nova contract system.

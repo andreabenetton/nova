@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Agent rules
 
 1. Read the nearest `CONTEXT.yaml` before modifying a component.
@@ -17,3 +19,12 @@
 - Nested `AGENTS.md` files provide more specific instructions for their directory trees.
 - Agent-specific files are adapters or extensions only and must not copy shared rules.
 - Deterministic requirements belong in tooling and CI rather than prompt instructions alone.
+
+## Licensing rules
+
+- Follow `legal/license-policy.yaml`; do not change a file's license by moving or copying it across a boundary without review.
+- New files require the correct SPDX identifier where the format supports comments.
+- Every new directory requires a `LICENSE.md` marker.
+- Core crates are AGPL; Interface, Adapter, Binding, Platform Attachment, tooling, and conformance crates are Apache-2.0.
+- Do not copy AGPL core implementation into Apache-licensed integration components.
+- Run `make licenses` after adding, moving, or generating files.

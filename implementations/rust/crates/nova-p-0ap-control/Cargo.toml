@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 [package]
 name = "nova-p-0ap-control"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
+license = "AGPL-3.0-or-later"
 
 [dependencies]
 nova-interface-p-0ap-control = { path = "../nova-interface-p-0ap-control" }

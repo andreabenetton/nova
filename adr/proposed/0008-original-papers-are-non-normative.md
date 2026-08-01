@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # ADR-0008: Original papers are non-normative research inputs
 
 - Status: proposed

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Task template: add a simulation front end
 
 - Name the architectural boundary being simulated.

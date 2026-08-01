@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: CC-BY-4.0
 policy_version: "0.1"
 crates:
   nova-r-stratum:

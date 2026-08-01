@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Security policy
 
 Nova is currently experimental. Do not deploy it to protect production traffic or economic value.

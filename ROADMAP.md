@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Roadmap
 
 The roadmap is organized around executable, versioned boundaries. P-0AP is the first deterministic Path Provider, P-RAP/QUIC is the first real external-underlay integration, and R-Stratum development proceeds in parallel against the P-R Interface.
@@ -112,3 +114,16 @@ Freeze `1.0` only after:
 ## Sequencing principle
 
 P-0AP validates contracts and deterministic behavior; it does not define them. QUIC precedes Ethernet as the first real external integration because it is user-space and CI-friendly. R-Stratum starts in parallel because it depends only on P-R.
+
+## Public-release licensing gate
+
+Before the first public release:
+
+- confirm the rights holder authorized to license pre-existing Nova material;
+- complete the third-party content review for historical papers;
+- validate all files with `make licenses`;
+- require DCO sign-off in contribution automation;
+- decide whether historical papers will be replaced by clean-room project diagrams;
+- perform trademark clearance; and
+- establish the OWFa contributor and designation process before any normative
+  specification is called `1.0` or Final.

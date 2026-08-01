@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-LAP association stub
 
 The first profile should use an exact Noise pattern and suite after a separate cryptographic ADR. The authenticated transcript must bind:

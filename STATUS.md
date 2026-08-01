@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Repository status
 
 - Architecture: draft, with private Provider Paths aggregated into R-Stratum-visible Edges
@@ -16,3 +18,14 @@
 - Security review: not performed
 
 No Interface, peer protocol, wire format, Obfuscated-degree production profile, simulation behavior, or cryptographic choice is stable. P-R `1.0` remains gated on P-0AP, R-Stratum, and an independent P-RAP/QUIC provider passing the same conformance semantics.
+
+## Licensing status
+
+- Split licensing policy: implemented and enforced by `legal/license-policy.yaml`.
+- Core crates: AGPL-3.0-or-later.
+- Interface and integration crates: Apache-2.0.
+- Specifications and documentation: CC-BY-4.0.
+- Contracts and schemas: Apache-2.0 OR CC-BY-4.0.
+- Historical papers: restricted pending third-party rights review.
+- OWFa final-specification registry: empty; no patent commitment is currently attached to a draft.
+- Public-release blockers: confirmation of pre-existing rights ownership, review of third-party paper content, trademark clearance, and patent-process review.

@@ -4,6 +4,9 @@ status: draft
 normative: true
 ---
 
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
+
 # Versioning
 
 Nova maintains independent version domains for:

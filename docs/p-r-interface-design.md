@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # P-Stratum to R-Stratum design guide
 
 This guide indexes the current P-R design. It is explanatory; the authoritative sources are `canon/`, the versioned NIDL contracts, and accepted ADRs.

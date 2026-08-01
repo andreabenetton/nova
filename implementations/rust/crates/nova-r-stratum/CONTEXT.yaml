@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 $schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
 module: nova-r-stratum
 required_context:

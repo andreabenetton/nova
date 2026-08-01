@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Tests
 
 Tests mirror architectural boundaries: contract, provider, consumer, peer-protocol, simulation, deterministic trace, integration, interoperability, adversarial, and performance.

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # Submission model
 
 A Submission begins when `submit-sdu` is accepted. P-Stratum owns an immutable logical copy until exactly one terminal completion event.

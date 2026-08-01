@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # R-Stratum
 
 R-Stratum consumes only `NOVA-IF-P-R 0.2.0`. It observes authenticated Peers, aggregated Edges, service profiles, Obfuscated degree, and complete SDU lifecycle. It does not observe P-Stratum Paths or their provenance.

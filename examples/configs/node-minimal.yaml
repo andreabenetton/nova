@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 example: "minimal-node"
 status: "non-normative"
 contracts:
