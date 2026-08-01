@@ -2,82 +2,164 @@
 
 # Nova
 
-Nova is an experimental replacement Internet protocol stack organized into three strict strata:
+Nova is a research and engineering project for a new Internet protocol stack.
 
-- **Proximitate Stratum (P-Stratum)**: creates protected Paths to Peers, aggregates them into Edges, and supplies a versioned Edge service to R-Stratum.
-- **Remotis Stratum (R-Stratum)**: discovers Routes, establishes Flows, routes Grams, and coordinates routing-related services.
-- **Onerarii Stratum (O-Stratum)**: provides application-facing transport semantics.
+The long-term aim is an Internet that is simpler to operate, private by default, economically open to new participants, and deployable progressively alongside today’s TCP/IP infrastructure. Nova is not intended to be another VPN, overlay network, transport library, or isolated routing protocol. It is an attempt to redesign the stack as a coherent whole.
 
-This repository is deliberately organized for independent human and LLM-assisted implementation. A component receives only the contracts and design material required for its boundary. Higher strata depend on the **service interface** of lower strata, never on their private protocols or technology integrations.
+The original paper describes a network in which encrypted application data can travel over selectable routes, communication services can expose meaningful characteristics and prices, forwarding providers can be compensated in real time, and Nodes that add useful capacity can share in the resulting economic activity. The adoption model is deliberately incremental: the new network should grow inside the existing one rather than depend on a coordinated global replacement.
 
-## Current status
+The paper is the source of the project’s direction, not its current specification. Its routing, privacy, settlement, monetary, and incentive mechanisms remain research goals until they are expressed as versioned contracts, reviewed protocol specifications, conformance tests, and interoperable implementations.
 
-This is a **design scaffold**, not an interoperable implementation. All ADRs are proposed, all Interface versions are experimental, and the Rust crates are compilable-intent skeletons intended to make architectural boundaries visible.
+## Why Nova
 
-## Architectural decomposition
+The project starts from several observations about the present Internet:
+
+- applications communicate, but IP addressing is tied to network interfaces and location;
+- route choice and service characteristics are mostly hidden from end users and applications;
+- privacy is commonly added through overlays instead of being built into the network architecture;
+- inter-provider charging and settlement remain indirect, aggregated, and operationally expensive;
+- operators that add forwarding capacity do not receive a direct protocol-level reward for carrying useful traffic; and
+- replacing a globally deployed stack is impossible without a credible path for gradual adoption.
+
+Nova explores whether these problems can be addressed together without abandoning the end-to-end principle. Intelligence and application policy remain at the endpoints, while the stack provides protected communication, explicit service characteristics, route choice, and—eventually—native economic settlement.
+
+## Long-term vision
+
+A complete Nova network is intended to provide:
+
+- **privacy by design**: payload confidentiality, protected routing information, replay resistance, and relationship confidentiality as properties of the stack;
+- **selectable communication services**: applications and users can express the characteristics they need and choose among suitable routes;
+- **market-based routing and transport**: providers can advertise service characteristics and prices without inspecting or discriminating by application content;
+- **real-time settlement**: the value of communication can be settled while traffic is carried and distributed among participating Nodes;
+- **incentives for a distributed topology**: operators, individuals, and new hardware providers can be rewarded for adding useful forwarding capacity;
+- **lower operational friction**: less manual router configuration, fewer bilateral settlement processes, and fewer centralized coordination points;
+- **identity independent of attachment point**: mobility and multi-homing do not redefine the communicating entity; and
+- **incremental adoption**: Nova can cross existing routed networks and support compatibility services for software that still expects IP.
+
+These are objectives, not current capabilities. Production anonymous routing, service negotiation, traffic settlement, monetary issuance, proof of bandwidth, and economic consensus have not yet been implemented or validated.
+
+## Stack architecture
+
+Nova is divided into three strict strata. Each stratum owns its terminology, protocols, and internal state. Adjacent strata interact only through versioned Interfaces.
+
+### Proximitate Stratum — P-Stratum
+
+P-Stratum provides protected, message-preserving communication with authenticated Peers through one or more Paths. It hides the differences between local adjacency, remote association, simulation, and the technologies beneath them.
+
+Its complete objectives are documented in [`protocols/p-stratum/objectives.md`](protocols/p-stratum/objectives.md).
+
+P-Stratum uses three Path Provider protocols:
+
+- **P-0AP** for deterministic zero-underlay association and simulation;
+- **P-LAP** for association with Peers adjacent through a Nexus Fundamenta, using replaceable Adapters; and
+- **P-RAP** for association with remote Peers across an existing routed underlay, using replaceable Bindings.
+
+P-0AP, P-LAP, and P-RAP are protocols. Implementations of those protocols create running Path Provider instances, which maintain Provider Paths for P-Stratum common.
+
+### Remotis Stratum — R-Stratum
+
+R-Stratum is responsible for network-wide reachability and forwarding. It discovers and selects Routes, defines directional Links, establishes Trails and Flows, and carries Grams.
+
+Its topology, privacy, route-selection, and forwarding mechanisms are still at an early design stage.
+
+### Onerarii Stratum — O-Stratum
+
+O-Stratum provides application-facing transport services. Its purpose is to carry application data while preserving the confidentiality and traffic-analysis-resistance properties required by the architecture.
+
+O-Stratum remains largely a research and specification workstream.
+
+### Interfaces between strata
+
+The Interfaces are where concepts from adjacent strata are related. For example, the P–R Interface defines how P-Stratum service is presented to R-Stratum without exposing Path Provider, Adapter, Binding, locator, or simulation details.
+
+The authoritative P–R terminology mapping is in [`contracts/interfaces/p-r/glossary.md`](contracts/interfaces/p-r/glossary.md).
 
 ```text
 Applications and compatibility services
                  |
+      O–Application Interface
+                 |
             O-Stratum
                  |
-       NOVA-IF-R-O / NOVA-IF-O-A
+          R–O Interface
                  |
             R-Stratum
                  |
-             NOVA-IF-P-R
+          P–R Interface
                  |
-            P-Stratum common
-   Edge aggregation, profiles, queues
+            P-Stratum
                  |
-       NOVA-IF-P-PATH-PROVIDER
+      Path Provider Interface
           /          |          \
        P-0AP       P-LAP       P-RAP
-         |            |           |
- Virtual Fabric    Adapters     Bindings
                       |           |
-             Nexus Fundamenta  Integrated routed underlays
-             (Ethernet, Wi-Fi) (IPv4-QUIC, IPv6-QUIC, ...)
+                   Adapters     Bindings
+                      |           |
+             Nexus Fundamenta  Routed underlays
 ```
 
-- **P-0AP** is the deterministic zero-underlay Path Provider protocol used for local, simulated, and replayable development. It creates authenticated Provider Paths, not Edges, has no Path-kind selector, and does not replace P-LAP or P-RAP conformance testing.
-- **P-LAP** establishes Paths with link-adjacent Peers through **Adapters**.
-- **P-RAP** establishes Paths with remote Peers through **Bindings**.
-- A P-RAP Binding identifies the integrated network/transport combination, such as **IPv4-QUIC** or **IPv6-QUIC**, because contemporary routing and transport implementations are tightly integrated.
-- **IP-over-Nova** is a Compatibility Service above O-Stratum. Its operating-system integration is provided by **Platform Attachments**, such as Windows NDIS or Linux TUN.
+Nova protocol logic is intended to run in user space. A platform may require a small privileged driver or attachment shim, but routing, identity, cryptographic association, policy, and settlement semantics do not belong in kernel mode.
 
-Path Provider instances conforming to P-0AP, P-LAP, or P-RAP provide private Paths to P-Stratum common through `NOVA-IF-P-PATH-PROVIDER 0.4.0`. P-Stratum common groups Paths by authenticated Node identity and exposes one Edge per Peer through `NOVA-IF-P-R 0.2.0`. Every Edge includes service profiles and a mandatory, profile-bounded Obfuscated degree. Peer identity continuity, finite Submission and event queues, exactly-one terminal completion, and reset ordering are explicit contract semantics. R-Stratum never learns which Path Provider, Adapter, Binding, locator, or simulation component produced it.
+## What this repository contains
 
-## Authority order
+The repository currently focuses on the foundations required to turn the architecture into independently implementable software:
 
-1. `canon/`
-2. `contracts/`
-3. `protocols/`
-4. `integrations/`, `simulation/`, and `compatibility/`
-5. accepted ADRs
-6. implementation documentation
-7. `research/`, including the original papers
+- versioned Interface contracts written in NIDL;
+- conformance scenarios for providers and consumers;
+- stratum-specific glossaries and architectural boundaries;
+- deterministic simulation through P-0AP and the Virtual Fabric;
+- early Rust crates that make the intended component boundaries concrete;
+- planned P-RAP integration over user-space QUIC;
+- planned P-LAP integration through simulated and Ethernet Adapters; and
+- compatibility work, including IP-over-Nova, for gradual migration.
 
-The original papers are preserved as non-normative research inputs. Where a normative document conflicts with a research paper, the normative document wins.
+The main directories are:
 
-Uppercase requirement words in normative documents have the meanings defined by [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt), as specified in [`canon/normative-language.md`](canon/normative-language.md).
+- [`canon/`](canon/) — project-wide architecture, invariants, registries, and normative language;
+- [`contracts/`](contracts/) — versioned Interfaces, schemas, and conformance scenarios;
+- [`protocols/`](protocols/) — specifications and objectives owned by each stratum;
+- [`implementations/`](implementations/) — implementation crates and executable prototypes;
+- [`integrations/`](integrations/) — Adapters, Bindings, Platform Attachments, and SDK surfaces;
+- [`simulation/`](simulation/) — deterministic profiles, scenarios, traces, and Virtual Fabric material;
+- [`compatibility/`](compatibility/) — migration services such as IP-over-Nova;
+- [`adr/`](adr/) — architectural decisions under discussion or accepted; and
+- [`research/`](research/) — the original papers and other non-normative research inputs.
 
-## First implementation target
+See [`REPOSITORY-MAP.md`](REPOSITORY-MAP.md) for a detailed inventory.
 
-The proposed first executable slice is:
+## Current status
 
-- the Edge-oriented P-R 0.2.0 contract and its conformance suite;
-- a deterministic Virtual Fabric;
-- P-0AP paired-node and virtual-fabric modes;
-- R-Stratum developed in parallel against `NOVA-IF-P-R`, first with mocks and P-0AP;
-- P-RAP tested first against a Simulated Binding, then with IPv6-QUIC and IPv4-QUIC Bindings;
-- a reliable QUIC control stream and reliable baseline data mapping first; QUIC DATAGRAM remains an optional later profile;
-- P-LAP tested against a Simulated Adapter before the Ethernet Adapter;
-- mixed P-LAP/P-RAP topology tests after both real integrations exist.
+Nova is in the design and early implementation phase.
 
-See `docs/p-r-interface-design.md`, `ROADMAP.md`, `adr/proposed/`, and `STATUS.md`.
+The current repository establishes architectural boundaries and experimental contracts, but it does not yet provide an interoperable network stack. The Rust code is incomplete, the cryptographic and wire profiles are not stable, and the privacy and economic mechanisms have not undergone the analysis required for production use.
 
-## Local checks
+Do not use Nova today for production networking, financial settlement, or privacy-critical communication.
+
+The immediate engineering sequence is:
+
+1. make P-0AP and the Virtual Fabric deterministic and conformance-complete;
+2. implement P-Stratum common against the Path Provider Interface;
+3. develop the first R-Stratum executable subset against the P–R Interface;
+4. implement P-RAP over IPv6-QUIC and IPv4-QUIC Bindings;
+5. implement P-LAP first with a simulated Adapter and then Ethernet; and
+6. validate mixed topologies before expanding into topology discovery, anonymous routing, settlement, and compatibility services.
+
+See [`STATUS.md`](STATUS.md) for the present implementation state and [`ROADMAP.md`](ROADMAP.md) for the staged plan.
+
+## Reading order
+
+For a first technical reading:
+
+1. this README;
+2. [`canon/architecture.md`](canon/architecture.md);
+3. the glossary index at [`canon/glossary.md`](canon/glossary.md);
+4. the objectives or specification of the stratum of interest;
+5. the relevant versioned Interface under [`contracts/interfaces/`](contracts/interfaces/); and
+6. the corresponding ADRs and conformance scenarios.
+
+The original papers explain the motivation and intended destination, but current implementation work follows the normative repository documents when they differ.
+
+## Building and validation
 
 ```sh
 make setup
@@ -85,18 +167,23 @@ make licenses
 make check
 ```
 
-The contract tool validates NIDL YAML against JSON Schema, normalizes contracts, performs Nova-specific linting, checks context manifests and dependency boundaries, and supports compatibility checks. Simulation profiles and scenarios are validated independently against their schemas.
+The checks validate contracts and schemas, normalized generated material, conformance scenarios, context and dependency boundaries, terminology ownership, simulation fixtures, repository shape, licensing, and implementation tests where the required toolchains are installed.
+
+Passing these checks establishes repository consistency only. It does not prove security, anonymity, economic soundness, or interoperability.
+
+## Contributing
+
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting changes. Contributions should preserve stratum boundaries, add tests or conformance material with new behavior, and keep published contract versions immutable.
+
+Normative requirement words are interpreted according to [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt), as documented in [`canon/normative-language.md`](canon/normative-language.md).
 
 ## Licensing
 
-Nova is multi-licensed by architectural role:
+Nova uses licences according to architectural role:
 
-- AGPL-3.0-or-later for the core implementation;
-- Apache-2.0 for public Interfaces, Adapters, Bindings, Platform Attachments,
-  conformance tooling, tests, and integration SDKs;
-- CC-BY-4.0 for architecture and specification prose; and
-- Apache-2.0 OR CC-BY-4.0 for machine-readable contracts and schemas.
+- **AGPL-3.0-or-later** for the core implementation;
+- **Apache-2.0** for public Interfaces, Adapters, Bindings, Platform Attachments, conformance tooling, tests, and integration SDKs;
+- **CC-BY-4.0** for architecture and specification prose; and
+- **Apache-2.0 OR CC-BY-4.0** for machine-readable contracts and schemas.
 
-Historical papers are excluded pending a third-party rights review. See
-`LICENSE`, `LICENSE-NOTICE.md`, `docs/licensing.md`, `PATENTS.md`, and the
-nearest directory `LICENSE.md` before reuse.
+Historical papers are excluded from those grants pending review of third-party material. Read [`LICENSE`](LICENSE), [`LICENSE-NOTICE.md`](LICENSE-NOTICE.md), [`docs/licensing.md`](docs/licensing.md), [`PATENTS.md`](PATENTS.md), and the nearest directory `LICENSE.md` before reuse.
