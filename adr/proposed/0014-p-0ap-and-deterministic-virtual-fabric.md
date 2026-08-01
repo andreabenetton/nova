@@ -14,7 +14,7 @@ Introduce P-0AP, the P-Stratum Zero-Underlay Association Protocol, as a developm
 
 The Virtual Fabric shall also support a Simulated P-LAP Adapter and Simulated P-RAP Binding so the real P-LAP and P-RAP protocols can be exercised deterministically at their proper boundaries.
 
-P-0AP shall support paired-node mode as the minimum useful profile. A literal self-loop is diagnostic and shall not normally expose an R-Stratum Edge. P-0AP Paths model existing Path kinds and do not expose a new P-0AP kind.
+P-0AP shall support paired-node mode as the minimum useful profile. A self-Path is rejected as a Provider Path; any future diagnostic loopback remains private to the control surface and never exposes an R-Stratum Edge. P-0AP creates Provider Paths without a Path-kind selector. P-Stratum common aggregates them into Edges; P-0AP never creates or classifies R-Stratum Edges directly.
 
 ## Consequences
 
@@ -32,7 +32,7 @@ P-0AP shall support paired-node mode as the minimum useful profile. A literal se
 
 ## Contract and migration impact
 
-Add `NOVA-IF-P-0AP-CONTROL 0.1.0` and `NOVA-IF-VIRTUAL-FABRIC 0.1.0`. Update `NOVA-IF-P-PATH-PROVIDER 0.2.0` documentation and roles while it remains experimental. Add implementation declarations for P-0AP, the Virtual Fabric, Simulated Adapter, and Simulated Binding.
+Use `NOVA-IF-P-0AP-CONTROL 0.2.0`, `NOVA-IF-P-PATH-PROVIDER 0.3.0`, and `NOVA-IF-VIRTUAL-FABRIC 0.1.0`. P-0AP supplies authenticated identity, finite Path properties, and Obfuscated degree to P-Stratum common. Add implementation declarations for P-0AP, the Virtual Fabric, Simulated Adapter, and Simulated Binding.
 
 ## Security impact
 

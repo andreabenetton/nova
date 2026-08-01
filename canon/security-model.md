@@ -42,6 +42,6 @@ Simulation components must additionally specify:
 - trace integrity and provenance;
 - behavior when a scenario cannot be represented without violating the selected conformance mode.
 
-P-Stratum link protection alone does not establish end-to-end relationship anonymity. Constant-rate shaping, chaff, degree obfuscation, proof of bandwidth, and monetary security remain research topics until separately specified and reviewed.
+P-Stratum link protection alone does not establish end-to-end relationship anonymity. The P-R Interface defines the observable Obfuscated-degree hint, but its noise distribution, private common-Peer detection, dummy-slot protocol, and privacy guarantees remain research and specification work. Constant-rate shaping, chaff, proof of bandwidth, and monetary security also remain research topics until separately specified and reviewed.
 
 P-0AP and Virtual Fabric can test specified security invariants and failure handling but cannot prove properties that depend on real Ethernet, IP, QUIC, operating-system, timing, or cryptographic implementations.

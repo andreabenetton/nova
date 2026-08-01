@@ -1,26 +1,21 @@
-
 # P-0AP architecture
 
 ```text
 Simulation controller
         |
-NOVA-IF-P-0AP-CONTROL
+NOVA-IF-P-0AP-CONTROL 0.2.0
         |
-      P-0AP
-       / \
-      /   \ NOVA-IF-VIRTUAL-FABRIC
-     /     \
-NOVA-IF-P-PATH-PROVIDER
-     |
+      P-0AP ----- NOVA-IF-VIRTUAL-FABRIC 0.1.0
+        |
+NOVA-IF-P-PATH-PROVIDER 0.3.0
+        |
 P-Stratum common
-     |
-NOVA-IF-P-R
-     |
+        |
+NOVA-IF-P-R 0.2.0
+        |
 R-Stratum
 ```
 
-The control Interface configures Nodes, modeled Paths, characteristics, virtual time, faults, and replay. It is not visible through P-Stratum common.
+Control configures simulated Nodes, identities, Provider Paths, Obfuscated degree, finite resources, virtual time, faults, and replay. None of that metadata appears through the Path Provider Interface or P-R.
 
-The Path Provider Interface is the only P-0AP surface consumed by P-Stratum common. R-Stratum remains unaware that P-0AP is involved.
-
-The Virtual Fabric is reusable. Simulated P-LAP Adapters and P-RAP Bindings may use the same engine, but they expose different Interfaces and exercise different protocol code.
+P-Stratum common, not P-0AP, aggregates Paths and creates Edges.

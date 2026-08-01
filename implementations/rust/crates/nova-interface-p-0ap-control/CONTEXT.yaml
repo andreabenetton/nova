@@ -2,7 +2,7 @@ $schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
 module: "nova-interface-p-0ap-control"
 required_context:
   - "canon/glossary.md"
-  - "contracts/interfaces/p-0ap-control/0.1.0/"
+  - "contracts/interfaces/p-0ap-control/0.2.0/"
 optional_context: []
 forbidden_context:
   - "protocols/r-stratum/"

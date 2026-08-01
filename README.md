@@ -2,7 +2,7 @@
 
 Nova is an experimental replacement Internet protocol stack organized into three strict strata:
 
-- **Proximitate Stratum (P-Stratum)**: creates protected Paths to Peers.
+- **Proximitate Stratum (P-Stratum)**: creates protected Paths to Peers, aggregates them into Edges, and supplies a versioned Edge service to R-Stratum.
 - **Remotis Stratum (R-Stratum)**: discovers Routes, establishes Flows, routes Grams, and coordinates routing-related services.
 - **Onerarii Stratum (O-Stratum)**: provides application-facing transport semantics.
 
@@ -10,7 +10,7 @@ This repository is deliberately organized for independent human and LLM-assisted
 
 ## Current status
 
-This is a **design scaffold**, not an interoperable implementation. All ADRs are proposed, all Interface versions are experimental, and the Rust crates are compileable-intent skeletons intended to make architectural boundaries visible.
+This is a **design scaffold**, not an interoperable implementation. All ADRs are proposed, all Interface versions are experimental, and the Rust crates are compilable-intent skeletons intended to make architectural boundaries visible.
 
 ## Architectural decomposition
 
@@ -26,6 +26,9 @@ Applications and compatibility services
              NOVA-IF-P-R
                  |
             P-Stratum common
+   Edge aggregation, profiles, queues
+                 |
+       NOVA-IF-P-PATH-PROVIDER
           /          |          \
        P-0AP       P-LAP       P-RAP
          |            |           |
@@ -35,13 +38,13 @@ Applications and compatibility services
              (Ethernet, Wi-Fi) (IPv4-QUIC, IPv6-QUIC, ...)
 ```
 
-- **P-0AP** is the deterministic zero-underlay Path Provider used for local, simulated, and replayable development. It does not create a new R-Stratum Path kind and does not replace P-LAP or P-RAP conformance testing.
+- **P-0AP** is the deterministic zero-underlay Path Provider used for local, simulated, and replayable development. It creates authenticated Provider Paths, not Edges, has no Path-kind selector, and does not replace P-LAP or P-RAP conformance testing.
 - **P-LAP** establishes Paths with link-adjacent Peers through **Adapters**.
 - **P-RAP** establishes Paths with remote Peers through **Bindings**.
 - A P-RAP Binding identifies the integrated network/transport combination, such as **IPv4-QUIC** or **IPv6-QUIC**, because contemporary routing and transport implementations are tightly integrated.
 - **IP-over-Nova** is a Compatibility Service above O-Stratum. Its operating-system integration is provided by **Platform Attachments**, such as Windows NDIS or Linux TUN.
 
-P-0AP, P-LAP, and P-RAP provide Paths to P-Stratum common through `NOVA-IF-P-PATH-PROVIDER`. R-Stratum sees only `NOVA-IF-P-R` and must not learn which Path Provider, Adapter, Binding, or simulation component produced a Path.
+P-0AP, P-LAP, and P-RAP provide private Paths to P-Stratum common through `NOVA-IF-P-PATH-PROVIDER 0.3.0`. P-Stratum common groups Paths by authenticated Node identity and exposes one Edge per Peer through `NOVA-IF-P-R 0.2.0`. Every Edge includes service profiles and a mandatory, profile-bounded Obfuscated degree. Peer identity continuity, finite Submission and event queues, exactly-one terminal completion, and reset ordering are explicit contract semantics. R-Stratum never learns which Path Provider, Adapter, Binding, locator, or simulation component produced it.
 
 ## Authority order
 
@@ -59,15 +62,16 @@ The original papers are preserved as non-normative research inputs. Where a norm
 
 The proposed first executable slice is:
 
+- the Edge-oriented P-R 0.2.0 contract and its conformance suite;
 - a deterministic Virtual Fabric;
 - P-0AP paired-node and virtual-fabric modes;
 - R-Stratum developed in parallel against `NOVA-IF-P-R`, first with mocks and P-0AP;
 - P-RAP tested first against a Simulated Binding, then with IPv6-QUIC and IPv4-QUIC Bindings;
-- a reliable QUIC control stream and QUIC DATAGRAM for message-oriented P-RAP data when supported;
+- a reliable QUIC control stream and reliable baseline data mapping first; QUIC DATAGRAM remains an optional later profile;
 - P-LAP tested against a Simulated Adapter before the Ethernet Adapter;
 - mixed P-LAP/P-RAP topology tests after both real integrations exist.
 
-See `ROADMAP.md`, `adr/proposed/`, and `STATUS.md`.
+See `docs/p-r-interface-design.md`, `ROADMAP.md`, `adr/proposed/`, and `STATUS.md`.
 
 ## Local checks
 

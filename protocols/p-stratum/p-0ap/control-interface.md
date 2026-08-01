@@ -1,15 +1,15 @@
-
 # P-0AP control Interface
 
-`NOVA-IF-P-0AP-CONTROL` is a test-only, versioned Interface between a Simulation controller and P-0AP.
+`NOVA-IF-P-0AP-CONTROL 0.2.0` is a test-only Interface used to:
 
-It is used to:
-
-- create and remove simulated Nodes;
-- create, update, remove, partition, and restore modeled Paths;
-- load profiles and scenarios;
+- create distinct simulated Nodes with distinct Nova Node identities;
+- update a simulated Node identity to model address rotation or identity replacement;
+- create, update, and remove Provider Paths without selecting a Path kind;
+- configure complete-SDU behavior, finite queues, latency, jitter, bandwidth, loss, duplication, and reordering;
+- configure Obfuscated degree and its profile, causing affected Provider Paths to update;
+- partition and restore Nodes;
 - advance virtual time and run until idle;
-- start recording and replay traces;
+- record and replay traces;
 - select conforming or explicitly adversarial provider behavior.
 
-The control Interface must never be forwarded through `NOVA-IF-P-R` or treated as a Nova peer protocol.
+It is never a peer protocol and is invisible to R-Stratum.

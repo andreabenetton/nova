@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-MULTIPATH-002
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Removing one of multiple Paths updates but does not remove the Edge
+  steps:
+  - action: establish Edge E backed by Provider Paths P1 and P2
+  - action: remove P1 while P2 remains usable
+  - action: expect edge-updated for E
+  - action: assert edge-removed is not emitted

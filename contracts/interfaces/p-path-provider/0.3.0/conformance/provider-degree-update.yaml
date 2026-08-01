@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PPP03-DEGREE-002
+  interface: NOVA-IF-P-PATH-PROVIDER
+  version: 0.3.0
+  role: provider
+  description: Obfuscated degree change is a Provider Path update
+  steps:
+  - action: announce Provider Path P to Peer N with degree D1
+  - action: receive or configure a fresh degree D2 for N
+  - action: increment P revision and emit provider-path-updated containing D2

@@ -1,20 +1,22 @@
-$schema: "../schemas/nidl/0.1/implementation.schema.json"
-nidl: "0.1"
+$schema: ../schemas/nidl/0.1/implementation.schema.json
+nidl: '0.1'
 implementation:
-  id: "NOVA-P-0AP"
-  version: "0.1.0"
-  status: "stub"
+  id: NOVA-P-0AP
+  version: 0.1.0
+  status: stub
 implements:
-  - interface: "NOVA-IF-P-PATH-PROVIDER"
-    version: "0.2.0"
-  - interface: "NOVA-IF-P-0AP-CONTROL"
-    version: "0.1.0"
+- interface: NOVA-IF-P-PATH-PROVIDER
+  version: 0.3.0
+- interface: NOVA-IF-P-0AP-CONTROL
+  version: 0.2.0
 technology:
-  component: "P-0AP"
-  underlay: "none"
+  component: P-0AP
+  underlay: none
 capabilities:
-  LOOPBACK_MODE: true
+  LOOPBACK_DIAGNOSTIC_MODE: false
   PAIRED_NODE_MODE: true
-  VIRTUAL_FABRIC_MODE: true
-  RECORD_REPLAY: true
-  ADVERSARIAL_PROVIDER_MODE: true
+  VIRTUAL_FABRIC_MODE: partial
+  RECORD_REPLAY: false
+  ADVERSARIAL_PROVIDER_MODE: false
+  OBFUSCATED_DEGREE_CONTROL: true
+  IDENTITY_UPDATE_CONTROL: true

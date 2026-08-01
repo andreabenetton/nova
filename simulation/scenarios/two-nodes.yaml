@@ -1,16 +1,32 @@
-
-schema_version: "0.1"
-name: "two-nodes"
+schema_version: '0.2'
+name: two-nodes
 seed: 1
-clock: "virtual"
-provider_compliance: "conforming"
+clock: virtual
+provider_compliance: conforming
 nodes:
-  - id: "node-a"
-  - id: "node-b"
+- id: node-a
+  identity:
+    identity_profile_id: 0
+    identity_digest_hex: '0501050105010501050105010501050105010501050105010501050105010501'
+    cryptographic_suite_id: 1
+    address_digest_hex: '0501050105010501050105010501050105010501050105010501050105010501'
+  obfuscated_degree:
+    value: 1
+    profile_id: 0
+    valid_for_ms: 60000
+- id: node-b
+  identity:
+    identity_profile_id: 0
+    identity_digest_hex: '0502050205020502050205020502050205020502050205020502050205020502'
+    cryptographic_suite_id: 1
+    address_digest_hex: '0502050205020502050205020502050205020502050205020502050205020502'
+  obfuscated_degree:
+    value: 1
+    profile_id: 0
+    valid_for_ms: 60000
 paths:
-  - id: "a-b"
-    from: "node-a"
-    to: "node-b"
-    path_kind: "REMOTE_ASSOCIATION"
-    profile: "remote-wan-like"
+- id: a-b
+  from: node-a
+  to: node-b
+  profile: remote-wan-like
 events: []

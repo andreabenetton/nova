@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-EXPIRY-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Expired accepted Submission is not transmitted
+  steps:
+  - action: accept a Submission with expires_after_micros
+  - action: advance monotonic time past expiry before transmission
+  - action: do not transmit it
+  - action: emit submission-completed with EXPIRED

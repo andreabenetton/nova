@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-IDENTITY-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Edge is announced only after identity authentication
+  steps:
+  - action: create an unauthenticated Provider Path candidate
+  - action: assert no edge-added occurs
+  - action: authenticate a non-empty NodeIdentity
+  - action: expect edge-added containing that NodeIdentity

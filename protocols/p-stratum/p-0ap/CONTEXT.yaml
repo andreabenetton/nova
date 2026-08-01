@@ -5,8 +5,8 @@ required_context:
   - "canon/glossary.md"
   - "canon/architecture.md"
   - "canon/invariants.md"
-  - "contracts/interfaces/p-path-provider/0.2.0/"
-  - "contracts/interfaces/p-0ap-control/0.1.0/"
+  - "contracts/interfaces/p-path-provider/0.3.0/"
+  - "contracts/interfaces/p-0ap-control/0.2.0/"
   - "contracts/interfaces/virtual-fabric/0.1.0/"
   - "protocols/p-stratum/common/"
   - "simulation/virtual-fabric/"
@@ -23,8 +23,8 @@ interfaces:
       version: "0.1.0"
   provides:
     - id: "NOVA-IF-P-PATH-PROVIDER"
-      version: "0.2.0"
+      version: "0.3.0"
     - id: "NOVA-IF-P-0AP-CONTROL"
-      version: "0.1.0"
+      version: "0.2.0"
 notes:
   - "P-0AP models Path behavior and must not acquire P-LAP or P-RAP technology semantics."

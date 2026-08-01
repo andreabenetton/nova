@@ -1,0 +1,14 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-PROFILE-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Service profile removal has explicit Submission outcomes
+  steps:
+  - action: accept Submission S on service profile Q
+  - action: begin removing Q while the Edge remains active through another profile
+  - action: either complete S normally or emit SERVICE_PROFILE_REMOVED exactly once
+  - action: emit edge-updated without Q after the terminal result
+  - action: reject later Submissions naming Q with UNKNOWN_SERVICE_PROFILE

@@ -1,0 +1,554 @@
+$schema: ../../../schemas/nidl/0.1/interface.schema.json
+nidl: '0.1'
+interface:
+  id: NOVA-IF-P-0AP-CONTROL
+  name: P-0AP Control Interface
+  kind: provider-interface
+  version: 0.2.0
+  status: experimental
+roles:
+  provider: P-0AP
+  consumer: Simulation controller
+compatibility:
+  policy: exact-version-during-0.x
+  type_references: strict
+states:
+- INACTIVE
+- READY
+- RUNNING
+- FAILED
+types:
+  SimulationNodeId:
+    kind: opaque
+  SimulationPathId:
+    kind: opaque
+  SimulationNodeIdentity:
+    kind: structure
+    fields:
+    - name: identity_id
+      type: SimulationNodeIdentityId
+      required: true
+    - name: addresses
+      type: non-empty-list<NodeAddress>
+      required: true
+  SimulationPathCharacteristics:
+    kind: structure
+    fields:
+    - name: maximum_sdu_size
+      type: unsigned-integer
+      required: true
+    - name: reliable
+      type: boolean
+      required: true
+    - name: ordered
+      type: boolean
+      required: true
+    - name: queue_limit_sdus
+      type: unsigned-integer
+      required: true
+    - name: queue_limit_bytes
+      type: unsigned-integer
+      required: true
+    - name: latency_micros
+      type: unsigned-integer
+      required: true
+    - name: jitter_micros
+      type: unsigned-integer
+      required: true
+    - name: bandwidth_bits_per_second
+      type: unsigned-integer
+      required: true
+    - name: loss_probability_ppm
+      type: unsigned-integer
+      required: true
+    - name: duplication_probability_ppm
+      type: unsigned-integer
+      required: true
+    - name: reordering_probability_ppm
+      type: unsigned-integer
+      required: true
+  SimulationObfuscatedDegree:
+    kind: structure
+    fields:
+    - name: value
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: profile_id
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: valid_for_micros
+      type: unsigned-integer
+      required: true
+  ScenarioDocument:
+    kind: structure
+  TraceDocument:
+    kind: structure
+  NodeAddress:
+    kind: structure
+    fields:
+    - name: cryptographic_suite_id
+      type: unsigned-integer
+      required: true
+    - name: address_digest
+      type: bytes
+      required: true
+  LoadScenarioRequest:
+    kind: structure
+    fields:
+    - name: scenario
+      type: ScenarioDocument
+      required: true
+  ScenarioLoaded:
+    kind: structure
+    fields:
+    - name: scenario_id
+      type: opaque
+      required: true
+  CreateNodeRequest:
+    kind: structure
+    fields:
+    - name: requested_id
+      type: SimulationNodeId
+      required: false
+    - name: identity
+      type: SimulationNodeIdentity
+      required: true
+  NodeCreated:
+    kind: structure
+    fields:
+    - name: node_id
+      type: SimulationNodeId
+      required: true
+  UpdateNodeIdentityRequest:
+    kind: structure
+    fields:
+    - name: node_id
+      type: SimulationNodeId
+      required: true
+    - name: identity
+      type: SimulationNodeIdentity
+      required: true
+  NodeIdentityUpdated:
+    kind: structure
+    fields:
+    - name: node_id
+      type: SimulationNodeId
+      required: true
+  RemoveNodeRequest:
+    kind: structure
+    fields:
+    - name: node_id
+      type: SimulationNodeId
+      required: true
+  NodeRemoved:
+    kind: structure
+    fields:
+    - name: node_id
+      type: SimulationNodeId
+      required: true
+  CreatePathRequest:
+    kind: structure
+    fields:
+    - name: from
+      type: SimulationNodeId
+      required: true
+    - name: to
+      type: SimulationNodeId
+      required: true
+    - name: characteristics
+      type: SimulationPathCharacteristics
+      required: true
+  PathCreated:
+    kind: structure
+    fields:
+    - name: path_id
+      type: SimulationPathId
+      required: true
+  UpdatePathRequest:
+    kind: structure
+    fields:
+    - name: path_id
+      type: SimulationPathId
+      required: true
+    - name: characteristics
+      type: SimulationPathCharacteristics
+      required: true
+  PathUpdated:
+    kind: structure
+    fields:
+    - name: path_id
+      type: SimulationPathId
+      required: true
+  RemovePathRequest:
+    kind: structure
+    fields:
+    - name: path_id
+      type: SimulationPathId
+      required: true
+  PathRemoved:
+    kind: structure
+    fields:
+    - name: path_id
+      type: SimulationPathId
+      required: true
+  SetObfuscatedDegreeRequest:
+    kind: structure
+    fields:
+    - name: node_id
+      type: SimulationNodeId
+      required: true
+    - name: degree
+      type: SimulationObfuscatedDegree
+      required: true
+  ObfuscatedDegreeSet:
+    kind: structure
+    fields:
+    - name: node_id
+      type: SimulationNodeId
+      required: true
+  SetPartitionRequest:
+    kind: structure
+    fields:
+    - name: members
+      type: list<SimulationNodeId>
+      required: true
+    - name: partitioned
+      type: boolean
+      required: true
+  PartitionApplied:
+    kind: structure
+    fields:
+    - name: members
+      type: list<SimulationNodeId>
+      required: true
+    - name: partitioned
+      type: boolean
+      required: true
+  AdvanceTimeRequest:
+    kind: structure
+    fields:
+    - name: delta_micros
+      type: unsigned-integer
+      required: true
+  TimeAdvanced:
+    kind: structure
+    fields:
+    - name: virtual_time_micros
+      type: unsigned-integer
+      required: true
+  RunUntilIdleRequest:
+    kind: structure
+    fields:
+    - name: maximum_events
+      type: unsigned-integer
+      required: true
+  SimulationIdle:
+    kind: structure
+    fields:
+    - name: virtual_time_micros
+      type: unsigned-integer
+      required: true
+    - name: events_processed
+      type: unsigned-integer
+      required: true
+  StartRecordingRequest:
+    kind: structure
+    fields:
+    - name: label
+      type: string
+      required: false
+  RecordingStarted:
+    kind: structure
+    fields:
+    - name: recording_id
+      type: opaque
+      required: true
+  ExportTraceRequest:
+    kind: structure
+    fields:
+    - name: recording_id
+      type: opaque
+      required: true
+  TraceExported:
+    kind: structure
+    fields:
+    - name: trace
+      type: TraceDocument
+      required: true
+  ReplayTraceRequest:
+    kind: structure
+    fields:
+    - name: trace
+      type: TraceDocument
+      required: true
+  TraceReplayed:
+    kind: structure
+    fields:
+    - name: events_replayed
+      type: unsigned-integer
+      required: true
+  SetProviderComplianceModeRequest:
+    kind: structure
+    fields:
+    - name: mode
+      type: enumeration
+      required: true
+  ProviderComplianceModeSet:
+    kind: structure
+    fields:
+    - name: mode
+      type: enumeration
+      required: true
+  ControlActionApplied:
+    kind: structure
+    fields:
+    - name: action_id
+      type: opaque
+      required: true
+    - name: virtual_time_micros
+      type: unsigned-integer
+      required: true
+  SimulationFailure:
+    kind: structure
+    fields:
+    - name: reason
+      type: string
+      required: true
+  TraceAvailable:
+    kind: structure
+    fields:
+    - name: recording_id
+      type: opaque
+      required: true
+  SimulationNodeIdentityId:
+    kind: structure
+    fields:
+    - name: profile_id
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: digest
+      type: bytes
+      required: true
+operations:
+- id: 1
+  name: load-scenario
+  caller: consumer
+  input: LoadScenarioRequest
+  success: ScenarioLoaded
+  errors:
+  - INVALID_SCENARIO
+  - UNSUPPORTED_SCENARIO_VERSION
+  - RESOURCE_LIMIT
+- id: 2
+  name: create-node
+  caller: consumer
+  input: CreateNodeRequest
+  success: NodeCreated
+  errors:
+  - DUPLICATE_NODE
+  - DUPLICATE_IDENTITY
+  - RESOURCE_LIMIT
+  - INVALID_STATE
+- id: 3
+  name: remove-node
+  caller: consumer
+  input: RemoveNodeRequest
+  success: NodeRemoved
+  errors:
+  - UNKNOWN_NODE
+  - INVALID_STATE
+- id: 4
+  name: create-path
+  caller: consumer
+  input: CreatePathRequest
+  success: PathCreated
+  errors:
+  - UNKNOWN_NODE
+  - SELF_LOOP_NOT_ALLOWED
+  - DUPLICATE_PATH
+  - INVALID_CHARACTERISTICS
+  - RESOURCE_LIMIT
+  - INVALID_STATE
+- id: 5
+  name: update-path
+  caller: consumer
+  input: UpdatePathRequest
+  success: PathUpdated
+  errors:
+  - UNKNOWN_PATH
+  - INVALID_CHARACTERISTICS
+  - INVALID_STATE
+- id: 6
+  name: remove-path
+  caller: consumer
+  input: RemovePathRequest
+  success: PathRemoved
+  errors:
+  - UNKNOWN_PATH
+  - INVALID_STATE
+- id: 7
+  name: set-obfuscated-degree
+  caller: consumer
+  input: SetObfuscatedDegreeRequest
+  success: ObfuscatedDegreeSet
+  errors:
+  - UNKNOWN_NODE
+  - INVALID_OBFUSCATED_DEGREE
+  - INVALID_STATE
+- id: 8
+  name: set-partition
+  caller: consumer
+  input: SetPartitionRequest
+  success: PartitionApplied
+  errors:
+  - UNKNOWN_NODE
+  - INVALID_STATE
+- id: 9
+  name: advance-time
+  caller: consumer
+  input: AdvanceTimeRequest
+  success: TimeAdvanced
+  errors:
+  - INVALID_TIME
+  - INVALID_STATE
+- id: 10
+  name: run-until-idle
+  caller: consumer
+  input: RunUntilIdleRequest
+  success: SimulationIdle
+  errors:
+  - EVENT_LIMIT
+  - INVALID_STATE
+- id: 11
+  name: start-recording
+  caller: consumer
+  input: StartRecordingRequest
+  success: RecordingStarted
+  errors:
+  - INVALID_STATE
+  - RESOURCE_LIMIT
+- id: 12
+  name: export-trace
+  caller: consumer
+  input: ExportTraceRequest
+  success: TraceExported
+  errors:
+  - NO_RECORDING
+  - RESOURCE_LIMIT
+- id: 13
+  name: replay-trace
+  caller: consumer
+  input: ReplayTraceRequest
+  success: TraceReplayed
+  errors:
+  - INVALID_TRACE
+  - UNSUPPORTED_TRACE_VERSION
+  - REPLAY_INCOMPATIBLE
+  - RESOURCE_LIMIT
+- id: 14
+  name: set-provider-compliance-mode
+  caller: consumer
+  input: SetProviderComplianceModeRequest
+  success: ProviderComplianceModeSet
+  errors:
+  - INVALID_MODE
+  - INVALID_STATE
+- id: 15
+  name: update-node-identity
+  caller: consumer
+  input: UpdateNodeIdentityRequest
+  success: NodeIdentityUpdated
+  errors:
+  - UNKNOWN_NODE
+  - DUPLICATE_IDENTITY
+  - INVALID_STATE
+  description: Updates the authenticated identity data of a simulated Node and emits Provider Path updates
+    for affected Paths.
+events:
+- id: 4097
+  name: control-action-applied
+  emitted_by: provider
+  data: ControlActionApplied
+- id: 4098
+  name: simulation-failed
+  emitted_by: provider
+  data: SimulationFailure
+- id: 4099
+  name: trace-available
+  emitted_by: provider
+  data: TraceAvailable
+errors:
+- id: 8193
+  name: INVALID_SCENARIO
+- id: 8194
+  name: UNSUPPORTED_SCENARIO_VERSION
+- id: 8195
+  name: RESOURCE_LIMIT
+- id: 8196
+  name: DUPLICATE_NODE
+- id: 8197
+  name: DUPLICATE_IDENTITY
+- id: 8198
+  name: UNKNOWN_NODE
+- id: 8199
+  name: INVALID_STATE
+- id: 8200
+  name: DUPLICATE_PATH
+- id: 8201
+  name: UNKNOWN_PATH
+- id: 8202
+  name: SELF_LOOP_NOT_ALLOWED
+- id: 8203
+  name: INVALID_CHARACTERISTICS
+- id: 8204
+  name: INVALID_OBFUSCATED_DEGREE
+- id: 8205
+  name: INVALID_TIME
+- id: 8206
+  name: EVENT_LIMIT
+- id: 8207
+  name: NO_RECORDING
+- id: 8208
+  name: INVALID_TRACE
+- id: 8209
+  name: UNSUPPORTED_TRACE_VERSION
+- id: 8210
+  name: REPLAY_INCOMPATIBLE
+- id: 8211
+  name: INVALID_MODE
+capabilities:
+- id: 1
+  name: LOOPBACK_DIAGNOSTIC_MODE
+- id: 2
+  name: PAIRED_NODE_MODE
+- id: 3
+  name: VIRTUAL_FABRIC_MODE
+- id: 4
+  name: RECORD_REPLAY
+- id: 5
+  name: ADVERSARIAL_PROVIDER_MODE
+- id: 6
+  name: OBFUSCATED_DEGREE_CONTROL
+- id: 7
+  name: IDENTITY_UPDATE_CONTROL
+invariants:
+- id: P0C-INV-001
+  statement: Control operations and identifiers are never exposed through the Path Provider or P-R Interfaces.
+- id: P0C-INV-002
+  statement: Distinct simulated Nodes have distinct authenticated Nova Node identities.
+- id: P0C-INV-003
+  statement: P-0AP creates Provider Paths and never creates R-Stratum Edges directly.
+- id: P0C-INV-004
+  statement: PathKind is not a P-0AP control concept.
+- id: P0C-INV-005
+  statement: Obfuscated degree controls expansion cardinality and is not an exact degree assertion.
+- id: P0C-INV-006
+  statement: All configured queue, event, Node, and Path resources are finite.
+- id: P0C-INV-007
+  statement: Adversarial provider behavior is explicitly selected and is not conformance evidence.
+- id: P0C-INV-008
+  statement: Identity updates with the same identity identifier model address rotation; a changed identity
+    identifier models a different Peer and causes affected Provider Paths to update.

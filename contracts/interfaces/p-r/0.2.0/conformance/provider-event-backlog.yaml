@@ -1,0 +1,14 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-EVENTS-003
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Finite event backlog exhaustion resets instead of silently dropping events
+  steps:
+  - action: open an Interface with a finite maximum_event_backlog
+  - action: stop the consumer from draining events and fill the backlog
+  - action: terminate pending accepted Submissions with INTERFACE_RESET
+  - action: emit interface-reset as the last observable event or close the transport if even that event cannot be delivered
+  - action: assert no sequence gap is silently hidden while the Interface remains OPEN

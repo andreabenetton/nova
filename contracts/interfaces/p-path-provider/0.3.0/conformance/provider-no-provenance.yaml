@@ -1,0 +1,11 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PPP03-ABSTRACTION-001
+  interface: NOVA-IF-P-PATH-PROVIDER
+  version: 0.3.0
+  role: provider
+  steps:
+  - action: emit all Provider events
+  - action: assert no Adapter, Binding, locator, seed, scenario, QUIC, Ethernet, or
+      provider protocol state is exposed

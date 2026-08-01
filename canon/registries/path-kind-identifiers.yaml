@@ -1,8 +1,11 @@
 $schema: "../../contracts/schemas/nidl/0.1/registry.schema.json"
-registry: NOVA-PATH-KINDS
-status: experimental
+registry: "NOVA-PATH-KINDS-HISTORICAL"
+status: "obsolete"
+description: "Historical identifiers retained only for NOVA-IF-P-R 0.1.0 and scenario schema 0.1. Current Path Provider and P-R contracts do not expose a Path kind."
 entries:
   - id: 1
     name: "LINK_ADJACENT"
+    status: "historical"
   - id: 2
     name: "REMOTE_ASSOCIATION"
+    status: "historical"

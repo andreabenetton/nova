@@ -1,13 +1,20 @@
-$schema: "../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "p-rap-design"
+$schema: ../../../contracts/schemas/nidl/0.1/context.schema.json
+module: p-rap-design
 required_context:
-  - "canon/glossary.md"
-  - "canon/invariants.md"
-  - "contracts/interfaces/p-path-provider/0.2.0/interface.yaml"
-  - "contracts/interfaces/p-rap-binding/0.1.0/interface.yaml"
-  - "protocols/p-stratum/p-rap/"
+- canon/glossary.md
+- canon/invariants.md
+- contracts/interfaces/p-path-provider/0.3.0/interface.yaml
+- contracts/interfaces/p-rap-binding/0.1.0/interface.yaml
+- protocols/p-stratum/p-rap/
 optional_context:
-  - "integrations/p-rap-bindings/quic-common/specification.md"
+- integrations/p-rap-bindings/quic-common/specification.md
 forbidden_context:
-  - "protocols/r-stratum/"
-  - "integrations/p-lap-adapters/"
+- protocols/r-stratum/
+- integrations/p-lap-adapters/
+interfaces:
+  consumes:
+  - id: NOVA-IF-P-RAP-BINDING
+    version: 0.1.0
+  provides:
+  - id: NOVA-IF-P-PATH-PROVIDER
+    version: 0.3.0

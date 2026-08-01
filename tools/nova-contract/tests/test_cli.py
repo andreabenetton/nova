@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from nova_contract.cli import canonical_bytes, load_yaml, validate_document
+from nova_contract.cli import canonical_bytes, lint_interface, load_yaml, validate_document
 
 
 class ContractToolTests(unittest.TestCase):
@@ -33,6 +33,24 @@ class ContractToolTests(unittest.TestCase):
                 encoding="utf-8",
             )
             self.assertTrue(validate_document(contract))
+
+
+    def test_strict_type_references_are_enforced(self):
+        document = {
+            "interface": {"id": "NOVA-IF-TEST", "version": "0.1.0"},
+            "compatibility": {"type_references": "strict"},
+            "types": {},
+            "operations": [
+                {
+                    "id": 1,
+                    "name": "missing",
+                    "caller": "consumer",
+                    "input": "MissingRequest",
+                }
+            ],
+        }
+        errors = lint_interface(Path("interface.yaml"), document)
+        self.assertTrue(any("undeclared type MissingRequest" in error for error in errors))
 
     def test_repository_contract_loads(self):
         root = Path(__file__).resolve().parents[3]

@@ -1,24 +1,28 @@
-
 # P-0AP state machine
 
-Minimum provider states:
+Provider states:
 
 ```text
 INACTIVE -> ACTIVE -> DRAINING -> INACTIVE
-                 \
-                  -> FAILED
+                 \-> RESET
 ```
 
-Minimum modeled Path states:
+Provider Path states:
 
 ```text
-ABSENT -> AVAILABLE -> DEGRADED -> UNAVAILABLE -> ABSENT
+ABSENT -> AVAILABLE -> DEGRADED -> DRAINING -> ABSENT
 ```
+
+P-0AP does not simulate an unauthenticated Path: a Provider Path is announced only after the control model supplies a valid authenticated Node identity.
 
 Rules:
 
-- Provider activation precedes any provider Path event.
-- A Path is assigned a new generation when restored after removal.
-- `provider-sdu-received` is not emitted after final Path removal for the same generation.
-- In-flight SDUs at partition or removal follow the scenario's declared disposition: deliver-before-cutoff, drop, or explicit adversarial violation.
-- Deactivation drains or drops queued work according to the selected profile and emits no later conforming events.
+- activation returns an atomic initial Path snapshot and continuation sequence;
+- `provider-path-added` follows identity validation;
+- address rotation, identity replacement, characteristic change, and Obfuscated-degree change increment Provider Path revision;
+- restoration after removal uses a non-reused Path identifier within the generation;
+- every accepted Provider Submission has exactly one terminal result;
+- no conforming SDU reception occurs after final Path removal;
+- reset emits `PROVIDER_RESET` completions before the final reset event;
+- orderly deactivation drains or terminally resolves accepted work;
+- self-Paths are rejected and never announced.

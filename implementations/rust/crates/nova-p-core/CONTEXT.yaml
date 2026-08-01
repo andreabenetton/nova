@@ -1,14 +1,17 @@
-$schema: "../../../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "nova-p-core"
+$schema: ../../../../contracts/schemas/nidl/0.1/context.schema.json
+module: nova-p-core
 required_context:
-  - "canon/glossary.md"
-  - "contracts/interfaces/p-r/0.1.0/"
-  - "contracts/interfaces/p-path-provider/0.2.0/"
-  - "protocols/p-stratum/common/"
-optional_context:
-  []
+- canon/glossary.md
+- contracts/interfaces/p-r/0.2.0/
+- contracts/interfaces/p-path-provider/0.3.0/
+- protocols/p-stratum/common/
+optional_context: []
 forbidden_context:
-  - "integrations/"
+- integrations/
 interfaces:
-  consumes: []
-  provides: []
+  consumes:
+  - id: NOVA-IF-P-PATH-PROVIDER
+    version: 0.3.0
+  provides:
+  - id: NOVA-IF-P-R
+    version: 0.2.0

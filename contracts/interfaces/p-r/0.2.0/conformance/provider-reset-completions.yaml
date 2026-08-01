@@ -1,0 +1,14 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-RESET-002
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Reset completes every accepted Submission before the terminal reset event
+  steps:
+  - action: accept two unresolved Submissions S1 and S2 in Interface I
+  - action: initiate provider reset
+  - action: emit exactly one submission-completed with INTERFACE_RESET for S1 and S2
+  - action: emit interface-reset as the final event for I
+  - action: assert no later event references I

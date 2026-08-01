@@ -1,14 +1,15 @@
-
 # P-0AP
 
-P-0AP is the **P-Stratum Zero-Underlay Association Protocol**. It is the deterministic local and simulation Path Provider used to make the P-Stratum boundary executable before external Nexus Fundamenta or routed underlays are available.
+P-0AP is the **P-Stratum Zero-Underlay Association Protocol**. It is the first deterministic Path Provider used to make P-Stratum common and R-Stratum executable without an external Nexus Fundamenta or routed underlay.
 
 P-0AP:
 
-- implements `NOVA-IF-P-PATH-PROVIDER`;
-- provides a test-only control surface through `NOVA-IF-P-0AP-CONTROL`;
-- consumes `NOVA-IF-VIRTUAL-FABRIC` when operating over the reusable Virtual Fabric;
-- exposes existing Path kinds rather than a P-0AP-specific kind;
+- implements `NOVA-IF-P-PATH-PROVIDER 0.3.0`;
+- provides test control through `NOVA-IF-P-0AP-CONTROL 0.2.0`;
+- consumes `NOVA-IF-VIRTUAL-FABRIC 0.1.0` when using the Virtual Fabric;
+- creates authenticated Provider Paths, not Edges;
+- has no Path-kind selector;
+- provides deterministic Obfuscated-degree hints and finite resource behavior;
 - is not an Adapter, Binding, or substitute for P-LAP/P-RAP protocol conformance.
 
-The digit `0` means zero external underlay. Two distinct Nodes joined by P-0AP remain one P-Stratum hop apart and become Closes when the modeled Path is exposed to R-Stratum.
+The digit `0` means zero external underlay. It does not mean R-Stratum distance zero.

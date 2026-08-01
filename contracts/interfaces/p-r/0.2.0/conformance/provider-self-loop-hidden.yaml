@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-SELFLOOP-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: A local self-loop is rejected or kept diagnostic-only and never creates an Edge
+  steps:
+  - action: attempt to create or enable a local P-0AP self-loop
+  - action: reject it as a Provider Path or keep it entirely inside the diagnostic control surface
+  - action: assert no edge-added is emitted to R-Stratum

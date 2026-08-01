@@ -1,0 +1,14 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-EDGE-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: First usable Provider Path creates one Edge
+  steps:
+  - action: activate an Interface instance with no Edges
+  - action: make one authenticated Provider Path to Peer B usable
+  - action: expect edge-added with one Edge service profile and mandatory Obfuscated
+      degree
+  - action: assert no Provider Path identifier or provenance is present

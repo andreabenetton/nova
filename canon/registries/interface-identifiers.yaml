@@ -1,20 +1,26 @@
-$schema: "../../contracts/schemas/nidl/0.1/registry.schema.json"
+$schema: ../../contracts/schemas/nidl/0.1/registry.schema.json
 registry: NOVA-INTERFACES
 status: experimental
 entries:
-  - id: "NOVA-IF-P-R"
-    name: "P-Stratum to R-Stratum"
-  - id: "NOVA-IF-P-PATH-PROVIDER"
-    name: "P-Stratum Path Provider"
-  - id: "NOVA-IF-P-LAP-ADAPTER"
-    name: "P-LAP Adapter"
-  - id: "NOVA-IF-P-RAP-BINDING"
-    name: "P-RAP Binding"
-  - id: "NOVA-IF-R-O"
-    name: "R-Stratum to O-Stratum"
-  - id: "NOVA-IF-O-A"
-    name: "O-Stratum to Application"
-  - id: "NOVA-IF-IP-PLATFORM-ATTACHMENT"
-    name: "IP Platform Attachment"
-  - id: "NOVA-IF-IP-GATEWAY-EGRESS"
-    name: "IP Gateway Egress"
+- id: NOVA-IF-P-R
+  name: P-Stratum to R-Stratum
+- id: NOVA-IF-P-PATH-PROVIDER
+  name: P-Stratum Path Provider
+- id: NOVA-IF-P-LAP-ADAPTER
+  name: P-LAP Adapter
+- id: NOVA-IF-P-RAP-BINDING
+  name: P-RAP Binding
+- id: NOVA-IF-R-O
+  name: R-Stratum to O-Stratum
+- id: NOVA-IF-O-A
+  name: O-Stratum to Application
+- id: NOVA-IF-IP-PLATFORM-ATTACHMENT
+  name: IP Platform Attachment
+- id: NOVA-IF-IP-GATEWAY-EGRESS
+  name: IP Gateway Egress
+- id: NOVA-IF-P-0AP-CONTROL
+  name: P-0AP Control
+- id: NOVA-IF-VIRTUAL-FABRIC
+  name: Virtual Fabric
+- id: NOVA-IF-R-FACILITY
+  name: R-Stratum Facility

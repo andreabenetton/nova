@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-CONSUMER-RESET-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: consumer
+  description: Consumer discards state after reset
+  steps:
+  - action: receive interface-reset for Interface I
+  - action: discard all Edge, PeerHandle, and Submission state for I
+  - action: open a new Interface instance before further submission

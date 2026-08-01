@@ -1,43 +1,126 @@
 #![forbid(unsafe_code)]
 
-use nova_types::{DeliveryClass, InterfaceVersion, PathId, PathProperties, PeerId, Sdu, SubmissionId};
+use nova_types::{
+    CapabilityId, EdgeId, EdgeRevision, EdgeSnapshot, EventSequence, InterfaceInstanceId,
+    InterfaceLimits, InterfaceVersion, ObfuscationProfileDescriptor, Sdu, ServiceProfileId,
+    SubmissionId, SubmissionOptions,
+};
 
-pub const VERSION: InterfaceVersion = InterfaceVersion { major: 0, minor: 1, patch: 0 };
+pub const VERSION: InterfaceVersion = InterfaceVersion {
+    major: 0,
+    minor: 2,
+    patch: 0,
+};
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct OpenInterfaceRequest {
+    pub supported_versions: Vec<InterfaceVersion>,
+    pub requested_capabilities: Vec<CapabilityId>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct InterfaceOpened {
+    pub interface_instance: InterfaceInstanceId,
+    pub selected_version: InterfaceVersion,
+    pub capabilities: Vec<CapabilityId>,
+    pub limits: InterfaceLimits,
+    pub obfuscation_profiles: Vec<ObfuscationProfileDescriptor>,
+    pub initial_edges: Vec<EdgeSnapshot>,
+    pub next_event_sequence: EventSequence,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct EventContext {
+    pub interface_instance: InterfaceInstanceId,
+    pub sequence: EventSequence,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum PRequest {
-    OpenInterface,
-    SubmitSdu { path: PathId, submission: SubmissionId, class: DeliveryClass, sdu: Sdu },
-    CancelSubmission { submission: SubmissionId },
-    QueryPath { path: PathId },
+    OpenInterface(OpenInterfaceRequest),
+    SubmitSdu {
+        interface_instance: InterfaceInstanceId,
+        edge: EdgeId,
+        submission: SubmissionId,
+        options: SubmissionOptions,
+        sdu: Sdu,
+    },
+    QueryEdge {
+        interface_instance: InterfaceInstanceId,
+        edge: EdgeId,
+    },
+    CloseInterface {
+        interface_instance: InterfaceInstanceId,
+    },
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum PResponse {
-    InterfaceOpened,
-    SubmissionAccepted,
-    SubmissionCancelled,
-    PathSnapshot { peer: PeerId, properties: PathProperties },
+    InterfaceOpened(InterfaceOpened),
+    SubmissionAccepted { submission: SubmissionId },
+    EdgeSnapshot(EdgeSnapshot),
+    InterfaceClosed,
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum SubmissionTerminalStatus {
+    DeliveredToPeerPStratum,
+    ServiceProfileRemoved,
+    EdgeRemoved,
+    Expired,
+    ProviderFailure,
+    InterfaceReset,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum PEvent {
-    PathAdded { path: PathId, peer: PeerId, properties: PathProperties },
-    PathUpdated { path: PathId, properties: PathProperties },
-    PathRemoved { path: PathId },
-    SduDelivered { path: PathId, peer: PeerId, sdu: Sdu },
-    SubmissionResult { submission: SubmissionId, delivered: bool },
+    EdgeAdded {
+        context: EventContext,
+        edge: EdgeSnapshot,
+    },
+    EdgeUpdated {
+        context: EventContext,
+        edge: EdgeSnapshot,
+    },
+    EdgeRemoved {
+        context: EventContext,
+        edge: EdgeId,
+        last_revision: EdgeRevision,
+    },
+    SduDelivered {
+        context: EventContext,
+        edge: EdgeId,
+        service_profile: ServiceProfileId,
+        sdu: Sdu,
+    },
+    SubmissionCompleted {
+        context: EventContext,
+        submission: SubmissionId,
+        status: SubmissionTerminalStatus,
+    },
+    SubmissionCapacityAvailable {
+        context: EventContext,
+        edge: EdgeId,
+        service_profile: ServiceProfileId,
+    },
+    InterfaceReset {
+        context: EventContext,
+        reason: String,
+    },
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum PError {
     UnsupportedVersion,
-    UnknownPath,
-    PathUnavailable,
+    ProviderUnavailable,
+    UnknownInterface,
+    UnknownEdge,
+    EdgeUnavailable,
+    UnknownServiceProfile,
     SduTooLarge,
-    Backpressure,
-    UnknownSubmission,
-    TooLate,
+    WouldBlock,
+    DuplicateSubmission,
+    InvalidOptions,
 }
 
 pub trait PStratumService {

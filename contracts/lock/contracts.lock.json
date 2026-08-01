@@ -2,77 +2,94 @@
   "canonicalization": "deterministic-sorted-json-v0",
   "contracts": [
     {
-      "fingerprint": "sha256:21442cdad1d42f88941c23cf5c56a03ecde7ac7aef14840bf30db16b83b5b8fe",
       "id": "NOVA-IF-IP-GATEWAY-EGRESS",
+      "version": "0.1.0",
       "path": "contracts/interfaces/ip-gateway-egress/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:21442cdad1d42f88941c23cf5c56a03ecde7ac7aef14840bf30db16b83b5b8fe"
     },
     {
-      "fingerprint": "sha256:91a4f8af88403f20645d25a7eef3768fe19ed611046bf6bb50295c08214a84bf",
       "id": "NOVA-IF-IP-PLATFORM-ATTACHMENT",
+      "version": "0.1.0",
       "path": "contracts/interfaces/ip-platform-attachment/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:91a4f8af88403f20645d25a7eef3768fe19ed611046bf6bb50295c08214a84bf"
     },
     {
-      "fingerprint": "sha256:2bf9f6cd7a4b3ceead114d8e927902d62e2939081de76589bf5d59ef0246671d",
       "id": "NOVA-IF-O-A",
+      "version": "0.1.0",
       "path": "contracts/interfaces/o-a/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:2bf9f6cd7a4b3ceead114d8e927902d62e2939081de76589bf5d59ef0246671d"
     },
     {
-      "fingerprint": "sha256:54669a4b9499512ba64958e5ab2f15aabbf8381872a71ae18a0c3fc636737233",
       "id": "NOVA-IF-P-0AP-CONTROL",
+      "version": "0.1.0",
       "path": "contracts/interfaces/p-0ap-control/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:54669a4b9499512ba64958e5ab2f15aabbf8381872a71ae18a0c3fc636737233"
     },
     {
-      "fingerprint": "sha256:c371d99f8b3fae961ba978062e09a6dd54e13795973543c50a9772c94ec85f66",
+      "id": "NOVA-IF-P-0AP-CONTROL",
+      "version": "0.2.0",
+      "path": "contracts/interfaces/p-0ap-control/0.2.0/interface.yaml",
+      "fingerprint": "sha256:1d5c0bd47fc7f0d209a6d0e00177244a99abcca758477ac38517b04b3bca7f3d"
+    },
+    {
       "id": "NOVA-IF-P-LAP-ADAPTER",
+      "version": "0.1.0",
       "path": "contracts/interfaces/p-lap-adapter/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:c371d99f8b3fae961ba978062e09a6dd54e13795973543c50a9772c94ec85f66"
     },
     {
-      "fingerprint": "sha256:aa034b1dc628d7865861ec018195efd574c7484ee543d38535446881dde6d53b",
       "id": "NOVA-IF-P-PATH-PROVIDER",
+      "version": "0.1.0",
       "path": "contracts/interfaces/p-path-provider/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:aa034b1dc628d7865861ec018195efd574c7484ee543d38535446881dde6d53b"
     },
     {
-      "fingerprint": "sha256:1ec3d48a83195a14b42084b56787f812b2d8cb2e9c0ce8f4475187b9076ad950",
       "id": "NOVA-IF-P-PATH-PROVIDER",
+      "version": "0.2.0",
       "path": "contracts/interfaces/p-path-provider/0.2.0/interface.yaml",
-      "version": "0.2.0"
+      "fingerprint": "sha256:1ec3d48a83195a14b42084b56787f812b2d8cb2e9c0ce8f4475187b9076ad950"
     },
     {
-      "fingerprint": "sha256:93f3408129ee0e2078102d38f25299ca2d81922d1e8741f2cfd391c3a163aa8f",
+      "id": "NOVA-IF-P-PATH-PROVIDER",
+      "version": "0.3.0",
+      "path": "contracts/interfaces/p-path-provider/0.3.0/interface.yaml",
+      "fingerprint": "sha256:86ab2de847030ea899d9df981e7cd3f8a4b76740d8a034d5f8f59a0c32456651"
+    },
+    {
       "id": "NOVA-IF-P-R",
+      "version": "0.1.0",
       "path": "contracts/interfaces/p-r/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:93f3408129ee0e2078102d38f25299ca2d81922d1e8741f2cfd391c3a163aa8f"
     },
     {
-      "fingerprint": "sha256:5510277b5ba421bc5edb6a42ebdbdeb440950f7e4b7e842cb075c2647e06845a",
+      "id": "NOVA-IF-P-R",
+      "version": "0.2.0",
+      "path": "contracts/interfaces/p-r/0.2.0/interface.yaml",
+      "fingerprint": "sha256:abd77f595f2d72ba308d7b196ad011fbb9226d4478f142478e0103d188322cd0"
+    },
+    {
       "id": "NOVA-IF-P-RAP-BINDING",
+      "version": "0.1.0",
       "path": "contracts/interfaces/p-rap-binding/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:5510277b5ba421bc5edb6a42ebdbdeb440950f7e4b7e842cb075c2647e06845a"
     },
     {
-      "fingerprint": "sha256:a370920b0fc45381c0607e887c37f1849600da27b67492b4264d737672169416",
       "id": "NOVA-IF-R-FACILITY",
+      "version": "0.1.0",
       "path": "contracts/interfaces/r-facility/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:a370920b0fc45381c0607e887c37f1849600da27b67492b4264d737672169416"
     },
     {
-      "fingerprint": "sha256:dcb1efeef5bbb2c73b378fde67cf63d9181a719a80d8a17ededce3c9542b2edf",
       "id": "NOVA-IF-R-O",
+      "version": "0.1.0",
       "path": "contracts/interfaces/r-o/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:dcb1efeef5bbb2c73b378fde67cf63d9181a719a80d8a17ededce3c9542b2edf"
     },
     {
-      "fingerprint": "sha256:77987d39c981e51572c3db72499f346004bef64c1b98dd009e039981368d7527",
       "id": "NOVA-IF-VIRTUAL-FABRIC",
+      "version": "0.1.0",
       "path": "contracts/interfaces/virtual-fabric/0.1.0/interface.yaml",
-      "version": "0.1.0"
+      "fingerprint": "sha256:77987d39c981e51572c3db72499f346004bef64c1b98dd009e039981368d7527"
     }
-  ],
-  "format_version": "0.1"
+  ]
 }

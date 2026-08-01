@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: P0C02-REPLAY-001
+  interface: NOVA-IF-P-0AP-CONTROL
+  version: 0.2.0
+  role: provider
+  steps:
+  - action: load fixed scenario and seed
+  - action: run and export trace
+  - action: reset and replay
+  - action: assert identical control and provider-observable trace

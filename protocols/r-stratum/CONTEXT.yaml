@@ -1,15 +1,22 @@
-$schema: "../../contracts/schemas/nidl/0.1/context.schema.json"
-module: "r-stratum-design"
+$schema: ../../contracts/schemas/nidl/0.1/context.schema.json
+module: r-stratum-design
 required_context:
-  - "canon/glossary.md"
-  - "canon/architecture.md"
-  - "contracts/interfaces/p-r/0.1.0/interface.yaml"
-  - "contracts/interfaces/r-o/0.1.0/interface.yaml"
-  - "protocols/r-stratum/"
+- canon/glossary.md
+- canon/architecture.md
+- contracts/interfaces/p-r/0.2.0/interface.yaml
+- contracts/interfaces/r-o/0.1.0/interface.yaml
+- protocols/r-stratum/
 optional_context:
-  - "research/original-papers/Nova__A_new_Internet_protocol_stack.pdf"
+- research/original-papers/Nova__A_new_Internet_protocol_stack.pdf
 forbidden_context:
-  - "protocols/p-stratum/p-lap/"
-  - "protocols/p-stratum/p-rap/"
-  - "integrations/p-lap-adapters/"
-  - "integrations/p-rap-bindings/"
+- protocols/p-stratum/p-lap/
+- protocols/p-stratum/p-rap/
+- integrations/p-lap-adapters/
+- integrations/p-rap-bindings/
+interfaces:
+  consumes:
+  - id: NOVA-IF-P-R
+    version: 0.2.0
+  provides:
+  - id: NOVA-IF-R-O
+    version: 0.1.0

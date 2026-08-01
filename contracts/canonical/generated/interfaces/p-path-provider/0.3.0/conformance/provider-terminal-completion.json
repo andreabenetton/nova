@@ -1,0 +1,1 @@
+{"$schema":"../../../../schemas/nidl/0.1/conformance.schema.json","nidl":"0.1","scenario":{"id":"PPP03-SUBMISSION-001","interface":"NOVA-IF-P-PATH-PROVIDER","role":"provider","steps":[{"action":"accept Provider Submission S"},{"action":"deliver it to peer provider"},{"action":"emit exactly one provider-submission-completed for S"}],"version":"0.3.0"}}

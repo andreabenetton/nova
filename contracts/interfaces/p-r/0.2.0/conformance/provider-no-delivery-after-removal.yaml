@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-EDGE-007
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: No SDU delivery follows terminal Edge removal
+  steps:
+  - action: expose Edge E and deliver one SDU on E
+  - action: remove the last Provider Path and emit edge-removed for E
+  - action: receive or synthesize a late lower-level delivery referring to the old Path
+  - action: discard or diagnose it without emitting sdu-delivered for E

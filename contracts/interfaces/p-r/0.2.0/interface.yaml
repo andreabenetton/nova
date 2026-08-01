@@ -1,0 +1,625 @@
+$schema: ../../../schemas/nidl/0.1/interface.schema.json
+nidl: '0.1'
+interface:
+  id: NOVA-IF-P-R
+  name: P-Stratum to R-Stratum Interface
+  kind: stratum-interface
+  version: 0.2.0
+  status: experimental
+  description: Edge-oriented service supplied by P-Stratum to R-Stratum.
+roles:
+  provider: P-Stratum common service
+  consumer: R-Stratum
+compatibility:
+  policy: exact-version-during-0.x
+  unknown_optional_fields: ignore
+  unknown_errors: map-to-generic
+  event_order: total-per-interface-instance
+  type_references: strict
+states:
+- CLOSED
+- OPEN
+- RESET
+types:
+  InterfaceInstanceId:
+    kind: opaque
+    scope: one open Interface instance
+  EventSequence:
+    kind: unsigned-integer
+    bits: 64
+    rule: monotonically increasing without reuse in one Interface instance
+  PeerHandle:
+    kind: unsigned-integer
+    bits: 64
+    scope: local to one Interface instance
+    rule: one stable handle per NodeIdentityId in one Interface instance; never reused for a different
+      identity
+  CryptographicSuiteId:
+    kind: unsigned-integer
+    bits: 32
+  NodeAddress:
+    kind: structure
+    fields:
+    - name: cryptographic_suite_id
+      type: CryptographicSuiteId
+      required: true
+    - name: address_digest
+      type: bytes
+      required: true
+  NodeIdentity:
+    kind: structure
+    fields:
+    - name: identity_id
+      type: NodeIdentityId
+      required: true
+    - name: addresses
+      type: non-empty-list<NodeAddress>
+      required: true
+    rule: addresses are canonical, sorted by cryptographic suite, unique, and cryptographically bound
+      to identity_id
+  EdgeId:
+    kind: unsigned-integer
+    bits: 64
+    scope: one Edge incarnation in one Interface instance
+  EdgeRevision:
+    kind: unsigned-integer
+    bits: 64
+    rule: strictly increases for visible changes to one Edge incarnation
+  ServiceProfileId:
+    kind: unsigned-integer
+    bits: 32
+    rule: scoped to one Edge incarnation; removed identifiers are not reused on that Edge
+  CapabilityId:
+    kind: unsigned-integer
+    bits: 32
+  ObfuscationProfileId:
+    kind: unsigned-integer
+    bits: 32
+  ObfuscationProfileDescriptor:
+    kind: structure
+    fields:
+    - name: profile_id
+      type: ObfuscationProfileId
+      required: true
+    - name: maximum_value
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: description
+      type: string
+      required: true
+    rule: profile algorithms may vary below the Interface, but all profiles preserve the base expansion-cardinality
+      meaning
+  InterfaceLimits:
+    kind: structure
+    fields:
+    - name: maximum_edge_count
+      type: unsigned-integer
+      required: true
+    - name: maximum_sdu_size
+      type: unsigned-integer
+      required: true
+    - name: maximum_queued_sdus_per_profile
+      type: unsigned-integer
+      required: true
+    - name: maximum_queued_bytes_per_profile
+      type: unsigned-integer
+      required: true
+    - name: maximum_event_backlog
+      type: unsigned-integer
+      required: true
+      rule: ordinary event capacity; one additional terminal reset event is reserved
+  EventContext:
+    kind: structure
+    fields:
+    - name: interface_instance_id
+      type: InterfaceInstanceId
+      required: true
+    - name: event_sequence
+      type: EventSequence
+      required: true
+  MetricSource:
+    kind: enumeration
+    values:
+    - MEASURED
+    - CONFIGURED
+    - DECLARED
+    - DERIVED
+  MetricUnit:
+    kind: enumeration
+    values:
+    - MICROSECONDS
+    - BITS_PER_SECOND
+  Metric:
+    kind: structure
+    fields:
+    - name: value
+      type: unsigned-integer
+      required: true
+    - name: unit
+      type: MetricUnit
+      required: true
+    - name: source
+      type: MetricSource
+      required: true
+    - name: age_micros
+      type: unsigned-integer
+      required: true
+    - name: sample_window_micros
+      type: unsigned-integer
+      required: true
+    - name: valid_for_micros
+      type: unsigned-integer
+      required: true
+    - name: confidence_ppm
+      type: unsigned-integer
+      required: false
+      rule: integer from 0 through 1000000 inclusive
+    rule: age is measured when the containing Edge snapshot is emitted or returned; included metrics use
+      a declared unit and are omitted when unknown
+  DeliveryProperties:
+    kind: structure
+    fields:
+    - name: reliable
+      type: boolean
+      required: true
+      value: true
+    - name: atomic_sdu
+      type: boolean
+      required: true
+      value: true
+    - name: boundary_preserving
+      type: boolean
+      required: true
+      value: true
+    - name: inter_sdu_ordering
+      type: enumeration
+      required: true
+      values:
+      - NONE
+    - name: duplicate_suppression
+      type: boolean
+      required: true
+      value: true
+  QueueLimits:
+    kind: structure
+    fields:
+    - name: maximum_queued_sdus
+      type: unsigned-integer
+      required: true
+    - name: maximum_queued_bytes
+      type: unsigned-integer
+      required: true
+  EdgeServiceProfile:
+    kind: structure
+    fields:
+    - name: service_profile_id
+      type: ServiceProfileId
+      required: true
+    - name: maximum_sdu_size
+      type: unsigned-integer
+      required: true
+    - name: delivery
+      type: DeliveryProperties
+      required: true
+    - name: queue_limits
+      type: QueueLimits
+      required: true
+    - name: round_trip_latency
+      type: Metric
+      required: false
+    - name: outbound
+      type: DirectionalMetrics
+      required: true
+    - name: inbound
+      type: DirectionalMetrics
+      required: true
+  ObfuscatedDegree:
+    kind: structure
+    description: Privacy-preserving neighbor-expansion cardinality, not an exact degree.
+    fields:
+    - name: value
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: profile_id
+      type: ObfuscationProfileId
+      required: true
+    - name: age_micros
+      type: unsigned-integer
+      required: true
+    - name: valid_for_micros
+      type: unsigned-integer
+      required: true
+    rule: value shall not exceed the maximum declared for profile_id; age is measured when the containing
+      Edge snapshot is emitted or returned
+  EdgeSnapshot:
+    kind: structure
+    fields:
+    - name: interface_instance_id
+      type: InterfaceInstanceId
+      required: true
+    - name: edge_id
+      type: EdgeId
+      required: true
+    - name: edge_revision
+      type: EdgeRevision
+      required: true
+    - name: peer_handle
+      type: PeerHandle
+      required: true
+    - name: node_identity
+      type: NodeIdentity
+      required: true
+    - name: service_profiles
+      type: non-empty-list<EdgeServiceProfile>
+      required: true
+    - name: obfuscated_degree
+      type: ObfuscatedDegree
+      required: true
+  RStratumSdu:
+    kind: bytes
+  SubmissionId:
+    kind: unsigned-integer
+    bits: 64
+    scope: one Interface instance
+  Urgency:
+    kind: enumeration
+    values:
+    - BACKGROUND
+    - NORMAL
+    - URGENT
+    - CRITICAL
+  SubmissionOptions:
+    kind: structure
+    fields:
+    - name: service_profile_id
+      type: ServiceProfileId
+      required: true
+    - name: urgency
+      type: Urgency
+      required: true
+    - name: priority_prefix_length
+      type: unsigned-integer
+      required: false
+    - name: expires_after_micros
+      type: unsigned-integer
+      required: false
+  SubmissionTerminalStatus:
+    kind: enumeration
+    values:
+    - DELIVERED_TO_PEER_P_STRATUM
+    - SERVICE_PROFILE_REMOVED
+    - EDGE_REMOVED
+    - EXPIRED
+    - PROVIDER_FAILURE
+    - INTERFACE_RESET
+  OpenInterfaceRequest:
+    kind: structure
+    fields:
+    - name: supported_versions
+      type: list<version>
+      required: true
+    - name: requested_capabilities
+      type: list<CapabilityId>
+      required: false
+  InterfaceOpened:
+    kind: structure
+    fields:
+    - name: interface_instance_id
+      type: InterfaceInstanceId
+      required: true
+    - name: selected_version
+      type: version
+      required: true
+    - name: capabilities
+      type: list<CapabilityId>
+      required: true
+    - name: limits
+      type: InterfaceLimits
+      required: true
+    - name: obfuscation_profiles
+      type: non-empty-list<ObfuscationProfileDescriptor>
+      required: true
+    - name: initial_edges
+      type: list<EdgeSnapshot>
+      required: true
+    - name: next_event_sequence
+      type: EventSequence
+      required: true
+  SubmitSduRequest:
+    kind: structure
+    fields:
+    - name: interface_instance_id
+      type: InterfaceInstanceId
+      required: true
+    - name: edge_id
+      type: EdgeId
+      required: true
+    - name: submission_id
+      type: SubmissionId
+      required: true
+    - name: options
+      type: SubmissionOptions
+      required: true
+    - name: sdu
+      type: RStratumSdu
+      required: true
+  SubmissionAccepted:
+    kind: structure
+    fields:
+    - name: submission_id
+      type: SubmissionId
+      required: true
+  QueryEdgeRequest:
+    kind: structure
+    fields:
+    - name: interface_instance_id
+      type: InterfaceInstanceId
+      required: true
+    - name: edge_id
+      type: EdgeId
+      required: true
+  CloseInterfaceRequest:
+    kind: structure
+    fields:
+    - name: interface_instance_id
+      type: InterfaceInstanceId
+      required: true
+  InterfaceClosed:
+    kind: structure
+  EdgeAdded:
+    kind: structure
+    fields:
+    - name: context
+      type: EventContext
+      required: true
+    - name: edge
+      type: EdgeSnapshot
+      required: true
+  EdgeUpdated:
+    kind: structure
+    fields:
+    - name: context
+      type: EventContext
+      required: true
+    - name: edge
+      type: EdgeSnapshot
+      required: true
+  EdgeRemoved:
+    kind: structure
+    fields:
+    - name: context
+      type: EventContext
+      required: true
+    - name: edge_id
+      type: EdgeId
+      required: true
+    - name: last_revision
+      type: EdgeRevision
+      required: true
+  SduDelivered:
+    kind: structure
+    fields:
+    - name: context
+      type: EventContext
+      required: true
+    - name: edge_id
+      type: EdgeId
+      required: true
+    - name: service_profile_id
+      type: ServiceProfileId
+      required: true
+    - name: sdu
+      type: RStratumSdu
+      required: true
+  SubmissionCompleted:
+    kind: structure
+    fields:
+    - name: context
+      type: EventContext
+      required: true
+    - name: submission_id
+      type: SubmissionId
+      required: true
+    - name: status
+      type: SubmissionTerminalStatus
+      required: true
+  SubmissionCapacityAvailable:
+    kind: structure
+    fields:
+    - name: context
+      type: EventContext
+      required: true
+    - name: edge_id
+      type: EdgeId
+      required: true
+    - name: service_profile_id
+      type: ServiceProfileId
+      required: true
+  InterfaceReset:
+    kind: structure
+    fields:
+    - name: context
+      type: EventContext
+      required: true
+    - name: reason
+      type: string
+      required: true
+  DirectionalMetrics:
+    kind: structure
+    fields:
+    - name: estimated_one_way_latency
+      type: Metric
+      required: false
+    - name: jitter
+      type: Metric
+      required: false
+    - name: nominal_capacity
+      type: Metric
+      required: false
+    - name: available_capacity
+      type: Metric
+      required: false
+  NodeIdentityId:
+    kind: structure
+    fields:
+    - name: profile_id
+      type: unsigned-integer
+      bits: 32
+      required: true
+    - name: digest
+      type: bytes
+      required: true
+    rule: canonical stable identity key used for Peer aggregation
+operations:
+- id: 1
+  name: open-interface
+  caller: consumer
+  input: OpenInterfaceRequest
+  success: InterfaceOpened
+  errors:
+  - UNSUPPORTED_VERSION
+  - PROVIDER_UNAVAILABLE
+  description: Atomically negotiates the Interface and returns a coherent Edge snapshot plus event continuation
+    sequence.
+- id: 2
+  name: submit-sdu
+  caller: consumer
+  input: SubmitSduRequest
+  success: SubmissionAccepted
+  errors:
+  - UNKNOWN_INTERFACE
+  - UNKNOWN_EDGE
+  - EDGE_UNAVAILABLE
+  - UNKNOWN_SERVICE_PROFILE
+  - SDU_TOO_LARGE
+  - WOULD_BLOCK
+  - DUPLICATE_SUBMISSION
+  - INVALID_OPTIONS
+- id: 3
+  name: query-edge
+  caller: consumer
+  input: QueryEdgeRequest
+  success: EdgeSnapshot
+  errors:
+  - UNKNOWN_INTERFACE
+  - UNKNOWN_EDGE
+- id: 4
+  name: close-interface
+  caller: consumer
+  input: CloseInterfaceRequest
+  success: InterfaceClosed
+  errors:
+  - UNKNOWN_INTERFACE
+events:
+- id: 4097
+  name: edge-added
+  emitted_by: provider
+  data: EdgeAdded
+- id: 4098
+  name: edge-updated
+  emitted_by: provider
+  data: EdgeUpdated
+- id: 4099
+  name: edge-removed
+  emitted_by: provider
+  data: EdgeRemoved
+- id: 4100
+  name: sdu-delivered
+  emitted_by: provider
+  data: SduDelivered
+- id: 4101
+  name: submission-completed
+  emitted_by: provider
+  data: SubmissionCompleted
+- id: 4102
+  name: submission-capacity-available
+  emitted_by: provider
+  data: SubmissionCapacityAvailable
+- id: 4103
+  name: interface-reset
+  emitted_by: provider
+  data: InterfaceReset
+capabilities:
+- id: 1
+  name: PRIORITY_PREFIX_HINT
+  description: Optional best-effort scheduling hint.
+- id: 2
+  name: METRIC_CONFIDENCE
+  description: Optional confidence values for Edge metrics.
+limits:
+- id: 1
+  name: MAXIMUM_EDGE_COUNT
+- id: 2
+  name: MAXIMUM_SDU_SIZE
+- id: 3
+  name: MAXIMUM_QUEUED_SDUS_PER_PROFILE
+- id: 4
+  name: MAXIMUM_QUEUED_BYTES_PER_PROFILE
+- id: 5
+  name: MAXIMUM_EVENT_BACKLOG
+errors:
+- id: 8193
+  name: UNSUPPORTED_VERSION
+- id: 8194
+  name: PROVIDER_UNAVAILABLE
+- id: 8195
+  name: UNKNOWN_INTERFACE
+- id: 8196
+  name: UNKNOWN_EDGE
+- id: 8197
+  name: EDGE_UNAVAILABLE
+- id: 8198
+  name: UNKNOWN_SERVICE_PROFILE
+- id: 8199
+  name: SDU_TOO_LARGE
+- id: 8200
+  name: WOULD_BLOCK
+- id: 8201
+  name: DUPLICATE_SUBMISSION
+- id: 8202
+  name: INVALID_OPTIONS
+invariants:
+- id: PR-INV-001
+  statement: R-Stratum shall not require knowledge of P-0AP, P-LAP, P-RAP, any Provider Path, Adapter,
+    Binding, locator, or simulation detail.
+- id: PR-INV-002
+  statement: The Interface exposes Edges and never exposes Provider Paths.
+- id: PR-INV-003
+  statement: P-Stratum common exposes at most one active Edge per authenticated Peer Node identity in
+    one Interface instance.
+- id: PR-INV-004
+  statement: Every Edge snapshot contains at least one service profile and one Obfuscated degree value.
+- id: PR-INV-005
+  statement: Obfuscated degree is interpreted only as a privacy-preserving neighbor-expansion cardinality.
+- id: PR-INV-006
+  statement: Every accepted Submission receives exactly one terminal completion event, including before
+    an Interface reset terminates the instance.
+- id: PR-INV-007
+  statement: No SDU is delivered after edge-removed for the same Edge incarnation.
+- id: PR-INV-008
+  statement: The baseline service preserves complete SDU boundaries and provides no inter-SDU ordering
+    guarantee.
+- id: PR-INV-009
+  statement: Queues are finite and backpressure is observable without polling.
+- id: PR-INV-010
+  statement: The initial Edge snapshot and event stream form one atomic, monotonically sequenced history.
+- id: PR-INV-011
+  statement: Runtime identifiers are local to one Interface instance and invalid after close or reset.
+- id: PR-INV-012
+  statement: An Edge identifier is never reused within one Interface instance.
+- id: PR-INV-013
+  statement: A PeerHandle is stable for one NodeIdentityId within an Interface instance and is never assigned
+    to a different identity.
+- id: PR-INV-014
+  statement: Every Obfuscated degree profile used by an Edge is declared when the Interface opens, and
+    its value stays within the declared bound.
+- id: PR-INV-015
+  statement: Mandatory version semantics are not negotiated as optional capabilities.
+- id: PR-INV-016
+  statement: An Edge snapshot carried by an event belongs to the same Interface instance as the event
+    context.
+- id: PR-INV-017
+  statement: The provider reserves capacity for the terminal reset event and never silently drops events
+    while the Interface remains open.

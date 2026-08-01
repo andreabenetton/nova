@@ -1,28 +1,34 @@
-$schema: "schemas/nidl/0.1/registry.schema.json"
-registry: "NOVA-CONTRACTS"
-status: "experimental"
+$schema: schemas/nidl/0.1/registry.schema.json
+registry: NOVA-CONTRACTS
+status: experimental
 entries:
-  - id: "NOVA-IF-P-R"
-    version: "0.1.0"
-  - id: "NOVA-IF-P-PATH-PROVIDER"
-    version: "0.1.0"
-  - id: "NOVA-IF-P-PATH-PROVIDER"
-    version: "0.2.0"
-  - id: "NOVA-IF-P-LAP-ADAPTER"
-    version: "0.1.0"
-  - id: "NOVA-IF-P-RAP-BINDING"
-    version: "0.1.0"
-  - id: "NOVA-IF-R-O"
-    version: "0.1.0"
-  - id: "NOVA-IF-O-A"
-    version: "0.1.0"
-  - id: "NOVA-IF-IP-PLATFORM-ATTACHMENT"
-    version: "0.1.0"
-  - id: "NOVA-IF-IP-GATEWAY-EGRESS"
-    version: "0.1.0"
-  - id: "NOVA-IF-R-FACILITY"
-    version: "0.1.0"
-  - id: "NOVA-IF-P-0AP-CONTROL"
-    version: "0.1.0"
-  - id: "NOVA-IF-VIRTUAL-FABRIC"
-    version: "0.1.0"
+- id: NOVA-IF-P-R
+  version: 0.1.0
+- id: NOVA-IF-P-PATH-PROVIDER
+  version: 0.1.0
+- id: NOVA-IF-P-PATH-PROVIDER
+  version: 0.2.0
+- id: NOVA-IF-P-LAP-ADAPTER
+  version: 0.1.0
+- id: NOVA-IF-P-RAP-BINDING
+  version: 0.1.0
+- id: NOVA-IF-R-O
+  version: 0.1.0
+- id: NOVA-IF-O-A
+  version: 0.1.0
+- id: NOVA-IF-IP-PLATFORM-ATTACHMENT
+  version: 0.1.0
+- id: NOVA-IF-IP-GATEWAY-EGRESS
+  version: 0.1.0
+- id: NOVA-IF-R-FACILITY
+  version: 0.1.0
+- id: NOVA-IF-P-0AP-CONTROL
+  version: 0.1.0
+- id: NOVA-IF-VIRTUAL-FABRIC
+  version: 0.1.0
+- id: NOVA-IF-P-R
+  version: 0.2.0
+- id: NOVA-IF-P-PATH-PROVIDER
+  version: 0.3.0
+- id: NOVA-IF-P-0AP-CONTROL
+  version: 0.2.0

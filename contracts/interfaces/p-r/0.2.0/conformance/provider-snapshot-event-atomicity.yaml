@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-SNAPSHOT-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Initial snapshot and events have no race gap
+  steps:
+  - action: begin open-interface while an Edge becomes available
+  - action: return the Edge either in initial_edges or as an event at next_event_sequence
+  - action: assert it is not omitted and not duplicated

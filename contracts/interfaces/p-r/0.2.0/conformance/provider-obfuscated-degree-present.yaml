@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-DEGREE-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Every Edge snapshot contains fresh Obfuscated degree
+  steps:
+  - action: emit edge-added
+  - action: assert obfuscated_degree.value, profile_id, age_micros, and valid_for_micros are present
+  - action: assert the value is within the advertised maximum

@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-IDENTITY-002
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Different authenticated identity creates a different Peer and Edge
+  steps:
+  - action: establish Edge E for NodeIdentity A
+  - action: replace the underlying association with NodeIdentity B
+  - action: expect removal of E and edge-added for a new Edge
+  - action: assert the old PeerHandle and EdgeId are not reused

@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-ABSTRACTION-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Provider does not leak Path provenance
+  steps:
+  - action: construct equivalent Edges using P-0AP, P-LAP, and P-RAP in separate runs
+  - action: inspect all P-R events and responses
+  - action: assert no PathId, PathKind, provider name, Adapter, Binding, locator,
+      QUIC, Ethernet, seed, or Virtual Fabric identifier appears

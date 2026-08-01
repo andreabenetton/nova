@@ -1,0 +1,14 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: P0C02-IDENTITY-002
+  interface: NOVA-IF-P-0AP-CONTROL
+  version: 0.2.0
+  role: provider
+  description: Identity updates propagate through affected Provider Paths
+  steps:
+  - action: create Node N and Provider Path P terminating at N
+  - action: update N with the same identity identifier and a valid rotated address set
+  - action: emit provider-path-updated for P with a greater revision
+  - action: update N with a different identity identifier
+  - action: emit another provider-path-updated so P-Stratum common can replace the Peer Edge

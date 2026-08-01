@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-ID-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: A removed Edge identifier is never reused
+  steps:
+  - action: add and remove Edge E for Peer B
+  - action: make Peer B reachable again
+  - action: expect edge-added with Edge E2
+  - action: assert E2 differs from E

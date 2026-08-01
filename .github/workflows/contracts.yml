@@ -23,6 +23,7 @@ jobs:
       - run: python tools/check_repository_shape.py
       - run: python tools/check_agent_instructions.py
       - run: python tools/check_simulation_fixtures.py
+      - run: python tools/generate_repository_docs.py --check
       - if: github.event_name == 'pull_request'
         run: |
           git fetch origin "${{ github.base_ref }}" --depth=1

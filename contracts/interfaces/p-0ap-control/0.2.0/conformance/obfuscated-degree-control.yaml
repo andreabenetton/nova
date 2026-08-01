@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: P0C02-DEGREE-001
+  interface: NOVA-IF-P-0AP-CONTROL
+  version: 0.2.0
+  role: provider
+  steps:
+  - action: create Node B
+  - action: set Obfuscated degree value and profile for B
+  - action: create a Provider Path to B
+  - action: assert Path Provider event carries the configured expansion cardinality

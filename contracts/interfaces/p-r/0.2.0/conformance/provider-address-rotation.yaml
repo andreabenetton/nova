@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-IDENTITY-003
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Valid address rotation preserves Peer and Edge identity
+  steps:
+  - action: establish Edge E with PeerHandle P and NodeIdentityId I
+  - action: update the authenticated address set with valid continuity proof while retaining I
+  - action: emit edge-updated with the same E and P and a greater EdgeRevision
+  - action: assert no edge-removed or edge-added pair is emitted

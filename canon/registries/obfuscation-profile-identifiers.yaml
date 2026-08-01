@@ -1,0 +1,10 @@
+$schema: ../../contracts/schemas/nidl/0.1/registry.schema.json
+registry: NOVA-OBFUSCATION-PROFILES
+status: experimental
+entries:
+- id: 0
+  name: DETERMINISTIC-TEST
+  description: Deterministic profile reserved for P-0AP, mocks, fixtures, and conformance tests; not a production privacy claim.
+- id: 1
+  name: POSITIVE-NOISE-COMMON-PEER-EXCLUSION-V1
+  description: Proposed production profile preserving zero for no further expansion and otherwise excluding known common Peers before adding positive noise. Algorithm parameters remain unresolved.

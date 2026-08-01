@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-CONSUMER-REVISION-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: consumer
+  description: Consumer ignores stale Edge updates
+  steps:
+  - action: install Edge E revision 5
+  - action: receive a duplicate or delayed update revision 4
+  - action: ignore revision 4 without reverting state

@@ -1,5 +1,5 @@
 {
-  "$id": "https://nova.invalid/simulation/scenario/0.1/schema.json",
+  "$id": "https://nova.invalid/simulation/scenario/0.2/schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
@@ -31,14 +31,67 @@
     },
     "nodes": {
       "items": {
-        "additionalProperties": true,
+        "additionalProperties": false,
         "properties": {
           "id": {
             "type": "string"
+          },
+          "identity": {
+            "additionalProperties": false,
+            "properties": {
+              "address_digest_hex": {
+                "pattern": "^[0-9a-fA-F]+$",
+                "type": "string"
+              },
+              "cryptographic_suite_id": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "identity_digest_hex": {
+                "pattern": "^[0-9a-fA-F]+$",
+                "type": "string"
+              },
+              "identity_profile_id": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "identity_profile_id",
+              "identity_digest_hex",
+              "cryptographic_suite_id",
+              "address_digest_hex"
+            ],
+            "type": "object"
+          },
+          "obfuscated_degree": {
+            "additionalProperties": false,
+            "properties": {
+              "profile_id": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "valid_for_ms": {
+                "minimum": 1,
+                "type": "integer"
+              },
+              "value": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "value",
+              "profile_id",
+              "valid_for_ms"
+            ],
+            "type": "object"
           }
         },
         "required": [
-          "id"
+          "id",
+          "identity",
+          "obfuscated_degree"
         ],
         "type": "object"
       },
@@ -54,12 +107,6 @@
           "id": {
             "type": "string"
           },
-          "path_kind": {
-            "enum": [
-              "LINK_ADJACENT",
-              "REMOTE_ASSOCIATION"
-            ]
-          },
           "profile": {
             "type": "string"
           },
@@ -71,7 +118,6 @@
           "id",
           "from",
           "to",
-          "path_kind",
           "profile"
         ],
         "type": "object"
@@ -85,7 +131,7 @@
       ]
     },
     "schema_version": {
-      "const": "0.1"
+      "const": "0.2"
     },
     "seed": {
       "minimum": 0,
@@ -100,6 +146,6 @@
     "paths",
     "events"
   ],
-  "title": "Nova deterministic simulation scenario",
+  "title": "Nova deterministic simulation scenario 0.2",
   "type": "object"
 }

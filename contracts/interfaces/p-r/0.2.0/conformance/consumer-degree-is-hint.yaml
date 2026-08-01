@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-CONSUMER-DEGREE-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: consumer
+  description: R-Stratum treats Obfuscated degree as expansion slots, not exact topology
+  steps:
+  - action: receive Edge E with Obfuscated degree value N
+  - action: prepare N neighbor-expansion slots
+  - action: do not infer physical degree, Path count, or exact Peer degree
+  - action: tolerate dummy slots according to the selected profile

@@ -1,0 +1,11 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PPP03-CONSUMER-001
+  interface: NOVA-IF-P-PATH-PROVIDER
+  version: 0.3.0
+  role: consumer
+  steps:
+  - action: receive two Provider Paths with the same authenticated Node identity
+  - action: group them as one Peer candidate for Edge aggregation
+  - action: do not infer two R-Stratum Edges

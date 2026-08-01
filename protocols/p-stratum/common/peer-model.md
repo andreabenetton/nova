@@ -1,7 +1,15 @@
-# P-Stratum Peer model
+# Peer and Edge model
 
-A Peer is a Nova Node reachable through one or more P-Stratum Paths. Multiple Paths may reach the same Peer. P-Stratum common may expose them separately so R-Stratum can select according to abstract policy.
+A Peer is an authenticated Nova Node reachable through one or more usable P-Stratum Paths. P-Stratum common groups Paths exclusively by `NodeIdentityId`, never by locator, address-set equality, or provider-local identifier.
 
-A P-LAP Path implies link adjacency through a Nexus Fundamenta. A P-RAP Path implies a remote P-RAP Association. A P-0AP Path models one of those two semantics for deterministic development and testing. All are one P-Stratum hop, but only a real P-LAP Path proves Nexus Fundamenta adjacency.
+`PeerHandle` is assigned to that identity and remains stable for the P-R Interface instance. Valid Node-address growth or rotation updates the same Peer. A different identity identifier creates a different Peer and handle.
 
-Paired-node and Virtual Fabric P-0AP modes must use distinct Node identities and independent state even when all Nodes execute in one process.
+An Edge is the one R-Stratum-visible relationship to that Peer.
+
+- the first usable Path capable of at least one compliant service profile creates the Edge;
+- later Paths or identity-address updates change its snapshot and revision;
+- removing one Path does not remove the Edge while another compliant Path or profile remains;
+- removing the last usable Path removes the Edge after accepted Submissions reach terminal results;
+- later reachability creates a new Edge incarnation and `EdgeId`, while the same Peer may retain its `PeerHandle`.
+
+Runtime handles are local to one P-R Interface instance. Distinct simulated Nodes in P-0AP must have distinct identity identifiers even if hosted by one process.

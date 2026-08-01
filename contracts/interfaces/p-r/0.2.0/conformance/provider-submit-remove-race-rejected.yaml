@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-RACE-002
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Removal linearizing before submission rejects the request
+  steps:
+  - action: linearize edge-removed before submit-sdu
+  - action: call submit-sdu using the removed EdgeId
+  - action: expect UNKNOWN_EDGE or EDGE_UNAVAILABLE
+  - action: assert no completion event is emitted for the unaccepted SubmissionId

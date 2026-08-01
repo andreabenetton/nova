@@ -1,0 +1,1 @@
+{"$schema":"../../../../schemas/nidl/0.1/conformance.schema.json","nidl":"0.1","scenario":{"id":"P0C02-SELFLOOP-001","interface":"NOVA-IF-P-0AP-CONTROL","role":"provider","steps":[{"action":"attempt create-path from Node A to Node A in normal mode"},{"action":"expect SELF_LOOP_NOT_ALLOWED"},{"action":"assert no Provider Path or P-R Edge is created"}],"version":"0.2.0"}}

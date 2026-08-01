@@ -1,18 +1,7 @@
-
 # P-0AP protocol model
 
-P-0AP has no interoperable network wire format. Its normative behavior is the combination of:
+P-0AP has no interoperable network wire format. Its normative behavior is defined by its versioned Interfaces, this protocol directory, and deterministic conformance scenarios.
 
-- `NOVA-IF-P-PATH-PROVIDER`;
-- `NOVA-IF-P-0AP-CONTROL`;
-- `NOVA-IF-VIRTUAL-FABRIC` when the Virtual Fabric is used;
-- the semantics and deterministic rules in this directory.
+A conforming P-0AP implementation supports paired-node mode, authenticated distinct identities, deterministic Provider Path lifecycle, finite queues, terminal Provider Submission results, Obfuscated degree, and recordable event order.
 
-A conforming P-0AP implementation must support at least paired-node mode and deterministic Path lifecycle. Loopback, virtual-fabric, replay, and adversarial provider modes are separately declared capabilities.
-
-P-0AP must preserve the distinction between:
-
-- the Node identity used by Nova;
-- the provider-local endpoint used by the Virtual Fabric;
-- the provider-local Path identifier;
-- the P-Stratum Path identifier assigned by P-Stratum common.
+It preserves the distinction between Nova Node identity, Virtual Fabric endpoint, Simulation Node, Provider Path identifier, and the Edge identifier later assigned by P-Stratum common.

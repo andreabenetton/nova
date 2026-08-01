@@ -141,17 +141,69 @@ def check_unique(items: list[dict[str, Any]], label: str, path: Path) -> list[st
     return errors
 
 
+BUILTIN_TYPE_REFERENCES = {
+    "boolean",
+    "bytes",
+    "capability",
+    "enumeration",
+    "limit",
+    "opaque",
+    "string",
+    "unsigned-integer",
+    "version",
+}
+
+
+def base_type_reference(value: str) -> str:
+    for prefix in ["list<", "non-empty-list<"]:
+        if value.startswith(prefix) and value.endswith(">"):
+            return base_type_reference(value[len(prefix) : -1])
+    return value
+
+
 def lint_interface(path: Path, document: dict[str, Any]) -> list[str]:
     if "interface" not in document:
         return []
     errors = []
     for label in ["operations", "events", "capabilities", "errors", "limits"]:
         errors.extend(check_unique(document.get(label, []), label, path))
+
+    types = document.get("types", {}) or {}
+    declared_types = set(types)
     declared_errors = {item.get("name") for item in document.get("errors", [])}
+
+    def check_type_reference(reference: Any, location: str) -> None:
+        if not isinstance(reference, str):
+            errors.append(f"{path}: {location} has a non-string type reference")
+            return
+        base = base_type_reference(reference)
+        if base not in BUILTIN_TYPE_REFERENCES and base not in declared_types:
+            errors.append(f"{path}: {location} references undeclared type {reference}")
+
+    for type_name, type_definition in types.items():
+        if not isinstance(type_definition, dict):
+            errors.append(f"{path}: type {type_name} must be a mapping")
+            continue
+        for field in type_definition.get("fields", []) or []:
+            check_type_reference(field.get("type"), f"type {type_name} field {field.get('name')}")
+
+    strict_type_references = (
+        document.get("compatibility", {}).get("type_references") == "strict"
+    )
     for operation in document.get("operations", []):
+        if strict_type_references and operation.get("input") is not None:
+            check_type_reference(operation.get("input"), f"operation {operation.get('name')} input")
+        if strict_type_references and operation.get("success") is not None:
+            check_type_reference(operation.get("success"), f"operation {operation.get('name')} success")
         for error in operation.get("errors", []):
             if error not in declared_errors:
                 errors.append(f"{path}: operation {operation.get('name')} references undeclared error {error}")
+
+    if strict_type_references:
+        for event in document.get("events", []):
+            if event.get("data") is not None:
+                check_type_reference(event.get("data"), f"event {event.get('name')} data")
+
     states = set(document.get("states", []))
     for transition in document.get("transitions", []):
         for key in ["from", "to"]:

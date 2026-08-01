@@ -1,5 +1,5 @@
 # P-LAP data-transfer stub
 
-The first interoperable profile should provide encrypted, message-preserving delivery with explicit packet numbers, key epochs, replay windows, and fragmentation fields.
+The first interoperable profile should provide encrypted, replay-protected, complete-SDU delivery with explicit packet numbers, key epochs, fragmentation fields, finite queues, and terminal Submission results.
 
-Reliable and unreliable SDU classes should be separate capabilities. Hop-by-hop retransmission must not be mandatory on every Nexus Fundamenta until its interaction with O-Stratum reliability is measured.
+The Path Provider contract can describe the actual properties of a Path. P-Stratum common is responsible for presenting the reliable atomic P-R baseline and may reject Paths that cannot support a selected Edge service profile.

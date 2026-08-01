@@ -2,23 +2,23 @@
 
 ## Required responsibilities
 
-- discover Adapter-local candidate peers;
+- discover Adapter-local candidate Peers;
 - bind a Nova Node identity to a Nexus locator through an authenticated transcript;
-- establish protected peer state;
-- create and remove link-adjacent Paths;
-- preserve submitted SDU boundaries;
+- establish protected Peer state;
+- create and remove Provider Paths;
+- preserve complete SDU boundaries;
 - fragment and reassemble according to Adapter-reported limits;
 - provide replay protection and bounded resource use;
-- report abstract Path characteristics;
-- optionally support negotiated delivery and privacy profiles.
+- report abstract Path characteristics and finite queue limits;
+- obtain and update the Obfuscated-degree hint required by the Path Provider Interface;
+- emit terminal Provider Submission results.
 
 ## Explicitly deferred from the first profile
 
 - mandatory constant-rate transmission;
 - chaff;
-- private common-peer detection;
-- obfuscated degree notification;
+- a final private common-Peer detection protocol;
 - proof-of-work admission;
-- multipath aggregation.
+- provider-internal multipath aggregation.
 
-These features require separate specifications and threat models.
+Obfuscated degree is not deferred at the Interface boundary: a first implementation may use a configured or deterministic experimental profile, clearly identified as such, until the private derivation protocol is specified.

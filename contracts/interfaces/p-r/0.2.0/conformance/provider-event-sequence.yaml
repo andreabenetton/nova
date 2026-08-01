@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-SEQUENCE-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Provider event sequence is total and gap-detectable
+  steps:
+  - action: open Interface instance I with next_event_sequence N
+  - action: emit three events
+  - action: assert their sequence values are N, N+1, and N+2
+  - action: never reuse a sequence value

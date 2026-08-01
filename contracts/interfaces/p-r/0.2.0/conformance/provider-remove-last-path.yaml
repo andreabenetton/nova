@@ -1,0 +1,14 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-MULTIPATH-003
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Removing last usable Path removes the Edge
+  steps:
+  - action: establish Edge E backed by one usable Provider Path
+  - action: remove the last usable Provider Path
+  - action: complete or fail every accepted unresolved Submission
+  - action: emit edge-removed for E
+  - action: assert no later sdu-delivered references E

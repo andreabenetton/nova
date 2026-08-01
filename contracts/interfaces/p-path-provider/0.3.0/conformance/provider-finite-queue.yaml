@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PPP03-BACKPRESSURE-001
+  interface: NOVA-IF-P-PATH-PROVIDER
+  version: 0.3.0
+  role: provider
+  steps:
+  - action: fill the advertised Provider Path queue
+  - action: call send-provider-sdu
+  - action: expect WOULD_BLOCK without acceptance
+  - action: drain capacity
+  - action: emit provider-capacity-available

@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-CLOSE-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Orderly close drains accepted Submissions and ends the event stream
+  steps:
+  - action: accept Submission S in Interface I
+  - action: call close-interface for I
+  - action: deliver one terminal completion for S before returning InterfaceClosed
+  - action: assert no later event references I

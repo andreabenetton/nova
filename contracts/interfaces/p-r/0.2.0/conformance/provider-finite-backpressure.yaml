@@ -1,0 +1,14 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-BACKPRESSURE-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Finite queue rejects without accepting and later signals capacity
+  steps:
+  - action: fill one Edge service-profile queue to its advertised byte or SDU limit
+  - action: call submit-sdu for another SDU
+  - action: expect WOULD_BLOCK and no ownership transfer
+  - action: drain capacity
+  - action: emit submission-capacity-available for the Edge and service profile

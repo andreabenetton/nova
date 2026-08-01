@@ -1,0 +1,13 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-CONSUMER-SEQUENCE-001
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: consumer
+  description: Consumer detects event gaps
+  steps:
+  - action: expect event sequence N
+  - action: receive N+1
+  - action: detect a gap and reconcile through query-edge or Interface reset policy
+  - action: do not silently apply an incomplete history

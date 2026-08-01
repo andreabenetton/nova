@@ -1,0 +1,12 @@
+$schema: ../../../../schemas/nidl/0.1/conformance.schema.json
+nidl: '0.1'
+scenario:
+  id: PR02-PROVIDER-SDU-002
+  interface: NOVA-IF-P-R
+  version: 0.2.0
+  role: provider
+  description: Provider does not promise inter-SDU order
+  steps:
+  - action: accept independent Submissions A then B
+  - action: permit terminal completion or delivery order B then A
+  - action: preserve each SDU atomically

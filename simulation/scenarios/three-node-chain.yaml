@@ -1,22 +1,46 @@
-
-schema_version: "0.1"
-name: "three-node-chain"
+schema_version: '0.2'
+name: three-node-chain
 seed: 42
-clock: "virtual"
-provider_compliance: "conforming"
+clock: virtual
+provider_compliance: conforming
 nodes:
-  - id: "node-a"
-  - id: "node-b"
-  - id: "node-c"
+- id: node-a
+  identity:
+    identity_profile_id: 0
+    identity_digest_hex: '0401040104010401040104010401040104010401040104010401040104010401'
+    cryptographic_suite_id: 1
+    address_digest_hex: '0401040104010401040104010401040104010401040104010401040104010401'
+  obfuscated_degree:
+    value: 1
+    profile_id: 0
+    valid_for_ms: 60000
+- id: node-b
+  identity:
+    identity_profile_id: 0
+    identity_digest_hex: '0402040204020402040204020402040204020402040204020402040204020402'
+    cryptographic_suite_id: 1
+    address_digest_hex: '0402040204020402040204020402040204020402040204020402040204020402'
+  obfuscated_degree:
+    value: 2
+    profile_id: 0
+    valid_for_ms: 60000
+- id: node-c
+  identity:
+    identity_profile_id: 0
+    identity_digest_hex: '0403040304030403040304030403040304030403040304030403040304030403'
+    cryptographic_suite_id: 1
+    address_digest_hex: '0403040304030403040304030403040304030403040304030403040304030403'
+  obfuscated_degree:
+    value: 1
+    profile_id: 0
+    valid_for_ms: 60000
 paths:
-  - id: "a-b"
-    from: "node-a"
-    to: "node-b"
-    path_kind: "LINK_ADJACENT"
-    profile: "adjacent-lan-like"
-  - id: "b-c"
-    from: "node-b"
-    to: "node-c"
-    path_kind: "REMOTE_ASSOCIATION"
-    profile: "remote-wan-like"
+- id: a-b
+  from: node-a
+  to: node-b
+  profile: adjacent-lan-like
+- id: b-c
+  from: node-b
+  to: node-c
+  profile: remote-wan-like
 events: []
