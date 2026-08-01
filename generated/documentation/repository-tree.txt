@@ -1,4 +1,7 @@
 .
+./.claude
+./.claude/LICENSE.md
+./.claude/statusline.sh
 ./.editorconfig
 ./.gemini
 ./.gemini/LICENSE.md

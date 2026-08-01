@@ -106,6 +106,9 @@ rules:
   - pattern: ".gemini/**"
     license: "Apache-2.0"
     spdx_header: false
+  - pattern: ".claude/**"
+    license: "Apache-2.0"
+    spdx_header: false
   - pattern: "agents/**"
     license: "Apache-2.0"
   - pattern: "benchmarks/**"
