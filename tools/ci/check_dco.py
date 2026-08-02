@@ -18,7 +18,13 @@ def main() -> int:
         return 2
     base = sys.argv[1]
     head = sys.argv[2] if len(sys.argv) == 3 else "HEAD"
-    records = git("log", "--format=%H%x00%B%x00", f"{base}..{head}").split("\x00")
+    # Merge commits are exempt. Integration policy requires merge commits, and
+    # both GitHub's merge button and `git merge` generate them without a
+    # trailer, so checking them would fail every pull request regardless of how
+    # the authored commits were signed off.
+    records = git(
+        "log", "--no-merges", "--format=%H%x00%B%x00", f"{base}..{head}"
+    ).split("\x00")
     failures: list[str] = []
     for index in range(0, len(records) - 1, 2):
         commit = records[index].strip()

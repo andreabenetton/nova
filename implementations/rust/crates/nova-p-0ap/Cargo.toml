@@ -12,5 +12,8 @@ nova-interface-p-path-provider = { path = "../nova-interface-p-path-provider" }
 nova-interface-p-0ap-control = { path = "../nova-interface-p-0ap-control" }
 nova-interface-virtual-fabric = { path = "../nova-interface-virtual-fabric" }
 
+[dev-dependencies]
+nova-virtual-fabric = { path = "../nova-virtual-fabric" }
+
 [lints]
 workspace = true

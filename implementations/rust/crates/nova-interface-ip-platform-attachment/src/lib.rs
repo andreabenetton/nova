@@ -18,9 +18,17 @@ pub struct IpDatagram {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum PlatformEvent {
-    DatagramReceived { interface: PlatformInterfaceId, datagram: IpDatagram },
-    InterfaceFailed { interface: PlatformInterfaceId },
-    MtuChanged { interface: PlatformInterfaceId, mtu: u32 },
+    DatagramReceived {
+        interface: PlatformInterfaceId,
+        datagram: IpDatagram,
+    },
+    InterfaceFailed {
+        interface: PlatformInterfaceId,
+    },
+    MtuChanged {
+        interface: PlatformInterfaceId,
+        mtu: u32,
+    },
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -36,6 +44,10 @@ pub enum PlatformError {
 pub trait IpPlatformAttachment {
     fn create_interface(&mut self, name: &str) -> Result<PlatformInterfaceId, PlatformError>;
     fn set_mtu(&mut self, interface: PlatformInterfaceId, mtu: u32) -> Result<(), PlatformError>;
-    fn inject_datagram(&mut self, interface: PlatformInterfaceId, datagram: IpDatagram) -> Result<(), PlatformError>;
+    fn inject_datagram(
+        &mut self,
+        interface: PlatformInterfaceId,
+        datagram: IpDatagram,
+    ) -> Result<(), PlatformError>;
     fn poll_event(&mut self) -> Option<PlatformEvent>;
 }
