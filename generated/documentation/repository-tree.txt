@@ -1394,6 +1394,7 @@
 ./tools/nova-contract/tests/LICENSE.md
 ./tools/nova-contract/tests/test_check_licenses.py
 ./tools/nova-contract/tests/test_cli.py
+./tools/nova-contract/tests/test_repository_docs.py
 ./tools/nova-contract/tests/test_statusline.py
 ./tools/spec-lint
 ./tools/spec-lint/LICENSE.md

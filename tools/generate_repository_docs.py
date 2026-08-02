@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import subprocess
 import sys
 from pathlib import Path
 
@@ -41,22 +42,27 @@ def contract_index() -> str:
 
 
 def repository_tree() -> str:
-    # settings.local.json is written by agent tooling and gitignored, so it
-    # must not enter the generated tree: it is present only on some clones.
-    excluded_names = {
-        ".git",
-        "__pycache__",
-        ".pytest_cache",
-        ".mypy_cache",
-        "target",
-        "settings.local.json",
-    }
-    paths = ["."]
-    for path in sorted(ROOT.rglob("*"), key=lambda item: item.relative_to(ROOT).as_posix()):
-        relative = path.relative_to(ROOT)
+    # Derived from the Git file listing rather than a filesystem walk. Ignored
+    # files such as build output and agent settings exist on some clones and
+    # not others, so a walk produced a tree that depended on the clone.
+    excluded_names = {".git", "__pycache__", ".pytest_cache", ".mypy_cache", "target"}
+    listing = subprocess.check_output(
+        ["git", "ls-files", "--cached", "--others", "--exclude-standard"],
+        cwd=ROOT,
+        text=True,
+    )
+    entries: set[str] = set()
+    for line in listing.splitlines():
+        if not line:
+            continue
+        relative = Path(line)
         if any(part in excluded_names for part in relative.parts):
             continue
-        paths.append("./" + relative.as_posix())
+        entries.add(relative.as_posix())
+        for parent in relative.parents:
+            if parent != Path("."):
+                entries.add(parent.as_posix())
+    paths = ["."] + ["./" + entry for entry in sorted(entries)]
     return "\n".join(paths) + "\n"
 
 
