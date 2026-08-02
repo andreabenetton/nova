@@ -74,6 +74,19 @@ class RepositoryTreeTests(unittest.TestCase):
         (vendored / "artifact.bin").write_text("x\n", encoding="utf-8")
         self.assertNotIn("./target", self.tree())
 
+    def test_unstaged_deletions_are_excluded(self):
+        git(self.root, "add", "-A")
+        git(self.root, "-c", "user.email=t@e", "-c", "user.name=t", "commit", "-m", "seed")
+        (self.root / "src" / "main.rs").unlink()
+        listed = self.tree()
+        self.assertNotIn("./src/main.rs", listed)
+
+    def test_non_ascii_paths_are_recorded_verbatim(self):
+        (self.root / "src" / "café.rs").write_text("//\n", encoding="utf-8")
+        listed = self.tree()
+        self.assertIn("./src/café.rs", listed)
+        self.assertNotIn('./"src/caf\\303\\251.rs"', listed)
+
     def test_the_root_is_first_and_entries_are_sorted(self):
         listed = self.tree()
         self.assertEqual(listed[0], ".")

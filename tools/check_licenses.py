@@ -43,12 +43,17 @@ def is_exempt(policy: dict[str, Any], rel: str) -> bool:
 
 
 def tracked_files() -> list[Path]:
+    # -z keeps paths verbatim; without it Git C-quotes non-ASCII names and any
+    # name containing a newline. --cached also still reports a file deleted in
+    # the worktree but not staged, so those are dropped as well.
     output = subprocess.check_output(
-        ["git", "ls-files", "--cached", "--others", "--exclude-standard"],
+        ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"],
         cwd=ROOT,
         text=True,
     )
-    return [ROOT / line for line in output.splitlines() if line]
+    return [
+        ROOT / line for line in output.split("\0") if line and (ROOT / line).exists()
+    ]
 
 
 def repository_directories() -> list[Path]:

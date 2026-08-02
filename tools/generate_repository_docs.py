@@ -46,16 +46,21 @@ def repository_tree() -> str:
     # files such as build output and agent settings exist on some clones and
     # not others, so a walk produced a tree that depended on the clone.
     excluded_names = {".git", "__pycache__", ".pytest_cache", ".mypy_cache", "target"}
+    # -z keeps paths verbatim; without it Git C-quotes non-ASCII names and any
+    # name containing a newline, which would be recorded as the quoted form.
     listing = subprocess.check_output(
-        ["git", "ls-files", "--cached", "--others", "--exclude-standard"],
+        ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"],
         cwd=ROOT,
         text=True,
     )
     entries: set[str] = set()
-    for line in listing.splitlines():
+    for line in listing.split("\0"):
         if not line:
             continue
         relative = Path(line)
+        # --cached still reports a file deleted in the worktree but not staged.
+        if not (ROOT / relative).exists():
+            continue
         if any(part in excluded_names for part in relative.parts):
             continue
         entries.add(relative.as_posix())

@@ -72,6 +72,17 @@ class RepositoryDirectoryTests(unittest.TestCase):
         (vendored / "file.md").write_text("content\n", encoding="utf-8")
         self.assertNotIn("tracked/__pycache__", self.directories())
 
+    def test_unstaged_deletions_do_not_keep_a_directory_alive(self):
+        git(self.root, "add", "-A")
+        git(self.root, "-c", "user.email=t@e", "-c", "user.name=t", "commit", "-m", "seed")
+        (self.root / "tracked" / "file.md").unlink()
+        self.assertNotIn("tracked", self.directories())
+
+    def test_non_ascii_paths_are_returned_verbatim(self):
+        (self.root / "tracked" / "café.md").write_text("x\n", encoding="utf-8")
+        names = {path.name for path in self.module.tracked_files()}
+        self.assertIn("café.md", names)
+
     def test_the_repository_root_is_always_reported(self):
         self.assertIn(self.root, self.module.repository_directories())
 
