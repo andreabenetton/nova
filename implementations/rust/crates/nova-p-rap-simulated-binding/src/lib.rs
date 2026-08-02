@@ -14,7 +14,10 @@ pub struct SimulatedBinding<F: VirtualFabric> {
 
 impl<F: VirtualFabric> SimulatedBinding<F> {
     pub const fn new(fabric: F) -> Self {
-        Self { fabric, next_instance: 0 }
+        Self {
+            fabric,
+            next_instance: 0,
+        }
     }
 
     pub fn fabric_mut(&mut self) -> &mut F {
@@ -23,8 +26,14 @@ impl<F: VirtualFabric> SimulatedBinding<F> {
 }
 
 impl<F: VirtualFabric> PRapBinding for SimulatedBinding<F> {
-    fn open(&mut self, _remote: RemoteLocator) -> Result<(BindingInstanceId, BindingProperties), BindingError> {
-        self.next_instance = self.next_instance.checked_add(1).ok_or(BindingError::Unreachable)?;
+    fn open(
+        &mut self,
+        _remote: RemoteLocator,
+    ) -> Result<(BindingInstanceId, BindingProperties), BindingError> {
+        self.next_instance = self
+            .next_instance
+            .checked_add(1)
+            .ok_or(BindingError::Unreachable)?;
         Ok((
             BindingInstanceId(self.next_instance),
             BindingProperties {
@@ -39,7 +48,11 @@ impl<F: VirtualFabric> PRapBinding for SimulatedBinding<F> {
         ))
     }
 
-    fn send_unit(&mut self, _instance: BindingInstanceId, _unit: PrapUnit) -> Result<(), BindingError> {
+    fn send_unit(
+        &mut self,
+        _instance: BindingInstanceId,
+        _unit: PrapUnit,
+    ) -> Result<(), BindingError> {
         Ok(())
     }
 

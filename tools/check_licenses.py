@@ -52,11 +52,18 @@ def tracked_files() -> list[Path]:
 
 
 def repository_directories() -> list[Path]:
-    result: list[Path] = []
-    for path in ROOT.rglob("*"):
-        if not path.is_dir() or any(part in IGNORED_PARTS for part in path.relative_to(ROOT).parts):
-            continue
-        result.append(path)
+    # Derived from the Git file listing rather than a filesystem walk, so that a
+    # directory holding only ignored files is not required to carry a marker.
+    # Agent tooling writes such files, and requiring a marker for them would fail
+    # on some clones and not others.
+    result: set[Path] = set()
+    for path in tracked_files():
+        for parent in path.parents:
+            if parent == ROOT:
+                break
+            if any(part in IGNORED_PARTS for part in parent.relative_to(ROOT).parts):
+                break
+            result.add(parent)
     return [ROOT, *sorted(result)]
 
 

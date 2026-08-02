@@ -29,10 +29,21 @@ pub struct BindingProperties {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum BindingEvent {
-    UnitReceived { instance: BindingInstanceId, unit: PrapUnit },
-    PropertiesChanged { instance: BindingInstanceId, properties: BindingProperties },
-    InstanceFailed { instance: BindingInstanceId },
-    RemoteLocatorChanged { instance: BindingInstanceId, locator: RemoteLocator },
+    UnitReceived {
+        instance: BindingInstanceId,
+        unit: PrapUnit,
+    },
+    PropertiesChanged {
+        instance: BindingInstanceId,
+        properties: BindingProperties,
+    },
+    InstanceFailed {
+        instance: BindingInstanceId,
+    },
+    RemoteLocatorChanged {
+        instance: BindingInstanceId,
+        locator: RemoteLocator,
+    },
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -46,8 +57,15 @@ pub enum BindingError {
 }
 
 pub trait PRapBinding {
-    fn open(&mut self, remote: RemoteLocator) -> Result<(BindingInstanceId, BindingProperties), BindingError>;
-    fn send_unit(&mut self, instance: BindingInstanceId, unit: PrapUnit) -> Result<(), BindingError>;
+    fn open(
+        &mut self,
+        remote: RemoteLocator,
+    ) -> Result<(BindingInstanceId, BindingProperties), BindingError>;
+    fn send_unit(
+        &mut self,
+        instance: BindingInstanceId,
+        unit: PrapUnit,
+    ) -> Result<(), BindingError>;
     fn close(&mut self, instance: BindingInstanceId) -> Result<(), BindingError>;
     fn poll_event(&mut self) -> Option<BindingEvent>;
 }

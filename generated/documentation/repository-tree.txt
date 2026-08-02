@@ -1389,6 +1389,7 @@
 ./tools/nova-contract/src/nova_contract/cli.py
 ./tools/nova-contract/tests
 ./tools/nova-contract/tests/LICENSE.md
+./tools/nova-contract/tests/test_check_licenses.py
 ./tools/nova-contract/tests/test_cli.py
 ./tools/spec-lint
 ./tools/spec-lint/LICENSE.md

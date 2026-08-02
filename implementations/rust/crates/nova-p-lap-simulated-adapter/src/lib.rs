@@ -13,7 +13,10 @@ pub struct SimulatedAdapter<F: VirtualFabric> {
 
 impl<F: VirtualFabric> SimulatedAdapter<F> {
     pub const fn new(fabric: F) -> Self {
-        Self { fabric, active: false }
+        Self {
+            fabric,
+            active: false,
+        }
     }
 
     pub fn fabric_mut(&mut self) -> &mut F {
@@ -32,8 +35,16 @@ impl<F: VirtualFabric> PLapAdapter for SimulatedAdapter<F> {
         })
     }
 
-    fn send_frame(&mut self, _destination: &NexusLocator, _frame: AdapterFrame) -> Result<(), AdapterError> {
-        if self.active { Ok(()) } else { Err(AdapterError::Inactive) }
+    fn send_frame(
+        &mut self,
+        _destination: &NexusLocator,
+        _frame: AdapterFrame,
+    ) -> Result<(), AdapterError> {
+        if self.active {
+            Ok(())
+        } else {
+            Err(AdapterError::Inactive)
+        }
     }
 
     fn deactivate(&mut self) {

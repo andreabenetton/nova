@@ -65,7 +65,10 @@ impl NodeIdentity {
             if address.address_digest.is_empty() {
                 return false;
             }
-            let current = (&address.cryptographic_suite, address.address_digest.as_slice());
+            let current = (
+                &address.cryptographic_suite,
+                address.address_digest.as_slice(),
+            );
             if let Some(previous) = previous {
                 if previous >= current {
                     return false;
@@ -187,7 +190,6 @@ impl ObfuscatedDegree {
             < self.valid_for_micros
     }
 }
-
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub struct ExpansionProfileId(pub u32);

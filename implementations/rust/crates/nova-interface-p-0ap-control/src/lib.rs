@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #![forbid(unsafe_code)]
 
-use nova_types::{NodeIdentity, ExpansionCardinality};
+use nova_types::{ExpansionCardinality, NodeIdentity};
 
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct SimulationNodeId(pub u64);
@@ -66,7 +66,8 @@ pub enum P0apControlError {
 }
 
 pub trait P0apControl {
-    fn create_node(&mut self, identity: NodeIdentity) -> Result<SimulationNodeId, P0apControlError>;
+    fn create_node(&mut self, identity: NodeIdentity)
+    -> Result<SimulationNodeId, P0apControlError>;
 
     fn update_node_identity(
         &mut self,

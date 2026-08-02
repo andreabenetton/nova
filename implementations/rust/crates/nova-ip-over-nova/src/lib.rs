@@ -11,7 +11,10 @@ pub struct IpOverNova<O: OStratumService, P: IpPlatformAttachment> {
 
 impl<O: OStratumService, P: IpPlatformAttachment> IpOverNova<O, P> {
     pub const fn new(o_stratum: O, platform: P) -> Self {
-        Self { o_stratum, platform }
+        Self {
+            o_stratum,
+            platform,
+        }
     }
 
     pub fn parts_mut(&mut self) -> (&mut O, &mut P) {

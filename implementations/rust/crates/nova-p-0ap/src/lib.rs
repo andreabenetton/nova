@@ -9,15 +9,15 @@ use nova_interface_p_0ap_control::{
 };
 use nova_interface_p_path_provider::{
     PathProvider, ProviderActivated, ProviderError, ProviderEvent, ProviderEventContext,
-    ProviderEventSequence, ProviderGeneration, ProviderInstanceId, ProviderLimits,
-    ProviderObfuscationProfileDescriptor, ProviderPathId, ProviderPathProperties,
+    ProviderEventSequence, ProviderExpansionProfileDescriptor, ProviderGeneration,
+    ProviderInstanceId, ProviderLimits, ProviderPathId, ProviderPathProperties,
     ProviderPathRevision, ProviderPathSnapshot, ProviderSubmissionId, ProviderSubmissionOptions,
     ProviderSubmissionStatus,
 };
 use nova_interface_virtual_fabric::VirtualFabric;
 use nova_types::{
-    DeliveryProperties, DirectionalMetrics, InterSduOrdering, Metric, MetricSource, MetricUnit,
-    NodeIdentity, ExpansionCardinality, ObfuscationProfileId, QueueLimits, Sdu,
+    DeliveryProperties, DirectionalMetrics, ExpansionCardinality, ExpansionProfileId,
+    InterSduOrdering, Metric, MetricSource, MetricUnit, NodeIdentity, QueueLimits, Sdu,
 };
 
 #[derive(Clone, Debug)]
@@ -90,14 +90,10 @@ impl<F: VirtualFabric> P0ap<F> {
     }
 
     fn properties(characteristics: SimulationPathCharacteristics) -> ProviderPathProperties {
-        let latency = Self::configured_metric(
-            characteristics.latency_micros,
-            MetricUnit::Microseconds,
-        );
-        let jitter = Self::configured_metric(
-            characteristics.jitter_micros,
-            MetricUnit::Microseconds,
-        );
+        let latency =
+            Self::configured_metric(characteristics.latency_micros, MetricUnit::Microseconds);
+        let jitter =
+            Self::configured_metric(characteristics.jitter_micros, MetricUnit::Microseconds);
         let capacity = Self::configured_metric(
             characteristics.bandwidth_bits_per_second,
             MetricUnit::BitsPerSecond,
@@ -143,16 +139,13 @@ impl<F: VirtualFabric> P0ap<F> {
     fn default_degree() -> ExpansionCardinality {
         ExpansionCardinality {
             value: 0,
-            profile_id: ObfuscationProfileId(0),
+            profile_id: ExpansionProfileId(0),
             age_micros: 0,
             valid_for_micros: u64::MAX,
         }
     }
 
-    fn update_paths_for_node(
-        &mut self,
-        node: SimulationNodeId,
-    ) -> Result<(), P0apControlError> {
+    fn update_paths_for_node(&mut self, node: SimulationNodeId) -> Result<(), P0apControlError> {
         let identity = self
             .nodes
             .get(&node)
@@ -172,17 +165,21 @@ impl<F: VirtualFabric> P0ap<F> {
 
         for id in affected {
             let updated = {
-                let record = self.paths.get_mut(&id).ok_or(P0apControlError::UnknownPath)?;
-                record.snapshot.revision = ProviderPathRevision(
-                    record.snapshot.revision.0.saturating_add(1),
-                );
+                let record = self
+                    .paths
+                    .get_mut(&id)
+                    .ok_or(P0apControlError::UnknownPath)?;
+                record.snapshot.revision =
+                    ProviderPathRevision(record.snapshot.revision.0.saturating_add(1));
                 record.snapshot.peer_identity = identity.clone();
                 record.snapshot.expansion_cardinality = degree;
                 record.snapshot.clone()
             };
             let context = self.event_context()?;
-            self.events
-                .push_back(ProviderEvent::PathUpdated { context, path: updated });
+            self.events.push_back(ProviderEvent::PathUpdated {
+                context,
+                path: updated,
+            });
         }
         Ok(())
     }
@@ -212,7 +209,7 @@ impl<F: VirtualFabric> PathProvider for P0ap<F> {
                 maximum_active_paths: 65_535,
                 maximum_event_backlog: 4_096,
             },
-            obfuscation_profiles: vec![ProviderObfuscationProfileDescriptor {
+            expansion_profiles: vec![ProviderExpansionProfileDescriptor {
                 profile_id: 0,
                 maximum_value: 65_535,
                 description: "deterministic test profile".to_owned(),
@@ -304,7 +301,10 @@ impl<F: VirtualFabric> PathProvider for P0ap<F> {
 }
 
 impl<F: VirtualFabric> P0apControl for P0ap<F> {
-    fn create_node(&mut self, identity: NodeIdentity) -> Result<SimulationNodeId, P0apControlError> {
+    fn create_node(
+        &mut self,
+        identity: NodeIdentity,
+    ) -> Result<SimulationNodeId, P0apControlError> {
         if !identity.is_valid() {
             return Err(P0apControlError::InvalidScenario);
         }
@@ -335,7 +335,10 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
         {
             return Err(P0apControlError::DuplicateIdentity);
         }
-        let current = self.nodes.get_mut(&node).ok_or(P0apControlError::UnknownNode)?;
+        let current = self
+            .nodes
+            .get_mut(&node)
+            .ok_or(P0apControlError::UnknownNode)?;
         *current = identity;
         self.update_paths_for_node(node)
     }
@@ -399,8 +402,10 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
             },
         );
         let context = self.event_context()?;
-        self.events
-            .push_back(ProviderEvent::PathAdded { context, path: snapshot });
+        self.events.push_back(ProviderEvent::PathAdded {
+            context,
+            path: snapshot,
+        });
         Ok(simulated)
     }
 
@@ -413,16 +418,20 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
             return Err(P0apControlError::InvalidCharacteristics);
         }
         let updated = {
-            let record = self.paths.get_mut(&path).ok_or(P0apControlError::UnknownPath)?;
-            record.snapshot.revision = ProviderPathRevision(
-                record.snapshot.revision.0.saturating_add(1),
-            );
+            let record = self
+                .paths
+                .get_mut(&path)
+                .ok_or(P0apControlError::UnknownPath)?;
+            record.snapshot.revision =
+                ProviderPathRevision(record.snapshot.revision.0.saturating_add(1));
             record.snapshot.properties = Self::properties(characteristics);
             record.snapshot.clone()
         };
         let context = self.event_context()?;
-        self.events
-            .push_back(ProviderEvent::PathUpdated { context, path: updated });
+        self.events.push_back(ProviderEvent::PathUpdated {
+            context,
+            path: updated,
+        });
         Ok(())
     }
 
@@ -435,7 +444,7 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
             return Err(P0apControlError::UnknownNode);
         }
         if degree.valid_for_micros == 0
-            || degree.profile_id != ObfuscationProfileId(0)
+            || degree.profile_id != ExpansionProfileId(0)
             || degree.value > 65_535
         {
             return Err(P0apControlError::InvalidExpansionCardinality);
@@ -476,5 +485,100 @@ impl<F: VirtualFabric> P0apControl for P0ap<F> {
     ) -> Result<(), P0apControlError> {
         self.mode = mode;
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use nova_types::{CryptographicSuiteId, NodeAddress, NodeIdentityId};
+    use nova_virtual_fabric::ReferenceVirtualFabric;
+
+    fn provider() -> P0ap<ReferenceVirtualFabric> {
+        P0ap::new(ReferenceVirtualFabric::default())
+    }
+
+    fn identity(seed: u8) -> NodeIdentity {
+        NodeIdentity {
+            id: NodeIdentityId {
+                profile_id: 0,
+                digest: vec![seed],
+            },
+            addresses: vec![NodeAddress {
+                cryptographic_suite: CryptographicSuiteId(0),
+                address_digest: vec![seed],
+            }],
+        }
+    }
+
+    fn cardinality(profile_id: u32, value: u32, valid_for_micros: u64) -> ExpansionCardinality {
+        ExpansionCardinality {
+            value,
+            profile_id: ExpansionProfileId(profile_id),
+            age_micros: 0,
+            valid_for_micros,
+        }
+    }
+
+    #[test]
+    fn activation_declares_a_single_expansion_profile() {
+        let activated = provider().activate().expect("activation succeeds");
+        assert_eq!(activated.expansion_profiles.len(), 1);
+        let profile = &activated.expansion_profiles[0];
+        assert_eq!(profile.profile_id, 0);
+        assert_eq!(profile.maximum_value, 65_535);
+    }
+
+    #[test]
+    fn cardinality_is_accepted_for_the_declared_profile() {
+        let mut p0ap = provider();
+        let node = p0ap.create_node(identity(1)).expect("node is created");
+        assert_eq!(
+            p0ap.set_expansion_cardinality(node, cardinality(0, 7, 1)),
+            Ok(())
+        );
+    }
+
+    #[test]
+    fn cardinality_boundary_values_are_accepted_and_rejected() {
+        let mut p0ap = provider();
+        let node = p0ap.create_node(identity(2)).expect("node is created");
+        assert_eq!(
+            p0ap.set_expansion_cardinality(node, cardinality(0, 65_535, 1)),
+            Ok(())
+        );
+        assert_eq!(
+            p0ap.set_expansion_cardinality(node, cardinality(0, 65_536, 1)),
+            Err(P0apControlError::InvalidExpansionCardinality)
+        );
+    }
+
+    #[test]
+    fn cardinality_is_rejected_for_an_undeclared_profile() {
+        let mut p0ap = provider();
+        let node = p0ap.create_node(identity(3)).expect("node is created");
+        assert_eq!(
+            p0ap.set_expansion_cardinality(node, cardinality(1, 7, 1)),
+            Err(P0apControlError::InvalidExpansionCardinality)
+        );
+    }
+
+    #[test]
+    fn cardinality_is_rejected_when_never_valid() {
+        let mut p0ap = provider();
+        let node = p0ap.create_node(identity(4)).expect("node is created");
+        assert_eq!(
+            p0ap.set_expansion_cardinality(node, cardinality(0, 7, 0)),
+            Err(P0apControlError::InvalidExpansionCardinality)
+        );
+    }
+
+    #[test]
+    fn cardinality_is_rejected_for_an_unknown_node() {
+        let mut p0ap = provider();
+        assert_eq!(
+            p0ap.set_expansion_cardinality(SimulationNodeId(99), cardinality(0, 7, 1)),
+            Err(P0apControlError::UnknownNode)
+        );
     }
 }
