@@ -41,7 +41,16 @@ def contract_index() -> str:
 
 
 def repository_tree() -> str:
-    excluded_names = {".git", "__pycache__", ".pytest_cache", ".mypy_cache", "target"}
+    # settings.local.json is written by agent tooling and gitignored, so it
+    # must not enter the generated tree: it is present only on some clones.
+    excluded_names = {
+        ".git",
+        "__pycache__",
+        ".pytest_cache",
+        ".mypy_cache",
+        "target",
+        "settings.local.json",
+    }
     paths = ["."]
     for path in sorted(ROOT.rglob("*"), key=lambda item: item.relative_to(ROOT).as_posix()):
         relative = path.relative_to(ROOT)
