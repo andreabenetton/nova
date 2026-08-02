@@ -26,10 +26,15 @@ transcript=$(printf '%s' "$input" | jq -r '.transcript_path // empty')
 [ -f "$transcript" ] || exit 0
 
 usage=$(jq -rs '
-  # one record per assistant request; later duplicates discarded
-  ( [ .[] | select(.type == "assistant" and .message.usage != null) ]
-    | group_by(.requestId // .uuid)
-    | map(.[0].message.usage) ) as $u
+  # One record per assistant request, keeping the first of each duplicate in
+  # transcript order. group_by would sort by request id, and ids are not
+  # ordered, so the newest turn is the last record rather than the greatest id.
+  ( reduce ( .[] | select(.type == "assistant" and .message.usage != null) ) as $r
+      ( { seen: {}, out: [] };
+        ( ($r.requestId // $r.uuid) | tostring ) as $k
+        | if .seen[$k] then . else .seen += { ($k): true } | .out += [$r.message.usage] end
+      )
+    | .out ) as $u
   | if ($u | length) == 0 then "" else
       ($u | last) as $l
       | [ ( ($l.input_tokens // 0)
