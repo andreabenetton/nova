@@ -20,6 +20,36 @@
 - Nested `AGENTS.md` files provide more specific instructions for their directory trees.
 - Agent-specific files are adapters or extensions only and must not copy shared rules.
 - Deterministic requirements belong in tooling and CI rather than prompt instructions alone.
+- The deeper instruction file governs its own tree on conflict. A nested file may narrow or refine a shared rule; it MUST NOT relax a repository-wide constraint such as authority order, boundary rules, licensing, testing, or Git discipline.
+- Resolve a relative path named by an instruction file against the directory containing that file unless the file states otherwise.
+- At task start, name the instruction files in scope for the paths being changed.
+
+## Source precedence
+
+`canon/authority.md` defines the normative authority order. It governs; this section states only how to apply it while working.
+
+- Read the authority chain top-down for the boundary being changed, and stop at the first artifact that answers the question. For an operation, event, error, limit, or lifecycle question, that is almost always the versioned contract, not prose about it.
+- An accepted ADR explains rationale and intent. When it disagrees with canon or a versioned contract about current behavior, the contract or canon is authoritative and the divergence is itself a finding to report.
+- Existing code is not a source of truth when it conflicts with an active contract. Do not propagate the code's assumption to keep a build green. Report the divergence, and change the lowest correct layer.
+- `README.md`, `ROADMAP.md`, `STATUS.md`, `VALIDATION.md`, and `CHANGELOG.md` are human-facing narrative. Do not cite them as authority for behavior and do not use them as implementation context. Correct them when a change makes them factually wrong; otherwise leave them alone.
+- `REPOSITORY-MAP.md` records the authority level of each tree. Use it to classify an unfamiliar path before deciding which rules apply to it.
+
+## Context loading map
+
+Load task-scoped context on demand. Do not copy it into this file.
+
+| Work | Read |
+|---|---|
+| Any component | the nearest `CONTEXT.yaml` and the nearest `AGENTS.md` |
+| Terminology | `canon/glossary.md` as the index, then only the common glossary, the glossary owned by the component being modified, and any explicit Interface glossary |
+| Cross-cutting architecture, invariants, authority, security, versioning | the owning document under `canon/` |
+| Peer behavior inside a stratum | `protocols/<stratum>/AGENTS.md` and the documents it names |
+| A boundary contract | the Interface directory under `contracts/interfaces/`, its `AGENTS.md` where present, and `contracts/README.md` |
+| Contract revision or version question | `canon/versioning.md` and `contracts/README.md` |
+| A new Adapter, Binding, compatibility service, simulation front end, stratum, or Interface change | the matching template under `agents/task-templates/` |
+| Review of an Interface, protocol, security, simulation, or LLM-scope change | the matching checklist under `agents/review-checklists/` |
+| Bounded role framing for a component | the matching file under `agents/roles/` |
+| Writing or placing an ADR | `adr/README.md` for scope, identifier, and status rules |
 
 ## Git discipline
 
@@ -143,6 +173,23 @@ python3 tools/check_repository_shape.py
 
 Do not push until the merged tree has been tested and these checks have either passed or their environmental limitation has been stated precisely.
 
+### Change-scoped validation
+
+`make check` remains the completion gate, and the list above remains the floor before pushing a contract-touching change. Use this table to know which target actually covers a change, and to run the covering target early rather than discovering the failure at push time.
+
+| Changed paths | Targets |
+|---|---|
+| `contracts/**` | `make contracts`, `make normalize`, `make lint`, `make matrix`, `make contract-tests`, and `python3 tools/ci/check_contract_versions.py` |
+| Glossaries, `canon/` terminology, normative prose | `make terminology` |
+| Any `CONTEXT.yaml`, or a new component directory | `make context` |
+| `implementations/rust/**` or `canon/dependency-policy.yaml` | `make boundaries`, `make rust`, `make test` |
+| Simulation scenarios, profiles, or traces | `make simulation-fixtures` |
+| Any `AGENTS.md`, `CLAUDE.md`, or vendor instruction file | `make agent-instructions` |
+| Files added, moved, copied, or relicensed, and every new directory | `make licenses` |
+| Any added, removed, or renamed tracked file | `make repository-docs` |
+
+The last row is easy to miss: `make repository-docs` regenerates `generated/repository-tree.txt` and `generated/contracts-index.md` from the tracked file list, so adding or removing any tracked file — including one unrelated to contracts — makes the generated documentation stale until the target is rerun. An untracked file that the repository intends to ignore MUST be ignored rather than committed to satisfy a check.
+
 
 ## Tests follow implementations
 
@@ -235,6 +282,19 @@ Shared contract, registry, or normative documentation changes that enable multip
 
 Do not split a single atomic cross-boundary contract revision into inconsistent commits. The contract revision, its schemas, canonical generated form, compatibility declaration, and conformance scenarios form one logical unit. Implementations that consume that completed revision follow in separate component commits.
 
+## Required documentation updates
+
+A normative change is never the changed file alone. Propagate every dependent artifact in the same commit, or in the same commit series in the authority direction when the multi-component rule requires separate commits.
+
+- A contract revision carries its source YAML, schemas, canonical generated form, lock entry, compatibility declaration, conformance scenarios, and the compatibility matrix.
+- A registry or numeric assignment change carries the registry file under `canon/registries/` and every document that cites the assignment.
+- A terminology change carries the owning glossary, and `canon/glossary.md` when ownership itself changes.
+- A new or changed ADR follows `adr/README.md` for scope directory, identifier sequence, and status metadata, and updates every document that cites it. When an accepted ADR requires a normative change, update the authoritative artifact rather than relying on the ADR alone.
+- A new replaceable boundary carries its versioned NIDL contract, conformance scenarios, context rules, and an ADR when the architecture changes.
+- Generated material is regenerated by its tool in the same commit as the source change. Never hand-edit it and never leave it stale.
+- `CHANGELOG.md` records externally visible contract and Interface changes.
+- `STATUS.md`, `VALIDATION.md`, `ROADMAP.md`, and `README.md` are corrected when a change makes them factually wrong, and are otherwise left alone.
+
 ## Debugging hygiene
 
 When investigation reveals multiple independent root causes, commit each root cause separately. Do not squash the diagnostic chain into one broad fix; preserve bisectability and the reason each change exists.
@@ -260,3 +320,43 @@ Cleanup belongs in the fix commit, or in a separate follow-up commit completed b
 - Core crates are AGPL; Interface, Adapter, Binding, Platform Attachment, tooling, and conformance crates are Apache-2.0.
 - Do not copy AGPL core implementation into Apache-licensed integration components.
 - Run `make licenses` after adding, moving, or generating files.
+
+## Anti-patterns
+
+Do not introduce:
+
+- stratum-owned terminology outside the Interface documentation that owns the mapping, or a unified glossary that redefines a term across strata;
+- a dependency on a lower stratum's internals, private model, or implementation behavior rather than its versioned contract;
+- implementation-specific knowledge carried across a declared boundary in prose, types, tests, or fixtures;
+- a change made at a higher layer because it is easier to make there, when a lower document or contract owns the behavior;
+- an implementation derived directly from a research document when a normative contract covers the behavior;
+- a new replaceable boundary without a versioned NIDL contract, conformance scenarios, context rules, and an ADR when the architecture changes;
+- an in-place edit to a published contract version, or to preserved experimental history, in place of a new version;
+- code that lands ahead of the contract when externally visible behavior changes;
+- a hand edit to anything a tool generates, including generated repository documentation, canonical contract forms, and generated crates;
+- a workaround in a consumer that compensates for a contract divergence instead of reporting it and fixing the owning layer;
+- AGPL core implementation copied into an Apache-licensed Interface, Adapter, Binding, Platform Attachment, tooling, or conformance component;
+- a new file without the correct SPDX identifier where the format supports comments, or a new directory without a `LICENSE.md` marker;
+- RFC 2119 uppercase requirement words in non-normative prose, or with a meaning other than the one defined by `canon/normative-language.md`;
+- a file committed only to satisfy a repository check, including build output or a lock file the repository deliberately ignores;
+- mock-only tests offered as evidence that an integration, socket, process boundary, or generated contract works;
+- a single happy-path test presented as coverage of a changed code path;
+- "while here" cleanup folded into a fix commit;
+- a completion claim that names `make check` when only part of it ran, or a push claim that Git did not confirm;
+- a reference to an unrelated external project by name in repository files or commit messages.
+
+## Completion checklist
+
+Work through this before proposing completion. Do not reproduce it in a response unless an item is missing or needs explicit call-out.
+
+- The change was made at the lowest correct layer, and the affected boundary consumes only versioned contracts.
+- Contract, canon, or normative documentation was updated before or with the code for externally visible behavior.
+- No stratum-owned terminology crossed a boundary, and the glossary index is current where ownership changed.
+- Dependent documentation propagated per "Required documentation updates".
+- Generated artifacts were regenerated by their tools and verified, not hand-written or asserted through copies.
+- Tests cover the added or changed behavior, including its rejection, edge, and boundary cases, and externally visible Interface changes carry matching provider and consumer conformance scenarios. If the change has no testable surface, the report says so and why.
+- Licensing holds: SPDX identifiers, directory markers, and crate license fields match policy.
+- `make check` passed, or every executed target and every omitted target is named precisely, with the environmental reason for each omission.
+- Commits are shaped per the multi-fix and multi-component rules, and carry no temporary diagnostic material.
+- Commit, push, and pull-request status is reported exactly as Git and the remote confirmed it.
+- Known divergences, unverified surfaces, deferred drift, and follow-up work are stated explicitly rather than left implied.
