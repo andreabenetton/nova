@@ -72,7 +72,7 @@ affected_documents: []
 ---
 ```
 
-All nine keys are required and no others are permitted. `supersedes` and `superseded_by` MUST be symmetric between the two records, and a record with a `superseded_by` entry MUST carry the `superseded` or `deprecated` status.
+All nine keys are required and no others are permitted. `affected_contracts` and `affected_documents` hold repository-relative paths that must exist. `supersedes` and `superseded_by` MUST be symmetric between the two records, and a record with a `superseded_by` entry MUST carry the `superseded` or `deprecated` status.
 
 ## Sections
 
@@ -94,13 +94,13 @@ Records use one canonical section set so that two records can be compared, and s
 | `## Migration and rollback` | yes |
 | `## Unresolved questions` | yes |
 
-A required section with nothing to report says `none`; it is not dropped. No other second-level heading is permitted, so a new concern becomes a template change rather than a per-record invention. Third-level headings are unconstrained.
+A required section with nothing to report says `none`; it is not dropped. No other second-level heading is permitted, no section repeats, and the order above is enforced, so a new concern becomes a template change rather than a per-record invention. Third-level headings are unconstrained.
 
 ## Index
 
 `generated/documentation/adr-index.md` lists every record by scope, with title, status, and date. It is generated, never hand-edited, and is the cheapest entry point when looking for the record that governs a topic.
 
-`tools/generate_adr_index.py` regenerates it and enforces every rule on this page: scope-to-directory placement, prefix agreement, identifier uniqueness, allowed statuses, ISO dates, heading agreement, supersession symmetry, and the requirement that citations carry a scope. Run `make adr-index` after touching any record; it is a required CI check.
+`tools/generate_adr_index.py` regenerates it and enforces every rule on this page: scope-to-directory placement, prefix agreement, identifier uniqueness, allowed statuses, ISO dates, heading agreement, supersession symmetry, the section set and its order, the existence of every affected path, and the requirement that citations carry a scope. Run `make adr-index` after touching any record; it is a required CI check.
 
 ## Status
 

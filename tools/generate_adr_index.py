@@ -51,6 +51,29 @@ REQUIRED_KEYS = (
     "affected_documents",
 )
 LIST_KEYS = ("supersedes", "superseded_by", "affected_contracts", "affected_documents")
+PATH_KEYS = ("affected_contracts", "affected_documents")
+
+# The canonical section set, in the order records must use. A required section
+# with nothing to report says `none` rather than being dropped, so an absent
+# concern reads as considered rather than forgotten.
+SECTIONS = (
+    ("Context", True),
+    ("Decision drivers", False),
+    ("Decision", True),
+    ("Architectural boundaries", True),
+    ("Interface and contract impact", True),
+    ("Wire compatibility impact", False),
+    ("Implementation impact", False),
+    ("Security and privacy impact", True),
+    ("Alternatives considered", True),
+    ("Consequences", True),
+    ("Validation and conformance", True),
+    ("Migration and rollback", True),
+    ("Unresolved questions", True),
+)
+SECTION_ORDER = [name for name, _ in SECTIONS]
+REQUIRED_SECTIONS = [name for name, required in SECTIONS if required]
+SECTION_HEADING = re.compile(r"^## (.+)$", re.M)
 
 # A prefix may contain digits (P0AP) but always starts with a letter, which
 # keeps it distinguishable from the four-digit sequence that follows.
@@ -154,6 +177,12 @@ def load(path: Path, root: Path, errors: list[str]) -> Record | None:
         if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
             errors.append(f"{relative}: {key} must be a list of strings")
             ok = False
+            continue
+        if key in PATH_KEYS:
+            for item in value:
+                if not (root / item).exists():
+                    errors.append(f"{relative}: {key} names {item}, which does not exist")
+                    ok = False
 
     heading = HEADING.search(text)
     if heading is None:
@@ -170,6 +199,24 @@ def load(path: Path, root: Path, errors: list[str]) -> Record | None:
     body = text[front_matter.end() :]
     for citation in sorted(set(UNSCOPED_CITATION.findall(body))):
         errors.append(f"{relative}: cites {citation} without a scope; use the scoped identifier")
+        ok = False
+
+    found = SECTION_HEADING.findall(body)
+    unknown_sections = [name for name in found if name not in SECTION_ORDER]
+    if unknown_sections:
+        errors.append(f"{relative}: unknown section(s) {', '.join(unknown_sections)}")
+        ok = False
+    duplicates = sorted({name for name in found if found.count(name) > 1})
+    if duplicates:
+        errors.append(f"{relative}: repeated section(s) {', '.join(duplicates)}")
+        ok = False
+    missing_sections = [name for name in REQUIRED_SECTIONS if name not in found]
+    if missing_sections:
+        errors.append(f"{relative}: missing required section(s) {', '.join(missing_sections)}")
+        ok = False
+    known = [name for name in found if name in SECTION_ORDER]
+    if known != sorted(known, key=SECTION_ORDER.index):
+        errors.append(f"{relative}: sections are out of canonical order")
         ok = False
 
     if not ok:

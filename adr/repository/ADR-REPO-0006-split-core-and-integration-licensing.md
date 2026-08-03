@@ -7,7 +7,8 @@ date: 2026-08-01
 supersedes: []
 superseded_by: []
 affected_contracts: []
-affected_documents: []
+affected_documents:
+  - legal/license-policy.yaml
 ---
 
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
@@ -44,6 +45,28 @@ providers that must remain independently licensed.
 Stable final specifications may receive an OWFa 1.0 Patent Only commitment only
 through the explicit process in `PATENTS.md`.
 
+## Architectural boundaries
+
+- Owned by: `legal/license-policy.yaml`, which maps repository paths to licenses.
+- Consumed through: SPDX identifiers in files, `LICENSE.md` directory markers, and Rust crate license fields.
+- Must not depend on: a file's license changing implicitly when it is moved or copied.
+- Information allowed to cross the boundary: Apache-licensed Interfaces, shared public types, and conformance material, which external providers may implement against.
+- Information prohibited from crossing the boundary: AGPL core implementation copied into an Apache-licensed integration component.
+
+## Interface and contract impact
+
+Machine-readable contracts and schemas are dual `Apache-2.0 OR CC-BY-4.0`, so an external implementation may consume a contract without taking on the core's reciprocal terms.
+
+## Security and privacy impact
+
+none directly. Licensing determines who may reuse code, not what the protocol protects.
+
+## Alternatives considered
+
+- Apply AGPL to every artifact. Rejected: it would make external Adapter, Binding, and Platform Attachment work substantially harder.
+- Apply a permissive license to the whole repository. Rejected: it would not preserve network-deployed modifications to the core.
+- Add a custom linking exception now. Rejected: it requires legal review, and published out-of-process provider contracts address the same need.
+
 ## Consequences
 
 - The official monolithic executable is an AGPL-covered combination even though
@@ -55,3 +78,15 @@ through the explicit process in `PATENTS.md`.
 - Public release is blocked until rights ownership and third-party material are
   reviewed.
 - Any future custom linking exception requires a separate ADR and legal review.
+
+## Validation and conformance
+
+CI enforces path classification, SPDX metadata, directory notices, and crate license fields through `tools/check_licenses.py`, run as `make licenses`.
+
+## Migration and rollback
+
+The policy was adopted before public release. Relicensing any path afterwards requires the consent of every contributor to it, so changes are effectively one-way.
+
+## Unresolved questions
+
+Public release is blocked until rights ownership and third-party material are reviewed. Any future linking exception requires a separate record and legal review.

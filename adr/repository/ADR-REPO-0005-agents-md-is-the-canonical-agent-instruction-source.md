@@ -7,7 +7,8 @@ date: 2026-08-01
 supersedes: []
 superseded_by: []
 affected_contracts: []
-affected_documents: []
+affected_documents:
+  - AGENTS.md
 ---
 
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
@@ -24,12 +25,21 @@ Nova is intended for work by multiple coding agents. Duplicating shared instruct
 
 A deterministic repository check shall validate the adapter hierarchy and report suspicious duplicated instruction files.
 
-## Consequences
+## Architectural boundaries
 
-- Shared instructions have one authoritative source.
-- Claude and Gemini receive small compatibility adapters.
-- New scoped `AGENTS.md` files require matching Claude adapters.
-- CI detects drift but does not automatically remove vendor-specific files.
+- Owned by: the root `AGENTS.md`, with nested files owning their directory trees.
+- Consumed through: sibling vendor adapters, which import rather than copy.
+- Must not depend on: a vendor-specific file carrying a rule that is not in `AGENTS.md`.
+- Information allowed to cross the boundary: an import of the canonical file, plus genuinely vendor-specific extensions.
+- Information prohibited from crossing the boundary: a duplicated copy of a shared rule, which becomes stale silently.
+
+## Interface and contract impact
+
+none. No Nova protocol or NIDL Interface changes. Repository contributors follow the instruction-file validation rule.
+
+## Security and privacy impact
+
+Reducing duplicated instructions lowers the chance that an agent bypasses current repository constraints because it loaded a stale vendor-specific copy.
 
 ## Alternatives considered
 
@@ -37,14 +47,21 @@ A deterministic repository check shall validate the adapter hierarchy and report
 - Making `CLAUDE.md` or another vendor format authoritative.
 - Relying only on human review to detect drift.
 
-## Contract and migration impact
+## Consequences
 
-No Nova protocol or NIDL Interface changes are required. Repository contributors must follow the new instruction-file validation rule.
+- Shared instructions have one authoritative source.
+- Claude and Gemini receive small compatibility adapters.
+- New scoped `AGENTS.md` files require matching Claude adapters.
+- CI detects drift but does not automatically remove vendor-specific files.
 
-## Security impact
-
-Reducing duplicated instructions lowers the chance that an agent bypasses current repository constraints because it loaded a stale vendor-specific copy.
-
-## Validation plan
+## Validation and conformance
 
 Require `tools/check_agent_instructions.py` to pass locally through `make agent-instructions` and in the existing contracts workflow.
+
+## Migration and rollback
+
+Existing vendor files were reduced to adapters when the rule was introduced. Rollback would mean reintroducing duplicated instructions and is not planned.
+
+## Unresolved questions
+
+The check detects duplicated instructions but cannot detect a vendor file that contradicts `AGENTS.md` in substance while sharing no wording.
