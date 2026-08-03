@@ -52,7 +52,7 @@ ADR-P-0001-path-provider-lifecycle.md
 ADR-IMPL-0001-rust-workspace-boundaries.md
 ```
 
-The identifier in the heading, the filename, and the front matter must match. Identifiers are never reused, including after rejection or supersession. Every citation of a record uses its scoped identifier; an unscoped `ADR-NNNN` is not a valid reference.
+The identifier in the heading, the filename, and the front matter must match. Identifiers are never reused, including after rejection or supersession. Every citation names the full identifier, scope segment included.
 
 ## Front matter
 
@@ -100,7 +100,7 @@ A required section with nothing to report says `none`; it is not dropped. No oth
 
 `generated/documentation/adr-index.md` lists every record by scope, with title, status, and date. It is generated, never hand-edited, and is the cheapest entry point when looking for the record that governs a topic.
 
-`tools/generate_adr_index.py` regenerates it and enforces every rule on this page: scope-to-directory placement, prefix agreement, identifier uniqueness, allowed statuses, ISO dates, heading agreement, supersession symmetry, the section set and its order, the existence of every affected path and that it stays inside the repository, and the requirement that citations carry a scope. Run `make adr-index` after touching any record; it is a required CI check.
+`tools/generate_adr_index.py` regenerates it and enforces every rule on this page: scope-to-directory placement, prefix agreement, identifier uniqueness, allowed statuses, ISO dates, heading agreement, supersession symmetry, the section set and its order, the existence of every affected path and that it stays inside the repository, and the requirement that a citation names the full identifier. Run `make adr-index` after touching any record; it is a required CI check.
 
 ## Status
 

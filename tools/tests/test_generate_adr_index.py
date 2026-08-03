@@ -286,10 +286,10 @@ class AdrIndexTestCase(unittest.TestCase):
         )
         self.assert_rejected("affected_contracts names contracts/interfaces/p-r/9.9.9, which does not exist")
 
-    def test_filename_without_scope_prefix_is_ignored(self) -> None:
+    def test_filename_without_a_scope_prefix_is_ignored(self) -> None:
         self.write("p-stratum/0001-split-p-stratum-into-p-lap-and-p-rap.md", VALID)
         code, out, _ = self.run_tool()
-        # An unprefixed filename is not discovered as a record at all.
+        # A filename without the ADR- prefix is not discovered as a record at all.
         self.assertEqual(code, 0)
         self.assertIn("0 record(s)", out)
 
@@ -400,14 +400,14 @@ class AdrIndexTestCase(unittest.TestCase):
         )
         self.assert_rejected("supersedes must be a list of strings")
 
-    def test_unscoped_identifier_citation_is_rejected(self) -> None:
+    def test_citation_without_a_scope_segment_is_rejected(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
-            VALID.replace("Body.", "This refines ADR-0002."),
+            VALID.replace("Body.", "This refines ADR-9999."),
         )
-        self.assert_rejected("cites ADR-0002 without a scope")
+        self.assert_rejected("cites ADR-9999 without a scope segment")
 
-    def test_scoped_identifier_in_the_body_is_not_an_unscoped_citation(self) -> None:
+    def test_full_identifier_in_the_body_is_not_flagged(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
             VALID.replace("Body.", "This refines ADR-ARCH-0001."),
