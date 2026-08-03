@@ -33,6 +33,7 @@ No records.
 | ADR-P-0002 | Adapters and Bindings are distinct extension points | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0002-adapters-and-bindings-are-distinct.md](../../adr/p-stratum/ADR-P-0002-adapters-and-bindings-are-distinct.md) |
 | ADR-P-0003 | Sequence QUIC before Ethernet while developing R-Stratum in parallel | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0003-sequence-quic-before-ethernet.md](../../adr/p-stratum/ADR-P-0003-sequence-quic-before-ethernet.md) |
 | ADR-P-0004 | Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0004-path-provider-protocols-and-p-stratum-objectives.md](../../adr/p-stratum/ADR-P-0004-path-provider-protocols-and-p-stratum-objectives.md) |
+| ADR-P-0005 | Serve the simulated Adapter and Binding from one Virtual Fabric | proposed | 2026-08-03 | [adr/p-stratum/ADR-P-0005-virtual-fabric-serves-simulated-integrations.md](../../adr/p-stratum/ADR-P-0005-virtual-fabric-serves-simulated-integrations.md) |
 
 ## p-0ap (`ADR-P0AP-`, `adr/p-stratum/p-0ap/`)
 

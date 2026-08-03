@@ -79,6 +79,7 @@
 ./adr/p-stratum/ADR-P-0002-adapters-and-bindings-are-distinct.md
 ./adr/p-stratum/ADR-P-0003-sequence-quic-before-ethernet.md
 ./adr/p-stratum/ADR-P-0004-path-provider-protocols-and-p-stratum-objectives.md
+./adr/p-stratum/ADR-P-0005-virtual-fabric-serves-simulated-integrations.md
 ./adr/p-stratum/LICENSE.md
 ./adr/p-stratum/README.md
 ./adr/p-stratum/p-0ap
