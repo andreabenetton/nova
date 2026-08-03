@@ -81,9 +81,9 @@ FILENAME = re.compile(r"^ADR-([A-Z][A-Z0-9]*)-(\d{4})-[a-z0-9]+(?:-[a-z0-9]+)*\.
 HEADING = re.compile(r"^# (ADR-[A-Z][A-Z0-9]*-\d{4}): (.+)$", re.M)
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-# An unscoped citation. `ADR-ARCH-0001` does not match: the scope segment
-# separates `ADR-` from the digits.
-UNSCOPED_CITATION = re.compile(r"\bADR-\d{4}\b")
+# A citation missing its scope segment. `ADR-ARCH-0001` does not match,
+# because the scope segment separates `ADR-` from the digits.
+CITATION_WITHOUT_SCOPE = re.compile(r"\bADR-\d{4}\b")
 
 
 @dataclass(frozen=True)
@@ -134,20 +134,22 @@ def strip_fenced_blocks(text: str) -> str:
     A record may legitimately show Markdown or configuration containing a line
     that starts with `##`; inside a fence it is literal content, not a section.
     """
-    lines = text.splitlines()
     fence: str | None = None
     kept: list[str] = []
-    for line in lines:
+    for line in text.splitlines():
         stripped = line.lstrip()
         if fence is None:
             marker = re.match(r"(`{3,}|~{3,})", stripped)
             if marker is not None:
-                fence = marker.group(1)[0] * 3
+                # Keep the opening marker's full length. A longer fence exists
+                # precisely so a shorter one can appear as literal content.
+                fence = marker.group(1)
                 kept.append("")
                 continue
             kept.append(line)
             continue
-        if stripped.startswith(fence) and stripped.strip(fence[0]) == "":
+        closing = rf"{re.escape(fence[0])}{{{len(fence)},}}\s*"
+        if re.fullmatch(closing, stripped):
             fence = None
         kept.append("")
     return "\n".join(kept)
@@ -243,8 +245,8 @@ def load(path: Path, root: Path, errors: list[str]) -> Record | None:
             ok = False
 
     body = text[front_matter.end() :]
-    for citation in sorted(set(UNSCOPED_CITATION.findall(body))):
-        errors.append(f"{relative}: cites {citation} without a scope; use the scoped identifier")
+    for citation in sorted(set(CITATION_WITHOUT_SCOPE.findall(body))):
+        errors.append(f"{relative}: cites {citation} without a scope segment; name the full identifier")
         ok = False
 
     found = SECTION_HEADING.findall(strip_fenced_blocks(body))
