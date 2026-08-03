@@ -106,6 +106,28 @@ def sort_key(record: Record) -> tuple[str, str]:
     return (record.scope, record.identifier)
 
 
+def contained_path(item: str, root: Path, key: str, relative: str, errors: list[str]) -> bool:
+    """Check that `item` names an existing path inside the repository.
+
+    An absolute path or a traversal would otherwise make validation depend on
+    the host filesystem rather than on the repository content.
+    """
+    if not item:
+        errors.append(f"{relative}: {key} contains an empty path")
+        return False
+    if Path(item).is_absolute():
+        errors.append(f"{relative}: {key} names absolute path {item}; use a repository-relative path")
+        return False
+    target = (root / item).resolve()
+    if target != root.resolve() and root.resolve() not in target.parents:
+        errors.append(f"{relative}: {key} names {item}, which resolves outside the repository")
+        return False
+    if not target.exists():
+        errors.append(f"{relative}: {key} names {item}, which does not exist")
+        return False
+    return True
+
+
 def load(path: Path, root: Path, errors: list[str]) -> Record | None:
     relative = path.relative_to(root).as_posix()
     filename_match = FILENAME.match(path.name)
@@ -180,8 +202,7 @@ def load(path: Path, root: Path, errors: list[str]) -> Record | None:
             continue
         if key in PATH_KEYS:
             for item in value:
-                if not (root / item).exists():
-                    errors.append(f"{relative}: {key} names {item}, which does not exist")
+                if not contained_path(item, root, key, relative, errors):
                     ok = False
 
     heading = HEADING.search(text)
