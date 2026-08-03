@@ -6,7 +6,8 @@ status: proposed
 date: 2026-08-01
 supersedes: []
 superseded_by: []
-affected_contracts: []
+affected_contracts:
+  - contracts/interfaces/p-r/0.2.0
 affected_documents: []
 ---
 
@@ -26,12 +27,21 @@ Submission acceptance transfers ownership of an immutable logical copy. Every ac
 
 Interface opening returns an atomic Edge snapshot plus continuation event sequence. Edge revisions and Interface event sequences are monotonic. Reset invalidates all runtime identifiers.
 
-## Consequences
+## Architectural boundaries
 
-- P-0AP must model finite resources rather than unlimited in-memory queues.
-- QUIC stream use cannot leak an ordering promise upward.
-- Optional unreliable profiles can be proposed later without weakening the stable baseline.
-- deterministic race scenarios become part of conformance.
+- Owned by: the P–R Interface.
+- Consumed through: `NOVA-IF-P-R` Submission, completion, and Interface event operations.
+- Must not depend on: QUIC stream behavior, in-memory queue behavior, or any provider's resource model.
+- Information allowed to cross the boundary: Submission acceptance, exactly one terminal completion per accepted Submission, Edge revisions, and a monotonic Interface event sequence.
+- Information prohibited from crossing the boundary: an ordering promise derived from a provider's transport, and any runtime identifier that survives a reset.
+
+## Interface and contract impact
+
+`NOVA-IF-P-R 0.2.0` defines the atomic reliable SDU baseline, ownership transfer on acceptance, exactly-one completion, `INTERFACE_RESET` for unresolved Submissions, finite queues with `WOULD_BLOCK` and event-driven capacity recovery, terminal behavior for service-profile removal and orderly close, and monotonic revisions and event sequences. Cancellation is excluded.
+
+## Security and privacy impact
+
+Delivery is authenticated and replay-protected while an Edge remains usable, which the baseline requires of every provider. Finite queues and explicit reset semantics bound the resources an adversary can consume through the Interface. The baseline does not itself establish the cryptographic strength of any underlying carriage.
 
 ## Alternatives considered
 
@@ -40,6 +50,21 @@ Interface opening returns an atomic Edge snapshot plus continuation event sequen
 - Cancellation in the initial baseline.
 - Unbounded provider queues.
 
-## Validation plan
+## Consequences
+
+- P-0AP must model finite resources rather than unlimited in-memory queues.
+- QUIC stream use cannot leak an ordering promise upward.
+- Optional unreliable profiles can be proposed later without weakening the stable baseline.
+- deterministic race scenarios become part of conformance.
+
+## Validation and conformance
 
 Test atomic delivery, ownership, exactly-one completion, both submit/remove linearizations, finite backpressure, capacity notification, profile removal, expiry, orderly close, reset ordering, event-backlog exhaustion, sequence gaps, stale Edge revisions, and no post-removal delivery.
+
+## Migration and rollback
+
+`0.1.0` left these semantics undefined, so no compatible migration exists; consumers move to `0.2.0` directly. Optional unreliable profiles may be added later without weakening the baseline.
+
+## Unresolved questions
+
+Whether cancellation is added as a later capability, and which unreliable profiles are worth defining, remain open.

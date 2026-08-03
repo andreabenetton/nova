@@ -29,12 +29,21 @@ After the contract and P-0AP milestone:
 
 QUIC is the first real external-underlay integration. Ethernet is the first real Nexus Fundamenta integration, but not the first external implementation milestone.
 
-## Consequences
+## Architectural boundaries
 
-- A multi-node R-Stratum prototype can run earlier in ordinary CI.
-- P-RAP and R-Stratum can produce feedback while P-LAP remains under design.
-- P-0AP and simulated integrations provide deterministic reproduction.
-- The project must prevent QUIC semantics from leaking into P-RAP or the P-R Interface.
+- Owned by: the project's implementation sequence rather than any protocol.
+- Consumed through: the existing P-LAP Adapter, P-RAP Binding, and Path Provider contracts, which sequencing does not alter.
+- Must not depend on: QUIC semantics reaching P-RAP or the P–R Interface.
+- Information allowed to cross the boundary: nothing beyond what the affected contracts already declare.
+- Information prohibited from crossing the boundary: transport-specific behavior introduced because it was convenient for the first integration.
+
+## Interface and contract impact
+
+No Interface version changes as a result of sequencing. The Binding and Adapter contracts must be complete enough for their simulated and real providers before the corresponding implementation milestone is accepted.
+
+## Security and privacy impact
+
+QUIC reduces the amount of new remote-transport security code in the first integration, but it does not prove P-RAP Association security or binding independence. Ethernet and P-LAP security remain separate work.
 
 ## Alternatives considered
 
@@ -42,18 +51,25 @@ QUIC is the first real external-underlay integration. Ethernet is the first real
 - Use TCP as the first P-RAP Binding.
 - Implement R-Stratum only after both P-LAP and P-RAP are complete.
 
-## Contract and migration impact
+## Consequences
 
-No Interface version is changed solely by sequencing. The P-RAP Binding and P-LAP Adapter contracts must be complete enough for their simulated and real providers before implementation milestones are accepted.
+- A multi-node R-Stratum prototype can run earlier in ordinary CI.
+- P-RAP and R-Stratum can produce feedback while P-LAP remains under design.
+- P-0AP and simulated integrations provide deterministic reproduction.
+- The project must prevent QUIC semantics from leaking into P-RAP or the P-R Interface.
 
-## Security impact
-
-QUIC reduces the amount of new remote-transport security code in the first integration, but it does not prove P-RAP Association security or binding independence. Ethernet and P-LAP security remain separate work.
-
-## Validation plan
+## Validation and conformance
 
 - Demonstrate R-Stratum over P-0AP.
 - Demonstrate P-RAP over the Simulated Binding.
 - Demonstrate multi-node forwarding over IPv4-QUIC and IPv6-QUIC.
 - Demonstrate P-LAP over the Simulated Adapter and then Ethernet.
 - Demonstrate a mixed P-LAP/P-RAP topology without R-Stratum source changes.
+
+## Migration and rollback
+
+Sequencing may be revised without a contract change. Reordering the milestones does not invalidate work already completed against a contract.
+
+## Unresolved questions
+
+Whether TCP Bindings are needed at all, beyond compatibility, is deferred until QUIC integration is complete.

@@ -27,6 +27,9 @@ SCOPES = {
     "p-r-interface": ("PR", "interfaces/p-r"),
     "r-o-interface": ("RO", "interfaces/r-o"),
     "p-stratum": ("P", "p-stratum"),
+    "p-0ap": ("P0AP", "p-stratum/p-0ap"),
+    "p-lap": ("PLAP", "p-stratum/p-lap"),
+    "p-rap": ("PRAP", "p-stratum/p-rap"),
     "r-stratum": ("R", "r-stratum"),
     "o-stratum": ("O", "o-stratum"),
     "security": ("SEC", "security"),
@@ -48,14 +51,39 @@ REQUIRED_KEYS = (
     "affected_documents",
 )
 LIST_KEYS = ("supersedes", "superseded_by", "affected_contracts", "affected_documents")
+PATH_KEYS = ("affected_contracts", "affected_documents")
 
-FILENAME = re.compile(r"^ADR-([A-Z]+)-(\d{4})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
-HEADING = re.compile(r"^# (ADR-[A-Z]+-\d{4}): (.+)$", re.M)
+# The canonical section set, in the order records must use. A required section
+# with nothing to report says `none` rather than being dropped, so an absent
+# concern reads as considered rather than forgotten.
+SECTIONS = (
+    ("Context", True),
+    ("Decision drivers", False),
+    ("Decision", True),
+    ("Architectural boundaries", True),
+    ("Interface and contract impact", True),
+    ("Wire compatibility impact", False),
+    ("Implementation impact", False),
+    ("Security and privacy impact", True),
+    ("Alternatives considered", True),
+    ("Consequences", True),
+    ("Validation and conformance", True),
+    ("Migration and rollback", True),
+    ("Unresolved questions", True),
+)
+SECTION_ORDER = [name for name, _ in SECTIONS]
+REQUIRED_SECTIONS = [name for name, required in SECTIONS if required]
+SECTION_HEADING = re.compile(r"^## (.+)$", re.M)
+
+# A prefix may contain digits (P0AP) but always starts with a letter, which
+# keeps it distinguishable from the four-digit sequence that follows.
+FILENAME = re.compile(r"^ADR-([A-Z][A-Z0-9]*)-(\d{4})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+HEADING = re.compile(r"^# (ADR-[A-Z][A-Z0-9]*-\d{4}): (.+)$", re.M)
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-# Retired global identifiers. `ADR-ARCH-0001` does not match: the scope
-# segment separates `ADR-` from the digits.
-LEGACY_CITATION = re.compile(r"\bADR-\d{4}\b")
+# An unscoped citation. `ADR-ARCH-0001` does not match: the scope segment
+# separates `ADR-` from the digits.
+UNSCOPED_CITATION = re.compile(r"\bADR-\d{4}\b")
 
 
 @dataclass(frozen=True)
@@ -149,6 +177,12 @@ def load(path: Path, root: Path, errors: list[str]) -> Record | None:
         if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
             errors.append(f"{relative}: {key} must be a list of strings")
             ok = False
+            continue
+        if key in PATH_KEYS:
+            for item in value:
+                if not (root / item).exists():
+                    errors.append(f"{relative}: {key} names {item}, which does not exist")
+                    ok = False
 
     heading = HEADING.search(text)
     if heading is None:
@@ -163,8 +197,26 @@ def load(path: Path, root: Path, errors: list[str]) -> Record | None:
             ok = False
 
     body = text[front_matter.end() :]
-    for citation in sorted(set(LEGACY_CITATION.findall(body))):
-        errors.append(f"{relative}: cites retired global identifier {citation}")
+    for citation in sorted(set(UNSCOPED_CITATION.findall(body))):
+        errors.append(f"{relative}: cites {citation} without a scope; use the scoped identifier")
+        ok = False
+
+    found = SECTION_HEADING.findall(body)
+    unknown_sections = [name for name in found if name not in SECTION_ORDER]
+    if unknown_sections:
+        errors.append(f"{relative}: unknown section(s) {', '.join(unknown_sections)}")
+        ok = False
+    duplicates = sorted({name for name in found if found.count(name) > 1})
+    if duplicates:
+        errors.append(f"{relative}: repeated section(s) {', '.join(duplicates)}")
+        ok = False
+    missing_sections = [name for name in REQUIRED_SECTIONS if name not in found]
+    if missing_sections:
+        errors.append(f"{relative}: missing required section(s) {', '.join(missing_sections)}")
+        ok = False
+    known = [name for name in found if name in SECTION_ORDER]
+    if known != sorted(known, key=SECTION_ORDER.index):
+        errors.append(f"{relative}: sections are out of canonical order")
         ok = False
 
     if not ok:

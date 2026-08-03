@@ -22,11 +22,21 @@ The Nova design requires independently implementable components and bounded cont
 
 Nova components shall interact across explicit, independently versioned Interface contracts. A higher stratum shall not depend on the private protocol or implementation of a lower stratum.
 
-## Consequences
+## Architectural boundaries
 
-- Contracts and tests become first-class design artifacts.
-- Implementation modules receive narrower context.
-- Additional schema and CI tooling is required.
+- Owned by: `canon/architecture.md` and `canon/authority.md`.
+- Consumed through: every versioned NIDL contract under `contracts/interfaces/`.
+- Must not depend on: the private protocol or implementation of any stratum.
+- Information allowed to cross the boundary: the operations, events, types, errors, capabilities, and limits a contract declares.
+- Information prohibited from crossing the boundary: implementation internals, provider provenance, and underlying technology identity.
+
+## Interface and contract impact
+
+This record constrains every boundary rather than one contract version. Each replaceable boundary requires its own versioned NIDL contract, and no existing contract version changes as a direct result.
+
+## Security and privacy impact
+
+The decision reduces accidental cross-layer coupling but does not itself prove protocol security.
 
 ## Alternatives considered
 
@@ -34,14 +44,20 @@ Nova components shall interact across explicit, independently versioned Interfac
 - One monolithic P-Stratum protocol.
 - Implementation-specific interfaces without shared conformance.
 
-## Contract and migration impact
+## Consequences
 
-To be specified before acceptance.
+- Contracts and tests become first-class design artifacts.
+- Implementation modules receive narrower context.
+- Additional schema and CI tooling is required.
 
-## Security impact
-
-The decision reduces accidental cross-layer coupling but does not itself prove protocol security.
-
-## Validation plan
+## Validation and conformance
 
 Require schema validation, dependency checks, generated mocks, and conformance scenarios before acceptance.
+
+## Migration and rollback
+
+none. The decision establishes the baseline architecture rather than replacing an earlier one.
+
+## Unresolved questions
+
+none.

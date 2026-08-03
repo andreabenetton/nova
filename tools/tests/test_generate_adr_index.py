@@ -37,6 +37,42 @@ VALID = textwrap.dedent(
     ## Context
 
     Body.
+
+    ## Decision
+
+    Body.
+
+    ## Architectural boundaries
+
+    Body.
+
+    ## Interface and contract impact
+
+    none.
+
+    ## Security and privacy impact
+
+    none.
+
+    ## Alternatives considered
+
+    Body.
+
+    ## Consequences
+
+    Body.
+
+    ## Validation and conformance
+
+    Body.
+
+    ## Migration and rollback
+
+    none.
+
+    ## Unresolved questions
+
+    none.
     """
 )
 
@@ -106,6 +142,21 @@ class AdrIndexTestCase(unittest.TestCase):
                 self.assertEqual(record.scope, scope)
                 path.unlink()
 
+    def test_prefix_containing_a_digit_is_parsed(self) -> None:
+        self.write(
+            "p-stratum/p-0ap/ADR-P0AP-0001-deterministic-virtual-fabric.md",
+            VALID.replace("adr: ADR-P-0001", "adr: ADR-P0AP-0001")
+            .replace("scope: p-stratum", "scope: p-0ap")
+            .replace("# ADR-P-0001:", "# ADR-P0AP-0001:"),
+        )
+        code, out, _ = self.run_tool()
+        self.assertEqual(code, 0)
+        self.assertIn("1 record(s)", out)
+
+    def test_prefix_starting_with_a_digit_is_rejected(self) -> None:
+        self.write("p-stratum/ADR-0P-0001-split.md", VALID)
+        self.assert_rejected("filename must match")
+
     def test_supersession_pair_is_accepted(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
@@ -121,12 +172,71 @@ class AdrIndexTestCase(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertIn("2 record(s)", out)
 
+    def test_optional_sections_are_accepted_in_canonical_position(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("## Decision\n", "## Decision drivers\n\nBody.\n\n## Decision\n")
+            .replace(
+                "## Security and privacy impact\n",
+                "## Wire compatibility impact\n\nnone.\n\n## Implementation impact\n\nBody.\n\n## Security and privacy impact\n",
+            ),
+        )
+        code, _, _ = self.run_tool()
+        self.assertEqual(code, 0)
+
+    def test_existing_affected_paths_are_accepted(self) -> None:
+        (self.root / "canon").mkdir()
+        (self.root / "canon" / "versioning.md").write_text("x", encoding="utf-8")
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("affected_documents: []", "affected_documents: [canon/versioning.md]"),
+        )
+        code, _, _ = self.run_tool()
+        self.assertEqual(code, 0)
+
     # Rejection.
 
-    def test_filename_without_scope_prefix_is_rejected(self) -> None:
+    def test_missing_required_section_is_rejected(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("## Migration and rollback\n\nnone.\n\n", ""),
+        )
+        self.assert_rejected("missing required section(s) Migration and rollback")
+
+    def test_unknown_section_is_rejected(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("## Consequences\n", "## Notes\n\nBody.\n\n## Consequences\n"),
+        )
+        self.assert_rejected("unknown section(s) Notes")
+
+    def test_repeated_section_is_rejected(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("## Consequences\n", "## Consequences\n\nBody.\n\n## Consequences\n"),
+        )
+        self.assert_rejected("repeated section(s) Consequences")
+
+    def test_sections_out_of_canonical_order_are_rejected(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("## Consequences\n\nBody.\n\n", "").replace(
+                "## Alternatives considered\n", "## Consequences\n\nBody.\n\n## Alternatives considered\n"
+            ),
+        )
+        self.assert_rejected("sections are out of canonical order")
+
+    def test_affected_path_that_does_not_exist_is_rejected(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("affected_contracts: []", "affected_contracts: [contracts/interfaces/p-r/9.9.9]"),
+        )
+        self.assert_rejected("affected_contracts names contracts/interfaces/p-r/9.9.9, which does not exist")
+
+    def test_filename_without_scope_prefix_is_ignored(self) -> None:
         self.write("p-stratum/0001-split-p-stratum-into-p-lap-and-p-rap.md", VALID)
         code, out, _ = self.run_tool()
-        # A legacy filename is not discovered as a record at all.
+        # An unprefixed filename is not discovered as a record at all.
         self.assertEqual(code, 0)
         self.assertIn("0 record(s)", out)
 
@@ -237,14 +347,14 @@ class AdrIndexTestCase(unittest.TestCase):
         )
         self.assert_rejected("supersedes must be a list of strings")
 
-    def test_legacy_identifier_citation_is_rejected(self) -> None:
+    def test_unscoped_identifier_citation_is_rejected(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
             VALID.replace("Body.", "This refines ADR-0002."),
         )
-        self.assert_rejected("cites retired global identifier ADR-0002")
+        self.assert_rejected("cites ADR-0002 without a scope")
 
-    def test_scoped_identifier_in_the_body_is_not_a_legacy_citation(self) -> None:
+    def test_scoped_identifier_in_the_body_is_not_an_unscoped_citation(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
             VALID.replace("Body.", "This refines ADR-ARCH-0001."),

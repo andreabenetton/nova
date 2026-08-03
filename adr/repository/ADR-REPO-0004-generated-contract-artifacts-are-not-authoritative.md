@@ -22,11 +22,21 @@ The Nova design requires independently implementable components and bounded cont
 
 NIDL source and its validated semantic model are authoritative. Generated Rust code, canonical JSON, mocks, and documentation are derived and must be reproducible in CI.
 
-## Consequences
+## Architectural boundaries
 
-- Contracts and tests become first-class design artifacts.
-- Implementation modules receive narrower context.
-- Additional schema and CI tooling is required.
+- Owned by: the NIDL source under `contracts/` and its validated semantic model.
+- Consumed through: generated artifacts under `generated/`, which are derived and reproducible.
+- Must not depend on: a hand edit to any generated file.
+- Information allowed to cross the boundary: anything derivable from the source model by a tool.
+- Information prohibited from crossing the boundary: a change introduced in a generated artifact and not present in its source.
+
+## Interface and contract impact
+
+Generated Rust code, canonical JSON, mocks, and documentation carry no authority. A contract question is answered from NIDL source and its semantic model.
+
+## Security and privacy impact
+
+The decision reduces accidental cross-layer coupling but does not itself prove protocol security.
 
 ## Alternatives considered
 
@@ -34,14 +44,20 @@ NIDL source and its validated semantic model are authoritative. Generated Rust c
 - One monolithic P-Stratum protocol.
 - Implementation-specific interfaces without shared conformance.
 
-## Contract and migration impact
+## Consequences
 
-To be specified before acceptance.
+- Contracts and tests become first-class design artifacts.
+- Implementation modules receive narrower context.
+- Additional schema and CI tooling is required.
 
-## Security impact
-
-The decision reduces accidental cross-layer coupling but does not itself prove protocol security.
-
-## Validation plan
+## Validation and conformance
 
 Require schema validation, dependency checks, generated mocks, and conformance scenarios before acceptance.
+
+## Migration and rollback
+
+none.
+
+## Unresolved questions
+
+none.

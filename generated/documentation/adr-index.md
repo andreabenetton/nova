@@ -32,10 +32,24 @@ No records.
 | ADR-P-0001 | Split P-Stratum into P-LAP and P-RAP | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md](../../adr/p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md) |
 | ADR-P-0002 | Adapters and Bindings are distinct extension points | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0002-adapters-and-bindings-are-distinct.md](../../adr/p-stratum/ADR-P-0002-adapters-and-bindings-are-distinct.md) |
 | ADR-P-0003 | Sequence QUIC before Ethernet while developing R-Stratum in parallel | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0003-sequence-quic-before-ethernet.md](../../adr/p-stratum/ADR-P-0003-sequence-quic-before-ethernet.md) |
-| ADR-P-0004 | QUIC carriage profile | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0004-quic-control-stream-and-datagram-profile.md](../../adr/p-stratum/ADR-P-0004-quic-control-stream-and-datagram-profile.md) |
-| ADR-P-0005 | P-RAP Association is independent from Binding instance | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0005-prap-association-independent-from-binding-instance.md](../../adr/p-stratum/ADR-P-0005-prap-association-independent-from-binding-instance.md) |
-| ADR-P-0006 | Add P-0AP and a deterministic Virtual Fabric | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0006-p-0ap-and-deterministic-virtual-fabric.md](../../adr/p-stratum/ADR-P-0006-p-0ap-and-deterministic-virtual-fabric.md) |
-| ADR-P-0007 | Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0007-path-provider-protocols-and-p-stratum-objectives.md](../../adr/p-stratum/ADR-P-0007-path-provider-protocols-and-p-stratum-objectives.md) |
+| ADR-P-0004 | Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols | proposed | 2026-08-01 | [adr/p-stratum/ADR-P-0004-path-provider-protocols-and-p-stratum-objectives.md](../../adr/p-stratum/ADR-P-0004-path-provider-protocols-and-p-stratum-objectives.md) |
+
+## p-0ap (`ADR-P0AP-`, `adr/p-stratum/p-0ap/`)
+
+| Identifier | Title | Status | Date | Source |
+|---|---|---|---|---|
+| ADR-P0AP-0001 | Add P-0AP and a deterministic Virtual Fabric | proposed | 2026-08-01 | [adr/p-stratum/p-0ap/ADR-P0AP-0001-p-0ap-and-deterministic-virtual-fabric.md](../../adr/p-stratum/p-0ap/ADR-P0AP-0001-p-0ap-and-deterministic-virtual-fabric.md) |
+
+## p-lap (`ADR-PLAP-`, `adr/p-stratum/p-lap/`)
+
+No records.
+
+## p-rap (`ADR-PRAP-`, `adr/p-stratum/p-rap/`)
+
+| Identifier | Title | Status | Date | Source |
+|---|---|---|---|---|
+| ADR-PRAP-0001 | QUIC carriage profile | proposed | 2026-08-01 | [adr/p-stratum/p-rap/ADR-PRAP-0001-quic-control-stream-and-datagram-profile.md](../../adr/p-stratum/p-rap/ADR-PRAP-0001-quic-control-stream-and-datagram-profile.md) |
+| ADR-PRAP-0002 | P-RAP Association is independent from Binding instance | proposed | 2026-08-01 | [adr/p-stratum/p-rap/ADR-PRAP-0002-prap-association-independent-from-binding-instance.md](../../adr/p-stratum/p-rap/ADR-PRAP-0002-prap-association-independent-from-binding-instance.md) |
 
 ## r-stratum (`ADR-R-`, `adr/r-stratum/`)
 

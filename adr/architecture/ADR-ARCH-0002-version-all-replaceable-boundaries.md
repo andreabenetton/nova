@@ -7,7 +7,8 @@ date: 2026-08-01
 supersedes: []
 superseded_by: []
 affected_contracts: []
-affected_documents: []
+affected_documents:
+  - canon/versioning.md
 ---
 
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
@@ -22,11 +23,21 @@ The Nova design requires independently implementable components and bounded cont
 
 Inter-stratum, Path Provider, Adapter, Binding, facility, Platform Attachment, and analogous replaceable boundaries shall each have an independent versioned NIDL contract.
 
-## Consequences
+## Architectural boundaries
 
-- Contracts and tests become first-class design artifacts.
-- Implementation modules receive narrower context.
-- Additional schema and CI tooling is required.
+- Owned by: `canon/versioning.md`.
+- Consumed through: the contract registry `contracts/registry.yaml` and the versioned directories under `contracts/interfaces/`.
+- Must not depend on: any single implementation's release cadence.
+- Information allowed to cross the boundary: contract identity, version, kind, and declared roles.
+- Information prohibited from crossing the boundary: an implementation's internal version or build identity.
+
+## Interface and contract impact
+
+Every inter-stratum, Path Provider, Adapter, Binding, facility, and Platform Attachment boundary carries an independently versioned contract. Adding a replaceable boundary without a contract is prohibited by this record.
+
+## Security and privacy impact
+
+The decision reduces accidental cross-layer coupling but does not itself prove protocol security.
 
 ## Alternatives considered
 
@@ -34,14 +45,20 @@ Inter-stratum, Path Provider, Adapter, Binding, facility, Platform Attachment, a
 - One monolithic P-Stratum protocol.
 - Implementation-specific interfaces without shared conformance.
 
-## Contract and migration impact
+## Consequences
 
-To be specified before acceptance.
+- Contracts and tests become first-class design artifacts.
+- Implementation modules receive narrower context.
+- Additional schema and CI tooling is required.
 
-## Security impact
-
-The decision reduces accidental cross-layer coupling but does not itself prove protocol security.
-
-## Validation plan
+## Validation and conformance
 
 Require schema validation, dependency checks, generated mocks, and conformance scenarios before acceptance.
+
+## Migration and rollback
+
+none. Boundaries that predate the rule are already versioned.
+
+## Unresolved questions
+
+none.
