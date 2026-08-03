@@ -74,6 +74,28 @@ affected_documents: []
 
 All nine keys are required and no others are permitted. `supersedes` and `superseded_by` MUST be symmetric between the two records, and a record with a `superseded_by` entry MUST carry the `superseded` or `deprecated` status.
 
+## Sections
+
+Records use one canonical section set so that two records can be compared, and so that a reader knows an absent concern was considered rather than forgotten. Sections appear in this order:
+
+| Section | Required |
+|---|---|
+| `## Context` | yes |
+| `## Decision drivers` | optional |
+| `## Decision` | yes |
+| `## Architectural boundaries` | yes |
+| `## Interface and contract impact` | yes |
+| `## Wire compatibility impact` | optional |
+| `## Implementation impact` | optional |
+| `## Security and privacy impact` | yes |
+| `## Alternatives considered` | yes |
+| `## Consequences` | yes |
+| `## Validation and conformance` | yes |
+| `## Migration and rollback` | yes |
+| `## Unresolved questions` | yes |
+
+A required section with nothing to report says `none`; it is not dropped. No other second-level heading is permitted, so a new concern becomes a template change rather than a per-record invention. Third-level headings are unconstrained.
+
 ## Index
 
 `generated/documentation/adr-index.md` lists every record by scope, with title, status, and date. It is generated, never hand-edited, and is the cheapest entry point when looking for the record that governs a topic.
@@ -110,10 +132,11 @@ Every record now uses a scope directory and a scoped identifier. The original gl
 ## Workflow
 
 1. Copy [`template.md`](template.md) into the correct scope directory.
-2. Allocate the next unused identifier within that scope.
-3. Declare affected contracts and normative documents.
+2. Allocate the next unused identifier within that scope, and check the index for the highest one already taken.
+3. Fill in the front matter, including affected contracts and normative documents.
 4. State architectural ownership and prohibited dependencies explicitly.
 5. Add validation and migration evidence appropriate to the decision.
-6. Submit the ADR for review before treating it as accepted authority.
+6. Run `make adr-index` to regenerate the index and validate the record.
+7. Submit the ADR for review before treating it as accepted authority.
 
 Accepted ADRs are subordinate to `canon/`, versioned `contracts/`, and stratum-owned normative protocol specifications. When an accepted ADR requires a normative change, update the authoritative artifact rather than relying on the ADR alone.
