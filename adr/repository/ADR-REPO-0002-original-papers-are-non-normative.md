@@ -1,10 +1,18 @@
+---
+adr: ADR-REPO-0002
+title: Original papers are non-normative research inputs
+scope: repository
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0001: Strict strata and versioned boundaries
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-REPO-0002: Original papers are non-normative research inputs
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-Nova components shall interact across explicit, independently versioned Interface contracts. A higher stratum shall not depend on the private protocol or implementation of a lower stratum.
+The Nova and P-Stratum papers remain preserved under research/original-papers. New canon, contracts, protocols, and accepted ADRs define conformance.
 
 ## Consequences
 

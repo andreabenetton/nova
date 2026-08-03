@@ -1,10 +1,18 @@
+---
+adr: ADR-REPO-0003
+title: LLM context manifests and knowledge firewalls
+scope: repository
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0012: Generated artifacts are not authoritative
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-REPO-0003: LLM context manifests and knowledge firewalls
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-NIDL source and its validated semantic model are authoritative. Generated Rust code, canonical JSON, mocks, and documentation are derived and must be reproducible in CI.
+Every implementation unit shall declare required, optional, and forbidden context. CI shall validate manifests and code dependency rules.
 
 ## Consequences
 

@@ -1,9 +1,18 @@
+---
+adr: ADR-ARCH-0003
+title: Scope terminology by stratum
+scope: architecture
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0019: Scope terminology by stratum
-
-- Status: Proposed
-- Date: 2026-08-01
+# ADR-ARCH-0003: Scope terminology by stratum
 
 ## Context
 

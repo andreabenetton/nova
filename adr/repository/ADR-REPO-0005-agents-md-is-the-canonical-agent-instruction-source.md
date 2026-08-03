@@ -1,10 +1,18 @@
+---
+adr: ADR-REPO-0005
+title: AGENTS.md is the canonical agent instruction source
+scope: repository
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0013: AGENTS.md is the canonical agent instruction source
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-REPO-0005: AGENTS.md is the canonical agent instruction source
 
 ## Context
 

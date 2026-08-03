@@ -1,10 +1,18 @@
+---
+adr: ADR-ARCH-0002
+title: Version all replaceable boundaries
+scope: architecture
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0010: IP-over-Nova is an O-Stratum Compatibility Service
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-ARCH-0002: Version all replaceable boundaries
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-IP-over-Nova shall operate above O-Stratum. Operating-system integration shall use Platform Attachments such as Windows NDIS and Linux TUN. These are not P-LAP Adapters or P-RAP Bindings.
+Inter-stratum, Path Provider, Adapter, Binding, facility, Platform Attachment, and analogous replaceable boundaries shall each have an independent versioned NIDL contract.
 
 ## Consequences
 

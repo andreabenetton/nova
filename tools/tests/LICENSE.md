@@ -1,5 +1,5 @@
 # Directory license notice
 
-Files directly in `adr/accepted` are licensed under `CC-BY-4.0` unless a file-level
+Files directly in `tools/tests` are licensed under `Apache-2.0` unless a file-level
 SPDX identifier states otherwise. Child directories carry their own
 `LICENSE.md` markers. The authoritative mapping is `../../legal/license-policy.yaml`.

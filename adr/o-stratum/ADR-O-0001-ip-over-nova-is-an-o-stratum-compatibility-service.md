@@ -1,10 +1,18 @@
+---
+adr: ADR-O-0001
+title: IP-over-Nova is an O-Stratum Compatibility Service
+scope: o-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0005: QUIC carriage profile
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-O-0001: IP-over-Nova is an O-Stratum Compatibility Service
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-P-RAP over QUIC should use a reliable bidirectional control stream and QUIC DATAGRAM for message-oriented data when available. Reliable data may use streams. Exact mapping remains subject to protocol specification and conformance tests.
+IP-over-Nova shall operate above O-Stratum. Operating-system integration shall use Platform Attachments such as Windows NDIS and Linux TUN. These are not P-LAP Adapters or P-RAP Bindings.
 
 ## Consequences
 

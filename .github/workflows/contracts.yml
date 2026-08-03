@@ -26,12 +26,14 @@ jobs:
       - run: nova-contract context .
       - run: nova-contract boundaries canon/dependency-policy.yaml implementations/rust
       - run: python -m unittest discover -s tools/nova-contract/tests
+      - run: python -m unittest discover -s tools/tests
       - run: python tools/check_repository_shape.py
       - run: python tools/check_agent_instructions.py
       - run: python tools/check_terminology.py
       - run: python tools/check_licenses.py
       - run: python tools/check_simulation_fixtures.py
       - run: python tools/generate_repository_docs.py --check
+      - run: python tools/generate_adr_index.py --check
       - if: github.event_name == 'pull_request'
         run: |
           python tools/ci/check_contract_versions.py "${{ github.event.pull_request.base.sha }}"

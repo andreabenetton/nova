@@ -1,10 +1,18 @@
+---
+adr: ADR-REPO-0004
+title: Generated artifacts are not authoritative
+scope: repository
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0011: P-RAP Association is independent from Binding instance
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-REPO-0004: Generated artifacts are not authoritative
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-A P-RAP Association is identified by Nova identities and Association state, not by an IP five-tuple, socket, QUIC connection, or current Binding instance.
+NIDL source and its validated semantic model are authoritative. Generated Rust code, canonical JSON, mocks, and documentation are derived and must be reproducible in CI.
 
 ## Consequences
 

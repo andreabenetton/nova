@@ -1,10 +1,18 @@
+---
+adr: ADR-P-0001
+title: Split P-Stratum into P-LAP and P-RAP
+scope: p-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0009: LLM context manifests and knowledge firewalls
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-P-0001: Split P-Stratum into P-LAP and P-RAP
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-Every implementation unit shall declare required, optional, and forbidden context. CI shall validate manifests and code dependency rules.
+P-Stratum shall use two distinct peer protocols: P-LAP for link-adjacent Paths and P-RAP for remote Paths over routed underlays. The distinction is protocol-level, not merely an Adapter choice.
 
 ## Consequences
 

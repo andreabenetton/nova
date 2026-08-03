@@ -1,10 +1,18 @@
+---
+adr: ADR-P-0003
+title: Sequence QUIC before Ethernet while developing R-Stratum in parallel
+scope: p-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0004: Sequence QUIC before Ethernet while developing R-Stratum in parallel
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-P-0003: Sequence QUIC before Ethernet while developing R-Stratum in parallel
 
 ## Context
 

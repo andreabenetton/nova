@@ -1,10 +1,18 @@
+---
+adr: ADR-P-0005
+title: P-RAP Association is independent from Binding instance
+scope: p-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0003: Adapters and Bindings are distinct extension points
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-P-0005: P-RAP Association is independent from Binding instance
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-P-LAP uses Adapters for Nexus Fundamenta. P-RAP uses Bindings for integrated routed network and transport combinations. Adapter and Binding are not interchangeable glossary terms.
+A P-RAP Association is identified by Nova identities and Association state, not by an IP five-tuple, socket, QUIC connection, or current Binding instance.
 
 ## Consequences
 

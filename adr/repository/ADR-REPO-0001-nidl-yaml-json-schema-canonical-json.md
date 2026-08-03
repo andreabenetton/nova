@@ -1,10 +1,18 @@
+---
+adr: ADR-REPO-0001
+title: NIDL representation
+scope: repository
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0007: Version all replaceable boundaries
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-REPO-0001: NIDL representation
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-Inter-stratum, Path Provider, Adapter, Binding, facility, Platform Attachment, and analogous replaceable boundaries shall each have an independent versioned NIDL contract.
+Humans and LLMs author restricted YAML. JSON Schema validates structure. Tooling normalizes the semantic model to deterministic JSON for fingerprints and generated artifacts.
 
 ## Consequences
 

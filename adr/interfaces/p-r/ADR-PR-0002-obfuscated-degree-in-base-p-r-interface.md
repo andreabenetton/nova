@@ -1,10 +1,18 @@
+---
+adr: ADR-PR-0002
+title: Include Obfuscated degree in the base P-R Interface
+scope: p-r-interface
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0016: Include Obfuscated degree in the base P-R Interface
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-PR-0002: Include Obfuscated degree in the base P-R Interface
 
 ## Context
 

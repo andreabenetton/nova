@@ -1,10 +1,18 @@
+---
+adr: ADR-P-0004
+title: QUIC carriage profile
+scope: p-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0006: NIDL representation
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
+# ADR-P-0004: QUIC carriage profile
 
 ## Context
 
@@ -12,7 +20,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-Humans and LLMs author restricted YAML. JSON Schema validates structure. Tooling normalizes the semantic model to deterministic JSON for fingerprints and generated artifacts.
+P-RAP over QUIC should use a reliable bidirectional control stream and QUIC DATAGRAM for message-oriented data when available. Reliable data may use streams. Exact mapping remains subject to protocol specification and conformance tests.
 
 ## Consequences
 
