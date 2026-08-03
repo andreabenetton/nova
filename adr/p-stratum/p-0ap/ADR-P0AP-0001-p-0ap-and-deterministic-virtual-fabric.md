@@ -1,7 +1,7 @@
 ---
-adr: ADR-P-0006
+adr: ADR-P0AP-0001
 title: Add P-0AP and a deterministic Virtual Fabric
-scope: p-stratum
+scope: p-0ap
 status: proposed
 date: 2026-08-01
 supersedes: []
@@ -12,7 +12,7 @@ affected_documents: []
 
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-P-0006: Add P-0AP and a deterministic Virtual Fabric
+# ADR-P0AP-0001: Add P-0AP and a deterministic Virtual Fabric
 
 ## Context
 

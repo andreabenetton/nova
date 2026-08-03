@@ -13,7 +13,10 @@ New ADRs are organized by decision ownership rather than only by lifecycle state
 | `architecture/` | `ADR-ARCH-` | Cross-stratum architecture, dependency direction, authority, and global invariants |
 | `interfaces/p-r/` | `ADR-PR-` | Decisions jointly owned by the P-Stratum and R-Stratum boundary |
 | `interfaces/r-o/` | `ADR-RO-` | Decisions jointly owned by the R-Stratum and O-Stratum boundary |
-| `p-stratum/` | `ADR-P-` | Decisions private to P-Stratum behavior and design |
+| `p-stratum/` | `ADR-P-` | Decisions spanning more than one P-Stratum Path Provider protocol, or owned by P-Stratum common |
+| `p-stratum/p-0ap/` | `ADR-P0AP-` | Decisions private to P-0AP |
+| `p-stratum/p-lap/` | `ADR-PLAP-` | Decisions private to P-LAP and its Adapter extension point |
+| `p-stratum/p-rap/` | `ADR-PRAP-` | Decisions private to P-RAP, its Association semantics, and Binding carriage |
 | `r-stratum/` | `ADR-R-` | Decisions private to R-Stratum behavior and design |
 | `o-stratum/` | `ADR-O-` | Decisions private to O-Stratum behavior and design |
 | `security/` | `ADR-SEC-` | Cross-cutting security, privacy, cryptographic, and threat-model decisions |
@@ -27,6 +30,8 @@ Interface decisions must not be placed under either adjacent stratum. An Interfa
 Use the narrowest scope that owns the decision completely.
 
 A decision belongs to a stratum directory only when an independent implementation can apply it using that stratum's private specification and its published Interfaces, without changing another stratum's private model.
+
+The same test applies one level down. A decision belongs to a protocol directory only when an implementation of that Path Provider protocol alone can apply it. A decision that constrains two of P-0AP, P-LAP, and P-RAP, or that constrains P-Stratum common, stays in `p-stratum/`. The protocol directories mirror `protocols/p-stratum/`, so a contributor or agent scoped to one protocol loads only the decisions that bind it.
 
 Use:
 
@@ -89,14 +94,15 @@ Status is metadata, not a directory. Moving an ADR because its status changes cr
 
 ## Existing ADRs
 
-Every record now uses a scope directory and a scoped identifier. The original global sequence `0001`–`0020` was migrated in one pass, preserving each record's relative order within its new scope. The legacy numbers are retired and MUST NOT be reused or cited.
-
-Migrated identifiers:
+Every record now uses a scope directory and a scoped identifier. The original global sequence `0001`–`0020` was migrated on 2026-08-03, preserving each record's relative order within its new scope. The legacy numbers are retired and MUST NOT be reused or cited. The identifiers below are the baseline from which the no-reuse rule applies.
 
 | Legacy | Current |
 |---|---|
 | ADR-0001, ADR-0007, ADR-0019 | ADR-ARCH-0001, ADR-ARCH-0002, ADR-ARCH-0003 |
-| ADR-0002, ADR-0003, ADR-0004, ADR-0005, ADR-0011, ADR-0014, ADR-0020 | ADR-P-0001 through ADR-P-0007 |
+| ADR-0002, ADR-0003, ADR-0004 | ADR-P-0001, ADR-P-0002, ADR-P-0003 |
+| ADR-0020 | ADR-P-0004 |
+| ADR-0014 | ADR-P0AP-0001 |
+| ADR-0005, ADR-0011 | ADR-PRAP-0001, ADR-PRAP-0002 |
 | ADR-0015, ADR-0016, ADR-0017 | ADR-PR-0001, ADR-PR-0002, ADR-PR-0003 |
 | ADR-0010 | ADR-O-0001 |
 | ADR-0006, ADR-0008, ADR-0009, ADR-0012, ADR-0013, ADR-0018 | ADR-REPO-0001 through ADR-REPO-0006 |

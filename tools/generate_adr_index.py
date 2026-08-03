@@ -27,6 +27,9 @@ SCOPES = {
     "p-r-interface": ("PR", "interfaces/p-r"),
     "r-o-interface": ("RO", "interfaces/r-o"),
     "p-stratum": ("P", "p-stratum"),
+    "p-0ap": ("P0AP", "p-stratum/p-0ap"),
+    "p-lap": ("PLAP", "p-stratum/p-lap"),
+    "p-rap": ("PRAP", "p-stratum/p-rap"),
     "r-stratum": ("R", "r-stratum"),
     "o-stratum": ("O", "o-stratum"),
     "security": ("SEC", "security"),
@@ -49,8 +52,10 @@ REQUIRED_KEYS = (
 )
 LIST_KEYS = ("supersedes", "superseded_by", "affected_contracts", "affected_documents")
 
-FILENAME = re.compile(r"^ADR-([A-Z]+)-(\d{4})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
-HEADING = re.compile(r"^# (ADR-[A-Z]+-\d{4}): (.+)$", re.M)
+# A prefix may contain digits (P0AP) but always starts with a letter, which
+# keeps it distinguishable from the four-digit sequence that follows.
+FILENAME = re.compile(r"^ADR-([A-Z][A-Z0-9]*)-(\d{4})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+HEADING = re.compile(r"^# (ADR-[A-Z][A-Z0-9]*-\d{4}): (.+)$", re.M)
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 # Retired global identifiers. `ADR-ARCH-0001` does not match: the scope

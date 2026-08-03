@@ -106,6 +106,21 @@ class AdrIndexTestCase(unittest.TestCase):
                 self.assertEqual(record.scope, scope)
                 path.unlink()
 
+    def test_prefix_containing_a_digit_is_parsed(self) -> None:
+        self.write(
+            "p-stratum/p-0ap/ADR-P0AP-0001-deterministic-virtual-fabric.md",
+            VALID.replace("adr: ADR-P-0001", "adr: ADR-P0AP-0001")
+            .replace("scope: p-stratum", "scope: p-0ap")
+            .replace("# ADR-P-0001:", "# ADR-P0AP-0001:"),
+        )
+        code, out, _ = self.run_tool()
+        self.assertEqual(code, 0)
+        self.assertIn("1 record(s)", out)
+
+    def test_prefix_starting_with_a_digit_is_rejected(self) -> None:
+        self.write("p-stratum/ADR-0P-0001-split.md", VALID)
+        self.assert_rejected("filename must match")
+
     def test_supersession_pair_is_accepted(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",

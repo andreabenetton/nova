@@ -1,5 +1,5 @@
 ---
-adr: ADR-P-0007
+adr: ADR-P-0004
 title: Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols
 scope: p-stratum
 status: proposed
@@ -12,7 +12,7 @@ affected_documents: []
 
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-P-0007: Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols
+# ADR-P-0004: Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols
 
 ## Context
 
