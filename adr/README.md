@@ -63,9 +63,17 @@ Status is metadata, not a directory. Moving an ADR because its status changes cr
 
 ## Existing ADRs
 
-The existing globally numbered records under `proposed/` are retained at their current paths to preserve history and links. They use the legacy identifier scheme and remain valid records.
+Every record now uses a scope directory and a scoped identifier. The original global sequence `0001`–`0020` was migrated in one pass, preserving each record's relative order within its new scope. The legacy numbers are retired and MUST NOT be reused or cited.
 
-Do not add new ADRs to `proposed/`. New records use the scoped directories and identifiers described here. A legacy ADR may be moved only as a dedicated migration that preserves redirects or updates every inbound reference and repository check.
+Migrated identifiers:
+
+| Legacy | Current |
+|---|---|
+| ADR-0001, ADR-0007, ADR-0019 | ADR-ARCH-0001, ADR-ARCH-0002, ADR-ARCH-0003 |
+| ADR-0002, ADR-0003, ADR-0004, ADR-0005, ADR-0011, ADR-0014, ADR-0020 | ADR-P-0001 through ADR-P-0007 |
+| ADR-0015, ADR-0016, ADR-0017 | ADR-PR-0001, ADR-PR-0002, ADR-PR-0003 |
+| ADR-0010 | ADR-O-0001 |
+| ADR-0006, ADR-0008, ADR-0009, ADR-0012, ADR-0013, ADR-0018 | ADR-REPO-0001 through ADR-REPO-0006 |
 
 ## Workflow
 

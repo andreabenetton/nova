@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0012: Generated artifacts are not authoritative
+# ADR-ARCH-0002: Version all replaceable boundaries
 
 - Status: proposed
 - Date: 2026-08-01
@@ -12,7 +12,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-NIDL source and its validated semantic model are authoritative. Generated Rust code, canonical JSON, mocks, and documentation are derived and must be reproducible in CI.
+Inter-stratum, Path Provider, Adapter, Binding, facility, Platform Attachment, and analogous replaceable boundaries shall each have an independent versioned NIDL contract.
 
 ## Consequences
 

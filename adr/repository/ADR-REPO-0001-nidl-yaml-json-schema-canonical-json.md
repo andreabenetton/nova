@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0001: Strict strata and versioned boundaries
+# ADR-REPO-0001: NIDL representation
 
 - Status: proposed
 - Date: 2026-08-01
@@ -12,7 +12,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-Nova components shall interact across explicit, independently versioned Interface contracts. A higher stratum shall not depend on the private protocol or implementation of a lower stratum.
+Humans and LLMs author restricted YAML. JSON Schema validates structure. Tooling normalizes the semantic model to deterministic JSON for fingerprints and generated artifacts.
 
 ## Consequences
 

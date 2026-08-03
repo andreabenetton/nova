@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0019: Scope terminology by stratum
+# ADR-ARCH-0003: Scope terminology by stratum
 
 - Status: Proposed
 - Date: 2026-08-01

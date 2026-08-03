@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0006: NIDL representation
+# ADR-O-0001: IP-over-Nova is an O-Stratum Compatibility Service
 
 - Status: proposed
 - Date: 2026-08-01
@@ -12,7 +12,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-Humans and LLMs author restricted YAML. JSON Schema validates structure. Tooling normalizes the semantic model to deterministic JSON for fingerprints and generated artifacts.
+IP-over-Nova shall operate above O-Stratum. Operating-system integration shall use Platform Attachments such as Windows NDIS and Linux TUN. These are not P-LAP Adapters or P-RAP Bindings.
 
 ## Consequences
 

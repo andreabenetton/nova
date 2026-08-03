@@ -1,5 +1,5 @@
 ---
-adr: 20
+adr: ADR-P-0007
 title: Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols
 status: proposed
 date: 2026-08-01
@@ -7,7 +7,7 @@ date: 2026-08-01
 
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0020: Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols
+# ADR-P-0007: Classify P-0AP, P-LAP, and P-RAP as Path Provider protocols
 
 ## Context
 

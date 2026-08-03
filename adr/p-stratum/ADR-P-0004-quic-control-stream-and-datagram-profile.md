@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0011: P-RAP Association is independent from Binding instance
+# ADR-P-0004: QUIC carriage profile
 
 - Status: proposed
 - Date: 2026-08-01
@@ -12,7 +12,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-A P-RAP Association is identified by Nova identities and Association state, not by an IP five-tuple, socket, QUIC connection, or current Binding instance.
+P-RAP over QUIC should use a reliable bidirectional control stream and QUIC DATAGRAM for message-oriented data when available. Reliable data may use streams. Exact mapping remains subject to protocol specification and conformance tests.
 
 ## Consequences
 

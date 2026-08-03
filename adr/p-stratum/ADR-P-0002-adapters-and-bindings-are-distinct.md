@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0008: Original papers are non-normative research inputs
+# ADR-P-0002: Adapters and Bindings are distinct extension points
 
 - Status: proposed
 - Date: 2026-08-01
@@ -12,7 +12,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-The Nova and P-Stratum papers remain preserved under research/original-papers. New canon, contracts, protocols, and accepted ADRs define conformance.
+P-LAP uses Adapters for Nexus Fundamenta. P-RAP uses Bindings for integrated routed network and transport combinations. Adapter and Binding are not interchangeable glossary terms.
 
 ## Consequences
 

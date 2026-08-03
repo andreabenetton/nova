@@ -86,5 +86,5 @@ The implementation sequence is:
 - P-0AP Control contract: `contracts/interfaces/p-0ap-control/0.3.0/`;
 - P-Stratum common design: `protocols/p-stratum/common/`;
 - P-0AP design: `protocols/p-stratum/p-0ap/`;
-- proposed decisions: ADR-0015, ADR-0016, ADR-0017;
+- proposed decisions: ADR-PR-0001, ADR-PR-0002, ADR-PR-0003;
 - implementation sequence and freeze gates: `ROADMAP.md` and `contracts/interfaces/p-r/0.2.0/stability-gates.md`.

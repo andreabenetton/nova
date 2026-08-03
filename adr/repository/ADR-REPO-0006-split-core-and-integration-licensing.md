@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0018: Split core and integration licensing
+# ADR-REPO-0006: Split core and integration licensing
 
 - Status: Proposed
 - Date: 2026-08-01

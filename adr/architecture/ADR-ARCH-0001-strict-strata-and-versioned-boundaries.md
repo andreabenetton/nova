@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0002: Split P-Stratum into P-LAP and P-RAP
+# ADR-ARCH-0001: Strict strata and versioned boundaries
 
 - Status: proposed
 - Date: 2026-08-01
@@ -12,7 +12,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-P-Stratum shall use two distinct peer protocols: P-LAP for link-adjacent Paths and P-RAP for remote Paths over routed underlays. The distinction is protocol-level, not merely an Adapter choice.
+Nova components shall interact across explicit, independently versioned Interface contracts. A higher stratum shall not depend on the private protocol or implementation of a lower stratum.
 
 ## Consequences
 

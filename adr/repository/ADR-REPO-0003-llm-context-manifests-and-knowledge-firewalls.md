@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# ADR-0005: QUIC carriage profile
+# ADR-REPO-0003: LLM context manifests and knowledge firewalls
 
 - Status: proposed
 - Date: 2026-08-01
@@ -12,7 +12,7 @@ The Nova design requires independently implementable components and bounded cont
 
 ## Decision
 
-P-RAP over QUIC should use a reliable bidirectional control stream and QUIC DATAGRAM for message-oriented data when available. Reliable data may use streams. Exact mapping remains subject to protocol specification and conformance tests.
+Every implementation unit shall declare required, optional, and forbidden context. CI shall validate manifests and code dependency rules.
 
 ## Consequences
 
