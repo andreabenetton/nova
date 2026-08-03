@@ -250,6 +250,35 @@ class AdrIndexTestCase(unittest.TestCase):
         )
         self.assert_rejected("contains an empty path")
 
+    def test_heading_inside_a_fence_is_not_a_section(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace(
+                "## Consequences\n\nBody.\n",
+                "## Consequences\n\n```markdown\n## Retry policy\n```\n\nBody.\n",
+            ),
+        )
+        code, _, _ = self.run_tool()
+        self.assertEqual(code, 0)
+
+    def test_tilde_fence_is_also_stripped(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace(
+                "## Consequences\n\nBody.\n",
+                "## Consequences\n\n~~~text\n## Retry policy\n~~~\n\nBody.\n",
+            ),
+        )
+        code, _, _ = self.run_tool()
+        self.assertEqual(code, 0)
+
+    def test_required_section_only_inside_a_fence_is_rejected(self) -> None:
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("## Consequences\n\nBody.\n", "```markdown\n## Consequences\n```\n"),
+        )
+        self.assert_rejected("missing required section(s) Consequences")
+
     def test_affected_path_that_does_not_exist_is_rejected(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",

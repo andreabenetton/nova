@@ -128,6 +128,31 @@ def contained_path(item: str, root: Path, key: str, relative: str, errors: list[
     return True
 
 
+def strip_fenced_blocks(text: str) -> str:
+    """Blank out fenced code blocks so their content is not read as structure.
+
+    A record may legitimately show Markdown or configuration containing a line
+    that starts with `##`; inside a fence it is literal content, not a section.
+    """
+    lines = text.splitlines()
+    fence: str | None = None
+    kept: list[str] = []
+    for line in lines:
+        stripped = line.lstrip()
+        if fence is None:
+            marker = re.match(r"(`{3,}|~{3,})", stripped)
+            if marker is not None:
+                fence = marker.group(1)[0] * 3
+                kept.append("")
+                continue
+            kept.append(line)
+            continue
+        if stripped.startswith(fence) and stripped.strip(fence[0]) == "":
+            fence = None
+        kept.append("")
+    return "\n".join(kept)
+
+
 def load(path: Path, root: Path, errors: list[str]) -> Record | None:
     relative = path.relative_to(root).as_posix()
     filename_match = FILENAME.match(path.name)
@@ -222,7 +247,7 @@ def load(path: Path, root: Path, errors: list[str]) -> Record | None:
         errors.append(f"{relative}: cites {citation} without a scope; use the scoped identifier")
         ok = False
 
-    found = SECTION_HEADING.findall(body)
+    found = SECTION_HEADING.findall(strip_fenced_blocks(body))
     unknown_sections = [name for name in found if name not in SECTION_ORDER]
     if unknown_sections:
         errors.append(f"{relative}: unknown section(s) {', '.join(unknown_sections)}")
