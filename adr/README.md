@@ -59,7 +59,7 @@ Allowed status values are:
 - `superseded`
 - `deprecated`
 
-Status is metadata, not a directory. Moving an ADR because its status changes creates unnecessary link churn.
+Status is metadata, not a directory. Moving an ADR because its status changes creates unnecessary link churn. The former `accepted/`, `proposed/`, `rejected/`, and `superseded/` directories were removed once every record carried a scope; a record declares its own status.
 
 ## Existing ADRs
 

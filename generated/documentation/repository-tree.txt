@@ -50,9 +50,6 @@
 ./adr
 ./adr/LICENSE.md
 ./adr/README.md
-./adr/accepted
-./adr/accepted/LICENSE.md
-./adr/accepted/README.md
 ./adr/architecture
 ./adr/architecture/ADR-ARCH-0001-strict-strata-and-versioned-boundaries.md
 ./adr/architecture/ADR-ARCH-0002-version-all-replaceable-boundaries.md
@@ -87,15 +84,9 @@
 ./adr/p-stratum/ADR-P-0007-path-provider-protocols-and-p-stratum-objectives.md
 ./adr/p-stratum/LICENSE.md
 ./adr/p-stratum/README.md
-./adr/proposed
-./adr/proposed/LICENSE.md
-./adr/proposed/README.md
 ./adr/r-stratum
 ./adr/r-stratum/LICENSE.md
 ./adr/r-stratum/README.md
-./adr/rejected
-./adr/rejected/LICENSE.md
-./adr/rejected/README.md
 ./adr/repository
 ./adr/repository/ADR-REPO-0001-nidl-yaml-json-schema-canonical-json.md
 ./adr/repository/ADR-REPO-0002-original-papers-are-non-normative.md
@@ -108,9 +99,6 @@
 ./adr/security
 ./adr/security/LICENSE.md
 ./adr/security/README.md
-./adr/superseded
-./adr/superseded/LICENSE.md
-./adr/superseded/README.md
 ./adr/template.md
 ./agents
 ./agents/LICENSE.md
