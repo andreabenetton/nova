@@ -1,10 +1,18 @@
+---
+adr: ADR-P-0002
+title: Adapters and Bindings are distinct extension points
+scope: p-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-P-0002: Adapters and Bindings are distinct extension points
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
 
 ## Context
 

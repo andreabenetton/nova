@@ -1,10 +1,18 @@
+---
+adr: ADR-PR-0001
+title: Expose aggregated Edges rather than Paths through P-R
+scope: p-r-interface
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-PR-0001: Expose aggregated Edges rather than Paths through P-R
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
 
 ## Context
 

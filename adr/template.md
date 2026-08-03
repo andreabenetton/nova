@@ -1,15 +1,20 @@
+---
+adr: ADR-<SCOPE>-NNNN
+title: Title
+scope: architecture
+status: proposed
+date: YYYY-MM-DD
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-<SCOPE>-NNNN: Title
 
-- Status: proposed
-- Date: YYYY-MM-DD
-- Decision owners: TBD
-- Scope: architecture | p-stratum | r-stratum | o-stratum | p-r-interface | r-o-interface | security | implementation | repository
-- Affected contracts: none
-- Affected normative documents: none
-- Supersedes: none
-- Superseded by: none
+Set `scope` to one of `architecture`, `p-stratum`, `r-stratum`, `o-stratum`, `p-r-interface`, `r-o-interface`, `security`, `implementation`, or `repository`, and place the record in the matching directory. The `title` must equal the heading title. List repository-relative paths in `affected_contracts` and `affected_documents`. See [`README.md`](README.md).
 
 ## Context
 

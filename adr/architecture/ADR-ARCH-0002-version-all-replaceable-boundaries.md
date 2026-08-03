@@ -1,10 +1,18 @@
+---
+adr: ADR-ARCH-0002
+title: Version all replaceable boundaries
+scope: architecture
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-ARCH-0002: Version all replaceable boundaries
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
 
 ## Context
 

@@ -1,10 +1,18 @@
+---
+adr: ADR-PR-0003
+title: Use an atomic reliable SDU baseline with explicit lifecycle
+scope: p-r-interface
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-PR-0003: Use an atomic reliable SDU baseline with explicit lifecycle
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
 
 ## Context
 

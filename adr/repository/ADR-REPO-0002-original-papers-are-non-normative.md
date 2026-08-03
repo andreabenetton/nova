@@ -1,10 +1,18 @@
+---
+adr: ADR-REPO-0002
+title: Original papers are non-normative research inputs
+scope: repository
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-REPO-0002: Original papers are non-normative research inputs
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
 
 ## Context
 

@@ -1,9 +1,18 @@
+---
+adr: ADR-REPO-0006
+title: Split core and integration licensing
+scope: repository
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-REPO-0006: Split core and integration licensing
-
-- Status: Proposed
-- Date: 2026-08-01
 
 ## Context
 

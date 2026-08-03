@@ -47,7 +47,33 @@ ADR-P-0001-path-provider-lifecycle.md
 ADR-IMPL-0001-rust-workspace-boundaries.md
 ```
 
-The identifier in the heading and filename must match. Identifiers are never reused, including after rejection or supersession.
+The identifier in the heading, the filename, and the front matter must match. Identifiers are never reused, including after rejection or supersession. The retired global identifiers `ADR-0001` through `ADR-0020` MUST NOT appear in a record; cite the current scoped identifier instead.
+
+## Front matter
+
+Every record opens with YAML front matter, which is the only machine-readable declaration of its metadata:
+
+```yaml
+---
+adr: ADR-P-0001
+title: Split P-Stratum into P-LAP and P-RAP
+scope: p-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+```
+
+All nine keys are required and no others are permitted. `supersedes` and `superseded_by` MUST be symmetric between the two records, and a record with a `superseded_by` entry MUST carry the `superseded` or `deprecated` status.
+
+## Index
+
+`generated/documentation/adr-index.md` lists every record by scope, with title, status, and date. It is generated, never hand-edited, and is the cheapest entry point when looking for the record that governs a topic.
+
+`tools/generate_adr_index.py` regenerates it and enforces every rule on this page: scope-to-directory placement, prefix agreement, identifier uniqueness, allowed statuses, ISO dates, heading agreement, supersession symmetry, and the ban on retired identifiers. Run `make adr-index` after touching any record; it is a required CI check.
 
 ## Status
 

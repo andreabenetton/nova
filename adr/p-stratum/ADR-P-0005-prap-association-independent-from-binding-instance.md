@@ -1,10 +1,18 @@
+---
+adr: ADR-P-0005
+title: P-RAP Association is independent from Binding instance
+scope: p-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-P-0005: P-RAP Association is independent from Binding instance
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
 
 ## Context
 

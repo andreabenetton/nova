@@ -1,10 +1,18 @@
+---
+adr: ADR-O-0001
+title: IP-over-Nova is an O-Stratum Compatibility Service
+scope: o-stratum
+status: proposed
+date: 2026-08-01
+supersedes: []
+superseded_by: []
+affected_contracts: []
+affected_documents: []
+---
+
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
 # ADR-O-0001: IP-over-Nova is an O-Stratum Compatibility Service
-
-- Status: proposed
-- Date: 2026-08-01
-- Decision owners: TBD
 
 ## Context
 

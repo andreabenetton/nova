@@ -783,6 +783,7 @@
 ./generated/documentation
 ./generated/documentation/LICENSE.md
 ./generated/documentation/README.md
+./generated/documentation/adr-index.md
 ./generated/documentation/compliance-matrix.md
 ./generated/documentation/contracts-index.md
 ./generated/documentation/repository-tree.txt
@@ -1397,6 +1398,7 @@
 ./tools/context-pack
 ./tools/context-pack/LICENSE.md
 ./tools/context-pack/README.md
+./tools/generate_adr_index.py
 ./tools/generate_repository_docs.py
 ./tools/nova-contract
 ./tools/nova-contract/LICENSE.md
@@ -1417,6 +1419,9 @@
 ./tools/spec-lint
 ./tools/spec-lint/LICENSE.md
 ./tools/spec-lint/README.md
+./tools/tests
+./tools/tests/LICENSE.md
+./tools/tests/test_generate_adr_index.py
 ./tools/vector-generator
 ./tools/vector-generator/LICENSE.md
 ./tools/vector-generator/README.md
