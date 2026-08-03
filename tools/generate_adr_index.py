@@ -134,20 +134,22 @@ def strip_fenced_blocks(text: str) -> str:
     A record may legitimately show Markdown or configuration containing a line
     that starts with `##`; inside a fence it is literal content, not a section.
     """
-    lines = text.splitlines()
     fence: str | None = None
     kept: list[str] = []
-    for line in lines:
+    for line in text.splitlines():
         stripped = line.lstrip()
         if fence is None:
             marker = re.match(r"(`{3,}|~{3,})", stripped)
             if marker is not None:
-                fence = marker.group(1)[0] * 3
+                # Keep the opening marker's full length. A longer fence exists
+                # precisely so a shorter one can appear as literal content.
+                fence = marker.group(1)
                 kept.append("")
                 continue
             kept.append(line)
             continue
-        if stripped.startswith(fence) and stripped.strip(fence[0]) == "":
+        closing = rf"{re.escape(fence[0])}{{{len(fence)},}}\s*"
+        if re.fullmatch(closing, stripped):
             fence = None
         kept.append("")
     return "\n".join(kept)

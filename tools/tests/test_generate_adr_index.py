@@ -272,6 +272,25 @@ class AdrIndexTestCase(unittest.TestCase):
         code, _, _ = self.run_tool()
         self.assertEqual(code, 0)
 
+    def test_longer_fence_survives_an_inner_shorter_fence(self) -> None:
+        # A four-backtick fence exists so a three-backtick block can be shown
+        # literally; the inner run must not close the outer fence.
+        example = "````markdown\n```\n## Retry policy\n```\n````"
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("## Consequences\n\nBody.\n", f"## Consequences\n\n{example}\n\nBody.\n"),
+        )
+        code, _, err = self.run_tool()
+        self.assertEqual(code, 0, err)
+
+    def test_closing_fence_must_be_at_least_as_long_as_the_opening(self) -> None:
+        example = "````\n```\n````"
+        self.write(
+            "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
+            VALID.replace("## Consequences\n\nBody.\n", f"## Consequences\n\n{example}\n\nBody.\n"),
+        )
+        self.assertEqual(self.run_tool()[0], 0)
+
     def test_required_section_only_inside_a_fence_is_rejected(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
