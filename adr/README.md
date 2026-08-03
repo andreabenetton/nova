@@ -6,7 +6,7 @@ Nova ADRs record durable architectural and engineering decisions that are not fu
 
 ## Scope-based organization
 
-New ADRs are organized by decision ownership rather than only by lifecycle state:
+ADRs are organized by decision ownership rather than by lifecycle state:
 
 | Directory | Prefix | Scope |
 |---|---|---|
@@ -52,7 +52,7 @@ ADR-P-0001-path-provider-lifecycle.md
 ADR-IMPL-0001-rust-workspace-boundaries.md
 ```
 
-The identifier in the heading, the filename, and the front matter must match. Identifiers are never reused, including after rejection or supersession. The retired global identifiers `ADR-0001` through `ADR-0020` MUST NOT appear in a record; cite the current scoped identifier instead.
+The identifier in the heading, the filename, and the front matter must match. Identifiers are never reused, including after rejection or supersession. Every citation of a record uses its scoped identifier; an unscoped `ADR-NNNN` is not a valid reference.
 
 ## Front matter
 
@@ -100,7 +100,7 @@ A required section with nothing to report says `none`; it is not dropped. No oth
 
 `generated/documentation/adr-index.md` lists every record by scope, with title, status, and date. It is generated, never hand-edited, and is the cheapest entry point when looking for the record that governs a topic.
 
-`tools/generate_adr_index.py` regenerates it and enforces every rule on this page: scope-to-directory placement, prefix agreement, identifier uniqueness, allowed statuses, ISO dates, heading agreement, supersession symmetry, and the ban on retired identifiers. Run `make adr-index` after touching any record; it is a required CI check.
+`tools/generate_adr_index.py` regenerates it and enforces every rule on this page: scope-to-directory placement, prefix agreement, identifier uniqueness, allowed statuses, ISO dates, heading agreement, supersession symmetry, and the requirement that citations carry a scope. Run `make adr-index` after touching any record; it is a required CI check.
 
 ## Status
 
@@ -112,22 +112,7 @@ Allowed status values are:
 - `superseded`
 - `deprecated`
 
-Status is metadata, not a directory. Moving an ADR because its status changes creates unnecessary link churn. The former `accepted/`, `proposed/`, `rejected/`, and `superseded/` directories were removed once every record carried a scope; a record declares its own status.
-
-## Existing ADRs
-
-Every record now uses a scope directory and a scoped identifier. The original global sequence `0001`–`0020` was migrated on 2026-08-03, preserving each record's relative order within its new scope. The legacy numbers are retired and MUST NOT be reused or cited. The identifiers below are the baseline from which the no-reuse rule applies.
-
-| Legacy | Current |
-|---|---|
-| ADR-0001, ADR-0007, ADR-0019 | ADR-ARCH-0001, ADR-ARCH-0002, ADR-ARCH-0003 |
-| ADR-0002, ADR-0003, ADR-0004 | ADR-P-0001, ADR-P-0002, ADR-P-0003 |
-| ADR-0020 | ADR-P-0004 |
-| ADR-0014 | ADR-P0AP-0001 |
-| ADR-0005, ADR-0011 | ADR-PRAP-0001, ADR-PRAP-0002 |
-| ADR-0015, ADR-0016, ADR-0017 | ADR-PR-0001, ADR-PR-0002, ADR-PR-0003 |
-| ADR-0010 | ADR-O-0001 |
-| ADR-0006, ADR-0008, ADR-0009, ADR-0012, ADR-0013, ADR-0018 | ADR-REPO-0001 through ADR-REPO-0006 |
+Status is metadata, not a directory. A record declares its own status, and moving a record because its status changed would create link churn for no gain.
 
 ## Workflow
 

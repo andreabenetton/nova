@@ -138,10 +138,10 @@ class AdrIndexTestCase(unittest.TestCase):
 
     # Rejection.
 
-    def test_filename_without_scope_prefix_is_rejected(self) -> None:
+    def test_filename_without_scope_prefix_is_ignored(self) -> None:
         self.write("p-stratum/0001-split-p-stratum-into-p-lap-and-p-rap.md", VALID)
         code, out, _ = self.run_tool()
-        # A legacy filename is not discovered as a record at all.
+        # An unprefixed filename is not discovered as a record at all.
         self.assertEqual(code, 0)
         self.assertIn("0 record(s)", out)
 
@@ -252,14 +252,14 @@ class AdrIndexTestCase(unittest.TestCase):
         )
         self.assert_rejected("supersedes must be a list of strings")
 
-    def test_legacy_identifier_citation_is_rejected(self) -> None:
+    def test_unscoped_identifier_citation_is_rejected(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
             VALID.replace("Body.", "This refines ADR-0002."),
         )
-        self.assert_rejected("cites retired global identifier ADR-0002")
+        self.assert_rejected("cites ADR-0002 without a scope")
 
-    def test_scoped_identifier_in_the_body_is_not_a_legacy_citation(self) -> None:
+    def test_scoped_identifier_in_the_body_is_not_an_unscoped_citation(self) -> None:
         self.write(
             "p-stratum/ADR-P-0001-split-p-stratum-into-p-lap-and-p-rap.md",
             VALID.replace("Body.", "This refines ADR-ARCH-0001."),

@@ -58,9 +58,9 @@ FILENAME = re.compile(r"^ADR-([A-Z][A-Z0-9]*)-(\d{4})-[a-z0-9]+(?:-[a-z0-9]+)*\.
 HEADING = re.compile(r"^# (ADR-[A-Z][A-Z0-9]*-\d{4}): (.+)$", re.M)
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-# Retired global identifiers. `ADR-ARCH-0001` does not match: the scope
-# segment separates `ADR-` from the digits.
-LEGACY_CITATION = re.compile(r"\bADR-\d{4}\b")
+# An unscoped citation. `ADR-ARCH-0001` does not match: the scope segment
+# separates `ADR-` from the digits.
+UNSCOPED_CITATION = re.compile(r"\bADR-\d{4}\b")
 
 
 @dataclass(frozen=True)
@@ -168,8 +168,8 @@ def load(path: Path, root: Path, errors: list[str]) -> Record | None:
             ok = False
 
     body = text[front_matter.end() :]
-    for citation in sorted(set(LEGACY_CITATION.findall(body))):
-        errors.append(f"{relative}: cites retired global identifier {citation}")
+    for citation in sorted(set(UNSCOPED_CITATION.findall(body))):
+        errors.append(f"{relative}: cites {citation} without a scope; use the scoped identifier")
         ok = False
 
     if not ok:
